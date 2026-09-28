@@ -14,11 +14,11 @@ The four-act shape and beat order are right, and several shots sell scale honest
 - **Fix:**
   - Don't subtitle what the picture shows: drop 2's line and trim 11, 14, 21 and 25.
   - Cut four dangling beats that never pay off: the Donnager's answer (26), the Excelsior's park line (28), the Infinity going home (29) and Breakwater's open cells (31).
-  - Tags: ACTUAL, EXTENUATING, ASTRID, ENDEAVOR, set small and dim. Keep lines off the cuts.
+  - Tags: ACTUAL, EXTENUATING, ASTRID, ENDEAVOR, set small and dim. Keep lines off the cuts. Rename the rock, since "the lee of the Lee" reads badly at speed.
   - Rewrites, each 12 cps or less at the durations in #2:
-    - **5:** "Skerry's thrown three rounds down our lane." / "They'll be hours." Label the HUD "ARRIVES T+6:40". From the T+0:04 launch, the sketch's "TOF 6 h 40 m" lands at T+6:44, not at shot 30's T+6:40.
+    - **5:** "Skerry's thrown three rounds down our lane." / "They'll be hours." Label the HUD "ARRIVES T+6:40". The sketch's "TOF 6 h 40 m" from T+0:04 gives T+6:44.
     - **6:** "Picture's up. Breakwater's right where the brief said."
-    - **9:** "Splash on Skerry. Their laser's gone." Viewers will take "two tracks down" to mean two of the three rounds.
+    - **9:** "Splash on Skerry. Their laser's gone." Viewers would read "two tracks down" as two of the three rounds.
     - **20:** "One's through—on Normandy!" Move "Normandy's gone. Close the gap." to 21, whose own line becomes "Turnover. One at a time."
     - **28 and 29:** "The Lee, Breakwater, Site One: one line. Spend wave on my mark." / "Mark." / "Spend wave away."
     - **30:** "Skerry's rounds. Right on time." / "All ships, left two degrees."
@@ -95,6 +95,7 @@ The four-act shape and beat order are right, and several shots sell scale honest
   - **25:** roll at 5× (3 s), then the wake and first shots at 1:1 on a hull camera (5 s), then the rock flash (1.5 s, with the clock jumping 32 s).
   - **24:** the call, then the fins crawling in against the clock at about 8×, then the hit at 1:1.
   - **17, 35:** only the last degrees of the slew, at 1:1.
+  - List every internal cut (in 6, 12, 17 and 35) as an a/b shot with its own duration, clock and subtitle.
 
 ### 7. [MINOR] No screen-direction rule; the sketches contradict the action (8, 11, 15–17, 21, 27)
 - **Problem:** Nothing fixes which way the fleet travels and fires.
@@ -103,19 +104,19 @@ The four-act shape and beat order are right, and several shots sell scale honest
   - 11's corvettes, described as "ahead", trail the stern.
   - 15's Canterbury faces away from the platform that is supposed to be "off its bow".
   - 17's muzzle bloom and 27's lance glow sit at the stern.
-  - Shot 16's "holed stern to bow" is left over from the draft. A ship flying bow-first is holed bow to stern.
+  - 16's "holed stern to bow" is left over from the draft. A ship flying bow-first is holed bow to stern.
 - **Fix:**
   - Maren and the enemy stay screen right. The LREF travels and fires left to right. After 21, bows point left while travel stays left to right.
   - Use enemy reverses only over an enemy foreground.
-  - At the Lee, point the bow at the frigate's rock. The threats are about 138° apart on map C, so the platform sits off the port quarter and the frigate off the port bow, and 25–27 share one axis.
+  - At the Lee, aim the bow at the frigate's rock. Map C puts the two threats about 138° apart, so the platform falls off the port quarter and the frigate off the port bow, and 25–27 share one axis.
 
 ### 8. [MINOR] Camera bodies and the sound rule (4, 7, 8, 11, 13, 17, 20–22, 29, 36)
 - **Problem:** Free cameras hear "through the hull", and in 7 a "handheld" camera has no operator in space.
 - **Evidence:**
-  - 8 and 21 are free orbits, yet the sound notes call for hull roar.
-  - In 17 the punch is heard from about 9 km away.
-  - In 11, 22, 29 and 36 the camera hears ticks with nothing touching it, and 13 hisses in vacuum.
-  - In 20, the Wallfish's hull can't carry the sound of the Normandy breaking up.
+  - 8 and 21 are free orbits, yet the notes call for hull roar.
+  - 17's punch is heard about 9 km away.
+  - In 11, 22, 29 and 36, a camera touching nothing hears ticks, and 13 hisses in vacuum.
+  - In 20, the Wallfish's hull can't carry the Normandy's break-up.
 - **Fix:**
   - Tag each shot with a camera body: hull camera (shakes; the only body that hears), drone or tracker (both silent).
   - **7:** on the Infinity's hull, shaking with each launch.
@@ -144,24 +145,14 @@ The four-act shape and beat order are right, and several shots sell scale honest
   - **10:** arc to dead ahead as the fins extend, so they collapse to slivers.
   - **37:** frame end-on, so three glowing fins and a gap read as a broken cross. The fins take about 20 s at 1:1, so start them part-way out.
 
-### 11. [NIT] Board housekeeping (3, 6, 12, 17, 18–21, 35)
-- **Problem:** Labels don't match the screen.
-- **Evidence:**
-  - 6, 12, 17 and 35 hide internal cuts.
-  - Shot 3 gives 12 flashes, 13 exits and 14 ships, while its line says "Thirteen for thirteen".
-  - 18–20 still belong to the Breakers fight.
-  - "The lee of the Lee" is hard to read at speed.
-- **Fix:**
-  - Split internal cuts into a/b shots, each with its own duration, clock and subtitle.
-  - Make the counts agree.
-  - Move the act break to 21.
-  - Rename the rock in the lines.
+### 11. [NIT] Board housekeeping (3, 18–21)
+- **Problem:** A few labels don't match what's on screen.
+- **Evidence:** Shot 3 has 12 flashes, 13 exits and 14 ships, yet its line says "Thirteen for thirteen". Shots 18–20 are still the Breakers fight.
+- **Fix:** Make the counts agree, and move the act break to 21.
 
 ## What works
 - **The skeleton pays off:** the spinal cannon (17 → 35), Skerry's rounds (5 → 30), and the fins as a running thread.
-- **Honest scale:**
-  - 9's 1,200 mm Skerry: a quarter-frame disc at about 260,000 km.
-  - 11's rock crossing a 24 mm frame in about 2 s, at true speed.
-  - The boulder field in 22 and the view along the line in 29.
+- **Honest scale:** 9's 1,200 mm Skerry (a quarter-frame disc at about 260,000 km), 11's rock crossing a 24 mm frame in about 2 s at true speed, 22's boulder field and 29's view along the line.
 - **Sound:** 3's thuds as score, 33's "no air, no bangs", 35's single boom and 16's dying channel all follow the Expanse rule.
-- **Slow motion saved for the kill:** 33 and 34 are slowed against a compressed approach. Damage also carries from shot to shot.
+- **Slow motion saved for the kill:** 33 and 34 slow down against a compressed approach.
+- **Damage continuity:** tracked from shot to shot.

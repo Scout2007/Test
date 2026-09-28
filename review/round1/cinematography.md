@@ -121,7 +121,7 @@ The four-act shape and beat order are right, and several shots sell scale honest
   - Tag each shot with a camera body: hull camera (shakes; the only body that hears), drone or tracker (both silent).
   - **7:** on the Infinity's hull, shaking with each launch.
   - **4:** rides the shield: the clamps bang, then silence. The Nauvoo is behind it, out of frame.
-  - **8, 17, 21:** sub-bass.
+  - **8 and 17:** sub-bass. 21 keeps its roar only as the hull-camera flip in #10.
   - **20:** the Normandy's channel dies to hiss, echoing 16.
   - **36:** the camera lands on the hull before the ticking fades in.
 
@@ -165,4 +165,4 @@ The four-act shape and beat order are right, and several shots sell scale honest
   - 11's rock crossing a 24 mm frame in about 2 s, at true speed.
   - The boulder field in 22 and the view along the line in 29.
 - **Sound:** 3's thuds as score, 33's "no air, no bangs", 35's single boom and 16's dying channel all follow the Expanse rule.
-- **Slow motion saved for the kill:** 33 and 34 are slowed against a compressed approach, and damage carries from shot to shot.
+- **Slow motion saved for the kill:** 33 and 34 are slowed against a compressed approach. Damage also carries from shot to shot.

@@ -248,7 +248,7 @@ Lore: saturation is "deploying enough missiles to overwhelm an enemy's missile d
 
 Three conclusions shape the doctrine:
 
-1. **Geometry beats numbers (O9).** A wave that arrives nose-on to the lasers, or where the planetary sites can't see it, needs a tenth of the missiles of one that shows its flanks to four GW-class lasers.
+1. **Geometry beats numbers (O9).** Arriving nose-on cuts the lasers' kills 7–17×, and arriving where the planetary sites can't see the wave removes their share entirely. Such a wave needs a fraction of the missiles of one that shows its flanks to four GW-class lasers.
 2. **Time on target beats CIWS (O3).** Kill clouds kill a few missiles per second. A wave that arrives within ~1 s is almost untouched by them; one that dribbles in over a minute is shredded.
 3. **Decoys are missiles too.** Each decoy the defender engages costs a retarget (0.5–2 s of laser time) and part of a CIWS cloud.
 
@@ -429,7 +429,7 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 | **O6** | **Close with purpose** | Knife range only where terrain forces it (rocks in the Shoals block sight lines until contact) or against crippled targets. Broadsides only with fins stowed. Plasma lances ≤ 50 km. | M-1C against a frigate ≤ ~190–340 km | *Why:* in open space, knife range is where emplacements win (§4.1). Added fin rule (§8). |
 | **O7** | **Layer the arms** | Drones, then corvettes, frigates, the cruiser, and the heavy cruiser. Each layer spends the enemy's attention and heat for the next. The spinal cannon fires into the gap. | — | Unchanged. |
 | **O8** | **Speed is the defender's ammunition** | Cross prepared space at ≤ ~20 km/s relative. Corvettes and drones lead and sweep the lane. Never make a high-speed ballistic pass through a defended system. | A 1 kg rock at 20 km/s = 48 kg TNT; at 180 km/s = 3.9 t (WN §6) | New. |
-| **O9** | **Choose the geometry, not the fight** | Attack from where the enemy's lasers see hardened noses or nothing: below the sites' horizon, behind rocks, through the Shoals' dust. Time strikes to planetary rotation and weather. Make every defender that can see the wave see it nose-on. | Nose-on vs side-on changes the kills per wave ~7× (WN §8) | New. |
+| **O9** | **Choose the geometry, not the fight** | Attack from where the enemy's lasers see hardened noses or nothing: below the sites' horizon, behind rocks, through the Shoals' dust. Time strikes to planetary rotation and weather. Make every defender that can see the wave see it nose-on. | Nose-on vs side-on changes the kills per wave 7–17× (WN §8) | New. |
 | **O10** | **Cripple, then kill** | Against a mobile heavy target: strip its fins and sensors (lasers), cut its drive (Casaba, missiles), and only then commit heavy kinetics, from inside its now-larger no-escape range. | Monitor: 0.05 g → 0.005 g grows the spinal no-escape range from ~4,000 to ~12,000 km (WN §2) | New. Reverses the draft's last beats (spinal before Casaba). |
 | **O11** | **Spend missiles, keep ships** | Frigate packs are the currency. Hold about a third of the magazine in reserve. Withdraw empty hedgehogs to the tender (4 CIWS only [Lore]). | ~700 missiles per hedgehog [A-26] | New, from lore. |
 | **O12** | **Plasma where the field holds** | Lances and torpedoes are knife weapons for emerging emplacements, crippled ships and strays. They are never the plan at range. | Lance ≤ ~50 km; torpedo launch ≤ ~100 km [A-23] | New, from lore. |

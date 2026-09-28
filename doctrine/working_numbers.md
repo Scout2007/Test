@@ -10,9 +10,9 @@ Spot = Airy first-null diameter 2.44·λ·R/D, holding 84 % of the power; a 1.5x
 |---|---|---|---|---|
 | LREF laser focusing array (LFA) | 3.3 m | 350 nm | 2.50e7 W | 7.50e7 W |
 | LREF PD laser | 1.6 m | 350 nm | 5.00e6 W | 1.50e7 W |
-| Bastion PD laser | 2.0 m | 530 nm | 1.00e7 W | 3.00e7 W |
-| Harrow ground laser (per site) | 10.0 m | 1060 nm | 2.00e9 W | 4.67e9 W |
-| Kest laser battery (airless) | 8.0 m | 530 nm | 1.00e9 W | 2.33e9 W |
+| Breakwater PD laser | 2.0 m | 530 nm | 1.00e7 W | 3.00e7 W |
+| Maren ground laser (per site) | 10.0 m | 1060 nm | 2.00e9 W | 4.67e9 W |
+| Skerry laser battery (airless) | 8.0 m | 530 nm | 1.00e9 W | 2.33e9 W |
 
 **LREF laser focusing array (LFA)**
 
@@ -36,7 +36,7 @@ Spot = Airy first-null diameter 2.44·λ·R/D, holding 84 % of the power; a 1.5x
 | 100,000 km | 80.1 m | 834 W/m² | 20.0 min | — | — | — | — |
 | 300,000 km | 240 m | 92.7 W/m² | 3.0 h | — | — | — | — |
 
-**Bastion PD laser**
+**Breakwater PD laser**
 
 | Range | Spot | Intensity | kill a seeker window | burn a radiator fin panel | burn a missile's side skin | burn a hardened missile nose (10 cm C-C) | melt through 0.72 m hull belt (model) |
 |---|---|---|---|---|---|---|---|
@@ -47,7 +47,7 @@ Spot = Airy first-null diameter 2.44·λ·R/D, holding 84 % of the power; a 1.5x
 | 100,000 km | 97.0 m | 1,137 W/m² | 14.7 min | — | — | — | — |
 | 300,000 km | 291 m | 126 W/m² | 2.2 h | — | — | — | — |
 
-**Harrow ground laser (per site)**
+**Maren ground laser (per site)**
 
 | Range | Spot | Intensity | kill a seeker window | burn a radiator fin panel | burn a missile's side skin | burn a hardened missile nose (10 cm C-C) | melt through 0.72 m hull belt (model) |
 |---|---|---|---|---|---|---|---|
@@ -58,7 +58,7 @@ Spot = Airy first-null diameter 2.44·λ·R/D, holding 84 % of the power; a 1.5x
 | 100,000 km | 38.8 m | 9.95e5 W/m² | 1.0 s | 20.1 s | 30.2 s | 83.8 min | — |
 | 300,000 km | 116 m | 1.11e5 W/m² | 9.0 s | 3.0 min | 4.5 min | — | — |
 
-**Kest laser battery (airless)**
+**Skerry laser battery (airless)**
 
 | Range | Spot | Intensity | kill a seeker window | burn a radiator fin panel | burn a missile's side skin | burn a hardened missile nose (10 cm C-C) | melt through 0.72 m hull belt (model) |
 |---|---|---|---|---|---|---|---|
@@ -77,9 +77,9 @@ Dazzle needs only ~10 W/m² on a sensor aperture, so every laser above dazzles o
 |---|---|---|---|---|
 | LREF M-1C twin railcannon (per gun) | 10.0 kg | 25.0 km/s | 3.12e9 J | 0.75 t |
 | Astrid spinal cannon | 500 kg | 60.0 km/s | 9.00e11 J | 215 t |
-| Bastion heavy railgun | 50.0 kg | 30.0 km/s | 2.25e10 J | 5.38 t |
-| Shoals railgun platform | 10.0 kg | 25.0 km/s | 3.12e9 J | 0.75 t |
-| Kest mass driver (smart rock) | 10,000 kg | 10.0 km/s | 5.00e11 J | 120 t |
+| Breakwater heavy railgun | 50.0 kg | 30.0 km/s | 2.25e10 J | 5.38 t |
+| Breakers railgun platform | 10.0 kg | 25.0 km/s | 3.12e9 J | 0.75 t |
+| Skerry mass driver (smart rock) | 10,000 kg | 10.0 km/s | 5.00e11 J | 120 t |
 
 *No-escape range*: inside it, the target cannot move far enough between seeing the shot and the slug arriving. It assumes the shooter sees the launch flash instantly (the light-lag is added to the reaction time) and fires one slug at the target's predicted centre. Salvo patterns stretch these ranges roughly 2-4x at the cost of hit probability per slug.
 
@@ -91,10 +91,10 @@ Dazzle needs only ~10 W/m² on a sensor aperture, so every laser above dazzles o
 | LREF M-1C twin railcannon (per gun) | capital ship on RCS only (0.1 g), broadside | 20 km/s | 1,835 km | 40.8 s |
 | LREF M-1C twin railcannon (per gun) | capital ship, main drive across the line of fire (1 g) | 0 km/s | 424 km | 16.9 s |
 | LREF M-1C twin railcannon (per gun) | capital ship, main drive across the line of fire (1 g) | 20 km/s | 763 km | 16.9 s |
-| LREF M-1C twin railcannon (per gun) | Bastion monitor (0.05 g) | 0 km/s | 1,503 km | 60.1 s |
-| LREF M-1C twin railcannon (per gun) | Bastion monitor (0.05 g) | 20 km/s | 2,705 km | 60.1 s |
-| LREF M-1C twin railcannon (per gun) | Bastion, drive crippled (0.005 g RCS) | 0 km/s | 4,590 km | 3.1 min |
-| LREF M-1C twin railcannon (per gun) | Bastion, drive crippled (0.005 g RCS) | 20 km/s | 8,262 km | 3.1 min |
+| LREF M-1C twin railcannon (per gun) | Breakwater monitor (0.05 g) | 0 km/s | 1,503 km | 60.1 s |
+| LREF M-1C twin railcannon (per gun) | Breakwater monitor (0.05 g) | 20 km/s | 2,705 km | 60.1 s |
+| LREF M-1C twin railcannon (per gun) | Breakwater, drive crippled (0.005 g RCS) | 0 km/s | 4,590 km | 3.1 min |
+| LREF M-1C twin railcannon (per gun) | Breakwater, drive crippled (0.005 g RCS) | 20 km/s | 8,262 km | 3.1 min |
 | LREF M-1C twin railcannon (per gun) | frigate (2 g) | 0 km/s | 188 km | 7.5 s |
 | LREF M-1C twin railcannon (per gun) | frigate (2 g) | 20 km/s | 339 km | 7.5 s |
 | LREF M-1C twin railcannon (per gun) | corvette (4 g) | 0 km/s | 81.4 km | 3.3 s |
@@ -105,46 +105,46 @@ Dazzle needs only ~10 W/m² on a sensor aperture, so every laser above dazzles o
 | Astrid spinal cannon | capital ship on RCS only (0.1 g), broadside | 20 km/s | 3,262 km | 40.8 s |
 | Astrid spinal cannon | capital ship, main drive across the line of fire (1 g) | 0 km/s | 1,017 km | 16.9 s |
 | Astrid spinal cannon | capital ship, main drive across the line of fire (1 g) | 20 km/s | 1,356 km | 16.9 s |
-| Astrid spinal cannon | Bastion monitor (0.05 g) | 0 km/s | 3,607 km | 60.1 s |
-| Astrid spinal cannon | Bastion monitor (0.05 g) | 20 km/s | 4,809 km | 60.1 s |
-| Astrid spinal cannon | Bastion, drive crippled (0.005 g RCS) | 0 km/s | 11,017 km | 3.1 min |
-| Astrid spinal cannon | Bastion, drive crippled (0.005 g RCS) | 20 km/s | 14,689 km | 3.1 min |
+| Astrid spinal cannon | Breakwater monitor (0.05 g) | 0 km/s | 3,607 km | 60.1 s |
+| Astrid spinal cannon | Breakwater monitor (0.05 g) | 20 km/s | 4,809 km | 60.1 s |
+| Astrid spinal cannon | Breakwater, drive crippled (0.005 g RCS) | 0 km/s | 11,017 km | 3.1 min |
+| Astrid spinal cannon | Breakwater, drive crippled (0.005 g RCS) | 20 km/s | 14,689 km | 3.1 min |
 | Astrid spinal cannon | frigate (2 g) | 0 km/s | 452 km | 7.5 s |
 | Astrid spinal cannon | frigate (2 g) | 20 km/s | 602 km | 7.5 s |
 | Astrid spinal cannon | corvette (4 g) | 0 km/s | 195 km | 3.3 s |
 | Astrid spinal cannon | corvette (4 g) | 20 km/s | 261 km | 3.3 s |
-| Bastion heavy railgun | capital ship on RCS only (0.1 g), end-on | 0 km/s | 615 km | 20.5 s |
-| Bastion heavy railgun | capital ship on RCS only (0.1 g), end-on | 20 km/s | 1,024 km | 20.5 s |
-| Bastion heavy railgun | capital ship on RCS only (0.1 g), broadside | 0 km/s | 1,223 km | 40.8 s |
-| Bastion heavy railgun | capital ship on RCS only (0.1 g), broadside | 20 km/s | 2,039 km | 40.8 s |
-| Bastion heavy railgun | capital ship, main drive across the line of fire (1 g) | 0 km/s | 508 km | 16.9 s |
-| Bastion heavy railgun | capital ship, main drive across the line of fire (1 g) | 20 km/s | 847 km | 16.9 s |
-| Bastion heavy railgun | Bastion monitor (0.05 g) | 0 km/s | 1,803 km | 60.1 s |
-| Bastion heavy railgun | Bastion monitor (0.05 g) | 20 km/s | 3,006 km | 60.1 s |
-| Bastion heavy railgun | Bastion, drive crippled (0.005 g RCS) | 0 km/s | 5,508 km | 3.1 min |
-| Bastion heavy railgun | Bastion, drive crippled (0.005 g RCS) | 20 km/s | 9,180 km | 3.1 min |
-| Bastion heavy railgun | frigate (2 g) | 0 km/s | 226 km | 7.5 s |
-| Bastion heavy railgun | frigate (2 g) | 20 km/s | 377 km | 7.5 s |
-| Bastion heavy railgun | corvette (4 g) | 0 km/s | 97.7 km | 3.3 s |
-| Bastion heavy railgun | corvette (4 g) | 20 km/s | 163 km | 3.3 s |
-| Shoals railgun platform | capital ship on RCS only (0.1 g), end-on | 0 km/s | 512 km | 20.5 s |
-| Shoals railgun platform | capital ship on RCS only (0.1 g), end-on | 20 km/s | 922 km | 20.5 s |
-| Shoals railgun platform | capital ship on RCS only (0.1 g), broadside | 0 km/s | 1,019 km | 40.8 s |
-| Shoals railgun platform | capital ship on RCS only (0.1 g), broadside | 20 km/s | 1,835 km | 40.8 s |
-| Shoals railgun platform | capital ship, main drive across the line of fire (1 g) | 0 km/s | 424 km | 16.9 s |
-| Shoals railgun platform | capital ship, main drive across the line of fire (1 g) | 20 km/s | 763 km | 16.9 s |
-| Shoals railgun platform | Bastion monitor (0.05 g) | 0 km/s | 1,503 km | 60.1 s |
-| Shoals railgun platform | Bastion monitor (0.05 g) | 20 km/s | 2,705 km | 60.1 s |
-| Shoals railgun platform | Bastion, drive crippled (0.005 g RCS) | 0 km/s | 4,590 km | 3.1 min |
-| Shoals railgun platform | Bastion, drive crippled (0.005 g RCS) | 20 km/s | 8,262 km | 3.1 min |
-| Shoals railgun platform | frigate (2 g) | 0 km/s | 188 km | 7.5 s |
-| Shoals railgun platform | frigate (2 g) | 20 km/s | 339 km | 7.5 s |
-| Shoals railgun platform | corvette (4 g) | 0 km/s | 81.4 km | 3.3 s |
-| Shoals railgun platform | corvette (4 g) | 20 km/s | 147 km | 3.3 s |
+| Breakwater heavy railgun | capital ship on RCS only (0.1 g), end-on | 0 km/s | 615 km | 20.5 s |
+| Breakwater heavy railgun | capital ship on RCS only (0.1 g), end-on | 20 km/s | 1,024 km | 20.5 s |
+| Breakwater heavy railgun | capital ship on RCS only (0.1 g), broadside | 0 km/s | 1,223 km | 40.8 s |
+| Breakwater heavy railgun | capital ship on RCS only (0.1 g), broadside | 20 km/s | 2,039 km | 40.8 s |
+| Breakwater heavy railgun | capital ship, main drive across the line of fire (1 g) | 0 km/s | 508 km | 16.9 s |
+| Breakwater heavy railgun | capital ship, main drive across the line of fire (1 g) | 20 km/s | 847 km | 16.9 s |
+| Breakwater heavy railgun | Breakwater monitor (0.05 g) | 0 km/s | 1,803 km | 60.1 s |
+| Breakwater heavy railgun | Breakwater monitor (0.05 g) | 20 km/s | 3,006 km | 60.1 s |
+| Breakwater heavy railgun | Breakwater, drive crippled (0.005 g RCS) | 0 km/s | 5,508 km | 3.1 min |
+| Breakwater heavy railgun | Breakwater, drive crippled (0.005 g RCS) | 20 km/s | 9,180 km | 3.1 min |
+| Breakwater heavy railgun | frigate (2 g) | 0 km/s | 226 km | 7.5 s |
+| Breakwater heavy railgun | frigate (2 g) | 20 km/s | 377 km | 7.5 s |
+| Breakwater heavy railgun | corvette (4 g) | 0 km/s | 97.7 km | 3.3 s |
+| Breakwater heavy railgun | corvette (4 g) | 20 km/s | 163 km | 3.3 s |
+| Breakers railgun platform | capital ship on RCS only (0.1 g), end-on | 0 km/s | 512 km | 20.5 s |
+| Breakers railgun platform | capital ship on RCS only (0.1 g), end-on | 20 km/s | 922 km | 20.5 s |
+| Breakers railgun platform | capital ship on RCS only (0.1 g), broadside | 0 km/s | 1,019 km | 40.8 s |
+| Breakers railgun platform | capital ship on RCS only (0.1 g), broadside | 20 km/s | 1,835 km | 40.8 s |
+| Breakers railgun platform | capital ship, main drive across the line of fire (1 g) | 0 km/s | 424 km | 16.9 s |
+| Breakers railgun platform | capital ship, main drive across the line of fire (1 g) | 20 km/s | 763 km | 16.9 s |
+| Breakers railgun platform | Breakwater monitor (0.05 g) | 0 km/s | 1,503 km | 60.1 s |
+| Breakers railgun platform | Breakwater monitor (0.05 g) | 20 km/s | 2,705 km | 60.1 s |
+| Breakers railgun platform | Breakwater, drive crippled (0.005 g RCS) | 0 km/s | 4,590 km | 3.1 min |
+| Breakers railgun platform | Breakwater, drive crippled (0.005 g RCS) | 20 km/s | 8,262 km | 3.1 min |
+| Breakers railgun platform | frigate (2 g) | 0 km/s | 188 km | 7.5 s |
+| Breakers railgun platform | frigate (2 g) | 20 km/s | 339 km | 7.5 s |
+| Breakers railgun platform | corvette (4 g) | 0 km/s | 81.4 km | 3.3 s |
+| Breakers railgun platform | corvette (4 g) | 20 km/s | 147 km | 3.3 s |
 
 **Time of flight by range** (slug speed + closing speed):
 
-| Range | LREF M-1C twin railcannon (per gun) | Astrid spinal cannon | Bastion heavy railgun | Shoals railgun platform | Kest mass driver (smart rock) | M-1C + 20 km/s closing |
+| Range | LREF M-1C twin railcannon (per gun) | Astrid spinal cannon | Breakwater heavy railgun | Breakers railgun platform | Skerry mass driver (smart rock) | M-1C + 20 km/s closing |
 |---|---|---|---|---|---|---|
 | 100 km | 4.0 s | 1.7 s | 3.3 s | 4.0 s | 10.0 s | 2.2 s |
 | 1,000 km | 40.0 s | 16.7 s | 33.3 s | 40.0 s | 100.0 s | 22.2 s |
@@ -161,8 +161,8 @@ Launched from rest relative to the target; 25-30 % of Δv held back for terminal
 | Hedgehog capital-ship killer | 30 g | 150 km/s | 4.3 min (77 km/s) | 18.0 min (112 km/s) | 47.6 min (112 km/s) | 2.5 h (112 km/s) |
 | Hedgehog multi-pack (small) | 50 g | 60.0 km/s | 4.5 min (45 km/s) | 37.8 min (45 km/s) | 111.9 min (45 km/s) | 6.2 h (45 km/s) |
 | Endeavor VLS precision missile | 40 g | 100 km/s | 3.8 min (75 km/s) | 23.8 min (75 km/s) | 68.3 min (75 km/s) | 3.7 h (75 km/s) |
-| Harrow belt-pod missile | 40 g | 40.0 km/s | 6.2 min (30 km/s) | 56.2 min (30 km/s) | 2.8 h (30 km/s) | 9.3 h (30 km/s) |
-| Harrow strike drone | 10 g | 30.0 km/s | 9.7 min (21 km/s) | 81.1 min (21 km/s) | 4.0 h (21 km/s) | 13.3 h (21 km/s) |
+| Breakers pod missile | 40 g | 40.0 km/s | 6.2 min (30 km/s) | 56.2 min (30 km/s) | 2.8 h (30 km/s) | 9.3 h (30 km/s) |
+| Compact strike drone | 10 g | 30.0 km/s | 9.7 min (21 km/s) | 81.1 min (21 km/s) | 4.0 h (21 km/s) | 13.3 h (21 km/s) |
 
 **Time a missile spends in each defensive band** at closing speed `Vc` (this is the defender's whole engagement window for that layer):
 
@@ -209,7 +209,7 @@ One spinal shot dumps about 2.25e12 J of heat (gun losses plus reactor waste). W
 
 ## 5. Who sees whom
 
-Detection range for a 1 m cooled IR telescope that needs 1e-15 W/m² (a quick stare against deep space; long stares do better, a bright planet or the warm Shoals behind the target does worse).
+Detection range for a 1 m cooled IR telescope that needs 1e-15 W/m² (a quick stare against deep space; long stares do better, a bright planet or the warm Breakers behind the target does worse).
 
 | Source | Radiated power | Detection range |
 |---|---|---|
@@ -218,7 +218,7 @@ Detection range for a 1 m cooled IR telescope that needs 1e-15 W/m² (a quick st
 | Astrid fins out, 1,200 K | 6.09e10 W | 2.20e9 km (15 AU) |
 | Endeavor dark: fins in, 300 K hull (~5.6e5 m²) | 2.31e8 W | 1.36e8 km (0.91 AU) |
 | Frigate dark, 300 K hull | 4.96e7 W | 6.28e7 km (0.42 AU) |
-| Shoals emplacement at rock temperature | same as the rock | only when it moves, fires or is radar-mapped |
+| Breakers emplacement at rock temperature | same as the rock | only when it moves, fires or is radar-mapped |
 
 **Radar** (X-band, 3 cm; 1 kHz integration; SNR 13 dB):
 
@@ -260,7 +260,7 @@ Detection range for a 1 m cooled IR telescope that needs 1e-15 W/m² (a quick st
 | 50.0 km/s | 84.9 min | 1.27e5 km |
 | 20.0 km/s | 34.0 min | 20,387 km |
 
-**Approach from a warp exit 450,000 km out to Bastion's orbit (410,000 km of travel) at 1 g**:
+**Approach from a warp exit 450,000 km out to Breakwater's orbit (410,000 km of travel) at 1 g**:
 
 | Cruise speed cap | Peak speed | Total time |
 |---|---|---|
@@ -309,8 +309,8 @@ Laser kills are integrated over the missile's run-in: each kill takes the burn t
 |---|---|---|---|---|
 | Endeavor: 8 LFAs | 371 | 44 | 167 | 20 |
 | Endeavor: 8 PD lasers | 99 | 5 | 45 | 2 |
-| Bastion: 24 PD lasers | 361 | 21 | 163 | 10 |
-| Harrow: 4 ground sites (if all see the wave) | 970 | 136 | 437 | 61 |
+| Breakwater: 24 PD lasers | 361 | 21 | 163 | 10 |
+| Maren: 4 ground sites (if all see the wave) | 970 | 136 | 437 | 61 |
 
 **CIWS kill clouds.** A 7-barrel mount throws ~280 rounds/s at ~2 km/s. A missile closing at tens of km/s cannot see or dodge a pellet cloud in the last fraction of a second, so the cloud kills with the missile's own speed; a 50 g pellet at 60 km/s carries 90 MJ. Covering one missile's last-second uncertainty (~50 m × 50 m) takes ~1,500 rounds, about 5 s of one mount's fire.
 

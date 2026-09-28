@@ -1,4 +1,4 @@
-"""Working numbers for the LREF and Harrow doctrines.
+"""Working numbers for the LREF and Maren doctrines.
 
 Run:  python3 doctrine/working_numbers.py > doctrine/working_numbers.md
 
@@ -70,9 +70,9 @@ LASERS = [
     # name, aperture m, wavelength m, beam power W, wall-plug eff, transmission
     ("LREF laser focusing array (LFA)", 3.3, 350e-9, 25e6, 0.25, 1.0),
     ("LREF PD laser", 1.6, 350e-9, 5e6, 0.25, 1.0),
-    ("Bastion PD laser", 2.0, 530e-9, 10e6, 0.25, 1.0),
-    ("Harrow ground laser (per site)", 10.0, 1.06e-6, 2e9, 0.30, 0.7),
-    ("Kest laser battery (airless)", 8.0, 530e-9, 1e9, 0.30, 1.0),
+    ("Breakwater PD laser", 2.0, 530e-9, 10e6, 0.25, 1.0),
+    ("Maren ground laser (per site)", 10.0, 1.06e-6, 2e9, 0.30, 0.7),
+    ("Skerry laser battery (airless)", 8.0, 530e-9, 1e9, 0.30, 1.0),
 ]
 print(table(["Laser", "Aperture", "λ", "Beam power", "Waste heat while firing"],
             [(n, f"{D} m", f"{lam*1e9:.0f} nm", fmt(P, "W"), fmt(P / e - P, "W"))
@@ -127,9 +127,9 @@ GUNS = [
     # name, slug kg, muzzle m/s
     ("LREF M-1C twin railcannon (per gun)", 10, 25e3),
     ("Astrid spinal cannon", 500, 60e3),
-    ("Bastion heavy railgun", 50, 30e3),
-    ("Shoals railgun platform", 10, 25e3),
-    ("Kest mass driver (smart rock)", 10_000, 10e3),
+    ("Breakwater heavy railgun", 50, 30e3),
+    ("Breakers railgun platform", 10, 25e3),
+    ("Skerry mass driver (smart rock)", 10_000, 10e3),
 ]
 print(table(["Gun", "Slug", "Muzzle velocity", "Muzzle energy", "TNT equiv."],
             [(n, fmt(m, "kg"), fmt(v / KM, "km/s"), fmt(0.5 * m * v * v, "J"),
@@ -142,8 +142,8 @@ TARGETS = [
     ("capital ship on RCS only (0.1 g), end-on", 0.1 * G, 150, 3),
     ("capital ship on RCS only (0.1 g), broadside", 0.1 * G, 700, 3),
     ("capital ship, main drive across the line of fire (1 g)", 1.0 * G, 700, 5),
-    ("Bastion monitor (0.05 g)", 0.05 * G, 800, 3),
-    ("Bastion, drive crippled (0.005 g RCS)", 0.005 * G, 800, 3),
+    ("Breakwater monitor (0.05 g)", 0.05 * G, 800, 3),
+    ("Breakwater, drive crippled (0.005 g RCS)", 0.005 * G, 800, 3),
     ("frigate (2 g)", 2 * G, 300, 2),
     ("corvette (4 g)", 4 * G, 100, 1),
 ]
@@ -188,8 +188,8 @@ MISSILES = [
     ("Hedgehog capital-ship killer", 30 * G, 150e3, 0.25),
     ("Hedgehog multi-pack (small)", 50 * G, 60e3, 0.25),
     ("Endeavor VLS precision missile", 40 * G, 100e3, 0.25),
-    ("Harrow belt-pod missile", 40 * G, 40e3, 0.25),
-    ("Harrow strike drone", 10 * G, 30e3, 0.3),
+    ("Breakers pod missile", 40 * G, 40e3, 0.25),
+    ("Compact strike drone", 10 * G, 30e3, 0.3),
 ]
 
 
@@ -299,7 +299,7 @@ SOURCES = [
     ("Astrid fins out, 1,200 K", rad_power(8 * 45_000, 1200)),
     ("Endeavor dark: fins in, 300 K hull (~5.6e5 m²)", 5.6e5 * 0.9 * SIGMA * 300 ** 4),
     ("Frigate dark, 300 K hull", 1.2e5 * 0.9 * SIGMA * 300 ** 4),
-    ("Shoals emplacement at rock temperature", 0.0),
+    ("Breakers emplacement at rock temperature", 0.0),
 ]
 rows = []
 for n, P in SOURCES:
@@ -310,7 +310,7 @@ for n, P in SOURCES:
     rows.append([n, fmt(P, "W"), f"{fmt(R/KM, 'km')} ({R/1.496e11:.2g} AU)"])
 print(f"Detection range for a 1 m cooled IR telescope that needs "
       f"{F_MIN:g} W/m² (a quick stare against deep space; long stares do "
-      f"better, a bright planet or the warm Shoals behind the target does worse).\n")
+      f"better, a bright planet or the warm Breakers behind the target does worse).\n")
 print(table(["Source", "Radiated power", "Detection range"], rows))
 print()
 
@@ -373,7 +373,7 @@ for vc in (10e3, 20e3, 30e3, 60e3, 1e9):
     t, vmax = approach(410_000 * KM, G, vc)
     rows.append(["brachistochrone" if vc > 1e8 else fmt(vc / KM, "km/s"),
                  fmt(vmax / KM, "km/s"), dur(t)])
-print("**Approach from a warp exit 450,000 km out to Bastion's orbit "
+print("**Approach from a warp exit 450,000 km out to Breakwater's orbit "
       "(410,000 km of travel) at 1 g**:\n")
 print(table(["Cruise speed cap", "Peak speed", "Total time"], rows))
 print()
@@ -451,8 +451,8 @@ PD_CASES = [
     # name, (D, lam, P, tr), count, retarget s, max tracking range m
     ("Endeavor: 8 LFAs", (3.3, 350e-9, 25e6, 1.0), 8, 1.0, 30_000 * KM),
     ("Endeavor: 8 PD lasers", (1.6, 350e-9, 5e6, 1.0), 8, 0.5, 5_000 * KM),
-    ("Bastion: 24 PD lasers", (2.0, 530e-9, 10e6, 1.0), 24, 0.5, 10_000 * KM),
-    ("Harrow: 4 ground sites (if all see the wave)", (10.0, 1.06e-6, 2e9, 0.7), 4, 2.0, 150_000 * KM),
+    ("Breakwater: 24 PD lasers", (2.0, 530e-9, 10e6, 1.0), 24, 0.5, 10_000 * KM),
+    ("Maren: 4 ground sites (if all see the wave)", (10.0, 1.06e-6, 2e9, 0.7), 4, 2.0, 150_000 * KM),
 ]
 rows = []
 for name, (D, lam, P, tr), count, t_re, R_max in PD_CASES:

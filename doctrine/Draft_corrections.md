@@ -2,6 +2,8 @@
 
 This checks the "Mechanics" and "Engagement envelopes" sections of `pack/storyboard_draft/DRAFT_READABLE.md` against `working_numbers.md` (WN). The last table lists shot-level physics problems; they are fixed in phase 2, not here.
 
+**Names:** this file uses the names decided at sign-off. The draft's Harrow is now Maren, Kest is Skerry, the Shoals are the Breakers, *Bastion* is *Breakwater*, and the destroyer *Wren* is the *Canterbury*.
+
 ## Mechanics
 
 | Draft says | Verdict | Corrected |
@@ -22,9 +24,9 @@ This checks the "Mechanics" and "Engagement envelopes" sections of `pack/storybo
 | PD laser (1.6 m) | ≤ 500 km | Missiles side-on ≤ ~1,000–5,000 km; noses ≤ ~100 km (§1) |
 | Twin railgun battery | ≤ 1,000 km vs ships · 5–60 s | **By target** (no-escape range): capital ship end-on 510–920 km; broadside 1,020–1,840 km; frigate 190–340 km; corvette 80–150 km; monitor 1,500–2,700 km. Flight time 4 s per 100 km. (§2) |
 | Spinal cannon | ≥ 10,000 km vs fixed · tens of s | Fixed targets out to ~100,000 km (flight ~28 min; at 10,000 km ~2.8 min, not tens of s). Mobile monitor ≤ 3,600–4,800 km; crippled monitor ≤ 11,000–14,700 km. (§2) |
-| Mass driver (Kest) | ~100,000 km · minutes | 100,000 km takes **~2.8 h**. It lays nets in pre-planned lanes; it doesn't snipe (Defence HO3). (§2) |
+| Mass driver (Skerry) | ~100,000 km · minutes | 100,000 km takes **~2.8 h**. It lays nets in pre-planned lanes; it doesn't snipe (Defence HO3). (§2) |
 | Missile | 10⁵–10⁶ km · minutes | Capital-ship killer: 18 min to 100,000 km, 2.5 h to 10⁶ km; small multi-pack missiles take twice as long (§3). |
-| Casaba howitzer | 1–5 km standoff | Right. It breaches a 0.72 m belt from ~2 km (20 kt) to ~4 km (100 kt), and Bastion's ~2 m belt from ~2.5 km (100 kt). Fins die anywhere along the jet out to 50–130 km. (§7) |
+| Casaba howitzer | 1–5 km standoff | Right. It breaches a 0.72 m belt from ~2 km (20 kt) to ~4 km (100 kt), and Breakwater's ~2 m belt from ~2.5 km (100 kt). Fins die anywhere along the jet out to 50–130 km. (§7) |
 | Plasma lance | ≤ 50 km · near-instant | Kept as a soft-coat value: compact toroids at ~1,000 km/s (LREF A-23). |
 | CIWS / PDC | ≤ 5 km · < 1 s | Kill clouds are placed 5–30 km out and the rounds take 2.5–15 s to get there. The missile then crosses the cloud in under a second and dies on its own speed. About 3 missiles/s per 16 mounts. (§8) |
 
@@ -35,11 +37,11 @@ This checks the "Mechanics" and "Engagement envelopes" sections of `pack/storybo
 | 4 Flip and burn | A 180° flip in 5 s | The Endeavor needs ~28–49 s (WN §6). Show part of it and cut, or compress and label. |
 | 5 Shield away | Released during a 180 km/s braking burn, so unrecoverable | Release at the park, at low speed (O1). |
 | 7 Hedgehog | One hedgehog | A pack of three (lore). |
-| 13 Into the Shoals | "Tumbling asteroids 2–5 km across" at few-km spacing | Large bodies are hundreds of km apart. Pass one chosen rock close, deliberately (Defence §4.1). |
-| 14 Screens out | Swarm pours from Kest during the fight | Drones are parked in the Shoals and wake as the fleet passes (HO4). |
+| 13 Into the Breakers | "Tumbling asteroids 2–5 km across" at few-km spacing | Large bodies are hundreds of km apart. Pass one chosen rock close, deliberately (Defence §4.1). |
+| 14 Screens out | Swarm pours from Skerry during the fight | Drones are parked in the Breakers and wake as the fleet passes (HO4). |
 | 16 The moon speaks | A mass-driver slug arriving in real time | Launched hours earlier into the predicted lane; it shatters the rock the Endeavor shelters behind (HO3). |
 | 18–20 Too hot / fin hit / broadside | Fins out, then a broadside | Doctrine says fins out only behind cover, and broadsides with fins stowed (D3, O6). Reorder or re-stage. |
-| 26 Spinal | "Aligned during the flip, the Astrid fires" | While braking toward the target, the spinal points *away* from it. The Astrid stops, slews and fires (§10). Bastion dodges at > ~4,000 km unless its drive is crippled (O10). |
-| 27 Casaba | One Casaba "cuts Bastion in two", *after* the spinal | Casaba spears cripple Bastion first, and the spinal shot kills it (O10). The break-up comes from the spinal hit plus secondary explosions. |
+| 26 Spinal | "Aligned during the flip, the Astrid fires" | While braking toward the target, the spinal points *away* from it. The Astrid stops, slews and fires (§10). Breakwater dodges at > ~4,000 km unless its drive is crippled (O10). |
+| 27 Casaba | One Casaba "cuts Breakwater in two", *after* the spinal | Casaba spears cripple Breakwater first, and the spinal shot kills it (O10). The break-up comes from the spinal hit plus secondary explosions. |
 | D7 rule / 28 | Hab rings spin down at action stations | Rings keep spinning, depopulated (A-34). |
 | Render plan | EEVEE for the wides | Cycles for everything (user decision). |

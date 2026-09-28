@@ -1,11 +1,11 @@
 # LREF doctrine: the Expeditionary Response Element in a system assault
 
-**Status:** phase 1 draft, for sign-off. **Scope:** how an LREF task group fights its way into a defended star system, written for the *Operation Tidebreak* film but general enough to reuse.
+**Status:** phase 1, revised with the user's sign-off answers (see `OPEN_QUESTIONS.md`); awaiting the final OK. **Scope:** how an LREF task group fights its way into a defended star system, written for the *Operation Tidebreak* film but general enough to reuse.
 
 **How to read the labels:**
 - **[Lore]**: stated in JCB's posts (`pack/lore/WPAtaMS_LREF_lore_posts.md`).
 - **[Model]**: already built in the Blender project (`pack/project_docs/`).
-- **[A-nn]**: a *production assumption*: the lore is silent, so this extends it from physics. Every assumption is listed in §14 and the ones you may want to overrule are also in `OPEN_QUESTIONS.md`.
+- **[A-nn]**: a *production assumption*: the lore is silent, so this extends it from physics. Every assumption is listed in §14; the ones marked ★ there were put to the user and confirmed.
 - **WN §n** points to section n of `doctrine/working_numbers.md`. `working_numbers.py` generates that file, so every figure can be re-derived. A bare **§n** is a section of this document.
 - **Rule IDs:** O = offensive, D = defensive. O1–O7 and D1–D7 keep the draft's numbering so the storyboard's citations still line up; where a rule changed, the table says how and why.
 
@@ -18,7 +18,7 @@ The setting is "a soft sci-fi setting wearing a hard sci-fi coat" [Lore]. So the
 An LREF task group arrives by warp at a world it does not own. Everything else follows from five facts:
 
 1. **It is seen the moment it arrives.** The warp-exit flash, the drive plumes and even a cold 300 K hull are visible to infrared sensors across the system (WN §5: a dark Endeavor is detectable at about 0.9 AU; its drive at 1 g, across the whole system). There is no stealth for a crewed warship in space. What *can* be hidden is intent: which ship is which, where it will be in ten minutes, and what it will shoot at.
-2. **It must cross the last few hundred thousand kilometres on its drives.** A bubble cannot be formed or collapsed inside a system's debris [Lore: bunny-hopping because of debris; A-01, A-02]. At Harrow that means a 4–6 hour approach (WN §6).
+2. **It must cross the last few hundred thousand kilometres on its drives.** A bubble cannot be formed or collapsed inside a system's debris [Lore: bunny-hopping because of debris; A-01, A-02]. At Maren that means a 4–6 hour approach (WN §6).
 3. **It arrives with only what it brought.** Magazines, drones, heat-sink capacity and spare radiators are finite, and the tender is back at the warp exit.
 4. **It must eventually brake.** A braking ship points its drive, reactor and radiators at the enemy and its forward guns away (§10).
 5. **The defender chose the ground.** Every rock in the belt has been surveyed, every lane pre-registered, and the planet's lasers have unlimited power and cooling.
@@ -29,21 +29,22 @@ So the LREF fights for three things: **the picture** (see first, and deny the en
 
 ## 2. Force structure and roles by class
 
-The task group for *Tidebreak*, compared with the draft:
+The task group for *Tidebreak*, as confirmed by the user. Apart from the Astrid and the Endeavor [Lore], every ship is named after a sci-fi ship (the user's choice); the source is in brackets.
 
-| Ship | Class | Count | Draft | Why changed |
+| Ship | Class and configuration | Draft | Why changed | Fate in the film |
 |---|---|---|---|---|
-| L.R.E.F.S. **Astrid** | Hanuman heavy cruiser (SCC) | 1 | 1 | — |
-| L.R.E.F.S. **Endeavor** | Ryland cruiser (MRV) | 1 | 1 | — |
-| Garibaldi-Ivanova, **hedgehog (MAV)** configuration | Frigate | **3** | 1 | Lore: "a sole MAV frigate is more than likely insufficient… hedgehogs operate in packs." Three is the smallest pack that can saturate Bastion (see §5). |
-| Garibaldi-Ivanova, **gun** configuration | Frigate | 1 | 1 | — |
-| Garibaldi-Ivanova, **PD** configuration | Frigate | **1** | 0 | Guards the tender and the shield park (D11). The lore lists the PD fit ("lasers, bulletstorm CIWS, kinetic kill clouds"). |
-| ECW destroyer | Destroyer | 2 | 2 | — |
-| Corvette | Corvette | 4 | 4 | — |
-| Fleet **tender** | Auxiliary | **1** | 0 | Lore: "there WILL be tenders somewhere in the backline." It holds the spare shields and reloads. It can stay off-screen or distant. |
-| Drones | Picket, decoy, PD, EW | ~200 | "some" | Roles in §6–7. |
+| L.R.E.F.S. **Astrid** | Hanuman heavy cruiser (SCC) | same | — | Survives |
+| L.R.E.F.S. **Endeavor** | Ryland cruiser (MRV) | same | — | Survives, minus a radiator fin |
+| **Infinity** (Halo), **Pillar of Autumn** (Halo), **Galactica** (Battlestar Galactica) | Garibaldi-Ivanova frigates, **hedgehog (MAV)** | 1 hedgehog | Lore: "a sole MAV frigate is more than likely insufficient… hedgehogs operate in packs". Three is the smallest pack that can saturate Breakwater (§5). | Survive; withdraw when empty (O11) |
+| **Donnager** (The Expanse) | Garibaldi-Ivanova frigate, **gun** | same | — | Survives |
+| **Excelsior** (Star Trek) | Garibaldi-Ivanova frigate, **PD** | none | Guards the tender and the shield park (D11). The lore lists the PD fit ("lasers, bulletstorm CIWS, kinetic kill clouds"). | Survives |
+| **Canterbury** (The Expanse) | ECW destroyer | "Wren" | Named for the ship lost first in *Leviathan Wakes* | **Lost early**: the defender hunts the network first (Defence HO9) |
+| **Extenuating Circumstances** (*To Sleep in a Sea of Stars*) | ECW destroyer | unnamed | — | Survives, as the fleet's last network ship |
+| **Rocinante** (The Expanse), **Tantive IV** (Star Wars), **Wallfish** (*To Sleep in a Sea of Stars*), **Normandy** (Mass Effect) | Corvettes | 4 unnamed | — | **Normandy is lost** to the drones, as its namesake is at the start of Mass Effect 2 |
+| **Nauvoo** (The Expanse) | Fleet **tender** | none | Lore: "there WILL be tenders somewhere in the backline." It holds the parked shields, reloads and spares. | Survives, at the shield park |
+| Drones | Picket, decoy, PD, EW | "some" | Roles in §6–7 | Consumables |
 
-All the frigates are one hull with swappable modules [Lore], so the extra frigates are instances of one asset. Whether to add them is your call (`OPEN_QUESTIONS.md` Q3).
+All the frigates are one hull with swappable modules [Lore], so the five frigates are instances of one asset.
 
 ### Roles by class
 
@@ -62,14 +63,14 @@ All the frigates are one hull with swappable modules [Lore], so the extra frigat
   - the back third as multi-silo packs of smaller nuclear missiles, many with MIRVs.
 
   Once empty it has only **4 CIWS** [Lore], so an empty hedgehog is withdrawn to the tender (O11).
-- **Gun:** "4 large kinetic batteries", with the rest of the hull as magazine, for "sustained fire at medium distances, filling in that awkward middle-range gap" [Lore]. At Tidebreak it is the medium-range hammer against emplacements and Harrow's frigates (O4).
+- **Gun:** "4 large kinetic batteries", with the rest of the hull as magazine, for "sustained fire at medium distances, filling in that awkward middle-range gap" [Lore]. At Tidebreak it is the medium-range hammer against emplacements and Maren's frigates (O4).
 - **PD:** lasers, CIWS and kinetic kill clouds [Lore]. It escorts the tender (D11).
 
 **Light cruisers (700–900 m) [Lore].** A frigate with a cruiser powerplant, one weapon type in quantity, and able to carry a plasma lance [Lore]. None in this group.
 
 **Cruiser: L.R.E.F.S. Endeavor (Ryland class, 1,194 m in the model) [Lore, Model].** "The greatest generalist of the fleet": every weapon family at once, and no spinal cannon [Lore].
 - **Weapons [Model]:** 6 M-1C twin railcannon turrets (12 guns, ~100 m class [Lore]), 8 laser focusing arrays, 8 PD lasers, 16 CIWS, 4 plasma lances, 16 VLS cells, 6 chaff/flare/smoke launchers, 2 EW jammers, 4 telescoping radiator fins.
-- **Tidebreak job:** the line of battle. It is the ship that goes into the Shoals, kills emplacements at close range, and delivers the knife-range blow (O6).
+- **Tidebreak job:** the line of battle. It is the ship that goes into the Breakers, kills emplacements at close range, and delivers the knife-range blow (O6).
 - **Heat:** at full combat it produces ~13.7 GW, more than its fins reject even at 1,200 K (WN §4). So it fights in bursts.
 
 **Heavy cruiser: L.R.E.F.S. Astrid (Hanuman class, ~1,600–1,700 m) [Lore].**
@@ -101,7 +102,7 @@ Every engagement runs the same four links. The defender's doctrine attacks each 
 
 | Link | Primary | Backup | How it fails |
 |---|---|---|---|
-| **1. Sense** | Astrid AVPSA: passive IR and optical, radar in bursts. Destroyer antennas. Picket drones pushed 5,000–20,000 km ahead. | Every ship's own IR search and track, phased arrays and star trackers [Model]. | Clutter (the Shoals), dazzle (planetary lasers), decoys. |
+| **1. Sense** | Astrid AVPSA: passive IR and optical, radar in bursts. Destroyer antennas. Picket drones pushed 5,000–20,000 km ahead. | Every ship's own IR search and track, phased arrays and star trackers [Model]. | Clutter (the Breakers), dazzle (planetary lasers), decoys. |
 | **2. Network** | The destroyers' **local network screen**: laser-link mesh, relays and EW drones [Lore]. The fleet is radio-silent. | Direct ship-to-ship laser links; pre-briefed autonomous fire plans. | Jamming, spoofing, a destroyer lost. |
 | **3. Fire control** | Fleet-level track fusion on the Astrid and both destroyers: each target is assigned to the best-placed shooter. | Each ship's own fire control from its own sensors. | Late or false tracks; light-lag (1.3 s at 380,000 km, WN §5). |
 | **4. Weapons by range band** | See below. | — | Heat, magazines, geometry. |
@@ -152,7 +153,7 @@ The second figure in each range includes 20 km/s of closing speed.
 
 **Doctrine:**
 - Kinetics are for **fixed, committed or crippled targets** (O4, O10).
-- The **spinal cannon's natural prey** is anything nailed to a rock or a moon: the Kest mass driver, Shoals platforms that have revealed themselves, orbital emplacements. Its other prey is a monitor whose drive has been cut.
+- The **spinal cannon's natural prey** is anything nailed to a rock or a moon: the Skerry mass driver, Breakers platforms that have revealed themselves, orbital emplacements. Its other prey is a monitor whose drive has been cut.
 - The Astrid must **point its whole hull** to fire (§10). A spinal shot is therefore an event the fleet plans around: the Astrid stops any burn, slews and steadies, then fires.
 
 ### 4.2 Directed energy: laser focusing arrays and PD lasers
@@ -190,7 +191,7 @@ Lore: plasma "requires an active electromagnetic field to maintain its form lest
 
 **Doctrine (O12):**
 - Plasma is a **knife weapon**, and it is less reliable than nuclear [Lore: "Nuclear is ironically much more commonplace and reliable"].
-- **Uses:** an emplacement unmasking at close range in the Shoals; a crippled ship; a frigate that strays inside 50 km.
+- **Uses:** an emplacement unmasking at close range in the Breakers; a crippled ship; a frigate that strays inside 50 km.
 - It is **never a primary weapon at range**.
 - The four nose lances on the Endeavor [Model] fire along its bow, so the ship must point at the target (§10).
 
@@ -242,9 +243,9 @@ Lore: saturation is "deploying enough missiles to overwhelm an enemy's missile d
 
 | Defence | Missiles at 45 km/s, side-on | Missiles at 45 km/s, nose-on | Missiles at 100 km/s, side-on | Missiles at 100 km/s, nose-on |
 |---|---|---|---|---|
-| Bastion's 24 PD lasers | ~360 | ~20 | ~160 | ~10 |
-| Harrow's 4 ground laser sites, *if all see the wave* | ~970 | ~140 | ~440 | ~60 |
-| 40 CIWS on Bastion | ~7 kills per second of the wave's arrival spread | | | |
+| Breakwater's 24 PD lasers | ~360 | ~20 | ~160 | ~10 |
+| Maren's 4 ground laser sites, *if all see the wave* | ~970 | ~140 | ~440 | ~60 |
+| 40 CIWS on Breakwater | ~7 kills per second of the wave's arrival spread | | | |
 
 Three conclusions shape the doctrine:
 
@@ -252,7 +253,7 @@ Three conclusions shape the doctrine:
 2. **Time on target beats CIWS (O3).** Kill clouds kill a few missiles per second. A wave that arrives within ~1 s is almost untouched by them; one that dribbles in over a minute is shredded.
 3. **Decoys are missiles too.** Each decoy the defender engages costs a retarget (0.5–2 s of laser time) and part of a CIWS cloud.
 
-**Pack arithmetic for Bastion [A-26].** One hedgehog carries ~360 pods: ~240 capital-ship killers and ~120 multi-packs of ~4 small missiles each, so **~700 missiles, plus MIRV warheads**.
+**Pack arithmetic for Breakwater [A-26].** One hedgehog carries ~360 pods: ~240 capital-ship killers and ~120 multi-packs of ~4 small missiles each, so **~700 missiles, plus MIRV warheads**.
 - **Plan:** two waves of about 400–600 missiles plus decoys each, from a pack of three, with about a third of the magazine held in reserve.
 - **Delivered in the laser shadow, nose-on, within a second:** the defence can stop only ~100 of a wave.
 - **Delivered in the open against all four ground sites:** the same waves are mostly wasted.
@@ -293,6 +294,7 @@ On top of that they carry offensive ECW: scrambling battle control, spoofing sen
 
 **What that means physically [A-29]:**
 - **EMCON.** The fleet does not use radio. Ships talk by laser link, relayed by the destroyers and their drones.
+  - **Voice rides the laser mesh.** Crews talk constantly, including the film's GUN-side comm lines, without breaking EMCON: a laser link can only be heard by someone standing in its beam.
   - **What it hides:** where each ship is, and which heat source is which.
   - **What it can't hide:** heat.
 - **The network screen** is the destroyers and their drones broadcasting masking noise and false emitters around the fleet. The enemy's passive RF sensors learn nothing, and its radar has to burn through.
@@ -324,11 +326,11 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 | Cruising dark (hotel only) | ~3.7 h | — |
 
 **Why fins can't just stay out:**
-- **They burn.** A fin burns through in ~20 s at 100,000 km under one Harrow ground laser, in ~11 s at 10,000 km under an LREF-class array, and in milliseconds to a pellet cloud.
+- **They burn.** A fin burns through in ~20 s at 100,000 km under one Maren ground laser, in ~11 s at 10,000 km under an LREF-class array, and in milliseconds to a pellet cloud.
 - **They show.** Fins at 1,200 K are visible at several AU (WN §5).
 - **Rules:**
   - inside any enemy laser envelope, fins stay stowed and the ship runs on its sink (D3);
-  - fins come out only behind cover (a rock, the planet's limb, the Shoals' dust) or with the threat on the ship's long axis.
+  - fins come out only behind cover (a rock, the planet's limb, the Breakers' dust) or with the threat on the ship's long axis.
 
 **Fins are edge-on along the axis.** The four fins extend radially, in planes that contain the ship's long axis [Model].
 - Seen from ahead or astern, all four are edge-on: the least area to a laser or slug, and the least glow toward the enemy.
@@ -357,7 +359,7 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 
 **Production assumptions:**
 - **A-01, velocity:** a ship leaves the bubble with the velocity it entered with, relative to the local star. Arrival velocity is set at the last hop point.
-- **A-02, the debris line:** a bubble cannot be formed or collapsed inside dense debris. At Harrow this keeps exits outside the Shoals torus: ≥ ~300,000 km in the ring plane.
+- **A-02, the debris line:** a bubble cannot be formed or collapsed inside dense debris. At Maren this keeps exits outside the Breakers torus: ≥ ~300,000 km in the ring plane.
 - **A-03, precision:** exits land within ~1,000 km of the aim point. Ships stagger their exits by seconds and by 50+ km so bubbles don't overlap.
 - **A-04, the flash:** bubble collapse makes a flash visible across the system at light speed. The defender knows the fleet has arrived ~1.5 s after it does, at 450,000 km (WN §5).
 - **A-05, spool times:** ~3–5 min to spool a bubble; ~5 s to collapse one (the rig's `warp_charge` ramp).
@@ -366,7 +368,7 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 - **A-07, warp without a shield:** possible, but it accepts the impact risk. Only a short hop into pre-surveyed space.
 
 **Doctrine:**
-- **Arrival (O1).** Exit slow (near rest relative to the target world), outside the debris line and outside the defender's effective reach. At Harrow that is ~450,000 km: beyond Kest's and the ground lasers' fin-kill envelope, and ≥ 1 h of missile flight from any defender launcher.
+- **Arrival (O1).** Exit slow (near rest relative to the target world), outside the debris line and outside the defender's effective reach. At Maren that is ~450,000 km: beyond Skerry's and the ground lasers' fin-kill envelope, and ≥ 1 h of missile flight from any defender launcher.
 - **Draft change:** the draft arrived at ~180 km/s. Braking that away at 1 g takes 5.1 hours over 1.65 million km (WN §6). It also means jettisoned shields fly on at 180 km/s and can never be collected, which contradicts the lore.
 - **The shield park.** Shields are released at the exit point, at near-zero velocity, where the tender holds. They are recovered there after the battle. Any ship that needs to leave by warp comes back to the park, or accepts a shieldless short hop (D9).
 - **Radiators and booms stow for warp [Lore].** A ship with damaged, jammed-out fins can't warp until they're cut away. That is one more reason fins are consumables (D7).
@@ -421,15 +423,15 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 
 | ID | Rule | Detail | Numbers | Change from draft |
 |---|---|---|---|---|
-| **O1** | **Arrive slow, outside, together** | Exit near rest relative to the target world, outside the debris line and the defender's reach. Stagger exits by seconds and 50+ km. Park the shields at the exit with the tender, then approach on drives. | Harrow: exit ~450,000 km; approach 4.6–6.3 h at a 20–30 km/s cruise (WN §6) | *Was:* arrive at 180 km/s, flip, jettison shields in the burn. *Why:* braking takes 5 h; shields released at speed can't be recovered [Lore]. |
+| **O1** | **Arrive slow, outside, together** | Exit near rest relative to the target world, outside the debris line and the defender's reach. Stagger exits by seconds and 50+ km. Park the shields at the exit with the tender, then approach on drives. | Maren: exit ~450,000 km; approach 4.6–6.3 h at a 20–30 km/s cruise (WN §6) | *Was:* arrive at 180 km/s, flip, jettison shields in the burn. *Why:* braking takes 5 h; shields released at speed can't be recovered [Lore]. |
 | **O2** | **See first, speak last** | The Astrid's AVPSA builds the picture: passive always, radar in bursts (it glows anyway). Everyone else is EMCON on laser links. Destroyers push picket and EW drones 5,000–20,000 km ahead. | AVPSA radar: 1 m² at ~180,000 km, a slug at ~57,000 km (WN §5) | Numbers added; the Astrid named as the lighthouse. |
 | **O3** | **Saturate on a clock** | Hedgehog packs fire in waves timed to arrive within ~1 s. Wave 1 spends and reveals; wave 2 kills. Mixed payloads: Casaba, thermonuclear, kill-cloud, decoy, EW. | One wave arriving nose-on in the laser shadow faces ~100 kills; side-on to four ground sites, ~500+ (WN §8) | Numbers added; pack of three (lore). |
 | **O4** | **Guns on what can't dodge** | Kinetics only inside the no-escape range, or at fixed or committed targets. The spinal cannon hunts fixed installations at long range and crippled ships at medium range. | Table in §4.1 | *Was:* ≤ 1,000 km against manoeuvring ships. *Now:* by target type; against frigates only ≤ ~200–340 km. |
 | **O5** | **Blind before the blow** | Arrays dazzle optics at any range. Destroyers jam radar, cut links and spoof tracks, so the defender's emplacements fall back to autonomous fire plans. The strike lands in that window. | Dazzle > 10⁶ km (WN §1) | Clarified: passive IR can't be jammed, only blinded by lasers or hidden by smoke. |
-| **O6** | **Close with purpose** | Knife range only where terrain forces it (rocks in the Shoals block sight lines until contact) or against crippled targets. Broadsides only with fins stowed. Plasma lances ≤ 50 km. | M-1C against a frigate ≤ ~190–340 km | *Why:* in open space, knife range is where emplacements win (§4.1). Added fin rule (§8). |
+| **O6** | **Close with purpose** | Knife range only where terrain forces it (rocks in the Breakers block sight lines until contact) or against crippled targets. Broadsides only with fins stowed. Plasma lances ≤ 50 km. | M-1C against a frigate ≤ ~190–340 km | *Why:* in open space, knife range is where emplacements win (§4.1). Added fin rule (§8). |
 | **O7** | **Layer the arms** | Drones, then corvettes, frigates, the cruiser, and the heavy cruiser. Each layer spends the enemy's attention and heat for the next. The spinal cannon fires into the gap. | — | Unchanged. |
 | **O8** | **Speed is the defender's ammunition** | Cross prepared space at ≤ ~20 km/s relative. Corvettes and drones lead and sweep the lane. Never make a high-speed ballistic pass through a defended system. | A 1 kg rock at 20 km/s = 48 kg TNT; at 180 km/s = 3.9 t (WN §6) | New. |
-| **O9** | **Choose the geometry, not the fight** | Attack from where the enemy's lasers see hardened noses or nothing: below the sites' horizon, behind rocks, through the Shoals' dust. Time strikes to planetary rotation and weather. Make every defender that can see the wave see it nose-on. | Nose-on vs side-on changes the kills per wave 7–17× (WN §8) | New. |
+| **O9** | **Choose the geometry, not the fight** | Attack from where the enemy's lasers see hardened noses or nothing: below the sites' horizon, behind rocks, through the Breakers' dust. Time strikes to planetary rotation and weather. Make every defender that can see the wave see it nose-on. | Nose-on vs side-on changes the kills per wave 7–17× (WN §8) | New. |
 | **O10** | **Cripple, then kill** | Against a mobile heavy target: strip its fins and sensors (lasers), cut its drive (Casaba, missiles), and only then commit heavy kinetics, from inside its now-larger no-escape range. | Monitor: 0.05 g → 0.005 g grows the spinal no-escape range from ~4,000 to ~12,000 km (WN §2) | New. Reverses the draft's last beats (spinal before Casaba). |
 | **O11** | **Spend missiles, keep ships** | Frigate packs are the currency. Hold about a third of the magazine in reserve. Withdraw empty hedgehogs to the tender (4 CIWS only [Lore]). | ~700 missiles per hedgehog [A-26] | New, from lore. |
 | **O12** | **Plasma where the field holds** | Lances and torpedoes are knife weapons for emerging emplacements, crippled ships and strays. They are never the plan at range. | Lance ≤ ~50 km; torpedo launch ≤ ~100 km [A-23] | New, from lore. |
@@ -442,9 +444,9 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 | **D1** | **Six layers against missiles** | EW, decoys, laser arrays, PD lasers, chaff and smoke, CIWS kill clouds (§6). Kill anything that might be a Casaba before ~10 km. | CIWS ~3 missiles/s per 16 mounts; Casaba standoff 2–4 km (WN §7–8) | Reordered by range; Casaba rule added. |
 | **D2** | **Spread out, stay covered** | Ships ≥ 50 km apart (well beyond a 1 Mt burst's fin-kill radius) but within ~10,000 km of the Astrid's arrays. | 1 Mt strips fins to ~3 km; LFAs kill side-on missiles to ~30,000 km (WN §1, §7) | *Was:* 50–200 km. The upper bound is now set by mutual PD cover. |
 | **D3** | **Heat discipline** | Fins stowed inside any enemy laser envelope; run on sinks. Fins out only behind cover or with the threat on the long axis. Rotate firing duty. Know the heat clock. | Endeavor dark: ~24 min full combat, ~91 min guns silent (WN §4) | *Was:* "a few minutes" on sinks. Numbers and the edge-on rule added. |
-| **D4** | **Random walk** | Inside any slug's no-escape range, jink on RCS and modulate the drive by ±10–20 %. Never fly a straight coast in the Shoals. | RCS 0.1 g moves a capital ship ~150 m in ~20 s (WN §2) | Linked to the no-escape table. |
-| **D5** | **Use the terrain** | Rocks, the planet's limb and the Shoals' dust give cover from lasers and sensors, and a place to vent heat. | — | Adds heat venting behind cover. |
-| **D6** | **Screen the screen** | Corvettes and PD drones kill drones and strike craft before they reach the line. The defender's drones are parked ahead in the lanes, so screen the lane ahead, not only the flank. | Drones from Kest need hours to reach the Shoals (WN §3) | Updated for pre-positioned drones. |
+| **D4** | **Random walk** | Inside any slug's no-escape range, jink on RCS and modulate the drive by ±10–20 %. Never fly a straight coast in the Breakers. | RCS 0.1 g moves a capital ship ~150 m in ~20 s (WN §2) | Linked to the no-escape table. |
+| **D5** | **Use the terrain** | Rocks, the planet's limb and the Breakers' dust give cover from lasers and sensors, and a place to vent heat. | — | Adds heat venting behind cover. |
+| **D6** | **Screen the screen** | Corvettes and PD drones kill drones and strike craft before they reach the line. The defender's drones are parked ahead in the lanes, so screen the lane ahead, not only the flank. | Drones from Skerry need hours to reach the Breakers (WN §3) | Updated for pre-positioned drones. |
 | **D7** | **Spend what is spendable** | Radiators, drones, decoys and the parked shields are consumables. Hab rings keep spinning but are depopulated; crew at citadel stations, suited; threatened sections depressurised. | — | *Was:* rings spin down. *Why:* counter-rotating rings don't fight a flip (§10). |
 | **D8** | **Never turn your back without cover** | Flips under smoke, EW peaks and escort cover, one ship at a time. | Flip: Endeavor ~28–49 s, Astrid ~33–58 s (WN §6) | New. |
 | **D9** | **Keep the way home** | The shield park and the tender are the line of retreat. Emergency warp without a shield only into a surveyed short hop. Keep 3–5 min of spool time in hand. | [A-05, A-07] | New, from lore. |
@@ -466,27 +468,27 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 - **Leaving the park unguarded** (D11).
 - **Carriers and crewed strike craft.** Lore calls carriers controversial, expensive and nullified by good screens. The LREF uses drones.
 - **Bombarding a populated world.** A slug or warhead fired at a planet's surface is a weapon of mass destruction. The operation exists to put T-SEC on the ground, not to ruin the ground.
-  - Whether the LREF may strike Harrow's isolated military laser sites is an ROE question for you (`OPEN_QUESTIONS.md` Q6). This doctrine assumes **no**: the fleet beats the ground lasers by geometry, weather, smoke and EW.
+  - **Decided (Q6):** the LREF does **not** strike Maren's ground laser sites, even though they are isolated military sites. The fleet beats them by geometry, weather, smoke and EW.
 
 ---
 
 ## 14. Assumption register
 
-Each of these goes beyond the lore. The ones marked ★ are also in `OPEN_QUESTIONS.md` because they change what the film shows.
+Each of these goes beyond the lore. The ones marked ★ change what the film shows, so they were put to the user and confirmed (`OPEN_QUESTIONS.md`).
 
 | ID | Assumption | Why this value |
 |---|---|---|
 | A-01 ★ | A ship leaves warp with its entry velocity; arrival velocity is set at the last hop point | Lets the fleet arrive slow, so the shields can be recovered [Lore] |
-| A-02 ★ | No bubble can form or collapse inside dense debris; at Harrow the debris line is the outer edge of the Shoals (~300,000 km) | Gives "bunny-hopping because of debris" [Lore] a tactical meaning |
+| A-02 ★ | No bubble can form or collapse inside dense debris; at Maren the debris line is the outer edge of the Breakers (~300,000 km) | Gives "bunny-hopping because of debris" [Lore] a tactical meaning |
 | A-03 | Exit precision ~1,000 km; exits staggered by seconds and ≥ 50 km | Avoids overlapping bubbles |
 | A-04 | Bubble collapse flashes, visible at light speed | The draft's opening shot; tells the defender |
 | A-05 | Spool 3–5 min, collapse ~5 s | Matches the rig's `warp_charge` ramp |
 | A-06 | Bunny-hop legs with a staging point outside the target system | Lore mentions bunny-hopping without detail |
 | A-07 | Warp without a shield = accepted impact risk, short surveyed hops only | Follows from the shield's purpose [Lore] |
 | A-10 | Sustained thrust: capital ships 1 g (2–3 g for minutes), frigates 2 g, corvettes 4 g, missiles 30–50 g | Crew tolerance; lore calls corvettes fast and heavy cruisers poor manoeuvrers |
-| A-11 ★ | A tender accompanies the task group and holds the shield park | Lore: tenders "WILL be" in the backline |
+| A-11 ★ | A tender (the *Nauvoo*) accompanies the task group and holds the shield park | Lore: tenders "WILL be" in the backline |
 | A-12 | The commander flies in the Astrid; the Endeavor is the alternate | Picture, power, survivability |
-| A-13 ★ | The objective is orbital control for a T-SEC landing | Explains why the LREF must break the defence and won't bombard |
+| A-13 ★ | The objective is orbital control for a T-SEC landing (not shown in the film) | Explains why the LREF must break the defence and won't bombard |
 | A-20 | M-1C: 10 kg at 25 km/s; spinal: 500 kg at 60 km/s | A ~100 m barrel [Lore] at ~3×10⁵ g; ~1 km barrel at ~2×10⁶ g |
 | A-21 | The spinal cannon can hit a fixed point target at ~100,000 km (slug divert kit or salvo) | Aim error of ~0.1 µrad is at the edge of plausible; beyond that, salvo |
 | A-22 | Laser focusing array: 3.3 m, 350 nm, 25 MW; PD laser: 1.6 m, 5 MW; 25 % wall-plug; 1.5× jitter | Apertures from the draft; UV matches the violet lens [Model] |
@@ -501,5 +503,5 @@ Each of these goes beyond the lore. The ones marked ★ are also in `OPEN_QUESTI
 | A-31 ★ | Heat sinks: Endeavor 20 TJ, Astrid 60 TJ | Sets the heat clock (24 and 40 min); the storyboard's overheating beat depends on it |
 | A-32 | Emergency dump: ~1,000 t of water, ~3 min at full combat, visible vapour plume | Open-cycle cooling |
 | A-33 | Flip time limited by ~1 g (routine) or ~3 g (combat) at the ship's ends | Structure and crew |
-| A-34 | Rings keep spinning at action stations, crew moved to citadel stations | Counter-rotating rings [Model] |
+| A-34 ★ | Rings keep spinning at action stations, crew moved to citadel stations | Counter-rotating rings [Model] |
 | A-35 | Battle state: suited crew, depressurised sections | Standard hard-SF practice |

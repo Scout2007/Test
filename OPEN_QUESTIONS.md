@@ -1,76 +1,47 @@
 # Open questions
 
-These are decisions only you can make. Each question has a recommendation, and phase 2 will use the recommendation unless you say otherwise. Numbers and IDs refer to `doctrine/`.
+Questions only the user can answer. Phase 1's questions were all answered at sign-off; they are kept below as a decision log, so the reasons stay with the choices. Phase 2 will add new questions to "Still open".
 
-## Phase 1: the doctrines
+## Still open
 
-**Q1. Who is the defender?**
-- **Placeholder:** "Harrow System Defence Command", holding the system alone with no warp fleet present (H-01).
-- **Needed from you:** a faction name, whether they are human (a breakaway polity or rival state) or alien, and whether a relief force is expected. Relief changes their doctrine from "hold forever" to "hold for N days".
-- **Recommendation:** a human breakaway polity, no relief expected. It keeps the fight symmetric in technology, which the doctrines assume.
+None right now. Waiting for the user's OK on the revised doctrines before phase 2 (the storyboard and the review rounds) starts.
 
-**Q2. The asteroid belt.**
-You asked for one, and it stays. The realistic version is a **debris torus around Harrow**: the wreck of a former moon, 120,000–260,000 km out (H-05, `Defence_doctrine.md` §4.1).
-- Even that has its big rocks hundreds of km apart, so the draft's "threading between tumbling asteroids" becomes **deliberate close passes of specific large rocks**.
-- **Options:**
-  - (a) the torus (recommended);
-  - (b) keep the draft's dense field as labelled artistic licence;
-  - (c) a mix: the torus, plus one dense rubble cluster around a recently shattered body where the knife fight happens.
-- **Recommendation:** (a), or (c) if you want one shot with several rocks in frame.
+## Decided at phase 1 sign-off
 
-**Q3. The LREF task group.**
-- **Recommended additions:**
-  - two more hedgehog frigates, because the lore says one hedgehog is never enough and they operate in packs;
-  - a PD-configured frigate;
-  - a tender that holds the parked shields.
-- All the frigates are one asset with swappable modules. The tender can be a distant shape.
-- **Your call:** add them, or keep the draft's composition.
+### The world and its rules
 
-**Q4. The arrival.**
-- **Recommendation:** exit warp slow, ~450,000 km out, and park the shields there with the tender. This matches the lore, where shields are collected after battle.
-- **The draft's version:** arrive at 180 km/s. That means a 5-hour braking burn, and shields released at that speed are lost forever.
-- **What it changes on screen:** the opening becomes "arrive, park the shields, turn toward Harrow and burn". The **flip-and-burn** moves to mid-film, as the dramatic turnover before braking toward Bastion.
+| # | Question | Decision | Where it lands |
+|---|---|---|---|
+| Q1 | Who defends the system? | **The Maren Compact**: a human polity that broke away from the GUN, with no warp fleet at Maren and **no relief coming** | Defence §1, H-01 |
+| Q2 | The asteroid belt | **A debris ring around the planet** (the wreck of a former moon), realistic spacing; close-rock shots are deliberate passes of chosen rocks | Defence §4.1, H-05 |
+| Q4 | The arrival | **Slow warp exit ~450,000 km out; shields parked with the tender**; the flip-and-burn moves to mid-film as the turnover | LREF §9, O1 |
+| Q5 | Heat clock | **~24 min (Endeavor) and ~40 min (Astrid)** of full combat with fins stowed | LREF §8, A-31 |
+| Q6 | May the LREF strike the planet's laser sites? | **No.** Beat them with geometry, weather, smoke and EW | LREF §13 |
+| Q7 | Objective | **Orbital control for a T-SEC landing, not shown** in the film | LREF A-13 |
+| Q8 | Warp rules | **Both confirmed**: velocity is conserved through warp; no bubble inside dense debris | LREF A-01, A-02 |
+| Q9 | Hab rings in battle | **Keep spinning, depopulated** | LREF §10, A-34 |
 
-**Q5. Heat-sink size** (A-31). These values set the film's overheating clock.
-- **Assumed:** Endeavor 20 TJ and Astrid 60 TJ, which gives about **24 min** and **40 min** of full combat with fins stowed.
-- **Your call:** bigger sinks mean less overheating drama; smaller ones mean more.
+### The fleet and the names
 
-**Q6. Rules of engagement.**
-- **Question:** may the LREF strike Harrow's ground laser sites from orbit? They are isolated military sites, but they are on an inhabited world.
-- **Recommendation:** no. The doctrine beats the lasers with geometry, weather, smoke and EW, which is more interesting and fits the GUN's values in the T-SEC post.
+| # | Question | Decision |
+|---|---|---|
+| Q3 | Task group | **Expanded**: a hedgehog pack of three, a PD frigate and a tender added to the draft's fleet |
+| Q10 | Ship names | Sci-fi references (the user's choice). **Hedgehogs:** *Infinity*, *Pillar of Autumn*, *Galactica*. **Gun frigate:** *Donnager*. **PD frigate:** *Excelsior*. **Destroyers:** *Canterbury* (lost early, as in *Leviathan Wakes*), *Extenuating Circumstances* (survives, kept as a destroyer). **Corvettes:** *Rocinante*, *Tantive IV*, *Wallfish*, *Normandy* (lost to the drones). **Tender:** *Nauvoo*. The Astrid and the Endeavor keep their lore names. |
+| Q10 | Place names | New originals: the planet **Maren**, the moon **Skerry**, the debris ring **the Breakers**, the monitor ***Breakwater***, the faction **the Maren Compact** |
+| — | Operation name | **Operation Tidebreak** (kept) |
+| — | LREF losses | **The destroyer *Canterbury* and the corvette *Normandy***; the Endeavor loses a radiator fin |
+| — | Ending | **A costly victory** |
 
-**Q7. The objective.** Phase 1 assumes the operation clears orbit for a **T-SEC landing** (A-13).
-- **Question:** is that right?
-- **Question:** should the last shot hint at it, for example T-SEC landing craft arriving? That would be a new asset.
+### The film
 
-**Q8. Warp rules** (A-01, A-02).
-- **The assumptions:**
-  - a ship leaves warp with the velocity it entered with;
-  - a bubble can't form or collapse inside dense debris.
-
-  The second one gives the lore's "bunny-hopping because of debris" a tactical meaning.
-- **Needed from you:** confirm these, or give me JCB's rule if one exists.
-
-**Q9. Hab rings in battle.**
-- **Recommendation:** they keep spinning, depopulated. The draft spun them down.
-- The counter-rotating twin rings don't resist a flip, so spinning down buys nothing. It is also a visual choice: spinning rings look alive.
-
-## For the storyboard (phase 2)
-
-**Q10. Names.** Everything is renameable: the operation, Harrow, Kest, the Shoals, *Bastion*, the destroyer *Wren*. The other LREF ships need names too: three hedgehogs, the gun and PD frigates, a second destroyer, four corvettes and the tender. I can propose some in the lore's style if you like.
-
-**Q11. The scenario.**
-- **Recommendation:** revise *Operation Tidebreak* rather than replace it. The physics mainly reorders beats:
-  - the shields are parked at arrival;
-  - the flip-and-burn becomes the mid-film turnover;
-  - the Shoals fight centres on one or two chosen rocks;
-  - Casaba spears cripple Bastion *before* the spinal shot kills it.
-- Every time jump gets an on-screen mission clock. The real operation runs ~5–7 hours.
-
-**Q12 (for your information, no change proposed). The M-1C's 0.33 s plasma pulse up the bore.**
-- A real 25 km/s slug crosses a 100 m barrel in ~8 ms, about a fifth of a frame.
-- **Options:**
-  - (a) accept it as cinematic;
-  - (b) read it in-universe as a bore-conditioning pulse that precedes the (instant) shot;
-  - (c) keep it only for close-ups, with a faster pulse in wides.
-- The design is yours and already decided; this is only so the physics reviewer's note doesn't surprise you later.
+| Question | Decision |
+|---|---|
+| Runtime | **Flexible**: the story sets the length, and the storyboard reports it |
+| Time and tactical picture | **A burned-in mission clock at each time jump, plus 2D tactical HUD inserts** |
+| Cameras | **Cinematic free cameras**, with real lens behaviour |
+| Interiors | **None**: exteriors only, with the HUD inserts as the "inside" view |
+| Dialogue | **GUN-side comm lines throughout**, as subtitles first (voice acting maybe later). They ride the fleet's laser links, so they don't break its radio silence (LREF §7). The defender is never heard. |
+| Sound | **Expanse-style**: near silence outside, sound through structure when the camera rides a hull, and big events as sub-bass |
+| New asset scope | **Everything hero-detailed** |
+| Render budget | **Up to a week per full pass** of the film |
+| Q12: the M-1C's 0.33 s bore pulse (a real shot takes ~8 ms) | **Kept as cinematic licence**, labelled in the physics notes |

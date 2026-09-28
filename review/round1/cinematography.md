@@ -65,10 +65,9 @@ The four-act shape and beat order are right, and several shots sell scale honest
     - Start it on the flash in 1 (T+0:00:00).
     - Run it at the shot's rate: spinning seconds mean compressed, crawling ones slowed.
     - On jumps over 30 minutes, roll the digits or dissolve.
-  - **HUD:** one master plot with Maren screen right, 5 s or more per insert, no more than 4 labels.
-    - Show the clock and "ENDEAVOR SINK nn %" in a fixed place, so the heat builds toward 23.
-    - **6:** the dish (3 s), then 5's feed (4 s), then the master plot (5 s: Breakwater, Site 1, Skerry, the Breakers, the approach line).
-    - **17:** the Astrid's bearing line swinging onto the platform.
+  - **HUD:** one master plot, with Maren screen right. Hold each insert 5 s or more, with no more than 4 labels, and keep the clock and "ENDEAVOR SINK nn %" in a fixed place so the heat builds toward 23.
+    - **6:** the dish (3 s), then 5's feed (4 s), then the master plot (5 s): Breakwater, Site 1, Skerry, the Breakers and the approach line.
+    - **17:** the Astrid's bearing line swings onto the platform.
     - **22:** the Lee's shadow, with the two nearby rocks tagged "?".
 
 ### 5. [MAJOR] The losses and the antagonist aren't set up (6, 11, 15–20, 29–37)

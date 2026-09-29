@@ -31,13 +31,13 @@ SHIELDS_OFF = "T+0:02:00"   # the shields leave the ships; sketches drop them fr
 
 # ---------------------------------------------------------------- mission
 PHASES = [
-    ("T+0:00", "T+0:25", "Arrival", "Exit at 450,000 km, near rest relative to Maren. Shields parked with the Nauvoo (T+0:02). Net up. Skerry throws three rounds (T+0:04) and its laser dazzles the Astrid's dish, so the fins stay in. Wave one away at Skerry (T+0:18)."),
+    ("T+0:00", "T+0:25", "Arrival", "Exit at 450,000 km, near rest relative to Maren. Shields parked with the Nauvoo (T+0:02). Net up. Skerry starts throwing (T+0:04; three rounds every ten minutes) and its laser dazzles the Astrid's dish, so the fins stay in. Wave one away at Skerry (T+0:18)."),
     ("T+0:25", "T+0:59", "Turn and burn", "1 g along the approach line for 34 min: 0 → 20 km/s over 20,400 km."),
     ("T+0:59", "T+3:20", "Coast", "20 km/s, bow on Maren. Skerry's laser dies at T+1:02 and its depot flushes 40 drones toward the shield park; the fins come out edge-on at T+1:10."),
     ("T+3:20", "T+4:34", "The Breakers", "Fins stowed in the debris. Site 1 dazzles; the pods wake; the Canterbury is lost (T+3:52); the Astrid answers; drones wake; the Normandy is lost (T+4:25)."),
     ("T+4:34", "T+5:09", "Turnover", "Flip (49 s) and brake at 1 g for 34 min, ending on Anchor's orbital velocity (1.63 km/s; thrust tilted ~4.7°)."),
     ("T+5:09", "T+5:43", "Anchor", "An 18 km rock that at T+5:09 lies over Site 1. The fleet sweeps it (a mine), vents, loses the port fin to a platform 400 km off, lances a frigate, kills the platform, and vents again with three fins (94 % → 31 %)."),
-    ("T+5:43", "T+7:51", "Final approach", "An inertial path of ~113,000 km: 1 g to 20 km/s (to T+6:17), coast, turnover at T+7:16, then brake to a stop ~8,500 km from Breakwater (T+7:51). The Astrid, trailing, stops 10,800 km out. Skerry's net at T+6:40; Site 1's fire from T+6:55; Breakwater's 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31). The pack stays at Anchor as a fire base."),
+    ("T+5:43", "T+7:51", "Final approach", "An inertial path of ~113,000 km: 1 g to 20 km/s (to T+6:17), coast, turnover at T+7:16, then brake to a stop ~8,500 km from Breakwater (T+7:51). The Astrid, trailing, stops 10,800 km out. Skerry's six nets from T+6:40, ten minutes apart, side-stepped one by one; Site 1's fire from T+6:55; Breakwater's 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31). The pack stays at Anchor as a fire base."),
     ("T+7:27", "T+7:58", "Hammer and anvil", "From Anchor, 118,000 km out, the spend wave (Infinity) arrives at T+7:52:00 and the kill wave (Galactica) at T+7:53:30. Both fly straight in, nose-on to Breakwater and ~48° off its zenith, so misses and wreckage clear Maren. Casaba jets cut the drive. The Astrid hails, then fires from rest at T+7:54:40, 15° off Breakwater's zenith; impact T+7:57:44."),
     ("T+7:58", "T+8:24", "Terms", "Sink 98 %: the Endeavor dumps water (T+8:00). Maren asks for terms (T+8:10). Site 1 goes dark; the fleet vents at last (T+8:24)."),
 ]
@@ -100,7 +100,7 @@ FLEET = [
 DEFENDERS = [
     ("Breakwater", "Warpless monitor", "Synchronous orbit over Site 1. Its guns never get a shot (the LREF stays outside their no-escape range); it fires its 64 missiles at the last ECW destroyer."),
     ("Site 1 (of 4)", "Ground laser, 2 GW", "The only site that sees Breakwater's sky. Dazzles and burns; never struck (ROE)."),
-    ("Skerry", "Moon complex", "Throws three rounds at T+0:04; its laser dazzles the fleet until wave one kills it; its depot flushes 40 drones at the shield park."),
+    ("Skerry", "Moon complex", "Throws three rounds every ten minutes from T+0:04 until wave one kills it (18 in all); its laser dazzles the fleet; its depot flushes 40 drones at the shield park."),
     ("The Breakers garrison", "Emplacements", "Cold pods, railgun platforms, mines, parked drones and a drone-control craft."),
     ("Inner ring", "12 emplacements", "Sensor pickets and sector defence along the orbit; too far apart to thicken Breakwater's wall."),
     ("Compact frigates", "3", "One ambushes the Endeavor at Anchor; two hold behind Maren's limb."),
@@ -314,8 +314,8 @@ shot(act="I", title="The Astrid looks", dur=3, clock="T+0:03:20", real="compress
      sketch="panel([ship('astrid',110,56,1.3,-3,true), '<ellipse cx=\"100\" cy=\"38\" rx=\"9\" ry=\"4\" fill=\"none\" stroke=\"#cfd6dc\" stroke-width=\"0.8\"/>'], 21)")
 shot(act="I", title="Skerry throws", dur=5, clock="T+0:04:10", real="1:1", body="hud",
      cam="HUD insert · the Astrid's telescope feed, 2,000 mm equivalent",
-     action="A thread of light runs along Skerry's dark limb: the mass driver throwing. Three rounds leave; the plot tags them ARRIVE T+6:40 · OUR LANE. Then a glare blooms across the feed: Skerry's laser has found the dish.",
-     comm=[("ASTRID", "Skerry's thrown three rounds down our lane."), ("ACTUAL", "They'll be hours.")],
+     action="A thread of light runs along Skerry's dark limb: the mass driver throwing. Three rounds leave; the plot tags them ARRIVE T+6:40 · OUR LANE and starts a count, since more follow every ten minutes. Then a glare blooms across the feed: Skerry's laser has found the dish.",
+     comm=[("ASTRID", "Skerry's throwing down our lane."), ("ACTUAL", "They'll be hours.")],
      rules=["HO3", "HO5", "O2"], vfx="HUD, telescope grain, dazzle glare", rig=[], assets=["HUD", "SKR", "FX-DAZZLE"],
      sound="Soft sensor tones.", cost="E", map="A", render=None,
      sketch="panel([moon(120,50,26), '<path d=\"M104,38 Q118,30 134,34\" fill=\"none\" stroke=\"#ffe3b0\" stroke-width=\"0.9\"/>', glow(150,30,30,'#f2e8ff',0.35), hud(70,12,100,76), label(74,20,'SKERRY · 3 ROUNDS','#e2603f'), label(74,86,'ARRIVE T+6:40 · OUR LANE','#33b3a2')], 5)")
@@ -343,7 +343,7 @@ shot(act="I", title="Turn and burn", dur=6, clock="T+0:25:00", real="compressed 
 # ============================================================ ACT II
 shot(act="II", title="Skerry burns", dur=4, clock="T+1:02:00", real="compressed 5× (~20 s of hits)", body="tracker",
      cam="EWS · 1,200 mm · Skerry a quarter-frame disc",
-     action="Pinpricks of white on Skerry's limb: wave one arriving, nose-on to the battery. The light left Skerry 0.9 s ago. Just before the hits, a faint spray of points leaves the depot: its drones, flushed toward the shield park.",
+     action="Pinpricks of white on Skerry's limb: wave one arriving, nose-on to the battery. The light left Skerry 0.9 s ago. Just before the hits, a faint spray of points leaves the depot: its drones, flushed toward the shield park. Its eighteen rounds are already on their way.",
      comm=[("ASTRID", "Splash on Skerry. Their laser's gone.")], rules=["O3", "O9", "HO8"],
      vfx="Distant nuclear flashes, flushed drones", rig=[], assets=["SKR", "FX-NUKE"],
      sound="Nothing; a swell of score.", cost="D", map="A", render=None,
@@ -530,7 +530,7 @@ shot(act="IV", title="The fire plan", dur=5, clock="T+5:40:00", real="1:1", body
      sketch="panel([hud(16,10,208,80), planet(196,60,12,'right'), ship('monitor',176,40,0.1,0), '<line x1=\"40\" y1=\"30\" x2=\"174\" y2=\"40\" stroke=\"#33b3a2\" stroke-width=\"0.6\" stroke-dasharray=\"1 1.5\"/><line x1=\"150\" y1=\"20\" x2=\"174\" y2=\"38\" stroke=\"#b476ff\" stroke-width=\"0.6\"/>', label(112,16,'FIRING LINE 15°','#b476ff'), rocks(2,1,30,38,26,34,4,4.5), label(22,44,'ANCHOR · PACK','#33b3a2'), label(60,24,'SPEND 7:52 · KILL 7:53','#33b3a2'), label(20,86,'SINK 31% · FINS 3/4 · PARK HOLDING','#33b3a2'), label(150,86,'2 FRIGATES · LIMB','#e2603f')], 67)")
 shot(act="IV", title="The net", dur=5, clock="T+6:40:00", real="compressed ~24× (2 min)", body="drone",
      cam="WS · 50 mm · over the Extenuating Circumstances",
-     action="Hours after Skerry threw them, its rounds arrive. Ahead of the fleet the destroyer's drones light up a spreading cloud of pellets about 20 km across, glittering in their lamps. The fleet side-steps, drives angled off the line.",
+     action="Hours after Skerry threw them, the first of its rounds arrive. Ahead of the fleet the destroyer's drones light up a spreading cloud of pellets about 20 km across, glittering in their lamps. The fleet side-steps, drives angled off the line; five more nets follow, ten minutes apart.",
      comm=[("EXTENUATING", "Skerry's rounds. Right on time."), ("ACTUAL", "All ships, left two degrees.")],
      rules=["HO3", "D4", "O8"], vfx="Canister cloud glitter (swarm system)", rig=[],
      assets=["DD", "DRN-L", "FX-SWARM"], sound="Silence; the score ticks.", cost="B", map="D", render=None,
@@ -634,9 +634,9 @@ shot(act="IV", title="Heat", dur=4, clock="T+8:00:00", real="1:1", body="hull",
      sketch="panel([ship('endeavorNoShield',150,50,1.2,0), glow(120,30,20,'#e8eef4',0.6), glow(92,20,24,'#e8eef4',0.4), glow(60,12,26,'#e8eef4',0.25)], 89)")
 shot(act="IV", title="Terms", dur=5, clock="T+8:10:00", real="1:1", body="tracker",
      cam="Tracker · 2,000 mm · from the Endeavor's standoff",
-     action="Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting over the night side. On the last plot two channels stay dark: Canterbury, Normandy.",
+     action="Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting over the night side. On the last plot the Astrid's firing line has already swung onto the next ring station, and two channels stay dark: Canterbury, Normandy.",
      comm=[("EXTENUATING", "Actual, Maren's asking for terms."), ("ACTUAL", "Site One goes dark first.")],
-     rules=[], vfx="Distant wreck, HUD tag", rig=[], assets=["BW-BRK", "MAREN", "HUD"],
+     rules=["O4", "D7"], vfx="Distant wreck, HUD tag", rig=[], assets=["BW-BRK", "MAREN", "RING", "HUD"],
      sound="The score, low.", cost="D", map="E", render=None,
      sketch="panel([planet(120,170,120,'right'), sparks(120,50,30,20,90), glow(120,50,6,'#ffd9a0',0.6), label(8,92,'CANTERBURY · NORMANDY — NO CARRIER','#9fb0bc')], 90)")
 shot(act="IV", title="Hold", dur=9, clock="T+8:24:00", real="1:1", body="drone",

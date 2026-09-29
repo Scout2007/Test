@@ -8,13 +8,13 @@ Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_do
 
 | Mission time | Phase | What happens |
 |---|---|---|
-| T+0:00–T+0:25 | Arrival | Exit at 450,000 km, near rest relative to Maren. Shields parked with the Nauvoo (T+0:02). Net up. Skerry throws three rounds (T+0:04) and its laser dazzles the Astrid's dish, so the fins stay in. Wave one away at Skerry (T+0:18). |
+| T+0:00–T+0:25 | Arrival | Exit at 450,000 km, near rest relative to Maren. Shields parked with the Nauvoo (T+0:02). Net up. Skerry starts throwing (T+0:04; three rounds every ten minutes) and its laser dazzles the Astrid's dish, so the fins stay in. Wave one away at Skerry (T+0:18). |
 | T+0:25–T+0:59 | Turn and burn | 1 g along the approach line for 34 min: 0 → 20 km/s over 20,400 km. |
 | T+0:59–T+3:20 | Coast | 20 km/s, bow on Maren. Skerry's laser dies at T+1:02 and its depot flushes 40 drones toward the shield park; the fins come out edge-on at T+1:10. |
 | T+3:20–T+4:34 | The Breakers | Fins stowed in the debris. Site 1 dazzles; the pods wake; the Canterbury is lost (T+3:52); the Astrid answers; drones wake; the Normandy is lost (T+4:25). |
 | T+4:34–T+5:09 | Turnover | Flip (49 s) and brake at 1 g for 34 min, ending on Anchor's orbital velocity (1.63 km/s; thrust tilted ~4.7°). |
 | T+5:09–T+5:43 | Anchor | An 18 km rock that at T+5:09 lies over Site 1. The fleet sweeps it (a mine), vents, loses the port fin to a platform 400 km off, lances a frigate, kills the platform, and vents again with three fins (94 % → 31 %). |
-| T+5:43–T+7:51 | Final approach | An inertial path of ~113,000 km: 1 g to 20 km/s (to T+6:17), coast, turnover at T+7:16, then brake to a stop ~8,500 km from Breakwater (T+7:51). The Astrid, trailing, stops 10,800 km out. Skerry's net at T+6:40; Site 1's fire from T+6:55; Breakwater's 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31). The pack stays at Anchor as a fire base. |
+| T+5:43–T+7:51 | Final approach | An inertial path of ~113,000 km: 1 g to 20 km/s (to T+6:17), coast, turnover at T+7:16, then brake to a stop ~8,500 km from Breakwater (T+7:51). The Astrid, trailing, stops 10,800 km out. Skerry's six nets from T+6:40, ten minutes apart, side-stepped one by one; Site 1's fire from T+6:55; Breakwater's 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31). The pack stays at Anchor as a fire base. |
 | T+7:27–T+7:58 | Hammer and anvil | From Anchor, 118,000 km out, the spend wave (Infinity) arrives at T+7:52:00 and the kill wave (Galactica) at T+7:53:30. Both fly straight in, nose-on to Breakwater and ~48° off its zenith, so misses and wreckage clear Maren. Casaba jets cut the drive. The Astrid hails, then fires from rest at T+7:54:40, 15° off Breakwater's zenith; impact T+7:57:44. |
 | T+7:58–T+8:24 | Terms | Sink 98 %: the Endeavor dumps water (T+8:00). Maren asks for terms (T+8:10). Site 1 goes dark; the fleet vents at last (T+8:24). |
 
@@ -105,7 +105,7 @@ Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_do
 | 50 | 3:09.0–3:13.0 | 4537–4632 | T+7:54:40 | compressed 45× (180 of the slug's 184 s; the clock races) | Three minutes | WS · 35 mm · the Casaba shot's angle (drone camera) | O10 |
 | 51 | 3:13.0–3:16.0 | 4633–4704 | T+7:57:44 | 1:1 | Impact | WS · 35 mm · the Casaba shot's angle (drone camera) | O4 |
 | 52 | 3:16.0–3:20.0 | 4705–4800 | T+8:00:00 | 1:1 | Heat | MS · 35 mm · along the Endeavor's scorched port flank (hull camera) | D3 D7 |
-| 53 | 3:20.0–3:25.0 | 4801–4920 | T+8:10:00 | 1:1 | Terms | Tracker · 2,000 mm · from the Endeavor's standoff (tracker) |  |
+| 53 | 3:20.0–3:25.0 | 4801–4920 | T+8:10:00 | 1:1 | Terms | Tracker · 2,000 mm · from the Endeavor's standoff (tracker) | O4 D7 |
 | 54 | 3:25.0–3:34.0 | 4921–5136 | T+8:24:00 | 1:1 | Hold | EWS · 35 mm · locked off, the Endeavor end-on (drone camera) | D3 |
 
 ## Act I: Arrival
@@ -198,8 +198,8 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Film:** 0:26.0–0:31.0 (5 s), frames 625–744
 - **Mission:** T+0:04:10 · 1:1
 - **Camera:** HUD insert · the Astrid's telescope feed, 2,000 mm equivalent (HUD insert)
-- **Action:** A thread of light runs along Skerry's dark limb: the mass driver throwing. Three rounds leave; the plot tags them ARRIVE T+6:40 · OUR LANE. Then a glare blooms across the feed: Skerry's laser has found the dish.
-- **Comms:** ASTRID: “Skerry's thrown three rounds down our lane.” / ACTUAL: “They'll be hours.”
+- **Action:** A thread of light runs along Skerry's dark limb: the mass driver throwing. Three rounds leave; the plot tags them ARRIVE T+6:40 · OUR LANE and starts a count, since more follow every ten minutes. Then a glare blooms across the feed: Skerry's laser has found the dish.
+- **Comms:** ASTRID: “Skerry's throwing down our lane.” / ACTUAL: “They'll be hours.”
 - **Doctrine:** HO3, HO5, O2
 - **VFX:** HUD, telescope grain, dazzle glare
 - **Rig:** none
@@ -258,7 +258,7 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Film:** 0:47.0–0:51.0 (4 s), frames 1129–1224
 - **Mission:** T+1:02:00 · compressed 5× (~20 s of hits)
 - **Camera:** EWS · 1,200 mm · Skerry a quarter-frame disc (tracker)
-- **Action:** Pinpricks of white on Skerry's limb: wave one arriving, nose-on to the battery. The light left Skerry 0.9 s ago. Just before the hits, a faint spray of points leaves the depot: its drones, flushed toward the shield park.
+- **Action:** Pinpricks of white on Skerry's limb: wave one arriving, nose-on to the battery. The light left Skerry 0.9 s ago. Just before the hits, a faint spray of points leaves the depot: its drones, flushed toward the shield park. Its eighteen rounds are already on their way.
 - **Comms:** ASTRID: “Splash on Skerry. Their laser's gone.”
 - **Doctrine:** O3, O9, HO8
 - **VFX:** Distant nuclear flashes, flushed drones
@@ -640,7 +640,7 @@ Across to Breakwater: Skerry's net, Site 1's fire, Breakwater's missiles at the 
 - **Film:** 2:24.0–2:29.0 (5 s), frames 3457–3576
 - **Mission:** T+6:40:00 · compressed ~24× (2 min)
 - **Camera:** WS · 50 mm · over the Extenuating Circumstances (drone camera)
-- **Action:** Hours after Skerry threw them, its rounds arrive. Ahead of the fleet the destroyer's drones light up a spreading cloud of pellets about 20 km across, glittering in their lamps. The fleet side-steps, drives angled off the line.
+- **Action:** Hours after Skerry threw them, the first of its rounds arrive. Ahead of the fleet the destroyer's drones light up a spreading cloud of pellets about 20 km across, glittering in their lamps. The fleet side-steps, drives angled off the line; five more nets follow, ten minutes apart.
 - **Comms:** EXTENUATING: “Skerry's rounds. Right on time.” / ACTUAL: “All ships, left two degrees.”
 - **Doctrine:** HO3, D4, O8
 - **VFX:** Canister cloud glitter (swarm system)
@@ -848,12 +848,12 @@ Across to Breakwater: Skerry's net, Site 1's fire, Breakwater's missiles at the 
 - **Film:** 3:20.0–3:25.0 (5 s), frames 4801–4920
 - **Mission:** T+8:10:00 · 1:1
 - **Camera:** Tracker · 2,000 mm · from the Endeavor's standoff (tracker)
-- **Action:** Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting over the night side. On the last plot two channels stay dark: Canterbury, Normandy.
+- **Action:** Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting over the night side. On the last plot the Astrid's firing line has already swung onto the next ring station, and two channels stay dark: Canterbury, Normandy.
 - **Comms:** EXTENUATING: “Actual, Maren's asking for terms.” / ACTUAL: “Site One goes dark first.”
-- **Doctrine:** 
+- **Doctrine:** O4, D7
 - **VFX:** Distant wreck, HUD tag
 - **Rig:** none
-- **Assets:** BW-BRK (new), MAREN (extend), HUD (new), SUB (new)
+- **Assets:** BW-BRK (new), MAREN (extend), RING (new), HUD (new), SUB (new)
 - **Sound:** The score, low.
 - **Render class:** D · **Map:** E
 

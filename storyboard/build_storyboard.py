@@ -459,7 +459,8 @@ def map_a():
     net = final_at(hours("T+6:40:00"))
     m.curve(SKERRY, (-170_000, 95_000), net, "m-kin")
     m.mark(*net, "m-kindot", "dot", 2)
-    m.text(-150_000, 132_000, "Skerry's three rounds · T+0:04 → T+6:40", "m-t m-compt", "middle")
+    m.text(-150_000, 132_000, "Skerry's 18 rounds · thrown T+0:04–0:54", "m-t m-compt", "middle")
+    m.text(-150_000, 132_000, "arriving T+6:40–7:30", "m-t m-compt", "middle", 0, 12)
     m.scalebar(100_000, "100,000 km")
     return m.svg(D.MAPS["A"])
 
@@ -580,7 +581,7 @@ def map_d():
     m.line([a27, b52], "m-missile")
     m.text_along(a27, b52, "spend and kill waves · T+7:27 → 7:53", "m-t m-lreft", 0.03, 13)
     m.line([A_DEP, STOP], "m-lref")
-    ev = [("T+6:40:00", "T+6:40 Skerry's net", "start", 4, -9), ("T+6:55:00", "T+6:55 Site 1 fires", "start", 4, -31),
+    ev = [("T+6:40:00", "T+6:40 Skerry's first net", "start", 4, -9), ("T+6:55:00", "T+6:55 Site 1 fires", "start", 4, -31),
           (fmt_clock(T_TURN * 3600), f"{fmt_clock(T_TURN * 3600)[:-3]} turnover", "middle", 0, -9)]
     for clock, lab, anchor, dx, dy in ev:
         p = final_at(hours(clock))

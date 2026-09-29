@@ -47,7 +47,7 @@ Everything *Operation Tidebreak* (revision 2 · after review round 1) needs from
 | DRN-C | Compact drone and its hide | new | yes | shot 23: 28 mm, nearest drones, ~30 px | 23, 25 | One design (plasma-bomb payload) plus the cold hide on a rock; concept first. |
 | EMP-POD | Cold missile pod on a rock | new | yes | shot 15: drone near the rock, ~300 px | 15 | Concept first. Controls: `heave`, `petals`. |
 | EMP-RG | Breakers railgun platform | new | yes | shot 18: drone over the platform, fills the frame | 18, 22, 30, 36 | Concept first. Buried twin railgun. Controls: `unmask`, `shot`. |
-| RING | Inner-ring station | new | yes | shot 40: far along the orbit, points of light | 40 | Only ever a point of light at ~21,800 km spacing: lights only, if the user agrees (Q13). |
+| RING | Inner-ring station | new | yes | shot 40: far along the orbit, points of light | 40, 53 | Only ever a point of light at ~21,800 km spacing: lights only, if the user agrees (Q13). |
 | SKR | Skerry | new |  | shot 11: 1,200 mm at ~262,000 km, a quarter-frame disc | 7, 11 | One still plate of an airless moon; the battery, tracks and depot are flash and light positions only. |
 
 ## Environment

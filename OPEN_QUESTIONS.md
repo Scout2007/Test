@@ -1,10 +1,23 @@
 # Open questions
 
-Questions only the user can answer. Phase 1's questions were all answered at sign-off; they are kept below as a decision log, so the reasons stay with the choices. Phase 2 will add new questions to "Still open".
+Questions only the user can answer. Phase 1's questions were all answered at sign-off; they are kept below as a decision log, so the reasons stay with the choices.
 
 ## Still open
 
-None right now. Waiting for the user's OK on the revised doctrines before phase 2 (the storyboard and the review rounds) starts.
+None of these blocks the storyboard; they matter when modelling starts. Each has a recommendation, and the storyboard currently follows it.
+
+| # | Question | Why it comes up | Recommendation (what the board assumes) |
+|---|---|---|---|
+| Q13 | May the smallest assets be proxies? | "Everything hero-detailed" still stands, but some items are never bigger than a few dozen pixels (the closest-view table in `ASSET_REQUESTS.md`). The inner-ring stations are only points of light 21,800 km apart; the Nauvoo and the Excelsior's PD module are ~40 px behind the parked shields; drones stay under ~30–40 px. | **Ring stations as lights only; the Nauvoo and the PD module as silhouettes; one drone design per side** (LREF and Compact), varied by payload. Everything seen larger stays hero. |
+| Q14 | The ECW destroyer's dish: text or art? | The lore post puts the parabolic antenna "over the aft third"; Sir_Lazz's art (`reference_art/destroyer.webp`) puts a forward-facing dish on a truss just behind the shield, and the post's own account of its job ("eyes and ears… once the front impact shield is removed") fits the art. | **Follow the art** (dish forward). |
+| Q15 | The modelling session's pending picks | The M-1C's wake style (split, ripple, bulk, extend, combined) and the PDC design (PD-1/2/3) were still waiting on you in the modelling session. The Endeavor rebuild, the Astrid's ~19 M-1Cs, the gun module and the PD module all inherit them. | No recommendation from here: they're your design picks. The build order puts them first. |
+
+### Changed in phase 2 without a question (say if you disagree)
+
+- **The rock is now called "Anchor"**, a placeholder in the sea-and-storm theme. "The lee of the Lee" read badly at speed. A better name is welcome.
+- **A one-way hail before the spinal shot.** *"Breakwater, you can't move. Strike, or we fire."* No answer comes, so the defender stays unheard. The lore review asked for it; it fits the GUN's values.
+- **The film is 3:34** (was 2:45) and has **54 shots** (was 37): internal cuts became shots, and new beats set up the losses and pay off the threats. Runtime was left flexible.
+- **The Endeavor keeps its 16 VLS cells** for self-defence rather than joining the kill wave. It could fire them in shot 44 if you'd like the moment.
 
 ## Decided at phase 1 sign-off
 

@@ -53,7 +53,7 @@ All the frigates are one hull with swappable modules [Lore], so the five frigate
 - **What they don't do:** they never trade fire with emplacements. They can't carry the armour.
 
 **ECW destroyers (100–225 m; this class ~200 m) [Lore].** No main weapons, only CIWS and a few PD emplacements [Lore]. They carry the fleet's computing, sensors and **network screen** ("capable of silencing the radio-emissions of an entire fleet"), plus drones and satellites for comms, sensor nets and counter-EW [Lore].
-- **Kit:** a huge parabolic dish, the ship's eyes and ears once the impact shield is off [Lore]. The post places it over the aft third; Sir_Lazz's art shows it forward, just behind the shield. The board follows the art until the user decides (`OPEN_QUESTIONS.md` Q14).
+- **Kit:** a huge parabolic dish, the ship's eyes and ears once the impact shield is off [Lore]. The post says the antenna is "taking up a near third of the ship’s overall length (at the aft of the ship)", but also that "the stern is literally taken up by the ship's engineering section and radiators"; Sir_Lazz's art shows it forward, just behind the shield. The board follows the art until the user decides (`OPEN_QUESTIONS.md` Q14).
 - **Tidebreak job:** fight the invisible war (§7). Keep the fleet's fire control connected and the defender's disconnected.
 - **Vulnerability:** they are the net, so the defender hunts them first. They sit inside the line, behind the corvettes and the frigates' PD.
 
@@ -187,7 +187,7 @@ Lore: plasma "requires an active electromagnetic field to maintain its form lest
 **Working model [A-23]:**
 - **Lance:** the ship projects a confining field along the line to the target and drives plasma down it: a violet-white jet from the nose channels to the target, held together all the way by the ship's own field, as the lore describes. The plasma moves at ~1,000 km/s, so a 40 km shot arrives in 0.04 s; a pulse carries ~1 GJ. When `lance_power` cuts, the jet fizzles back from the target.
 - **Range:** ~50 km, the distance over which the ship can project its field. Beyond it the plasma loses confinement and fizzles out.
-- **Torpedo:** a self-propelled field generator that closes to ~50–100 km and fires or becomes one large toroid.
+- **Torpedo:** a self-propelled field generator that carries its plasma to the target and releases it at contact, or within the few kilometres its own field can hold.
 
 **Doctrine (O12):**
 - Plasma is a **knife weapon**, and it is less reliable than nuclear [Lore: "Nuclear is ironically much more commonplace and reliable"].
@@ -433,7 +433,7 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 | **O8** | **Speed is the defender's ammunition** | Cross prepared space at ≤ ~20 km/s relative. Corvettes and drones lead and sweep the lane. Never make a high-speed ballistic pass through a defended system. | A 1 kg rock at 20 km/s = 48 kg TNT; at 180 km/s = 3.9 t (WN §6) | New. |
 | **O9** | **Choose the geometry, not the fight** | Attack from where the enemy's lasers see hardened noses or nothing: below the sites' horizon, behind rocks, through the Breakers' dust. Time strikes to planetary rotation and weather. Make every defender that can see the wave see it nose-on. Never with an inhabited world behind the target: bring the final legs of missiles and guns in ≥ 10° off the target's local vertical, so misses, over-penetrating slugs and PD-killed wreckage clear the planet's limb (ROE, §13). | Nose-on vs side-on changes the kills per wave 7–17× (WN §8) | New. |
 | **O10** | **Cripple, then kill** | Against a mobile heavy target: strip its fins and sensors (lasers), cut its drive (Casaba, missiles), and only then commit heavy kinetics, from inside its now-larger no-escape range. | Monitor: 0.05 g → 0.005 g grows the spinal no-escape range from ~4,000 to ~12,000 km (WN §2) | New. Reverses the draft's last beats (spinal before Casaba). |
-| **O11** | **Spend missiles, keep ships** | Frigate packs are the currency. Hold about a third of the magazine in reserve. Withdraw empty hedgehogs to the tender (4 CIWS only [Lore]). | ~700 missiles per hedgehog [A-26] | New, from lore. |
+| **O11** | **Spend missiles, keep ships** | Frigate packs are the currency. Hold about a third of the magazine in reserve. Withdraw empty hedgehogs to the tender once the way back is safe; until then they hold with the pack under guard (D11), since an empty hedgehog has only 4 CIWS [Lore]. | ~700 missiles per hedgehog [A-26] | New, from lore. |
 | **O12** | **Plasma where the field holds** | Lances and torpedoes are knife weapons for emerging emplacements, crippled ships and strays. They are never the plan at range. | Lance ≤ ~50 km; torpedo launch ≤ ~100 km [A-23] | New, from lore. |
 | **O13** | **Brake late and off-axis** | Fight coasting and bow-on. Brake with the thrust line off the main threat axis, under cover, when the enemy's long weapons are blinded or busy. | Braking 20 km/s at 1 g: 34 min over ~20,000 km (WN §6) | New. |
 
@@ -451,7 +451,7 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 | **D8** | **Never turn your back without cover** | Flips under smoke, EW peaks and escort cover, one ship at a time. | Flip: Endeavor ~28–49 s, Astrid ~33–58 s (WN §6) | New. |
 | **D9** | **Keep the way home** | The shield park and the tender are the line of retreat. Emergency warp without a shield only into a surveyed short hop. Keep 3–5 min of spool time in hand. | [A-05, A-07] | New, from lore. |
 | **D10** | **Protect the net** | Air-gapped fire control, authenticated laser links, kill switches on every drone. Assume spoofed tracks until two sensors agree. | — | New, from lore. |
-| **D11** | **Guard the park** | The PD frigate and a corvette hold the shield park and the tender. A defender raid on the park is a trade the LREF accepts only if it costs the defender its strike craft [Lore]. | — | New, from lore. |
+| **D11** | **Guard the park and the fire base** | The PD frigate and a corvette hold the shield park and the tender. Any detached element, such as a hedgehog fire base, gets its own guard: a gun frigate or a corvette. A defender raid on the park is a trade the LREF accepts only if it costs the defender its strike craft [Lore]. | — | New, from lore. |
 
 ---
 
@@ -489,7 +489,7 @@ Each of these goes beyond the lore. The ones marked ★ change what the film sho
 | A-10 | Sustained thrust: capital ships 1 g (2–3 g for minutes), frigates 2 g, corvettes 4 g, missiles 30–50 g | Crew tolerance; lore calls corvettes fast and heavy cruisers poor manoeuvrers |
 | A-11 ★ | A tender (the *Nauvoo*) accompanies the task group and holds the shield park | Lore: tenders "WILL be" in the backline |
 | A-12 | The commander flies in the Astrid; the Endeavor is the alternate | Picture, power, survivability |
-| A-13 ★ | The objective is orbital control for a T-SEC landing (not shown in the film) | Explains why the LREF must break the defence and won't bombard |
+| A-13 ★ | The objective is orbital control for a T-SEC landing (not shown in the film). The T-SEC transports arrive after the task group and wait at the shield park until the sky is clear | Explains why the LREF must break the defence and won't bombard |
 | A-20 | M-1C: 10 kg at 25 km/s; spinal: 500 kg at 60 km/s | A ~100 m barrel [Lore] at ~3×10⁵ g; ~1 km barrel at ~2×10⁶ g |
 | A-21 | The spinal cannon can hit a fixed point target at ~100,000 km (slug divert kit or salvo) | Aim error of ~0.1 µrad is at the edge of plausible; beyond that, salvo |
 | A-22 | Laser focusing array: 3.3 m, 350 nm, 25 MW; PD laser: 1.6 m, 5 MW; 25 % wall-plug; 1.5× jitter | Apertures from the draft; UV matches the violet lens [Model] |

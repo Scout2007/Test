@@ -80,7 +80,11 @@ function rng(seed) { var s = seed * 9301 + 49297; return function () { s = (s * 
       for (var i = 0; i < 5; i++) s += '<rect x="' + (-22 + i * 7) + '" y="-5" width="5" height="10" fill="none" stroke="' + C.dark + '" stroke-width="0.6"/>';
       return s;
     },
-    shield: function () { return '<ellipse cx="0" cy="0" rx="2" ry="14" fill="' + C.gold + '"/>'; }
+    shield: function () { return '<ellipse cx="0" cy="0" rx="2" ry="14" fill="' + C.gold + '"/>'; },
+    missile: function () { // added: a 26 m missile, nose left like the ships
+      return '<path d="M-14,0 L-10,-1.6 L12,-1.6 L12,1.6 L-10,1.6Z" fill="' + C.hull + '"/>' +
+        '<path d="M12,-1.6 L15,-3.4 L15,3.4 L12,1.6Z" fill="' + C.dark + '"/><circle cx="-12" cy="0" r="0.8" fill="' + C.heat + '"/>';
+    }
   };
   var SHIELDS = true; // added: the builder clears it for shots after the shields are parked
   function ship(kind, x, y, s, rot, flip) {

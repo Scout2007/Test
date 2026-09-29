@@ -24,10 +24,10 @@ This checks the "Mechanics" and "Engagement envelopes" sections of `pack/storybo
 | PD laser (1.6 m) | ≤ 500 km | Missiles side-on ≤ ~1,000–5,000 km; noses ≤ ~100 km (§1) |
 | Twin railgun battery | ≤ 1,000 km vs ships · 5–60 s | **By target** (no-escape range): capital ship end-on 510–920 km; broadside 1,020–1,840 km; frigate 190–340 km; corvette 80–150 km; monitor 1,500–2,700 km. Flight time 4 s per 100 km. (§2) |
 | Spinal cannon | ≥ 10,000 km vs fixed · tens of s | Fixed targets out to ~100,000 km (flight ~28 min; at 10,000 km ~2.8 min, not tens of s). Mobile monitor ≤ 3,600–4,800 km; crippled monitor ≤ 11,000–14,700 km. (§2) |
-| Mass driver (Skerry) | ~100,000 km · minutes | 100,000 km takes **~2.2 h** (at 12.5 km/s). It lays nets in pre-planned lanes; it doesn't snipe (Defence HO3). (§2) |
+| Mass driver (Skerry) | ~100,000 km · minutes | 100,000 km takes **~1.8 h** (at 15.5 km/s). It lays nets in pre-planned lanes; it doesn't snipe (Defence HO3). (§2) |
 | Missile | 10⁵–10⁶ km · minutes | Capital-ship killer: 18 min to 100,000 km, 2.5 h to 10⁶ km; small multi-pack missiles take twice as long (§3). |
 | Casaba howitzer | 1–5 km standoff | Right. It breaches a 0.72 m belt from ~2 km (20 kt) to ~4 km (100 kt), and Breakwater's ~2 m belt from ~2.5 km (100 kt). Fins die anywhere along the jet out to 50–130 km. (§7) |
-| Plasma lance | ≤ 50 km · near-instant | Kept as a soft-coat value: compact toroids at ~1,000 km/s (LREF A-23). |
+| Plasma lance | ≤ 50 km · near-instant | Kept as a soft-coat value, re-explained: a field-held jet, and ~50 km is how far the ship can project its field (LREF A-23). |
 | CIWS / PDC | ≤ 5 km · < 1 s | Kill clouds are placed 5–30 km out and the rounds take 2.5–15 s to get there. The missile then crosses the cloud in under a second and dies on its own speed. About 3 missiles/s per 16 mounts. (§8) |
 
 ## Shot-level problems to fix in phase 2

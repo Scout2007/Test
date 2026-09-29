@@ -129,7 +129,7 @@ GUNS = [
     ("Astrid spinal cannon", 500, 60e3),
     ("Breakwater heavy railgun", 50, 30e3),
     ("Breakers railgun platform", 10, 25e3),
-    ("Skerry mass driver (smart rock)", 10_000, 12.5e3),
+    ("Skerry mass driver (smart rock)", 10_000, 15.5e3),
 ]
 print(table(["Gun", "Slug", "Muzzle velocity", "Muzzle energy", "TNT equiv."],
             [(n, fmt(m, "kg"), fmt(v / KM, "km/s"), fmt(0.5 * m * v * v, "J"),
@@ -525,4 +525,6 @@ print(table(["Wave arrives this far off the target's zenith", "Kills by the site
 print()
 print("So against Breakwater, Site 1 matters little whatever the angle: the "
       "angle is chosen to keep misses and wreckage off the planet (LREF O9), "
-      "not to hide from the site.\n")
+      "not to hide from the site. A neighbouring site sees such a wave only "
+      "early in its flight, far off and nearly nose-on, so it adds a handful "
+      "of kills at most.\n")

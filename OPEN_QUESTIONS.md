@@ -8,16 +8,18 @@ None of these blocks the storyboard; they matter when modelling starts. Each has
 
 | # | Question | Why it comes up | Recommendation (what the board assumes) |
 |---|---|---|---|
-| Q13 | May the smallest assets be proxies? | "Everything hero-detailed" still stands, but some items are never bigger than a few dozen pixels (the closest-view table in `ASSET_REQUESTS.md`). The inner-ring stations are only points of light 21,800 km apart; the Nauvoo and the Excelsior's PD module are ~40 px behind the parked shields; drones stay under ~30–40 px. | **Ring stations as lights only; the Nauvoo and the PD module as silhouettes; one drone design per side** (LREF and Compact), varied by payload. Everything seen larger stays hero. |
-| Q14 | The ECW destroyer's dish: text or art? | The lore post puts the parabolic antenna "over the aft third"; Sir_Lazz's art (`reference_art/destroyer.webp`) puts a forward-facing dish on a truss just behind the shield, and the post's own account of its job ("eyes and ears… once the front impact shield is removed") fits the art. | **Follow the art** (dish forward). |
+| Q13 | May the smallest assets be proxies? | "Everything hero-detailed" still stands, but some items are never bigger than a few dozen pixels (the closest-view table in `ASSET_REQUESTS.md`). The inner-ring stations are only points of light 21,800 km apart; the Nauvoo and the Excelsior's PD module are ~40 px behind the parked shields; the Donnager's gun module is only seen far off; drones stay under ~30–40 px. | **Ring stations as lights only; the Nauvoo, the PD module and the gun module as silhouettes; one drone design per side** (LREF and Compact), varied by payload. Everything seen larger stays hero. |
+| Q14 | The ECW destroyer's dish: text or art? | The lore post says the antenna is "taking up a near third of the ship’s overall length (at the aft of the ship)", but also that "the stern is literally taken up by the ship's engineering section and radiators". Sir_Lazz's art (`reference_art/destroyer.webp`) puts a forward-facing dish on a truss just behind the shield, and the post's own account of its job ("eyes and ears… once the front impact shield is removed") fits the art. | **Follow the art** (dish forward, fixed on its truss). |
 | Q15 | The modelling session's pending picks | The M-1C's wake style (split, ripple, bulk, extend, combined) and the PDC design (PD-1/2/3) were still waiting on you in the modelling session. The Endeavor rebuild, the Astrid's ~19 M-1Cs, the gun module and the PD module all inherit them. | No recommendation from here: they're your design picks. The build order puts them first. |
 
 ### Changed in phase 2 without a question (say if you disagree)
 
 - **The rock is now called "Anchor"**, a placeholder in the sea-and-storm theme. "The lee of the Lee" read badly at speed. A better name is welcome.
 - **A one-way hail before the spinal shot.** *"Breakwater, you can't move. Strike, or we fire."* No answer comes, so the defender stays unheard. The lore review asked for it; it fits the GUN's values.
-- **The film is 3:34** (was 2:45) and has **54 shots** (was 37): internal cuts became shots, and new beats set up the losses and pay off the threats. Runtime was left flexible.
-- **The Endeavor keeps its 16 VLS cells** for self-defence rather than joining the kill wave. It could fire them in shot 44 if you'd like the moment.
+- **The film is 4:11** (revision 1 was 2:45) with **62 shots** (was 37). Internal cuts became shots; new beats set up the losses and pay off the threats; your five weapon close-ups and the reviewers' holds added the rest. Runtime was left flexible.
+- **The Endeavor keeps its 16 VLS cells** as the fast reserve (~4 min to Breakwater from the stop) rather than joining the kill wave. It could fire them in shot 50 if you'd like the moment.
+- **The hedgehog pack keeps a guard at Anchor**, the Donnager and the Wallfish, and the defender now makes one try for it (Skerry's clouds ring the rock, drones follow); the guard beats it off.
+- **The kill wave is ~40 Casaba killers among ~300 decoy and EW birds**, sized to cripple Breakwater's drive and leave the kill to the spinal shot; ~1,100 missiles stay in reserve.
 
 ## Decided at phase 1 sign-off
 
@@ -44,6 +46,12 @@ None of these blocks the storyboard; they matter when modelling starts. Each has
 | — | Operation name | **Operation Tidebreak** (kept) |
 | — | LREF losses | **The destroyer *Canterbury* and the corvette *Normandy***; the Endeavor loses a radiator fin |
 | — | Ending | **A costly victory** |
+
+### Phase 2 requests
+
+| Request | Where it landed |
+|---|---|
+| Close-ups of the other weapons: missiles in flight, the nose sensors, railcannons waking and firing, laser arrays flashing and tracking | Revision 3: *Birds away* (a missile in flight), *Lenses* (a laser array tracking and pulsing), *Rails wake* and *Fire* (an M-1C waking and firing), *Seeker* (a Casaba killer's nose sensor in its last seconds). "Nose sensors" was read as the missiles' seeker heads; say if you meant the Endeavor's own nose sensors. |
 
 ### The film
 

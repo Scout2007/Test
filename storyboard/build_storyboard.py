@@ -107,13 +107,14 @@ def shot_no(title, where):
     return TITLES[title]
 
 
-CLOSEST = {a: (shot_no(t, f"CLOSEST[{a}]"), what, size) for a, (t, what, size) in D.CLOSEST.items()}
+CLOSEST = {a: (shot_no(t, f"CLOSEST[{a}]"), resolve(what), size) for a, (t, what, size) in D.CLOSEST.items()}
 SETS = [(name, sorted(shot_no(t, f"SETS[{name}]") for t in titles)) for name, titles in D.SETS]
 
 # ----------------------------------------------------------------- timing
 t = 0
 for n, s in enumerate(D.SHOTS, 1):
     s["n"] = n
+    s.setdefault("hud", [])
     if s["comm"] and "SUB" not in s["assets"]:
         s["assets"].append("SUB")
     s["t0"], s["t1"] = t, t + s["dur"]
@@ -180,6 +181,27 @@ def clock_rate(real):
     return None
 
 
+def shot_end(s):
+    """Mission clock (s) at the end of a shot: its explicit `end`, or its start plus duration × rate."""
+    if s.get("end"):
+        return clock_s(s["end"])
+    rate = clock_rate(s["real"])
+    return None if rate is None else clock_s(s["clock"]) + s["dur"] * rate
+
+
+def state_of(asset, clock):
+    """The asset's state (STATES) at a mission clock, or None."""
+    out = None
+    for start, text in D.STATES.get(asset, []):
+        if clock_s(clock) >= clock_s(start):
+            out = text
+    return out
+
+
+# Words a camera that can't hear must not be given, unless they belong to the score or a channel.
+HEARD = re.compile(r"through the|\b(roar|clang|bang|thump|clunk|groan|shear|whine|boom|tick)", re.I)
+
+
 def check():
     rule_ids = set()
     for f in ("LREF_doctrine.md", "Defence_doctrine.md"):
@@ -194,16 +216,26 @@ def check():
                ([f"reference frame {s['render']}"] if s["render"] and s["render"][4:] not in IMG_SOURCES else []))
         if bad:
             sys.exit(f"{tag}: unknown " + ", ".join(bad))
-        chars = sum(len(line) for _, line in s["comm"])
+        chars = sum(len(line) for _, line in s["comm"]) + sum(len(h) for h in s["hud"])
         if chars / s["dur"] > MAX_CPS:
-            NOTES.append(f"{tag}: subtitles at {chars / s['dur']:.1f} characters a second (ceiling {MAX_CPS})")
-        if s["body"] != "hull" and re.search(r"through the (hull|truss|backplate)", s["sound"]):
-            NOTES.append(f"{tag}: a {s['body']} camera can't hear through the hull")
+            NOTES.append(f"{tag}: subtitles and HUD text at {chars / s['dur']:.1f} characters a second (ceiling {MAX_CPS})")
+        if len(s["comm"]) > s["dur"]:
+            NOTES.append(f"{tag}: {len(s['comm'])} lines in {s['dur']} s (at least 1 s a line)")
+        if s["body"] != "hull" and HEARD.search(s["sound"]) and not re.search(r"score|channel|sub-bass", s["sound"]):
+            NOTES.append(f"{tag}: a {s['body']} camera can't hear '{s['sound']}'")
+        if shot_end(s) is None:
+            NOTES.append(f"{tag}: no stated rate or end clock, so its end can't be checked")
+        for asset, start, needed in D.STATE_ASSETS:
+            if asset in s["assets"] and clock_s(s["clock"]) >= clock_s(start) and needed not in s["assets"]:
+                NOTES.append(f"{tag}: {asset} is in its '{state_of(asset, s['clock'])}' state, so it needs {needed}")
     for a, b in zip(D.SHOTS, D.SHOTS[1:]):
-        rate = clock_rate(a["real"])
-        end = clock_s(a["clock"]) + a["dur"] * (rate or 0)
+        end = shot_end(a)
+        if end is None:
+            continue
         if clock_s(b["clock"]) < end - 0.5:
             NOTES.append(f"shot {b['n']} ({b['title']}) starts at {b['clock']}, before shot {a['n']} ends at {fmt_clock(end)}")
+        if clock_s(b["clock"]) - end >= 1800 and not re.search(r"roll|dissolve", b["real"]):
+            NOTES.append(f"shot {b['n']} ({b['title']}) jumps {round((clock_s(b['clock']) - end) / 60)} min with no roll or dissolve marked")
     for a, (n, _, _) in CLOSEST.items():
         if a not in D.SHOTS[n - 1]["assets"]:
             NOTES.append(f"closest view of {a} is shot {n}, which doesn't use it")
@@ -308,7 +340,7 @@ def track(r):
 T_DEP = hours("T+5:43:00")
 A_DEP = anchor_at(T_DEP)
 ESCORTS = (8_500, 25)      # km from Breakwater, degrees off its zenith: where the escorts stop
-ASTRID = (10_800, 15)      # where the Astrid stops and fires (the spinal's line clears Maren)
+ASTRID = (10_000, 15)      # where the Astrid stops and fires (the spinal's line clears Maren)
 
 
 def _final_approach():
@@ -459,8 +491,9 @@ def map_a():
     net = final_at(hours("T+6:40:00"))
     m.curve(SKERRY, (-170_000, 95_000), net, "m-kin")
     m.mark(*net, "m-kindot", "dot", 2)
+    m.curve(SKERRY, (-230_000, 110_000), anchor_at(hours("T+6:52:00")), "m-kin m-thin")
     m.text(-150_000, 132_000, "Skerry's 18 rounds · thrown T+0:04–0:54", "m-t m-compt", "middle")
-    m.text(-150_000, 132_000, "arriving T+6:40–7:30", "m-t m-compt", "middle", 0, 12)
+    m.text(-150_000, 132_000, "five nets on the lane T+6:40–7:30, one ring on Anchor", "m-t m-compt", "middle", 0, 12)
     m.scalebar(100_000, "100,000 km")
     return m.svg(D.MAPS["A"])
 
@@ -511,7 +544,7 @@ def map_c():
     """Local frame around Anchor, km; Site 1 and Breakwater off to +x."""
     m = Map(-420, 420, -420, 330, 2)
     m.circle(0, 0, 300, "m-edge")
-    m.text(0, 300, "rocks cleared inside 300 km (the Donnager)", "m-t m-muted", "middle", 0, -6)
+    m.text(0, 300, "rocks shelled inside 300 km (the Donnager); moonlets next", "m-t m-muted", "middle", 0, -6)
     x0, y0 = m.P(-420, 9)
     x1, y1 = m.P(-9, -9)
     m.add(f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{x1 - x0:.1f}" height="{y1 - y0:.1f}" class="m-shadow"/>')
@@ -524,7 +557,7 @@ def map_c():
     m.text(*pol(360, SUN), "sun", "m-t m-muted", "end", -4, -4)
     m.mark(14, 8, "m-comp", "x", 3)
     m.text(14, 8, "mine, T+5:10", "m-t m-compt", "start", 6, 4)
-    en = (-30, 0)
+    en = (-15, 0)
     for p, lab, shape, anchor, dx, dy in ((en, "Endeavor", "sq", "end", -4, -9), ((-80, 5), "", "dot", "", 0, 0),
                                           ((-150, -4), "", "dot", "", 0, 0), ((-180, 4), "the pack", "dot", "middle", 0, -9),
                                           ((-210, -3), "", "dot", "", 0, 0), ((-290, 0), "Astrid", "sq", "middle", 0, -9)):
@@ -536,11 +569,11 @@ def map_c():
     for p in ((-60, 70), (60, -60), (-250, -150)):
         m.mark(*p, "m-lreff", "dot", 1.6)
     m.text(-250, -150, "corvettes and drones sweep", "m-t m-muted", "middle", 0, 14)
-    moon, frig = (-70, -26), (-66, -30)
+    moon, frig = pol(42, 220, en), pol(46, 220, en)
     m.circle(*moon, 3, "m-rockdot", 2.6)
     m.mark(*frig, "m-comp", "dia", 2.6)
     m.line([en, frig], "m-lance")
-    for i, line in enumerate(("Compact frigate", "behind a moonlet, 45 km", "lanced at 40 km, T+5:13:55")):
+    for i, line in enumerate(("Compact frigate in a cleft", "on a moonlet, 45 km", "lanced at T+5:13:55")):
         m.text(*frig, line, "m-t m-compt", "end", -8, 4 + 12 * i)
     plat = pol(400, -45, en)
     m.mark(*plat, "m-comp", "x", 4)
@@ -576,10 +609,13 @@ def map_d():
     m.text(*pol(11_000, 11), "2 Compact frigates", "m-t m-compt", "start", 9, 0)
     m.text(*pol(11_000, 11), "behind the limb", "m-t m-compt", "start", 9, 12)
     m.mark(*A_DEP, "m-rock", "dot", 3.5)
-    m.text(*A_DEP, "Anchor: the pack stays", "m-t m-lreft", "start", 2, -9)
+    m.text(*A_DEP, "Anchor: the pack stays, guarded", "m-t m-lreft", "start", 2, -9)
+    ring = anchor_at(hours("T+6:52:00"))
+    m.circle(*ring, 2_400, "m-kin m-thin")
+    m.text(*ring, "Skerry's ring on Anchor, T+6:52", "m-t m-compt", "start", 2, 56)
     a27 = anchor_at(hours("T+7:27:00"))
     m.line([a27, b52], "m-missile")
-    m.text_along(a27, b52, "spend and kill waves · T+7:27 → 7:53", "m-t m-lreft", 0.03, 13)
+    m.text_along(a27, b52, "waves: slow birds T+7:07, killers T+7:27 → T+7:53", "m-t m-lreft", 0.03, 13)
     m.line([A_DEP, STOP], "m-lref")
     ev = [("T+6:40:00", "T+6:40 Skerry's first net", "start", 4, -9), ("T+6:55:00", "T+6:55 Site 1 fires", "start", 4, -31),
           (fmt_clock(T_TURN * 3600), f"{fmt_clock(T_TURN * 3600)[:-3]} turnover", "middle", 0, -9)]
@@ -846,13 +882,20 @@ def shot_card(s):
     if s["comm"]:
         comm = '<div class="comm">' + "".join(f"<div><b>{E(sp)}</b>{E(line)}</div>" for sp, line in s["comm"]) + "</div>"
     rig = "".join(f"<code>{E(r)}</code>" for r in s["rig"]) or '<span class="mono">none</span>'
+    extra = ""
+    if s["hud"]:
+        extra += "<dt>On screen</dt><dd>" + "".join(f'<code>{E(h)}</code>' for h in s["hud"]) + "</dd>"
+    states = [f"{a}: {state_of(a, s['clock'])}" for a in D.STATES if a in s["assets"]]
+    if states:
+        extra += f"<dt>State</dt><dd>{E('; '.join(states))}</dd>"
+    world = "" if s["body"] == "hud" else f"<span>World: {E(D.ENVS[s['map']])}</span>"
     return f"""<article class="shot" id="shot-{s['n']}">
 <div class="media">{media}<span class="badge n">{s['n']}</span><span class="badge t">{mmss(s['t0'])}–{mmss(s['t1'])} · {s['dur']} s</span></div>
 <div class="body"><h4>{E(s['title'])}</h4>
 <div class="meta"><span>{E(s['cam'])}</span><span>{BODY_LABEL[s['body']]}</span><span>frames {s['f0']}–{s['f1']}</span></div>
-<div class="meta"><span class="clock">{E(s['clock'])}</span><span>{E(s['real'])}</span><span>map {s['map']}</span><span>render class {s['cost']}</span></div>
+<div class="meta"><span class="clock">{E(s['clock'])}</span><span>{E(s['real'])}</span><span>map {s['map']}</span><span>render class {s['cost']}</span>{world}</div>
 <p class="action">{E(s['action'])}</p>{comm}
-<dl class="rows"><dt>Doctrine</dt><dd>{rule_chips(s['rules'])}</dd><dt>VFX</dt><dd>{E(s['vfx'])}</dd>
+<dl class="rows"><dt>Doctrine</dt><dd>{rule_chips(s['rules'])}</dd>{extra}<dt>VFX</dt><dd>{E(s['vfx'])}</dd>
 <dt>Rig</dt><dd>{rig}</dd><dt>Assets</dt><dd>{asset_chips(s['assets'])}</dd><dt>Sound</dt><dd>{E(s['sound'])}</dd></dl>
 </div></article>"""
 
@@ -870,6 +913,14 @@ def render_budget():
 
 def sets_text():
     return f"{len(SETS)} set-ups cover the film: " + "; ".join(f"{name} ({ranges(nums)})" for name, nums in SETS) + "."
+
+
+def batches_text():
+    out = []
+    for k, env in D.ENVS.items():
+        nums = [s["n"] for s in D.SHOTS if s["map"] == k and s["body"] != "hud"]
+        out.append(f"{env}: {ranges(nums)}")
+    return "Render in batches by World preset: " + "; ".join(out) + "."
 
 
 def build_html():
@@ -893,7 +944,7 @@ def build_html():
                    for c, n, note, ns, fr, h in budget)
     closest = "".join(f'<tr><td class="mono">{a}</td><td>{E(D.ASSETS[a][0])}</td><td class="mono"><a href="#shot-{n}">{n}</a></td><td>{E(what)}</td><td>{E(size)}</td></tr>'
                       for a, (n, what, size) in CLOSEST.items())
-    plan = "".join(f"<dt>{E(k)}</dt><dd>{rich(v)}</dd>" for k, v in [("Sets", sets_text())] + list(D.PRODUCTION_PLAN))
+    plan = "".join(f"<dt>{E(k)}</dt><dd>{rich(v)}</dd>" for k, v in [("Sets", sets_text()), ("Batches", batches_text())] + list(D.PRODUCTION_PLAN))
     new_assets = [a for a, v in D.ASSETS.items() if v[1] != "built"]
     concept = [a for a, v in D.ASSETS.items() if v[2]]
     reviews = "".join(
@@ -972,12 +1023,14 @@ def write_csv():
     with open(SB / "shots.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["shot", "act", "title", "film_start_s", "film_end_s", "frame_start", "frame_end", "duration_s",
-                    "mission_clock", "time_treatment", "camera", "camera_body", "action", "comms", "doctrine", "vfx",
-                    "rig", "assets", "sound", "render_class", "map", "reference_frame"])
+                    "mission_clock", "time_treatment", "camera", "camera_body", "world", "action", "comms", "on_screen",
+                    "doctrine", "state", "vfx", "rig", "assets", "sound", "render_class", "map", "reference_frame"])
         for s in D.SHOTS:
             w.writerow([s["n"], s["act"], s["title"], s["t0"], s["t1"], s["f0"], s["f1"], s["dur"], s["clock"],
-                        s["real"], s["cam"], s["body"], s["action"], " | ".join(f"{a}: {b}" for a, b in s["comm"]),
-                        " ".join(s["rules"]), s["vfx"], "; ".join(s["rig"]), " ".join(s["assets"]), s["sound"],
+                        s["real"], s["cam"], s["body"], "" if s["body"] == "hud" else D.ENVS[s["map"]], s["action"],
+                        " | ".join(f"{a}: {b}" for a, b in s["comm"]), " | ".join(s["hud"]), " ".join(s["rules"]),
+                        "; ".join(f"{a}: {state_of(a, s['clock'])}" for a in D.STATES if a in s["assets"]),
+                        s["vfx"], "; ".join(s["rig"]), " ".join(s["assets"]), s["sound"],
                         s["cost"], s["map"], s["render"] or ""])
 
 
@@ -1007,6 +1060,13 @@ def write_md():
                   f"- **Action:** {s['action']}"]
             if s["comm"]:
                 L.append("- **Comms:** " + " / ".join(f"{a}: “{b}”" for a, b in s["comm"]))
+            if s["hud"]:
+                L.append("- **On screen:** " + " · ".join(f"`{h}`" for h in s["hud"]))
+            states = [f"{a}: {state_of(a, s['clock'])}" for a in D.STATES if a in s["assets"]]
+            if states:
+                L.append("- **State:** " + "; ".join(states))
+            if s["body"] != "hud":
+                L.append(f"- **World:** {D.ENVS[s['map']]}")
             L += [f"- **Doctrine:** {', '.join(s['rules'])}",
                   f"- **VFX:** {s['vfx']}",
                   f"- **Rig:** {'; '.join(s['rig']) if s['rig'] else 'none'}",
@@ -1021,6 +1081,7 @@ ASSET_GROUPS = [
     ("Endeavor and M-1C", ["EN", "EN-FIN", "EN-PD", "EN-MAST", "EN-DMG", "M1C"]),
     ("The Maren Compact", ["BW", "BW-BRK", "CF", "DRN-C", "EMP-POD", "EMP-RG", "RING", "SKR"]),
     ("Environment", ["WORLD", "MAREN", "BRK", "ANCHOR"]),
+    ("Blocking", ["PROXY"]),
     ("Effects", [k for k in D.ASSETS if k.startswith("FX-")]),
     ("2D compositing", ["HUD", "SUB"]),
 ]
@@ -1042,9 +1103,10 @@ def write_assets():
         for a in ids:
             name, status, concept, note = D.ASSETS[a]
             near = f"shot {CLOSEST[a][0]}: {CLOSEST[a][1]}, {CLOSEST[a][2]}" if a in CLOSEST else ""
-            L.append(f"| {a} | {name} | {status} | {'yes' if concept else ''} | {near} | {ranges(used[a]) or '—'} | {note} |")
+            shots = "every 3D shot" if a in ("WORLD", "PROXY") else (ranges(used[a]) or "—")
+            L.append(f"| {a} | {name} | {status} | {'yes' if concept else ''} | {near} | {shots} | {note} |")
         L.append("")
-    unused = [a for a, v in used.items() if not v]
+    unused = [a for a, v in used.items() if not v and a not in ("PROXY",)]
     if unused:
         L += ["Not used by any shot yet: " + ", ".join(unused) + ".", ""]
     (ROOT / "ASSET_REQUESTS.md").write_text("\n".join(L))

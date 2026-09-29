@@ -79,7 +79,7 @@ Dazzle needs only ~10 W/m² on a sensor aperture, so every laser above dazzles o
 | Astrid spinal cannon | 500 kg | 60.0 km/s | 9.00e11 J | 215 t |
 | Breakwater heavy railgun | 50.0 kg | 30.0 km/s | 2.25e10 J | 5.38 t |
 | Breakers railgun platform | 10.0 kg | 25.0 km/s | 3.12e9 J | 0.75 t |
-| Skerry mass driver (smart rock) | 10,000 kg | 12.5 km/s | 7.81e11 J | 187 t |
+| Skerry mass driver (smart rock) | 10,000 kg | 15.5 km/s | 1.20e12 J | 287 t |
 
 *No-escape range*: inside it, the target cannot move far enough between seeing the shot and the slug arriving. It assumes the shooter sees the launch flash instantly (the light-lag is added to the reaction time) and fires one slug at the target's predicted centre. Salvo patterns stretch these ranges roughly 2-4x at the cost of hit probability per slug.
 
@@ -146,11 +146,11 @@ Dazzle needs only ~10 W/m² on a sensor aperture, so every laser above dazzles o
 
 | Range | LREF M-1C twin railcannon (per gun) | Astrid spinal cannon | Breakwater heavy railgun | Breakers railgun platform | Skerry mass driver (smart rock) | M-1C + 20 km/s closing |
 |---|---|---|---|---|---|---|
-| 100 km | 4.0 s | 1.7 s | 3.3 s | 4.0 s | 8.0 s | 2.2 s |
-| 1,000 km | 40.0 s | 16.7 s | 33.3 s | 40.0 s | 80.0 s | 22.2 s |
-| 10,000 km | 6.7 min | 2.8 min | 5.6 min | 6.7 min | 13.3 min | 3.7 min |
-| 50,000 km | 33.3 min | 13.9 min | 27.8 min | 33.3 min | 66.7 min | 18.5 min |
-| 100,000 km | 66.7 min | 27.8 min | 55.6 min | 66.7 min | 2.2 h | 37.0 min |
+| 100 km | 4.0 s | 1.7 s | 3.3 s | 4.0 s | 6.5 s | 2.2 s |
+| 1,000 km | 40.0 s | 16.7 s | 33.3 s | 40.0 s | 64.5 s | 22.2 s |
+| 10,000 km | 6.7 min | 2.8 min | 5.6 min | 6.7 min | 10.8 min | 3.7 min |
+| 50,000 km | 33.3 min | 13.9 min | 27.8 min | 33.3 min | 53.8 min | 18.5 min |
+| 100,000 km | 66.7 min | 27.8 min | 55.6 min | 66.7 min | 107.5 min | 37.0 min |
 
 ## 3. Missiles: flight time
 
@@ -333,5 +333,5 @@ A 16-mount battery therefore kills roughly 3 missiles a second while the wave ar
 | 48° | 15 |
 | 90° | 33 |
 
-So against Breakwater, Site 1 matters little whatever the angle: the angle is chosen to keep misses and wreckage off the planet (LREF O9), not to hide from the site.
+So against Breakwater, Site 1 matters little whatever the angle: the angle is chosen to keep misses and wreckage off the planet (LREF O9), not to hide from the site. A neighbouring site sees such a wave only early in its flight, far off and nearly nose-on, so it adds a handful of kills at most.
 

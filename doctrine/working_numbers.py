@@ -129,7 +129,7 @@ GUNS = [
     ("Astrid spinal cannon", 500, 60e3),
     ("Breakwater heavy railgun", 50, 30e3),
     ("Breakers railgun platform", 10, 25e3),
-    ("Skerry mass driver (smart rock)", 10_000, 10e3),
+    ("Skerry mass driver (smart rock)", 10_000, 12.5e3),
 ]
 print(table(["Gun", "Slug", "Muzzle velocity", "Muzzle energy", "TNT equiv."],
             [(n, fmt(m, "kg"), fmt(v / KM, "km/s"), fmt(0.5 * m * v * v, "J"),
@@ -487,3 +487,42 @@ print("A 16-mount battery therefore kills roughly 3 missiles a second while "
       "the wave arrives, and nothing that detonates outside ~5 km: a Casaba "
       "standing off at 2-4 km must be killed by the clouds at 5-30 km or by "
       "the lasers before that.\n")
+
+
+def site_kills_vs_orbit(off_deg, v=80e3, start=120_000 * KM, t_re=2.0):
+    """One ground site against a wave aimed at a target in synchronous orbit
+    straight above it. The wave flies a straight line to the target, arriving
+    off_deg from the target's zenith; the laser burns the nose or the flank,
+    whichever the aspect along the path makes quicker; the site fires only
+    above 20 degrees elevation."""
+    site, tgt = (0.0, 6_400 * KM), (0.0, 42_164 * KM)
+    a = math.radians(off_deg)
+    u = (math.sin(a), math.cos(a))      # from the target toward the incoming wave
+    n, k = 20000, 0.0
+    dt = start / v / n
+    for i in range(n):
+        d = start * (1 - (i + 0.5) / n)
+        mx, my = tgt[0] + u[0] * d, tgt[1] + u[1] * d
+        dx, dy = site[0] - mx, site[1] - my
+        R = math.hypot(dx, dy)
+        if math.degrees(math.asin((my - site[1]) / R)) < 20:
+            continue
+        alpha = math.acos(max(-1.0, min(1.0, (-u[0] * dx - u[1] * dy) / R)))
+        F = 9e7 / max(math.sin(alpha), 1e-9)
+        if alpha < math.pi / 2:
+            F = min(F, 5e9 / max(math.cos(alpha), 1e-9))
+        k += dt / (F / intensity(2e9, 10.0, 1.06e-6, R, 0.7) + t_re)
+    return k
+
+
+print("**A ground site against a wave aimed at an orbital target.** The table "
+      "above assumes missiles that run in to ~50 km of the laser. A wave aimed "
+      "at a monitor in synchronous orbit over the site (42,164 km) never comes "
+      "closer than ~35,800 km, where one 2 GW site needs ~12-15 s per flank "
+      "kill. One site, a wave closing at 80 km/s from 120,000 km out:\n")
+rows = [[f"{off}°", f"{site_kills_vs_orbit(off):.0f}"] for off in (0, 15, 30, 48, 90)]
+print(table(["Wave arrives this far off the target's zenith", "Kills by the site"], rows))
+print()
+print("So against Breakwater, Site 1 matters little whatever the angle: the "
+      "angle is chosen to keep misses and wreckage off the planet (LREF O9), "
+      "not to hide from the site.\n")

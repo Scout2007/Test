@@ -53,7 +53,7 @@ All the frigates are one hull with swappable modules [Lore], so the five frigate
 - **What they don't do:** they never trade fire with emplacements. They can't carry the armour.
 
 **ECW destroyers (100–225 m; this class ~200 m) [Lore].** No main weapons, only CIWS and a few PD emplacements [Lore]. They carry the fleet's computing, sensors and **network screen** ("capable of silencing the radio-emissions of an entire fleet"), plus drones and satellites for comms, sensor nets and counter-EW [Lore].
-- **Kit:** the aft third of the hull is a huge parabolic antenna, which is the ship's eyes and ears once the impact shield is off [Lore].
+- **Kit:** a huge parabolic dish, the ship's eyes and ears once the impact shield is off [Lore]. The post places it over the aft third; Sir_Lazz's art shows it forward, just behind the shield. The board follows the art until the user decides (`OPEN_QUESTIONS.md` Q14).
 - **Tidebreak job:** fight the invisible war (§7). Keep the fleet's fire control connected and the defender's disconnected.
 - **Vulnerability:** they are the net, so the defender hunts them first. They sit inside the line, behind the corvettes and the frigates' PD.
 
@@ -103,7 +103,7 @@ Every engagement runs the same four links. The defender's doctrine attacks each 
 | Link | Primary | Backup | How it fails |
 |---|---|---|---|
 | **1. Sense** | Astrid AVPSA: passive IR and optical, radar in bursts. Destroyer antennas. Picket drones pushed 5,000–20,000 km ahead. | Every ship's own IR search and track, phased arrays and star trackers [Model]. | Clutter (the Breakers), dazzle (planetary lasers), decoys. |
-| **2. Network** | The destroyers' **local network screen**: laser-link mesh, relays and EW drones [Lore]. The fleet is radio-silent. | Direct ship-to-ship laser links; pre-briefed autonomous fire plans. | Jamming, spoofing, a destroyer lost. |
+| **2. Network** | The destroyers' **local network screen** [Lore], built as a laser-link mesh with relays and EW drones [A-29]. The fleet is radio-silent. With fewer destroyers the screen thins ("if present in large enough numbers" [Lore]) and the fleet falls back on direct links. | Direct ship-to-ship laser links; pre-briefed autonomous fire plans. | Jamming, spoofing, a destroyer lost. |
 | **3. Fire control** | Fleet-level track fusion on the Astrid and both destroyers: each target is assigned to the best-placed shooter. | Each ship's own fire control from its own sensors. | Late or false tracks; light-lag (1.3 s at 380,000 km, WN §5). |
 | **4. Weapons by range band** | See below. | — | Heat, magazines, geometry. |
 
@@ -185,8 +185,8 @@ The second figure in each range includes 20 km/s of closing speed.
 Lore: plasma "requires an active electromagnetic field to maintain its form lest it just fizzles out". A **torpedo** carries its own field generator; a **lance** uses the ship's field to deliver plasma straight to the target. Plasma weapons are "finicky and specialized" [Lore].
 
 **Working model [A-23]:**
-- **Lance:** the lance fires compact magnetised plasma toroids (plasma "smoke rings" that hold their own field for a while). They leave at ~1,000 km/s, so a 40 km shot arrives in 0.04 s, and each carries ~1 GJ.
-- **Range:** they hold together for ~50 km before they expand and cool.
+- **Lance:** the ship projects a confining field along the line to the target and drives plasma down it: a violet-white jet from the nose channels to the target, held together all the way by the ship's own field, as the lore describes. The plasma moves at ~1,000 km/s, so a 40 km shot arrives in 0.04 s; a pulse carries ~1 GJ. When `lance_power` cuts, the jet fizzles back from the target.
+- **Range:** ~50 km, the distance over which the ship can project its field. Beyond it the plasma loses confinement and fizzles out.
 - **Torpedo:** a self-propelled field generator that closes to ~50–100 km and fires or becomes one large toroid.
 
 **Doctrine (O12):**
@@ -394,7 +394,7 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 - **O13, brake late and off-axis.** Hold the fighting attitude (coast, bow-on) as long as possible. Brake with the thrust line off the main threat axis, so throttle changes move the ship across the line of fire. Brake when the enemy's long weapons are blinded or busy.
 - **D8, never turn your back without cover.** A flip is the most vulnerable minute a ship has: ~30–60 s with its PD geometry changing and its guns swinging away. Flips happen under smoke, EW peaks and escort cover, and never all ships at once.
 - **The spinal turn.** The Astrid aims by turning. Before a spinal shot, it cuts thrust, slews (~30 s for 90°), steadies on RCS, and fires. Recoil is negligible to its trajectory (~cm/s) but a hard jolt to its structure.
-- **Hab rings.** Both classes have counter-rotating twin rings [Lore; Model], so the rings' spin doesn't fight a flip. At action stations the rings keep turning but are **depopulated**. The crew goes to the armoured, non-rotating citadel stations on acceleration couches [A-34].
+- **Hab rings.** Both classes have twin rings [Lore: "dual ring configuration"], counter-rotating in the model [Model], so the rings' spin doesn't fight a flip. At action stations the rings keep turning but are **depopulated**. The crew goes to the armoured, non-rotating citadel stations on acceleration couches [A-34].
   - **Draft change:** the draft's D7 spun the rings down. Spinning them down and back up costs time and energy and buys nothing.
 
 ---
@@ -425,13 +425,13 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 |---|---|---|---|---|
 | **O1** | **Arrive slow, outside, together** | Exit near rest relative to the target world, outside the debris line and the defender's reach. Stagger exits by seconds and 50+ km. Park the shields at the exit with the tender, then approach on drives. | Maren: exit ~450,000 km; approach 4.6–6.3 h at a 20–30 km/s cruise (WN §6) | *Was:* arrive at 180 km/s, flip, jettison shields in the burn. *Why:* braking takes 5 h; shields released at speed can't be recovered [Lore]. |
 | **O2** | **See first, speak last** | The Astrid's AVPSA builds the picture: passive always, radar in bursts (it glows anyway). Everyone else is EMCON on laser links. Destroyers push picket and EW drones 5,000–20,000 km ahead. | AVPSA radar: 1 m² at ~180,000 km, a slug at ~57,000 km (WN §5) | Numbers added; the Astrid named as the lighthouse. |
-| **O3** | **Saturate on a clock** | Hedgehog packs fire in waves timed to arrive within ~1 s. Wave 1 spends and reveals; wave 2 kills. Mixed payloads: Casaba, thermonuclear, kill-cloud, decoy, EW. | One wave arriving nose-on in the laser shadow faces ~100 kills; side-on to four ground sites, ~500+ (WN §8) | Numbers added; pack of three (lore). |
+| **O3** | **Saturate on a clock** | Hedgehog packs fire in waves; each wave arrives within ~1 s. The spend wave lands 1–2 minutes before the kill wave: long enough to make the defender reveal itself and spend, too short for it to cool, reload or re-mask. Mixed payloads: Casaba, thermonuclear, kill-cloud, decoy, EW. | One wave arriving nose-on in the laser shadow faces ~100 kills; side-on to four ground sites, ~500+ (WN §8) | Numbers added; pack of three (lore). |
 | **O4** | **Guns on what can't dodge** | Kinetics only inside the no-escape range, or at fixed or committed targets. The spinal cannon hunts fixed installations at long range and crippled ships at medium range. | Table in §4.1 | *Was:* ≤ 1,000 km against manoeuvring ships. *Now:* by target type; against frigates only ≤ ~200–340 km. |
 | **O5** | **Blind before the blow** | Arrays dazzle optics at any range. Destroyers jam radar, cut links and spoof tracks, so the defender's emplacements fall back to autonomous fire plans. The strike lands in that window. | Dazzle > 10⁶ km (WN §1) | Clarified: passive IR can't be jammed, only blinded by lasers or hidden by smoke. |
 | **O6** | **Close with purpose** | Knife range only where terrain forces it (rocks in the Breakers block sight lines until contact) or against crippled targets. Broadsides only with fins stowed. Plasma lances ≤ 50 km. | M-1C against a frigate ≤ ~190–340 km | *Why:* in open space, knife range is where emplacements win (§4.1). Added fin rule (§8). |
 | **O7** | **Layer the arms** | Drones, then corvettes, frigates, the cruiser, and the heavy cruiser. Each layer spends the enemy's attention and heat for the next. The spinal cannon fires into the gap. | — | Unchanged. |
 | **O8** | **Speed is the defender's ammunition** | Cross prepared space at ≤ ~20 km/s relative. Corvettes and drones lead and sweep the lane. Never make a high-speed ballistic pass through a defended system. | A 1 kg rock at 20 km/s = 48 kg TNT; at 180 km/s = 3.9 t (WN §6) | New. |
-| **O9** | **Choose the geometry, not the fight** | Attack from where the enemy's lasers see hardened noses or nothing: below the sites' horizon, behind rocks, through the Breakers' dust. Time strikes to planetary rotation and weather. Make every defender that can see the wave see it nose-on. | Nose-on vs side-on changes the kills per wave 7–17× (WN §8) | New. |
+| **O9** | **Choose the geometry, not the fight** | Attack from where the enemy's lasers see hardened noses or nothing: below the sites' horizon, behind rocks, through the Breakers' dust. Time strikes to planetary rotation and weather. Make every defender that can see the wave see it nose-on. Never with an inhabited world behind the target: bring the final legs of missiles and guns in ≥ 10° off the target's local vertical, so misses, over-penetrating slugs and PD-killed wreckage clear the planet's limb (ROE, §13). | Nose-on vs side-on changes the kills per wave 7–17× (WN §8) | New. |
 | **O10** | **Cripple, then kill** | Against a mobile heavy target: strip its fins and sensors (lasers), cut its drive (Casaba, missiles), and only then commit heavy kinetics, from inside its now-larger no-escape range. | Monitor: 0.05 g → 0.005 g grows the spinal no-escape range from ~4,000 to ~12,000 km (WN §2) | New. Reverses the draft's last beats (spinal before Casaba). |
 | **O11** | **Spend missiles, keep ships** | Frigate packs are the currency. Hold about a third of the magazine in reserve. Withdraw empty hedgehogs to the tender (4 CIWS only [Lore]). | ~700 missiles per hedgehog [A-26] | New, from lore. |
 | **O12** | **Plasma where the field holds** | Lances and torpedoes are knife weapons for emerging emplacements, crippled ships and strays. They are never the plan at range. | Lance ≤ ~50 km; torpedo launch ≤ ~100 km [A-23] | New, from lore. |
@@ -469,6 +469,7 @@ Lore: "Heat still needs to go somewhere… the name of the game is radiators, Ra
 - **Carriers and crewed strike craft.** Lore calls carriers controversial, expensive and nullified by good screens. The LREF uses drones.
 - **Bombarding a populated world.** A slug or warhead fired at a planet's surface is a weapon of mass destruction. The operation exists to put T-SEC on the ground, not to ruin the ground.
   - **Decided (Q6):** the LREF does **not** strike Maren's ground laser sites, even though they are isolated military sites. The fleet beats them by geometry, weather, smoke and EW.
+  - The same rule covers firing *past* a target: never with the planet behind it (O9). Seen from a synchronous orbit, Maren fills ±8.7° around the nadir.
 
 ---
 
@@ -492,7 +493,7 @@ Each of these goes beyond the lore. The ones marked ★ change what the film sho
 | A-20 | M-1C: 10 kg at 25 km/s; spinal: 500 kg at 60 km/s | A ~100 m barrel [Lore] at ~3×10⁵ g; ~1 km barrel at ~2×10⁶ g |
 | A-21 | The spinal cannon can hit a fixed point target at ~100,000 km (slug divert kit or salvo) | Aim error of ~0.1 µrad is at the edge of plausible; beyond that, salvo |
 | A-22 | Laser focusing array: 3.3 m, 350 nm, 25 MW; PD laser: 1.6 m, 5 MW; 25 % wall-plug; 1.5× jitter | Apertures from the draft; UV matches the violet lens [Model] |
-| A-23 | Plasma lance = compact toroids at ~1,000 km/s, ~1 GJ each, ~50 km coherence | Gives the lore's "ship generates the EMF" a mechanism |
+| A-23 | Plasma lance = plasma driven down a field the ship projects: ~1,000 km/s, ~1 GJ per pulse, ~50 km of field reach | The lore's own mechanism: "the ship itself generates the EMF to deliver plasma straight to a target" |
 | A-24 | Casaba: 20–100 kt, 25 % into a 0.01 rad jet | At the optimistic end of published concepts; the soft coat |
 | A-25 | Missiles: hardened nose, spin, a quarter of Δv held for the terminal phase; specs in §4.5 | Makes the PD maths honest |
 | A-26 | Hedgehog: ~240 capital-ship killers + ~120 multi-packs of ~4 = ~700 missiles | Lore: ~360 pods, "back 1/3" multi-silo, MIRVs |

@@ -79,7 +79,7 @@ Dazzle needs only ~10 W/m² on a sensor aperture, so every laser above dazzles o
 | Astrid spinal cannon | 500 kg | 60.0 km/s | 9.00e11 J | 215 t |
 | Breakwater heavy railgun | 50.0 kg | 30.0 km/s | 2.25e10 J | 5.38 t |
 | Breakers railgun platform | 10.0 kg | 25.0 km/s | 3.12e9 J | 0.75 t |
-| Skerry mass driver (smart rock) | 10,000 kg | 10.0 km/s | 5.00e11 J | 120 t |
+| Skerry mass driver (smart rock) | 10,000 kg | 12.5 km/s | 7.81e11 J | 187 t |
 
 *No-escape range*: inside it, the target cannot move far enough between seeing the shot and the slug arriving. It assumes the shooter sees the launch flash instantly (the light-lag is added to the reaction time) and fires one slug at the target's predicted centre. Salvo patterns stretch these ranges roughly 2-4x at the cost of hit probability per slug.
 
@@ -146,11 +146,11 @@ Dazzle needs only ~10 W/m² on a sensor aperture, so every laser above dazzles o
 
 | Range | LREF M-1C twin railcannon (per gun) | Astrid spinal cannon | Breakwater heavy railgun | Breakers railgun platform | Skerry mass driver (smart rock) | M-1C + 20 km/s closing |
 |---|---|---|---|---|---|---|
-| 100 km | 4.0 s | 1.7 s | 3.3 s | 4.0 s | 10.0 s | 2.2 s |
-| 1,000 km | 40.0 s | 16.7 s | 33.3 s | 40.0 s | 100.0 s | 22.2 s |
-| 10,000 km | 6.7 min | 2.8 min | 5.6 min | 6.7 min | 16.7 min | 3.7 min |
-| 50,000 km | 33.3 min | 13.9 min | 27.8 min | 33.3 min | 83.3 min | 18.5 min |
-| 100,000 km | 66.7 min | 27.8 min | 55.6 min | 66.7 min | 2.8 h | 37.0 min |
+| 100 km | 4.0 s | 1.7 s | 3.3 s | 4.0 s | 8.0 s | 2.2 s |
+| 1,000 km | 40.0 s | 16.7 s | 33.3 s | 40.0 s | 80.0 s | 22.2 s |
+| 10,000 km | 6.7 min | 2.8 min | 5.6 min | 6.7 min | 13.3 min | 3.7 min |
+| 50,000 km | 33.3 min | 13.9 min | 27.8 min | 33.3 min | 66.7 min | 18.5 min |
+| 100,000 km | 66.7 min | 27.8 min | 55.6 min | 66.7 min | 2.2 h | 37.0 min |
 
 ## 3. Missiles: flight time
 
@@ -322,4 +322,16 @@ Laser kills are integrated over the missile's run-in: each kill takes the burn t
 | 30 km | 15.0 s | 675 km / 65 m | 1,500 km / 13 m |
 
 A 16-mount battery therefore kills roughly 3 missiles a second while the wave arrives, and nothing that detonates outside ~5 km: a Casaba standing off at 2-4 km must be killed by the clouds at 5-30 km or by the lasers before that.
+
+**A ground site against a wave aimed at an orbital target.** The table above assumes missiles that run in to ~50 km of the laser. A wave aimed at a monitor in synchronous orbit over the site (42,164 km) never comes closer than ~35,800 km, where one 2 GW site needs ~12-15 s per flank kill. One site, a wave closing at 80 km/s from 120,000 km out:
+
+| Wave arrives this far off the target's zenith | Kills by the site |
+|---|---|
+| 0° | 1 |
+| 15° | 5 |
+| 30° | 9 |
+| 48° | 15 |
+| 90° | 33 |
+
+So against Breakwater, Site 1 matters little whatever the angle: the angle is chosen to keep misses and wreckage off the planet (LREF O9), not to hide from the site.
 

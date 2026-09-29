@@ -11,6 +11,10 @@ Writes:
   ASSET_REQUESTS.md          everything the storyboard needs that is not built
   storyboard/img/*.jpg       reference frames (converted once from pack/renders)
 
+It checks the data on the way (doctrine rule IDs, asset IDs, shot references,
+the mission clock, subtitle reading speed, camera bodies, set coverage) and
+prints what it finds.
+
 --fragment writes the page without <html>/<head>/<body> for the artifact viewer.
 --doc-base sets where doctrine rule links point (default: the local reading edition).
 """
@@ -20,6 +24,7 @@ import importlib.util
 import math
 import pathlib
 import random
+import re
 import shutil
 import sys
 
@@ -35,7 +40,75 @@ if "--doc-base" in sys.argv:
 
 E = html.escape
 FPS = D.FPS
-SEC_PER_FRAME = {"A": 35, "B": 75, "C": 150, "D": 15, "E": 2}
+SEC_PER_FRAME = {c: float(re.search(r"([\d.]+) s/frame", cost).group(1)) for c, (_, cost) in D.RENDER_CLASSES.items()}
+MAX_CPS = 12          # subtitle reading speed ceiling (round 1 cinematography review)
+MARGIN = 0.30         # re-render allowance on the render budget
+BODY_LABEL = {"hull": "hull camera", "drone": "drone camera", "tracker": "tracker", "hud": "HUD insert"}
+NOTES = []            # what the checks found; printed at the end
+
+
+def clock_s(c):
+    h, m, s = c[2:].split(":")
+    return int(h) * 3600 + int(m) * 60 + int(s)
+
+
+def fmt_clock(sec):
+    sec = round(sec)
+    return f"T+{sec // 3600}:{sec % 3600 // 60:02d}:{sec % 60:02d}"
+
+
+def mmss(sec):
+    return f"{int(sec // 60)}:{sec % 60:04.1f}"
+
+
+def rule_doc(rid):
+    return "maren" if rid.startswith("H") else "lref"
+
+
+# ----------------------------------------------------------------- shot numbers and references
+TITLES = {}
+for i, s in enumerate(D.SHOTS, 1):
+    if s["title"] in TITLES:
+        sys.exit(f"duplicate shot title: {s['title']}")
+    TITLES[s["title"]] = i
+REF = re.compile(r"\{#([^}]+)\}")
+
+
+def resolve(text):
+    def sub(m):
+        if m.group(1) not in TITLES:
+            sys.exit(f"unknown shot reference {{#{m.group(1)}}}")
+        return str(TITLES[m.group(1)])
+    return REF.sub(sub, text)
+
+
+def walk(x):
+    """Resolve {#Title} references everywhere except in sketch code."""
+    if isinstance(x, str):
+        return resolve(x)
+    if isinstance(x, list):
+        return [walk(v) for v in x]
+    if isinstance(x, tuple):
+        return tuple(walk(v) for v in x)
+    if isinstance(x, dict):
+        return {k: (v if k == "sketch" else walk(v)) for k, v in x.items()}
+    return x
+
+
+for _name in ("PHASES", "KEY_NUMBERS", "LIGHTING", "CLOCK_HUD", "SCREEN_DIRECTION", "CAMERA_BODIES", "FLEET",
+              "DEFENDERS", "ASSETS", "RENDER_NOTE", "PRODUCTION_PLAN", "ACTS", "MAPS", "REVIEW_STATUS", "REVIEWS",
+              "SHOTS"):
+    setattr(D, _name, walk(getattr(D, _name)))
+
+
+def shot_no(title, where):
+    if title not in TITLES:
+        sys.exit(f"{where}: no shot titled '{title}'")
+    return TITLES[title]
+
+
+CLOSEST = {a: (shot_no(t, f"CLOSEST[{a}]"), what, size) for a, (t, what, size) in D.CLOSEST.items()}
+SETS = [(name, sorted(shot_no(t, f"SETS[{name}]") for t in titles)) for name, titles in D.SETS]
 
 # ----------------------------------------------------------------- timing
 t = 0
@@ -45,22 +118,23 @@ for n, s in enumerate(D.SHOTS, 1):
         s["assets"].append("SUB")
     s["t0"], s["t1"] = t, t + s["dur"]
     s["f0"], s["f1"] = t * FPS + 1, (t + s["dur"]) * FPS
+    s["shields"] = clock_s(s["clock"]) < clock_s(D.SHIELDS_OFF)
     t += s["dur"]
 RUNTIME = t
 FRAMES = RUNTIME * FPS
+MISSION_END = D.SHOTS[-1]["clock"][:-3]
 
 
-def mmss(sec):
-    return f"{int(sec // 60)}:{sec % 60:04.1f}"
-
-
-def clock_hours(c):
-    h, m, s = c[2:].split(":")
-    return int(h) + int(m) / 60 + int(s) / 3600
-
-
-def rule_doc(rid):
-    return "maren" if rid.startswith("H") else "lref"
+def ranges(nums):
+    """[1, 2, 3, 5] -> '1–3, 5'"""
+    out, i = [], 0
+    while i < len(nums):
+        j = i
+        while j + 1 < len(nums) and nums[j + 1] == nums[j] + 1:
+            j += 1
+        out.append(str(nums[i]) if i == j else f"{nums[i]}–{nums[j]}")
+        i = j + 1
+    return ", ".join(out)
 
 
 # ----------------------------------------------------------------- images
@@ -94,6 +168,176 @@ def prepare_images():
         im.save(dst, "JPEG", quality=82, optimize=True)
 
 
+# ----------------------------------------------------------------- checks
+def clock_rate(real):
+    """Mission seconds per screen second, or None when the shot doesn't say."""
+    if real.startswith(("1:1", "the clock jumps")):
+        return 1.0
+    m = re.match(r"(compressed|slowed) ~?([\d.]+)×", real)
+    if m:
+        k = float(m.group(2))
+        return k if m.group(1) == "compressed" else 1 / k
+    return None
+
+
+def check():
+    rule_ids = set()
+    for f in ("LREF_doctrine.md", "Defence_doctrine.md"):
+        rule_ids |= set(re.findall(r"^\|\s*\*\*((?:O|D|HO|HD)\d+)\*\*", (ROOT / "doctrine" / f).read_text(), re.M))
+    for s in D.SHOTS:
+        tag = f"shot {s['n']} ({s['title']})"
+        bad = ([f"rule {r}" for r in s["rules"] if r not in rule_ids] +
+               [f"asset {a}" for a in s["assets"] if a not in D.ASSETS] +
+               ([f"camera body {s['body']}"] if s["body"] not in D.CAMERA_BODIES else []) +
+               ([f"render class {s['cost']}"] if s["cost"] not in D.RENDER_CLASSES else []) +
+               ([f"map {s['map']}"] if s["map"] not in D.MAPS else []) +
+               ([f"reference frame {s['render']}"] if s["render"] and s["render"][4:] not in IMG_SOURCES else []))
+        if bad:
+            sys.exit(f"{tag}: unknown " + ", ".join(bad))
+        chars = sum(len(line) for _, line in s["comm"])
+        if chars / s["dur"] > MAX_CPS:
+            NOTES.append(f"{tag}: subtitles at {chars / s['dur']:.1f} characters a second (ceiling {MAX_CPS})")
+        if s["body"] != "hull" and re.search(r"through the (hull|truss|backplate)", s["sound"]):
+            NOTES.append(f"{tag}: a {s['body']} camera can't hear through the hull")
+    for a, b in zip(D.SHOTS, D.SHOTS[1:]):
+        rate = clock_rate(a["real"])
+        end = clock_s(a["clock"]) + a["dur"] * (rate or 0)
+        if clock_s(b["clock"]) < end - 0.5:
+            NOTES.append(f"shot {b['n']} ({b['title']}) starts at {b['clock']}, before shot {a['n']} ends at {fmt_clock(end)}")
+    for a, (n, _, _) in CLOSEST.items():
+        if a not in D.SHOTS[n - 1]["assets"]:
+            NOTES.append(f"closest view of {a} is shot {n}, which doesn't use it")
+    counts = {}
+    for _, nums in SETS:
+        for n in nums:
+            counts[n] = counts.get(n, 0) + 1
+    for s in D.SHOTS:
+        if counts.get(s["n"], 0) != 1:
+            NOTES.append(f"shot {s['n']} ({s['title']}) is in {counts.get(s['n'], 0)} set-ups, not one")
+    grouped = [a for _, ids in ASSET_GROUPS for a in ids]
+    for a in D.ASSETS:
+        if grouped.count(a) != 1:
+            NOTES.append(f"asset {a} is in {grouped.count(a)} groups of ASSET_REQUESTS.md, not one")
+
+
+# ----------------------------------------------------------------- geometry
+# Maren-centred inertial frame in km. The fleet arrives from -x, so on every map
+# Maren is screen right, as in the film's HUD. Angles are degrees counter-clockwise
+# from +x. At T+5:09 Anchor, Breakwater and Site 1 line up at 180°.
+G1 = 9.80665e-3                                   # 1 g, km/s²
+W_MAREN = 360 / 23.934                            # °/h (sidereal day)
+W_ANCHOR = math.degrees(1.63 / 150_000 * 3600)    # °/h (1.63 km/s at 150,000 km)
+T_ALIGN = 5 + 9 / 60                              # hours: Anchor over Site 1
+SUN = 30                                          # direction of the sun from Maren
+BURN = 20 / G1                                    # s: 0 → 20 km/s at 1 g
+BURN_KM = 0.5 * G1 * BURN ** 2
+FLIP = 49                                         # s: the Endeavor's flip
+MAREN_HALF = math.degrees(math.asin(6_400 / 42_164))   # Maren's half-width seen from Breakwater
+
+
+def hours(clock):
+    return clock_s(clock) / 3600
+
+
+def pol(r, deg, origin=(0.0, 0.0)):
+    return (origin[0] + r * math.cos(math.radians(deg)), origin[1] + r * math.sin(math.radians(deg)))
+
+
+def bearing(p, q):
+    return math.degrees(math.atan2(q[1] - p[1], q[0] - p[0]))
+
+
+def angdiff(a, b):
+    """Smallest angle between two directions, degrees."""
+    return abs((a - b + 180) % 360 - 180)
+
+
+def line_miss(p, q):
+    """Distance from Maren's centre to the straight line through p and q (km)."""
+    dx, dy = q[0] - p[0], q[1] - p[1]
+    return abs(dx * p[1] - dy * p[0]) / math.hypot(dx, dy)
+
+
+def path_point(p0, p1, s):
+    L = math.dist(p0, p1)
+    return (p0[0] + (p1[0] - p0[0]) * s / L, p0[1] + (p1[1] - p0[1]) * s / L)
+
+
+def th_bw(t):
+    return 180 + W_MAREN * (t - T_ALIGN)
+
+
+def bw_at(t):
+    return pol(42_164, th_bw(t))
+
+
+def site1_at(t):
+    return pol(6_400, th_bw(t))
+
+
+def anchor_at(t):
+    return pol(150_000, 180 + W_ANCHOR * (t - T_ALIGN))
+
+
+def off_zenith(t, rng, off):
+    """A point rng km from Breakwater, off degrees from its zenith, on Anchor's side."""
+    return pol(rng, th_bw(t) - off, bw_at(t))
+
+
+EXIT, ANCHOR = (-450_000.0, 20_000.0), anchor_at(T_ALIGN)
+SKERRY = pol(380_000, 140)
+
+
+def approach_r(t):
+    """Distance from Maren during the approach: wait, burn at T+0:25, coast, flip at T+4:34:10, brake."""
+    s, start, turn = t * 3600, 25 * 60, clock_s("T+4:34:10")
+    if s <= start:
+        return 450_000
+    if s <= start + BURN:
+        return 450_000 - 0.5 * G1 * (s - start) ** 2
+    coasted = min(s, turn + FLIP) - start - BURN
+    x = min(max(s - turn - FLIP, 0), BURN)
+    return 450_000 - BURN_KM - 20 * coasted - (20 * x - 0.5 * G1 * x * x)
+
+
+def track(r):
+    """The point on the exit → Anchor line at distance r from Maren (along x)."""
+    return (-r, 20_000 * (r - 150_000) / 300_000)
+
+
+T_DEP = hours("T+5:43:00")
+A_DEP = anchor_at(T_DEP)
+ESCORTS = (8_500, 25)      # km from Breakwater, degrees off its zenith: where the escorts stop
+ASTRID = (10_800, 15)      # where the Astrid stops and fires (the spinal's line clears Maren)
+
+
+def _final_approach():
+    """Anchor (T+5:43) to the escorts' stop: 1 g, coast, flip, 1 g."""
+    t_stop = hours("T+7:50:00")
+    for _ in range(30):
+        stop = off_zenith(t_stop, *ESCORTS)
+        L = math.dist(A_DEP, stop)
+        coast = (L - 2 * BURN_KM - 20 * FLIP) / 20
+        t_stop = T_DEP + (2 * BURN + FLIP + coast) / 3600
+    return stop, L, coast, t_stop
+
+
+STOP, FINAL_KM, COAST, T_STOP = _final_approach()
+T_TURN = T_DEP + (BURN + COAST) / 3600
+
+
+def final_at(t):
+    s = (t - T_DEP) * 3600
+    if s <= BURN:
+        d = 0.5 * G1 * s * s
+    elif s <= BURN + COAST + FLIP:
+        d = BURN_KM + 20 * (s - BURN)
+    else:
+        x = min(s - BURN - COAST - FLIP, BURN)
+        d = BURN_KM + 20 * (COAST + FLIP) + 20 * x - 0.5 * G1 * x * x
+    return path_point(A_DEP, STOP, d)
+
+
 # ----------------------------------------------------------------- maps
 class Map:
     def __init__(self, x0, x1, y0, y1, scale, pad=12):
@@ -117,6 +361,30 @@ class Map:
         d = " ".join(f"{'M' if i == 0 else 'L'}{self.P(x, y)[0]:.1f},{self.P(x, y)[1]:.1f}" for i, (x, y) in enumerate(pts))
         self.add(f'<path d="{d}" class="{cls}" {extra}/>')
 
+    def arrow(self, p0, p1, cls="m-arrow"):
+        self.line([p0, p1], cls, 'marker-end="url(#arr)"')
+
+    def poly(self, pts, cls):
+        d = " ".join(f"{'M' if i == 0 else 'L'}{x:.1f},{y:.1f}" for i, (x, y) in enumerate(self.P(*q) for q in pts))
+        self.add(f'<path d="{d}Z" class="{cls}"/>')
+
+    def halfplane(self, p, deg, cls):
+        """Shade the side of the line through p, perpendicular to deg, that deg points into."""
+        nx, ny = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+        side = lambda q: (q[0] - p[0]) * nx + (q[1] - p[1]) * ny
+        rect = [(self.x0, self.y0), (self.x1, self.y0), (self.x1, self.y1), (self.x0, self.y1)]
+        out = []
+        for i in range(4):
+            a, b = rect[i], rect[(i + 1) % 4]
+            sa, sb = side(a), side(b)
+            if sa >= 0:
+                out.append(a)
+            if (sa >= 0) != (sb >= 0):
+                k = sa / (sa - sb)
+                out.append((a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k))
+        if len(out) > 2:
+            self.poly(out, cls)
+
     def curve(self, a, c, b, cls):
         (ax, ay), (cx, cy), (bx, by) = self.P(*a), self.P(*c), self.P(*b)
         self.add(f'<path d="M{ax:.1f},{ay:.1f} Q{cx:.1f},{cy:.1f} {bx:.1f},{by:.1f}" class="{cls}"/>')
@@ -124,6 +392,13 @@ class Map:
     def text(self, x, y, s, cls="m-t", anchor="start", dx=0, dy=0):
         px, py = self.P(x, y)
         self.add(f'<text x="{px + dx:.1f}" y="{py + dy:.1f}" class="{cls}" text-anchor="{anchor}">{E(s)}</text>')
+
+    def text_along(self, p0, p1, s, cls="m-t", f=0.0, off=12):
+        """Text laid along the segment p0→p1, starting a fraction f along it; off > 0 sits below the line."""
+        (x0, y0), (x1, y1) = self.P(*p0), self.P(*p1)
+        ang = math.degrees(math.atan2(y1 - y0, x1 - x0))
+        x, y = x0 + (x1 - x0) * f, y0 + (y1 - y0) * f
+        self.add(f'<text transform="translate({x:.1f},{y:.1f}) rotate({ang:.1f})" y="{off}" class="{cls}">{E(s)}</text>')
 
     def mark(self, x, y, cls, shape="dot", size=3.2):
         px, py = self.P(x, y)
@@ -149,170 +424,235 @@ class Map:
                 f'<rect width="100%" height="100%" class="m-bg"/>' + "".join(self.out) + "</svg>")
 
 
-def path_point(p0, p1, s):
-    L = math.dist(p0, p1)
-    return (p0[0] + (p1[0] - p0[0]) * s / L, p0[1] + (p1[1] - p0[1]) * s / L)
-
-
-EXIT, LEE = (450_000, 20_000), (150_000, 0)
-SKERRY = (380_000 * math.cos(math.radians(40)), 380_000 * math.sin(math.radians(40)))
-
-
-def x_on_track(x):
-    return (x, 20_000 * (x - 150_000) / 300_000)
-
-
 def map_a():
-    m = Map(-60_000, 480_000, -130_000, 300_000, 1_000)
+    m = Map(-480_000, 60_000, -140_000, 300_000, 1_000)
     cx, cy = m.P(0, 0)
     m.add(f'<path d="M{cx - 260:.1f},{cy:.1f} a260,260 0 1,0 520,0 a260,260 0 1,0 -520,0 '
           f'M{cx - 120:.1f},{cy:.1f} a120,120 0 1,1 240,0 a120,120 0 1,1 -240,0Z" class="m-torus" fill-rule="evenodd"/>')
-    m.text(0, -205_000, "THE BREAKERS · 120,000–260,000 km", "m-t m-muted", "middle")
+    m.text(-115_000, -125_000, "THE BREAKERS · 120,000–260,000 km", "m-t m-muted", "middle")
     m.circle(0, 0, 380_000, "m-orbit")
     m.circle(0, 0, 42_164, "m-orbit")
     m.circle(0, 0, 6_400, "m-planet", 4)
-    m.text(0, 0, "Maren", "m-t", "end", -7, 14)
-    m.mark(42_164, 0, "m-comp", "dia", 3)
-    m.text(42_164, 0, "Breakwater", "m-t m-compt", "start", 5, -6)
+    m.text(0, 0, "Maren", "m-t", "middle", 0, 58)
+    bw = bw_at(hours("T+1:10:00"))
+    m.mark(*bw, "m-comp", "dia", 3)
+    m.text(*bw, "Breakwater, over Site 1", "m-t m-compt", "middle", 0, -9)
+    m.arrow(pol(12_000, SUN), pol(52_000, SUN))
+    m.text(*pol(52_000, SUN), "sun", "m-t m-muted", "start", 4, 4)
     m.mark(*SKERRY, "m-moon", "dot", 4)
-    m.text(*SKERRY, "Skerry (mass driver, laser, depot)", "m-t", "start", 7, 4)
-    m.line([EXIT, LEE], "m-lref")
+    m.text(*SKERRY, "Skerry: mass driver, laser, depot", "m-t", "start", 8, 4)
+    m.line([EXIT, ANCHOR], "m-lref")
     m.mark(*EXIT, "m-lreff", "sq", 3.5)
-    m.text(*EXIT, "Warp exit · shield park", "m-t m-lreft", "end", -2, 20)
-    m.text(*EXIT, "Nauvoo, Excelsior", "m-t m-muted", "end", -2, 32)
-    for s_km, lab in ((20_400, "T+0:59 at 20 km/s"),):
-        p = path_point(EXIT, LEE, s_km)
+    m.text(*EXIT, "Warp exit and shield park", "m-t m-lreft", "start", -3, 17)
+    m.text(*EXIT, "Nauvoo, Excelsior, Tantive IV", "m-t m-muted", "start", -3, 29)
+    for clock, lab, anchor in (("T+0:59:00", "T+0:59 · 20 km/s", "start"), ("T+3:20:00", "T+3:20 into the Breakers", "middle")):
+        p = track(approach_r(hours(clock)))
         m.mark(*p, "m-lreff", "dot", 2.5)
-        m.text(*p, lab, "m-t", "middle", 0, -9)
-    for x, lab, dy in ((260_000, "T+3:20 into the Breakers", 14), (170_400, "T+4:35 turnover", -8)):
-        p = x_on_track(x)
-        m.mark(*p, "m-lreff", "dot", 2.5)
-        m.text(*p, lab, "m-t", "middle", 0, dy)
-    m.mark(*LEE, "m-rock", "dot", 3.5)
-    m.text(*LEE, "the Lee · T+5:09", "m-t m-lreft", "middle", 0, 16)
-    m.curve(EXIT, (380_000, 170_000), SKERRY, "m-missile")
-    m.text(400_000, 120_000, "wave one · T+0:18 → T+1:04", "m-t m-lreft", "middle")
-    m.curve(SKERRY, (160_000, 180_000), (92_000, -6_000), "m-kin")
-    m.text(150_000, 125_000, "Skerry's three rounds · T+0:04 → T+6:40", "m-t m-compt", "middle")
+        m.text(*p, lab, "m-t", anchor, -2 if anchor == "start" else 0, -9)
+    m.mark(*ANCHOR, "m-rock", "dot", 3.5)
+    m.text(*ANCHOR, "Anchor · T+5:09", "m-t m-lreft", "middle", 0, 16)
+    m.curve(EXIT, (-420_000, 170_000), SKERRY, "m-missile")
+    m.text(-470_000, 200_000, "wave one", "m-t m-lreft", "start")
+    m.text(-470_000, 200_000, "T+0:18 → T+1:02", "m-t m-lreft", "start", 0, 12)
+    m.line([SKERRY, (-430_000, 60_000), EXIT], "m-kin m-thin")
+    m.text(-352_000, 70_000, "40 drones → the park", "m-t m-compt", "start")
+    net = final_at(hours("T+6:40:00"))
+    m.curve(SKERRY, (-170_000, 95_000), net, "m-kin")
+    m.mark(*net, "m-kindot", "dot", 2)
+    m.text(-150_000, 132_000, "Skerry's three rounds · T+0:04 → T+6:40", "m-t m-compt", "middle")
     m.scalebar(100_000, "100,000 km")
     return m.svg(D.MAPS["A"])
 
 
 def map_b():
-    m = Map(130_000, 290_000, -40_000, 40_000, 250)
+    m = Map(-290_000, -130_000, -40_000, 40_000, 250)
     cx, cy = m.P(0, 0)
     m.add(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{260_000 / 250:.1f}" class="m-edge"/>')
     rnd = random.Random(7)
     for _ in range(170):
-        x, y = rnd.uniform(130_000, 290_000), rnd.uniform(-40_000, 40_000)
+        x, y = rnd.uniform(-290_000, -130_000), rnd.uniform(-40_000, 40_000)
         if math.hypot(x, y) < 260_000:
             m.mark(x, y, "m-rockdot", "dot", rnd.uniform(0.6, 1.5))
-    m.text(257_000, 36_000, "outer edge of the Breakers", "m-t m-muted", "end")
-    m.text(140_000, -36_000, "Large rocks shown are a sample: real spacing is hundreds of km.", "m-t m-muted")
-    m.line([x_on_track(290_000), LEE], "m-lref")
-    ev = [(260_000, "T+3:20 enter", -10), (248_000, "T+3:30 Site 1 dazzles", 14),
-          (236_000, "T+3:40 pods launch", -22), (221_600, "T+3:52 Canterbury lost", 26),
-          (200_000, "T+4:10 drones wake", -10), (182_000, "T+4:25 Normandy lost", 14),
-          (170_400, "T+4:35 turnover", -22)]
-    for x, lab, dy in ev:
-        p = x_on_track(x)
+    m.text(-286_000, 36_000, "outer edge of the Breakers", "m-t m-muted", "start")
+    m.text(-286_000, -36_000, "Large rocks shown are a sample: real spacing is hundreds of km.", "m-t m-muted")
+    m.line([track(290_000), ANCHOR], "m-lref")
+    ev = [("T+3:20:00", "T+3:20 enter", -10), ("T+3:30:00", "T+3:30 Site 1 dazzles", 16),
+          ("T+3:40:00", "T+3:40 pods launch", -22), ("T+3:52:13", "T+3:52 Canterbury holed", 28),
+          ("T+4:10:00", "T+4:10 drones wake", -10), ("T+4:25:00", "T+4:25 Normandy lost", 16),
+          ("T+4:34:10", "T+4:34 turnover", -22)]
+    for clock, lab, dy in ev:
+        p = track(approach_r(hours(clock)))
         m.mark(*p, "m-lreff", "dot", 2.4)
         m.text(*p, lab, "m-t", "middle", 0, dy)
-    for dx, dy in ((0, 3_000), (-1_500, 4_500), (1_000, -2_500)):
-        p = x_on_track(236_000)
-        m.mark(p[0] + dx, p[1] + dy, "m-comp", "dia", 2.2)
-    plat = (221_000, x_on_track(221_000)[1] + 500)
+    r40 = approach_r(hours("T+3:40:00"))
+    for dx, dy in ((2_500, 3_000), (4_000, -2_600), (6_000, 1_800)):
+        p = track(r40 - dx)
+        m.mark(p[0], p[1] + dy, "m-comp", "dia", 2.2)
+    plat_r = approach_r(hours("T+3:52:00")) - 600
+    plat = (track(plat_r)[0], track(plat_r)[1] - 1_600)
     m.mark(*plat, "m-comp", "x", 3)
-    ast = x_on_track(229_600)
+    ast = track(plat_r + 8_600)
     m.mark(*ast, "m-lreff", "sq", 3)
-    m.text(*ast, "Astrid (8,000 km back)", "m-t m-lreft", "middle", 0, -36)
     m.line([ast, plat], "m-spinal")
-    m.mark(*LEE, "m-rock", "dot", 4)
-    m.text(*LEE, "the Lee", "m-t m-lreft", "start", 7, 4)
+    m.text(*ast, "Astrid fires: 8,600 km, 108 s", "m-t m-lreft", "middle", 0, -38)
+    ctl = track(approach_r(hours("T+4:14:00")))
+    ctl = (ctl[0], ctl[1] - 9_000)
+    m.mark(*ctl, "m-comp", "dia", 2.6)
+    m.text(*ctl, "control craft, dazzled (T+4:14)", "m-t m-compt", "middle", 0, 16)
+    m.mark(*ANCHOR, "m-rock", "dot", 4)
+    m.text(*ANCHOR, "Anchor", "m-t m-lreft", "end", -7, -8)
+    m.text(*ANCHOR, "T+5:09", "m-t m-lreft", "end", -7, 18)
     m.scalebar(10_000, "10,000 km")
     return m.svg(D.MAPS["B"])
 
 
 def map_c():
-    m = Map(-200, 1_400, -900, 900, 10 / 3)
-    m.add(f'<rect x="{m.P(0, 9)[0]:.1f}" y="{m.P(0, 9)[1]:.1f}" width="{1_400 * 0.3:.1f}" height="{18 * 0.3:.1f}" class="m-shadow"/>')
-    m.text(1_380, -45, "the rock's shadow: hidden from Site 1 and Breakwater", "m-t m-lreft", "end")
-    m.text(1_380, -85, "the fleet strings out along it, 50–250 km apart", "m-t m-muted", "end")
-    m.line([(-20, 0), (-190, 0)], "m-arrow", 'marker-end="url(#arr)"')
-    m.text(-190, -130, "to Breakwater 108,000 km", "m-t m-muted")
-    m.text(-190, -170, "to Site 1 143,600 km", "m-t m-muted")
-    m.mark(0, 0, "m-rock", "dot", 3.2)
-    m.text(0, 0, "the Lee (18 km)", "m-t", "end", -6, -10)
-    for x, lab in ((6, "Endeavor"), (110, "Donnager"), (220, ""), (330, ""), (440, ""), (700, "Astrid")):
-        m.mark(x, 0, "m-lreff", "sq" if lab in ("Astrid", "Endeavor") else "dot", 2.4)
+    """Local frame around Anchor, km; Site 1 and Breakwater off to +x."""
+    m = Map(-420, 420, -420, 330, 2)
+    m.circle(0, 0, 300, "m-edge")
+    m.text(0, 300, "rocks cleared inside 300 km (the Donnager)", "m-t m-muted", "middle", 0, -6)
+    x0, y0 = m.P(-420, 9)
+    x1, y1 = m.P(-9, -9)
+    m.add(f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{x1 - x0:.1f}" height="{y1 - y0:.1f}" class="m-shadow"/>')
+    m.circle(0, 0, 9, "m-rock", 2.5)
+    m.text(0, 0, "Anchor (18 km)", "m-t", "start", 7, 17)
+    m.arrow((330, 0), (412, 0))
+    m.text(412, 0, "to Site 1 · 143,600 km", "m-t m-muted", "end", 0, -32)
+    m.text(412, 0, "to Breakwater · 108,000 km", "m-t m-muted", "end", 0, -20)
+    m.arrow(pol(260, SUN), pol(360, SUN))
+    m.text(*pol(360, SUN), "sun", "m-t m-muted", "end", -4, -4)
+    m.mark(14, 8, "m-comp", "x", 3)
+    m.text(14, 8, "mine, T+5:10", "m-t m-compt", "start", 6, 4)
+    en = (-30, 0)
+    for p, lab, shape, anchor, dx, dy in ((en, "Endeavor", "sq", "end", -4, -9), ((-80, 5), "", "dot", "", 0, 0),
+                                          ((-150, -4), "", "dot", "", 0, 0), ((-180, 4), "the pack", "dot", "middle", 0, -9),
+                                          ((-210, -3), "", "dot", "", 0, 0), ((-290, 0), "Astrid", "sq", "middle", 0, -9)):
+        m.mark(*p, "m-lreff", shape, 2.6 if shape == "sq" else 2.2)
         if lab:
-            m.text(x, 0, lab, "m-t", "middle", 0, -10 if lab != "Endeavor" else 16)
-    plat = (400, 693)
+            m.text(*p, lab, "m-t", anchor, dx, dy)
+    m.mark(-150, 190, "m-lreff", "dot", 2.2)
+    m.text(-150, 190, "Donnager, shelling outward", "m-t", "middle", 0, -8)
+    for p in ((-60, 70), (60, -60), (-250, -150)):
+        m.mark(*p, "m-lreff", "dot", 1.6)
+    m.text(-250, -150, "corvettes and drones sweep", "m-t m-muted", "middle", 0, 14)
+    moon, frig = (-70, -26), (-66, -30)
+    m.circle(*moon, 3, "m-rockdot", 2.6)
+    m.mark(*frig, "m-comp", "dia", 2.6)
+    m.line([en, frig], "m-lance")
+    for i, line in enumerate(("Compact frigate", "behind a moonlet, 45 km", "lanced at 40 km, T+5:13:55")):
+        m.text(*frig, line, "m-t m-compt", "end", -8, 4 + 12 * i)
+    plat = pol(400, -45, en)
     m.mark(*plat, "m-comp", "x", 4)
-    m.text(*plat, "railgun platform on a rock, 800 km", "m-t m-compt", "middle", 0, -10)
-    m.line([plat, (8, 6)], "m-kin")
-    m.text(210, 360, "T+5:21 salvo: 32 s flight", "m-t m-compt", "start", 6)
-    m.line([(8, 4), (396, 688)], "m-lref", 'stroke-dasharray="1 3"')
-    m.text(150, 290, "T+5:22 broadside", "m-t m-lreft", "end", -6)
-    frig_rock, frig = (20, -56), (14, -38)
-    m.mark(*frig_rock, "m-rockdot", "dot", 2.2)
-    m.mark(*frig, "m-comp", "dia", 2.8)
-    m.text(*frig, "Compact frigate: 60 km off, lanced at 40 km", "m-t m-compt", "start", 8, 30)
-    m.scalebar(200, "200 km")
+    m.text(*plat, "railgun platform, 400 km", "m-t m-compt", "middle", 0, 18)
+    m.text(*plat, "off the port quarter", "m-t m-compt", "middle", 0, 30)
+    m.line([plat, en], "m-kin")
+    m.text(185, -170, "T+5:13 salvo · 16 s", "m-t m-compt", "start", 10)
+    m.line([(en[0] + 6, en[1] + 4), (plat[0] + 4, plat[1] + 6)], "m-lref", 'stroke-dasharray="1 3"')
+    m.text(150, -185, "T+5:14 broadside", "m-t m-lreft", "end", -10)
+    m.scalebar(100, "100 km")
     return m.svg(D.MAPS["C"])
 
 
 def map_d():
-    m = Map(-20_000, 160_000, -70_000, 70_000, 1_000 / 3)
-    x_h, _ = m.P(6_400, 0)
-    m.add(f'<rect x="{x_h:.1f}" y="{m.pad}" width="{m.w - x_h - m.pad:.1f}" height="{m.h - 2 * m.pad:.1f}" class="m-sky"/>')
-    m.text(158_000, 66_000, "Site 1's sky (above its horizon)", "m-t m-compt", "end")
+    m = Map(-160_000, 50_000, -52_000, 46_000, 1_000 / 3)
+    t52 = hours("T+7:52:00")
+    m.halfplane(site1_at(t52), th_bw(t52), "m-sky")
+    m.text(*pol(33_000, th_bw(t52) + 90), "Site 1's sky at T+7:52", "m-t m-compt", "middle")
     m.circle(0, 0, 42_164, "m-orbit")
-    for k in range(12):
-        a = math.radians(30 * k)
-        if k:
-            m.mark(42_164 * math.cos(a), 42_164 * math.sin(a), "m-comp", "dot", 1.8)
+    for k in range(1, 12):
+        m.mark(*pol(42_164, th_bw(t52) + 30 * k), "m-comp", "dot", 1.6)
+    m.text(48_000, 44_000, "inner ring: 11 stations", "m-t m-muted", "end")
     m.circle(0, 0, 6_400, "m-planet")
-    m.mark(6_400, 0, "m-comp", "tri", 3)
-    m.text(0, -8_000, "Maren · Site 1", "m-t", "middle", 0, 12)
-    m.mark(42_164, 0, "m-comp", "dia", 4)
-    m.text(42_164, 0, "Breakwater", "m-t m-compt", "middle", 0, 18)
-    m.text(-19_000, 52_000, "inner ring: 12 emplacements", "m-t m-muted")
-    lee_509, lee_545 = (150_000, 0), (148_600, -20_100)
-    m.mark(*lee_509, "m-rock", "dot", 3)
-    m.mark(*lee_545, "m-rock", "dot", 3)
-    m.text(*lee_509, "the Lee at T+5:09", "m-t", "end", -6, -8)
-    m.text(*lee_545, "the Lee at T+5:45", "m-t", "end", -6, 14)
-    stand = (54_000, 0)
-    m.line([lee_545, stand], "m-lref")
-    m.curve(lee_509, (100_000, 4_000), (42_900, 400), "m-missile")
-    m.text(105_000, 13_000, "wave two · T+5:42 → T+6:01", "m-t m-lreft", "middle")
-    net = (93_000, -7_600)
-    rnd = random.Random(3)
-    for _ in range(40):
-        m.mark(net[0] + rnd.gauss(0, 1_500), net[1] + rnd.gauss(0, 1_500), "m-kindot", "dot", 0.8)
-    m.text(*net, "Skerry's net · T+6:40 (fleet steps aside)", "m-t m-compt", "middle", 0, 22)
-    to2 = path_point(lee_545, stand, math.dist(lee_545, stand) - 20_400)
-    m.mark(*to2, "m-lreff", "dot", 2.4)
-    m.text(*to2, "T+7:05 turnover", "m-t", "middle", 0, -9)
-    ast = (42_164 + 14_700, 0)
-    m.mark(*ast, "m-lreff", "sq", 3)
-    m.line([ast, (42_600, 0)], "m-spinal")
-    m.text(*ast, "Astrid fires from 14,700 km · T+7:26", "m-t m-lreft", "middle", 0, 32)
-    m.text(-19_000, -62_000, "Maren-fixed frame: Site 1 and Breakwater stay put; the Lee drifts 12.8°/h.", "m-t m-muted")
+    m.mark(*site1_at(t52), "m-comp", "tri", 3)
+    m.text(0, 0, "Maren", "m-t", "middle", 0, 34)
+    b43, b52 = bw_at(T_DEP), bw_at(t52)
+    m.mark(*b43, "m-comp", "dia", 3)
+    m.text(*b43, "Breakwater, T+5:43", "m-t m-compt", "end", -6, -6)
+    m.mark(*b52, "m-comp", "dia", 3.6)
+    m.text(*b52, "Breakwater, T+7:52", "m-t m-compt", "start", 7, 14)
+    for f in (pol(10_500, 6), pol(11_500, 16)):
+        m.mark(*f, "m-comp", "dia", 2.2)
+    m.text(*pol(11_000, 11), "2 Compact frigates", "m-t m-compt", "start", 9, 0)
+    m.text(*pol(11_000, 11), "behind the limb", "m-t m-compt", "start", 9, 12)
+    m.mark(*A_DEP, "m-rock", "dot", 3.5)
+    m.text(*A_DEP, "Anchor: the pack stays", "m-t m-lreft", "start", 2, -9)
+    a27 = anchor_at(hours("T+7:27:00"))
+    m.line([a27, b52], "m-missile")
+    m.text_along(a27, b52, "spend and kill waves · T+7:27 → 7:53", "m-t m-lreft", 0.03, 13)
+    m.line([A_DEP, STOP], "m-lref")
+    ev = [("T+6:40:00", "T+6:40 Skerry's net", "start", 4, -9), ("T+6:55:00", "T+6:55 Site 1 fires", "start", 4, -31),
+          (fmt_clock(T_TURN * 3600), f"{fmt_clock(T_TURN * 3600)[:-3]} turnover", "middle", 0, -9)]
+    for clock, lab, anchor, dx, dy in ev:
+        p = final_at(hours(clock))
+        m.mark(*p, "m-lreff", "dot", 2.4)
+        m.text(*p, lab, "m-t", anchor, dx, dy)
+    m.mark(*STOP, "m-lreff", "sq", 3)
+    m.text(*STOP, f"stop, {fmt_clock(T_STOP * 3600)[:-3]}", "m-t m-lreft", "end", -7, 16)
+    m.text(-157_000, -47_000, "Inertial frame: Maren turns 15°/h under Breakwater, Anchor drifts 2.2°/h. Map E has the detail.",
+           "m-t m-muted")
     m.scalebar(20_000, "20,000 km")
     return m.svg(D.MAPS["D"])
 
 
-MAP_SVGS = {"A": map_a, "B": map_b, "C": map_c, "D": map_d}
+def map_e():
+    t_kill = hours("T+7:53:30")
+    b = bw_at(t_kill)
+    z = th_bw(t_kill)
+    m = Map(b[0] - 27_000, b[0] + 19_000, b[1] - 15_000, b[1] + 17_000, 80)
+    nad = z + 180
+    m.poly([b, pol(80_000, nad - MAREN_HALF, b), pol(80_000, nad + MAREN_HALF, b)], "m-wedge")
+    m.text(*pol(12_000, nad + MAREN_HALF + 4, b), "towards Maren", "m-t m-muted", "end", -6, 0)
+    m.text(*pol(12_000, nad + MAREN_HALF + 4, b), f"(its disc ±{MAREN_HALF:.1f}°)", "m-t m-muted", "end", -6, 12)
+    m.circle(0, 0, 42_164, "m-orbit")
+    m.line([b, pol(16_000, z, b)], "m-zenith")
+    m.text(*pol(15_500, z, b), "Breakwater's zenith", "m-t m-compt", "start", 6, 4)
+    b25 = bw_at(hours("T+7:25:00"))
+    m.mark(*b25, "m-comp", "dia", 2.6)
+    m.text(*b25, "Breakwater, T+7:25", "m-t m-compt", "start", 7, 4)
+    path = [final_at(hours(f"T+7:{mm:02d}:00")) for mm in range(10, 52)] + [STOP]
+    m.line(path, "m-lref")
+    f25, f31 = final_at(hours("T+7:25:00")), final_at(hours("T+7:31:00"))
+    m.line([b25, f31], "m-kin")
+    m.text(-3_000 + (b25[0] + f31[0]) / 2, 2_600 + (b25[1] + f31[1]) / 2, "64 missiles at the Extenuating", "m-t m-compt", "middle")
+    for p, lab, dy in ((f25, "fleet, T+7:25", -9), (f31, "umbrella, T+7:31", 17)):
+        m.mark(*p, "m-lreff", "dot", 2.4)
+        m.text(*p, lab, "m-t", "middle", 0, dy)
+    m.mark(*STOP, "m-lreff", "sq", 3)
+    m.text(*STOP, f"escorts stop, {ESCORTS[0]:,} km", "m-t m-lreft", "end", -8, 14)
+    ast = off_zenith(hours("T+7:54:40"), *ASTRID)
+    hit = bw_at(hours("T+7:57:44"))
+    shot_dir = bearing(ast, hit)
+    m.mark(*ast, "m-lreff", "sq", 3.6)
+    m.text(*ast, f"Astrid, stopped {ASTRID[0]:,} km out", "m-t m-lreft", "end", -7, 14)
+    m.line([ast, hit], "m-spinal")
+    m.line([pol(8_000, shot_dir, hit), pol(60_000, shot_dir, hit)], "m-ghost")
+    m.text(*pol(18_000, shot_dir, hit), f"a spinal miss passes {line_miss(ast, hit) - 6_400:,.0f} km above Maren",
+           "m-t m-muted", "end", 0, 14)
+    a27 = anchor_at(hours("T+7:27:00"))
+    come = bearing(b, a27)
+    m.line([pol(40_000, come, b), b], "m-missile")
+    m.line([pol(8_000, come + 180, b), pol(60_000, come + 180, b)], "m-ghost")
+    m.text(*pol(26_000, come, b), f"waves from Anchor, {angdiff(come, z):.0f}° off the zenith", "m-t m-lreft", "start", 0, -8)
+    m.text(b[0] + 18_700, pol(18_000, come + 180, b)[1], f"misses pass {line_miss(a27, bw_at(hours('T+7:52:00'))):,.0f} km from Maren",
+           "m-t m-muted", "end", 0, 16)
+    m.mark(*b, "m-comp", "dia", 4.2)
+    m.text(*b, "Breakwater", "m-t m-compt", "middle", 0, -12)
+    m.text(b[0] + 18_500, b[1] - 13_500, "At Breakwater: spend wave T+7:52:00; kill wave and Casaba jets",
+           "m-t m-muted", "end", 0, -12)
+    m.text(b[0] + 18_500, b[1] - 13_500, "T+7:53:30; spinal fired T+7:54:40, impact T+7:57:44.", "m-t m-muted", "end")
+    m.scalebar(5_000, "5,000 km")
+    return m.svg(D.MAPS["E"])
+
+
+MAP_SVGS = {"A": map_a, "B": map_b, "C": map_c, "D": map_d, "E": map_e}
 
 
 # ----------------------------------------------------------------- timeline
 def timeline_svg():
     W, x0, x1 = 1000, 40, 960
-    hours = 9.5
+    hrs = math.ceil(hours(D.SHOTS[-1]["clock"]) + 0.25)
     fx = lambda s: x0 + (x1 - x0) * s / RUNTIME
-    mx = lambda h: x0 + (x1 - x0) * h / hours
+    mx = lambda h: x0 + (x1 - x0) * h / hrs
     out = [f'<svg viewBox="0 0 {W} 250" role="img" aria-label="Film time against mission time">']
     act_span = {}
     for s in D.SHOTS:
@@ -322,14 +662,14 @@ def timeline_svg():
         a, b = act_span[num]
         out.append(f'<rect x="{fx(a):.1f}" y="18" width="{fx(b) - fx(a):.1f}" height="22" class="tl-act tl-act{i}"/>')
         out.append(f'<text x="{fx(a) + 6:.1f}" y="33" class="tl-actt">{num} · {E(name.upper())}</text>')
+    acts = [a[0] for a in D.ACTS]
     for s in D.SHOTS:
-        h = clock_hours(s["clock"])
-        out.append(f'<line x1="{fx(s["t0"]):.1f}" y1="42" x2="{mx(h):.1f}" y2="196" class="tl-link tl-l{"I II III IV".split().index(s["act"])}"/>')
+        out.append(f'<line x1="{fx(s["t0"]):.1f}" y1="42" x2="{mx(hours(s["clock"])):.1f}" y2="196" class="tl-link tl-l{acts.index(s["act"])}"/>')
         out.append(f'<line x1="{fx(s["t0"]):.1f}" y1="40" x2="{fx(s["t0"]):.1f}" y2="46" class="tl-tick"/>')
     for sec in range(0, RUNTIME + 1, 15):
         out.append(f'<text x="{fx(sec):.1f}" y="12" class="tl-t" text-anchor="middle">{sec // 60}:{sec % 60:02d}</text>')
     out.append(f'<line x1="{x0}" y1="198" x2="{x1}" y2="198" class="tl-axis"/>')
-    for hr in range(0, 10):
+    for hr in range(0, hrs + 1):
         out.append(f'<line x1="{mx(hr):.1f}" y1="196" x2="{mx(hr):.1f}" y2="202" class="tl-axis"/>')
         out.append(f'<text x="{mx(hr):.1f}" y="216" class="tl-t" text-anchor="middle">T+{hr}h</text>')
     out.append(f'<text x="{x0}" y="240" class="tl-t tl-muted">Top: film time (min:s). Bottom: real mission time. Each line is one shot; '
@@ -379,12 +719,18 @@ h3{font:600 1.25rem/1.2 var(--f-display); margin:0 0 .5rem;}
 dl.kv{display:grid; grid-template-columns:minmax(8rem,34%) minmax(0,1fr); gap:.45rem .9rem; margin:.4rem 0 0; font-size:.88rem;}
 dl.kv dt{font:500 .78rem var(--f-mono); color:var(--muted);}
 dl.kv dd{margin:0;}
+ul.rules{margin:.3rem 0 0; padding-left:1.1rem; font-size:.88rem;}
+ul.rules li{margin:.3rem 0;}
 .tbl{overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:var(--panel); margin:1rem 0;}
+.card .tbl{margin:.6rem 0 0;}
 table{border-collapse:collapse; width:100%; font-size:.86rem; font-variant-numeric:tabular-nums;}
 th{font:600 .74rem var(--f-display); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-align:left; padding:.55rem .7rem; border-bottom:1px solid var(--line);}
 td{padding:.5rem .7rem; border-top:1px solid var(--line); vertical-align:top;}
 tr:first-child td{border-top:0;}
 td.mono, .mono{font-family:var(--f-mono); font-size:.8rem;}
+td.mono{white-space:nowrap;}
+.span2{grid-column:1/-1;}
+#reviews h3{margin-top:1.4rem;}
 .figure{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:.8rem; margin:0; min-width:0;}
 .figure svg{display:block; width:100%; height:auto;}
 .figure figcaption{font-size:.8rem; color:var(--muted); margin-top:.5rem;}
@@ -392,7 +738,10 @@ td.mono, .mono{font-family:var(--f-mono); font-size:.8rem;}
 .maps{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem;}
 .legend{display:flex; flex-wrap:wrap; gap:.3rem 1.2rem; font:400 .78rem var(--f-mono); color:var(--muted); margin:0 0 .8rem;}
 .legend i{display:inline-block; width:22px; height:0; vertical-align:middle; margin-right:.4rem; border-top:2px solid;}
+.legend .sw{display:inline-block; width:14px; height:10px; vertical-align:middle; margin-right:.4rem;}
 .lg-lref{border-color:var(--lref);} .lg-comp{border-color:var(--comp);} .lg-mis{border-top-style:dotted!important; border-color:var(--lref);} .lg-kin{border-top-style:dashed!important; border-color:var(--comp);}
+.lg-spinal{border-top-style:dashed!important; border-color:var(--lref); border-top-width:1px!important;}
+.lg-sky{background:color-mix(in srgb, var(--comp) 22%, transparent);} .lg-shadow{background:color-mix(in srgb, var(--lref) 30%, transparent);}
 /* map drawing */
 .m-bg{fill:var(--panel2);}
 .m-t{font:400 9.5px var(--f-mono); fill:var(--ink);}
@@ -408,12 +757,17 @@ td.mono, .mono{font-family:var(--f-mono); font-size:.8rem;}
 .m-comp{fill:var(--comp); stroke:var(--comp); stroke-width:1.2;}
 .m-missile{fill:none; stroke:var(--lref); stroke-width:1.1; stroke-dasharray:1 3; stroke-linecap:round;}
 .m-kin{fill:none; stroke:var(--comp); stroke-width:1.1; stroke-dasharray:5 3;}
+.m-thin{stroke-width:.7; stroke-dasharray:2 3;}
 .m-kindot{fill:var(--comp); fill-opacity:.8;}
 .m-spinal{fill:none; stroke:var(--lref); stroke-width:1.2; stroke-dasharray:6 2 1 2;}
+.m-lance{fill:none; stroke:var(--lref); stroke-width:2.2; stroke-linecap:round;}
+.m-ghost{fill:none; stroke:var(--muted); stroke-width:.8; stroke-dasharray:2 3;}
+.m-zenith{fill:none; stroke:var(--comp); stroke-width:.8; stroke-dasharray:4 3; stroke-opacity:.8;}
 .m-arrow{fill:none; stroke:var(--muted); stroke-width:1;}
 .m-arrowhead{fill:var(--muted);}
 .m-shadow{fill:var(--lref); fill-opacity:.25;}
-.m-sky{fill:var(--comp); fill-opacity:.06;}
+.m-sky{fill:var(--comp); fill-opacity:.08;}
+.m-wedge{fill:var(--clock); fill-opacity:.14;}
 .m-scale{fill:none; stroke:var(--ink); stroke-width:1;}
 /* timeline */
 .tl-act{fill-opacity:.9;} .tl-act0{fill:var(--lref); fill-opacity:.35;} .tl-act1{fill:var(--clock); fill-opacity:.3;} .tl-act2{fill:var(--heat); fill-opacity:.3;} .tl-act3{fill:var(--comp); fill-opacity:.3;}
@@ -451,11 +805,17 @@ a.chip.r-maren{border-color:color-mix(in srgb, var(--comp) 55%, transparent); co
 .chip.new{border-style:dashed;} .chip.concept{border-color:var(--heat); color:var(--heat); border-style:dashed;}
 code{font:400 .76rem var(--f-mono); background:var(--panel2); padding:.05rem .3rem; border-radius:3px; margin:0 .2rem .2rem 0; display:inline-block;}
 a{color:var(--lref);}
+td.lens{font:600 .8rem var(--f-display); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); white-space:nowrap;}
 footer{border-top:1px solid var(--line); margin-top:3rem; padding-block:1.4rem 2.6rem; color:var(--muted); font-size:.82rem;}
 a:focus-visible{outline:2px solid var(--lref); outline-offset:2px;}
 @media (max-width: 900px){ .grid2, .maps, .shots{grid-template-columns:minmax(0,1fr);} }
 @media (max-width: 520px){ .rows{grid-template-columns:minmax(0,1fr);} .rows dt{margin-top:.2rem;} dl.kv{grid-template-columns:minmax(0,1fr);} }
 """
+
+
+def rich(text):
+    """Escape text and turn `code` spans into <code>."""
+    return re.sub(r"`([^`]+)`", r"<code>\1</code>", E(text))
 
 
 def rule_chips(rules):
@@ -488,7 +848,7 @@ def shot_card(s):
     return f"""<article class="shot" id="shot-{s['n']}">
 <div class="media">{media}<span class="badge n">{s['n']}</span><span class="badge t">{mmss(s['t0'])}–{mmss(s['t1'])} · {s['dur']} s</span></div>
 <div class="body"><h4>{E(s['title'])}</h4>
-<div class="meta"><span>{E(s['cam'])}</span><span>frames {s['f0']}–{s['f1']}</span></div>
+<div class="meta"><span>{E(s['cam'])}</span><span>{BODY_LABEL[s['body']]}</span><span>frames {s['f0']}–{s['f1']}</span></div>
 <div class="meta"><span class="clock">{E(s['clock'])}</span><span>{E(s['real'])}</span><span>map {s['map']}</span><span>render class {s['cost']}</span></div>
 <p class="action">{E(s['action'])}</p>{comm}
 <dl class="rows"><dt>Doctrine</dt><dd>{rule_chips(s['rules'])}</dd><dt>VFX</dt><dd>{E(s['vfx'])}</dd>
@@ -503,8 +863,12 @@ def render_budget():
         fr = sum(s["dur"] for s in shots) * FPS
         hrs = fr * SEC_PER_FRAME[c] / 3600
         total += hrs
-        rows.append((c, name, note, len(shots), fr, hrs))
+        rows.append((c, name, note, [s["n"] for s in shots], fr, hrs))
     return rows, total
+
+
+def sets_text():
+    return f"{len(SETS)} set-ups cover the film: " + "; ".join(f"{name} ({ranges(nums)})" for name, nums in SETS) + "."
 
 
 def build_html():
@@ -518,14 +882,25 @@ def build_html():
     defs = "".join(f"<dt>{E(n)}</dt><dd><b>{E(c)}.</b> {E(r)}</dd>" for n, c, r in D.DEFENDERS)
     phases = "".join(f'<tr><td class="mono">{a}–{b}</td><td>{E(n)}</td><td>{E(d)}</td></tr>' for a, b, n, d in D.PHASES)
     keyn = "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td><td class=\"mono\">{E(c)}</td></tr>" for a, b, c in D.KEY_NUMBERS)
+    lis = lambda items: "<ul class=\"rules\">" + "".join(f"<li>{E(x)}</li>" for x in items) + "</ul>"
+    cap = lambda x: x[:1].upper() + x[1:]
+    bodies = "".join(f"<dt>{E(BODY_LABEL[k])}</dt><dd>{E(cap(v.split(': ', 1)[1]))}</dd>" for k, v in D.CAMERA_BODIES.items())
     maps = "".join(f'<figure class="figure" id="map-{k}">{MAP_SVGS[k]()}<figcaption><b>Map {k}.</b> {E(v)}. To scale, except the ship and site symbols.</figcaption></figure>'
                    for k, v in D.MAPS.items())
     budget, total = render_budget()
-    brow = "".join(f'<tr><td class="mono">{c}</td><td>{E(n)}</td><td>{E(note)}</td><td class="mono">{k}</td><td class="mono">{fr:,}</td><td class="mono">{h:,.0f} h</td></tr>'
-                   for c, n, note, k, fr, h in budget)
+    brow = "".join(f'<tr><td class="mono">{c}</td><td>{E(n)}</td><td>{E(note)}</td><td class="mono">{len(ns)}</td><td class="mono">{fr:,}</td><td class="mono">{h:,.0f} h</td></tr>'
+                   for c, n, note, ns, fr, h in budget)
+    closest = "".join(f'<tr><td class="mono">{a}</td><td>{E(D.ASSETS[a][0])}</td><td class="mono"><a href="#shot-{n}">{n}</a></td><td>{E(what)}</td><td>{E(size)}</td></tr>'
+                      for a, (n, what, size) in CLOSEST.items())
+    plan = "".join(f"<dt>{E(k)}</dt><dd>{rich(v)}</dd>" for k, v in [("Sets", sets_text())] + list(D.PRODUCTION_PLAN))
     new_assets = [a for a, v in D.ASSETS.items() if v[1] != "built"]
     concept = [a for a, v in D.ASSETS.items() if v[2]]
-    sk = ",\n".join(f"{s['n']}: function () {{ return {s['sketch']}; }}" for s in D.SHOTS if s["sketch"])
+    reviews = "".join(
+        f'<h3>{E(rnd)} · on {E(on.lower())}</h3><div class="tbl"><table><thead><tr><th>Lens</th><th>Major issue</th><th>How it was answered</th></tr></thead><tbody>'
+        + "".join(f'<tr><td class="lens">{E(lens)}</td><td>{E(issue)}</td><td>{E(fix)}</td></tr>' for lens, issue, fix in rows)
+        + "</tbody></table></div>" for rnd, on, rows in D.REVIEWS)
+    sk = ",\n".join(f"{s['n']}: function () {{ SHIELDS = {'true' if s['shields'] else 'false'}; return {s['sketch']}; }}"
+                    for s in D.SHOTS if s["sketch"])
     lib = (SB / "sketchlib.js").read_text()
     head = f"""<title>Operation Tidebreak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -536,11 +911,11 @@ def build_html():
     body = f"""<header class="top wrap">
 <div class="eyebrow">WPAtaMS fan animation · pre-production board · {E(D.REVISION)}</div>
 <h1>Operation Tidebreak</h1>
-<p class="lead">An LREF task group led by L.R.E.F.S. Astrid and L.R.E.F.S. Endeavor breaks the orbital defence of Maren, a world held by the Maren Compact. Nine real hours, told in {RUNTIME // 60}:{RUNTIME % 60:02d} of film, every time jump marked with the mission clock. Built on the approved doctrines.</p>
-<ul class="facts"><li>Runtime <b>{RUNTIME // 60}:{RUNTIME % 60:02d}</b></li><li>Frames <b>{FRAMES:,}</b> @ 24 fps</li><li>Shots <b>{len(D.SHOTS)}</b></li><li>Mission <b>T+0:00 → T+9:10</b></li><li>Format <b>{E(D.FORMAT)}</b></li></ul>
+<p class="lead">An LREF task group led by L.R.E.F.S. Astrid and L.R.E.F.S. Endeavor breaks the orbital defence of Maren, a world held by the Maren Compact. The mission runs from T+0:00 to {MISSION_END} of real time; the film tells it in {RUNTIME // 60}:{RUNTIME % 60:02d}, with the mission clock marking every jump. Built on the approved doctrines.</p>
+<ul class="facts"><li>Runtime <b>{RUNTIME // 60}:{RUNTIME % 60:02d}</b></li><li>Frames <b>{FRAMES:,}</b> @ 24 fps</li><li>Shots <b>{len(D.SHOTS)}</b></li><li>Mission <b>T+0:00 → {MISSION_END}</b></li><li>Format <b>{E(D.FORMAT)}</b></li></ul>
 <p class="note">Sketches are layout drawings; frames marked <em>render</em> are current Blender renders of the Endeavor used as look reference. Doctrine chips open the rule in the doctrine reading edition. Comm lines are GUN side only, as subtitles for now.</p>
 </header>
-<nav class="toc" aria-label="Sections"><div class="wrap"><a href="#overview">Overview</a><a href="#timeline">Timeline</a><a href="#maps">Maps</a><a href="#shots">Shots</a><a href="#production">Production</a><a href="#reviews">Reviews</a><a href="{DOC_BASE}" target="_blank" rel="noopener">Doctrine ↗</a></div></nav>
+<nav class="toc" aria-label="Sections"><div class="wrap"><a href="#overview">Overview</a><a href="#film">Film rules</a><a href="#timeline">Timeline</a><a href="#maps">Maps</a><a href="#shots">Shots</a><a href="#production">Production</a><a href="#reviews">Reviews</a><a href="{DOC_BASE}" target="_blank" rel="noopener">Doctrine ↗</a></div></nav>
 <main class="wrap">
 <section id="overview"><h2>Forces and plan</h2>
 <div class="grid2"><div class="card side-lref"><h3>LREF task group</h3><dl class="kv">{fleet}</dl></div>
@@ -548,19 +923,29 @@ def build_html():
 <div class="tbl"><table><thead><tr><th>Mission time</th><th>Phase</th><th>What happens</th></tr></thead><tbody>{phases}</tbody></table></div>
 <div class="tbl"><table><thead><tr><th>Key number</th><th>Value</th><th>Source</th></tr></thead><tbody>{keyn}</tbody></table></div>
 </section>
+<section id="film"><h2>Film rules</h2>
+<div class="grid2"><div class="card"><h3>Lighting</h3>{lis(D.LIGHTING)}</div>
+<div class="card"><h3>Mission clock and HUD</h3>{lis(D.CLOCK_HUD)}</div>
+<div class="card"><h3>Screen direction</h3>{lis(D.SCREEN_DIRECTION)}</div>
+<div class="card"><h3>Camera bodies and sound</h3><dl class="kv">{bodies}</dl></div></div>
+</section>
 <section id="timeline"><h2>Film time and mission time</h2><figure class="figure"><div class="scrollx">{timeline_svg()}</div></figure></section>
 <section id="maps"><h2>Tactical maps</h2>
-<div class="legend"><span><i class="lg-lref"></i>LREF</span><span><i class="lg-comp"></i>Maren Compact</span><span><i class="lg-mis"></i>missile track</span><span><i class="lg-kin"></i>kinetic rounds</span></div>
+<div class="legend"><span><i class="lg-lref"></i>LREF</span><span><i class="lg-comp"></i>Maren Compact</span><span><i class="lg-mis"></i>missile track</span><span><i class="lg-kin"></i>kinetic rounds</span><span><i class="lg-spinal"></i>spinal shot</span><span><span class="sw lg-sky"></span>Site 1's sky</span><span><span class="sw lg-shadow"></span>Anchor's shadow</span></div>
 <div class="maps">{maps}</div></section>
 <section id="shots"><h2>Shot list</h2>{"".join(acts_html)}</section>
 <section id="production"><h2>Production</h2>
-<div class="grid2"><div class="card"><h3>Render budget</h3><p class="action">Estimated with the measured Cycles costs from the project context. The user's ceiling is a week (168 h) per full pass.</p>
+<div class="grid2"><div class="card"><h3>Render budget</h3><p class="action">{E(D.RENDER_NOTE)} The ceiling is a week (168 h) per full pass.</p>
 <div class="tbl"><table><thead><tr><th>Class</th><th>Kind</th><th>Cost</th><th>Shots</th><th>Frames</th><th>Time</th></tr></thead><tbody>{brow}
-<tr><td></td><td><b>Total</b></td><td></td><td class="mono">{len(D.SHOTS)}</td><td class="mono">{FRAMES:,}</td><td class="mono"><b>{total:,.0f} h</b></td></tr></tbody></table></div></div>
-<div class="card"><h3>Assets</h3><p class="action">{len(new_assets)} of {len(D.ASSETS)} assets are new or need additions; {len(concept)} of them go through concept sheets first (per the user's rule for new designs): {", ".join(concept)}. The full list, with the shots that need each one, is in <code>ASSET_REQUESTS.md</code>.</p>
-<p class="action">Legend: <span class="chip">built</span><span class="chip new">new or extended</span><span class="chip concept">concept first</span></p></div></div>
+<tr><td></td><td><b>Total</b></td><td></td><td class="mono">{len(D.SHOTS)}</td><td class="mono">{FRAMES:,}</td><td class="mono"><b>{total:,.0f} h</b></td></tr>
+<tr><td></td><td>With {MARGIN:.0%} for re-renders</td><td></td><td></td><td></td><td class="mono"><b>{total * (1 + MARGIN):,.0f} h</b></td></tr></tbody></table></div></div>
+<div class="card"><h3>Plan</h3><dl class="kv">{plan}</dl></div>
+<div class="card span2"><h3>Assets</h3><p class="action">{len(new_assets)} of {len(D.ASSETS)} assets are new or need additions; {len(concept)} of them go through concept sheets first (per the user's rule for new designs): {", ".join(concept)}. The full list, with the shots that need each one, is in <code>ASSET_REQUESTS.md</code>.</p>
+<p class="action">Legend: <span class="chip">built</span><span class="chip new">new or extended</span><span class="chip concept">concept first</span></p></div>
+<div class="card span2"><h3>Closest view of each main asset</h3><p class="action">Detail is built for the closest view; anything smaller than a few dozen pixels can be a proxy (Q13).</p>
+<div class="tbl"><table><thead><tr><th>ID</th><th>Asset</th><th>Shot</th><th>View</th><th>On screen</th></tr></thead><tbody>{closest}</tbody></table></div></div></div>
 </section>
-<section id="reviews"><h2>Reviews</h2><p class="action">Round 1 is under way: physics, military doctrine, lore, cinematography and production feasibility, each by its own reviewer. Reports and the synthesis go to <code>review/</code>.</p></section>
+<section id="reviews"><h2>Reviews</h2><p class="action">Five reviewers read each revision: physics, military doctrine, lore, cinematography and production. Every major issue is answered in the next revision; the reports and syntheses are in <code>review/</code>. {E(D.REVIEW_STATUS)}</p>{reviews}</section>
 </main>
 <footer class="wrap">Generated by <code>storyboard/build_storyboard.py</code> from <code>storyboard/tidebreak_data.py</code>. Names are the user's; ship classes and weapon families follow JCB's lore posts.</footer>
 <svg width="0" height="0" style="position:absolute"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10z" class="m-arrowhead"/></marker></defs></svg>
@@ -586,11 +971,11 @@ def write_csv():
     with open(SB / "shots.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["shot", "act", "title", "film_start_s", "film_end_s", "frame_start", "frame_end", "duration_s",
-                    "mission_clock", "time_treatment", "camera", "action", "comms", "doctrine", "vfx", "rig",
-                    "assets", "sound", "render_class", "map", "reference_frame"])
+                    "mission_clock", "time_treatment", "camera", "camera_body", "action", "comms", "doctrine", "vfx",
+                    "rig", "assets", "sound", "render_class", "map", "reference_frame"])
         for s in D.SHOTS:
             w.writerow([s["n"], s["act"], s["title"], s["t0"], s["t1"], s["f0"], s["f1"], s["dur"], s["clock"],
-                        s["real"], s["cam"], s["action"], " | ".join(f"{a}: {b}" for a, b in s["comm"]),
+                        s["real"], s["cam"], s["body"], s["action"], " | ".join(f"{a}: {b}" for a, b in s["comm"]),
                         " ".join(s["rules"]), s["vfx"], "; ".join(s["rig"]), " ".join(s["assets"]), s["sound"],
                         s["cost"], s["map"], s["render"] or ""])
 
@@ -598,22 +983,26 @@ def write_csv():
 def write_md():
     L = [f"# {D.TITLE}: shot list", "",
          f"{D.REVISION}. Runtime {RUNTIME // 60}:{RUNTIME % 60:02d} ({FRAMES:,} frames at {FPS} fps), {len(D.SHOTS)} shots, "
-         f"mission span T+0:00 → T+9:10, {D.FORMAT}. Generated from `storyboard/tidebreak_data.py`; "
+         f"mission span T+0:00 → {MISSION_END}, {D.FORMAT}. Generated from `storyboard/tidebreak_data.py`; "
          "the page with maps and sketches is `storyboard/index.html`.", "",
          "Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_doctrine.md` (HO, HD, H). "
          "Asset IDs refer to `ASSET_REQUESTS.md`. Render classes: " +
          "; ".join(f"**{k}** {v[0]} ({v[1]})" for k, v in D.RENDER_CLASSES.items()) + ".", "",
          "## Mission phases", "", "| Mission time | Phase | What happens |", "|---|---|---|"]
     L += [f"| {a}–{b} | {n} | {d} |" for a, b, n, d in D.PHASES]
+    L += ["", "## Film rules", "", "**Lighting**", ""] + [f"- {x}" for x in D.LIGHTING]
+    L += ["", "**Mission clock and HUD**", ""] + [f"- {x}" for x in D.CLOCK_HUD]
+    L += ["", "**Screen direction**", ""] + [f"- {x}" for x in D.SCREEN_DIRECTION]
+    L += ["", "**Camera bodies**", ""] + [f"- {v}" for v in D.CAMERA_BODIES.values()]
     L += ["", "## Overview", "", "| # | Film | Frames | Mission clock | Time | Title | Camera | Doctrine |", "|---|---|---|---|---|---|---|---|"]
-    L += [f"| {s['n']} | {mmss(s['t0'])}–{mmss(s['t1'])} | {s['f0']}–{s['f1']} | {s['clock']} | {s['real']} | {s['title']} | {s['cam']} | {' '.join(s['rules'])} |" for s in D.SHOTS]
+    L += [f"| {s['n']} | {mmss(s['t0'])}–{mmss(s['t1'])} | {s['f0']}–{s['f1']} | {s['clock']} | {s['real']} | {s['title']} | {s['cam']} ({BODY_LABEL[s['body']]}) | {' '.join(s['rules'])} |" for s in D.SHOTS]
     for num, name, summary in D.ACTS:
         L += ["", f"## Act {num}: {name}", "", summary]
         for s in [x for x in D.SHOTS if x["act"] == num]:
             L += ["", f"### {s['n']}. {s['title']}", "",
                   f"- **Film:** {mmss(s['t0'])}–{mmss(s['t1'])} ({s['dur']} s), frames {s['f0']}–{s['f1']}",
                   f"- **Mission:** {s['clock']} · {s['real']}",
-                  f"- **Camera:** {s['cam']}",
+                  f"- **Camera:** {s['cam']} ({BODY_LABEL[s['body']]})",
                   f"- **Action:** {s['action']}"]
             if s["comm"]:
                 L.append("- **Comms:** " + " / ".join(f"{a}: “{b}”" for a, b in s["comm"]))
@@ -626,13 +1015,17 @@ def write_md():
     (SB / "shots.md").write_text("\n".join(L) + "\n")
 
 
+ASSET_GROUPS = [
+    ("LREF ships and craft", ["AST", "GI", "GI-MAV", "GI-GUN", "GI-PD", "DD", "DD-BRK", "CV", "CV-BRK", "TND", "SHD", "DRN-L", "MSL", "MSL-V"]),
+    ("Endeavor and M-1C", ["EN", "EN-FIN", "EN-PD", "EN-MAST", "EN-DMG", "M1C"]),
+    ("The Maren Compact", ["BW", "BW-BRK", "CF", "DRN-C", "EMP-POD", "EMP-RG", "RING", "SKR"]),
+    ("Environment", ["WORLD", "MAREN", "BRK", "ANCHOR"]),
+    ("Effects", [k for k in D.ASSETS if k.startswith("FX-")]),
+    ("2D compositing", ["HUD", "SUB"]),
+]
+
+
 def write_assets():
-    groups = [("LREF ships and craft", ["AST", "GI", "GI-MAV", "GI-GUN", "GI-PD", "DD", "DD-BRK", "CV", "CV-BRK", "TND", "SHD", "DRN-L", "MSL", "MSL-V"]),
-              ("Endeavor and M-1C", ["EN", "EN-FIN", "EN-MAST", "EN-DMG", "M1C"]),
-              ("The Maren Compact", ["BW", "BW-BRK", "CF", "DRN-C", "EMP-POD", "EMP-RG", "RING", "SKR"]),
-              ("Environment", ["MAREN", "BRK", "LEE"]),
-              ("Effects", [k for k in D.ASSETS if k.startswith("FX-")]),
-              ("2D compositing", ["HUD", "SUB"])]
     used = {a: [s["n"] for s in D.SHOTS if a in s["assets"]] for a in D.ASSETS}
     L = ["# Asset requests", "",
          f"Everything *{D.TITLE}* ({D.REVISION.lower()}) needs from the modelling session, with the shots that need each item. "
@@ -640,12 +1033,15 @@ def write_assets():
          "- **Status:** *built* exists; *extend* exists but needs additions; *new* must be made.",
          "- **Concept first:** per the user's rule, new weapon and ship designs go through concept sheets and the user picks before modelling. "
          "Items without reference art are flagged too.",
-         "- **Detail level:** the user asked for everything hero-detailed.", ""]
-    for g, ids in groups:
-        L += [f"## {g}", "", "| ID | Asset | Status | Concept first | Shots | Notes |", "|---|---|---|---|---|---|"]
+         "- **Detail level:** the user asked for everything hero-detailed. The closest view says how much of that detail the camera "
+         "can ever see; proxies for the smallest items are open question Q13.",
+         f"- **Set-ups:** {sets_text()}", ""]
+    for g, ids in ASSET_GROUPS:
+        L += [f"## {g}", "", "| ID | Asset | Status | Concept first | Closest view | Shots | Notes |", "|---|---|---|---|---|---|---|"]
         for a in ids:
             name, status, concept, note = D.ASSETS[a]
-            L.append(f"| {a} | {name} | {status} | {'yes' if concept else ''} | {', '.join(map(str, used[a])) or '—'} | {note} |")
+            near = f"shot {CLOSEST[a][0]}: {CLOSEST[a][1]}, {CLOSEST[a][2]}" if a in CLOSEST else ""
+            L.append(f"| {a} | {name} | {status} | {'yes' if concept else ''} | {near} | {ranges(used[a]) or '—'} | {note} |")
         L.append("")
     unused = [a for a, v in used.items() if not v]
     if unused:
@@ -655,6 +1051,7 @@ def write_assets():
 
 def main():
     prepare_images()
+    check()
     head, body = build_html()
     (SB / "index.html").write_text("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
                                    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
@@ -670,7 +1067,14 @@ def main():
     write_md()
     write_assets()
     budget, total = render_budget()
-    print(f"{len(D.SHOTS)} shots, {RUNTIME} s, {FRAMES} frames; render estimate {total:,.0f} h")
+    print(f"{len(D.SHOTS)} shots, {RUNTIME} s ({RUNTIME // 60}:{RUNTIME % 60:02d}), {FRAMES} frames; "
+          f"render estimate {total:,.0f} h, {total * (1 + MARGIN):,.0f} h with margin")
+    print(f"final approach {FINAL_KM:,.0f} km, turnover {fmt_clock(T_TURN * 3600)}, stop {fmt_clock(T_STOP * 3600)}")
+    for c, name, _, ns, fr, h in budget:
+        print(f"  class {c:2s} {len(ns):2d} shots {fr:5,d} frames {h:6.1f} h")
+    print("checks: " + ("all clear" if not NOTES else f"{len(NOTES)} to look at"))
+    for n in NOTES:
+        print("  - " + n)
 
 
 if __name__ == "__main__":

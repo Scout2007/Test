@@ -82,8 +82,11 @@ function rng(seed) { var s = seed * 9301 + 49297; return function () { s = (s * 
     },
     shield: function () { return '<ellipse cx="0" cy="0" rx="2" ry="14" fill="' + C.gold + '"/>'; }
   };
+  var SHIELDS = true; // added: the builder clears it for shots after the shields are parked
   function ship(kind, x, y, s, rot, flip) {
-    return '<g transform="translate(' + x + ',' + y + ') rotate(' + (rot || 0) + ') scale(' + (flip ? -s : s) + ',' + s + ')">' + SHIP[kind]() + '</g>';
+    var body = SHIP[kind]();
+    if (!SHIELDS && kind !== "shield") body = body.replace(/<(ellipse|path)[^>]*fill="#c9922f"[^>]*\/>/g, "");
+    return '<g transform="translate(' + x + ',' + y + ') rotate(' + (rot || 0) + ') scale(' + (flip ? -s : s) + ',' + s + ')">' + body + '</g>';
   }
   function glow(x, y, r, col, op) {
     var id = "g" + Math.random().toString(36).slice(2, 8);

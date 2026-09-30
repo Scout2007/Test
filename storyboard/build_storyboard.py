@@ -47,7 +47,7 @@ FPS = D.FPS
 ESTIMATE = {c: float(re.search(r"([\d.]+) s/frame", cost).group(1)) for c, (_, cost) in D.RENDER_CLASSES.items()}
 SEC_PER_FRAME = {**ESTIMATE, **{k: v for k, v in D.MEASURED.items() if k in ESTIMATE}}
 MAX_CPS = 12          # subtitle reading speed ceiling (round 1 cinematography review)
-MARGIN = 0.30         # re-render allowance on the render budget
+MARGIN = D.MARGIN     # re-render allowance on the render budget, kept beside GATE_HOURS in the data
 BODY_LABEL = {"hull": "hull camera", "drone": "drone camera", "tracker": "tracker", "hud": "HUD insert"}
 NOTES = []            # what the checks found; printed at the end
 
@@ -128,6 +128,7 @@ for n, s in enumerate(D.SHOTS, 1):
     s.setdefault("hud", [])
     s.setdefault("see", "")
     s.setdefault("group", None)
+    s.setdefault("hold", 0)       # seconds at the shot's end kept free of lines (a held silence, a plot on its own)
     # A comm line may carry a cue: the second in the shot where it starts, after its event.
     s["cues"] = [c[2] if len(c) > 2 else None for c in s["comm"]]
     s["comm"] = [(c[0], c[1]) for c in s["comm"]]
@@ -251,23 +252,27 @@ def reading_groups():
 
 def cue_windows(run):
     """(shot, characters to read, line, start s, window s) for every cued line in a run of shots, the characters
-    counting a first tag; a shot's last line may run on
+    counting a first tag and any uncued lines that follow it; a shot's last line may run on
     over the following shots of the run that have no lines of their own."""
     out = []
     for i, s in enumerate(run):
         for j, ((sp, line), cue) in enumerate(zip(s["comm"], s["cues"])):
             if cue is None:
                 continue
-            later = [c for c in s["cues"][j + 1:] if c is not None]
-            if later:
-                end = later[0]
+            chars = len(line) + s["tagc"][j]
+            k = j + 1
+            while k < len(s["comm"]) and s["cues"][k] is None:     # uncued lines after it share its window
+                chars += len(s["comm"][k][1]) + s["tagc"][k]
+                k += 1
+            if k < len(s["comm"]):
+                end = s["cues"][k]
             else:
-                end = s["dur"]
+                end = s["dur"] - s["hold"]
                 for nxt in run[i + 1:]:
                     if nxt["comm"]:
                         break
-                    end += nxt["dur"]
-            out.append((s, len(line) + s["tagc"][j], line, cue, end - cue))
+                    end += nxt["dur"] - nxt["hold"]
+            out.append((s, chars, line, cue, end - cue))
     return out
 
 
@@ -318,13 +323,16 @@ def check():
         if s["body"] != "hud" and world_of(s) not in D.ENVS:
             NOTES.append(f"{tag}: no World preset '{world_of(s)}'")
     for run in reading_groups():
-        chars = (sum(len(line) + c for s in run for (_, line), c in zip(s["comm"], s["tagc"]))
-                 + sum(len(h) for s in run for h in s["hud"]))
+        lines = sum(len(line) + c for s in run for (_, line), c in zip(s["comm"], s["tagc"]))
+        chars = lines + sum(len(h) for s in run for h in s["hud"])
         dur = sum(s["dur"] for s in run)
         ceiling = min(s.get("cps", MAX_CPS) for s in run)     # title cards may set a higher one
+        where = f"shot {run[0]['n']}" + (f"–{run[-1]['n']}" if len(run) > 1 else "") + f" ({run[0]['title']})"
         if chars / dur > ceiling:
-            where = f"shot {run[0]['n']}" + (f"–{run[-1]['n']}" if len(run) > 1 else "") + f" ({run[0]['title']})"
             NOTES.append(f"{where}: subtitles and HUD text at {chars / dur:.1f} characters a second (ceiling {ceiling})")
+        spoken = dur - sum(s["hold"] for s in run)
+        if lines and lines / spoken > ceiling:
+            NOTES.append(f"{where}: the lines need {lines / spoken:.1f} characters a second before the held beat (ceiling {ceiling})")
         for s, chars, line, cue, window in cue_windows(run):
             if window <= 0 or chars / window > MAX_CPS:
                 NOTES.append(f"shot {s['n']} ({s['title']}): '{line}' has {window:.1f} s from its cue ({chars / max(window, 0.01):.1f} cps)")
@@ -370,10 +378,12 @@ G1 = 9.80665e-3                                   # 1 g, km/s²
 W_MAREN = 360 / 23.934                            # °/h (sidereal day)
 W_ANCHOR = math.degrees(1.63 / 150_000 * 3600)    # °/h (1.63 km/s at 150,000 km)
 T_ALIGN = 5 + 9 / 60                              # hours: Anchor over Site 1
-SUN = 33.2                                        # direction of the sun from Maren, in the ring plane (Maren's
+SUN = 33.1                                        # direction of the sun from Maren, in the ring plane (Maren's
                                                   # equinox); chosen so Breakwater's sunrise falls in The wait
 SUN_R = math.radians(0.2666)                      # the sun's angular radius at 1 AU
 R_MAREN = 6_400
+R_SHADOW = R_MAREN + 75                           # the shadow's opaque radius: the air adds ~75 km, as eclipse
+                                                  # tables enlarge Earth's shadow ~2 % (round 5 physics review)
 BURN = 20 / G1                                    # s: 0 → 20 km/s at 1 g
 BURN_KM = 0.5 * G1 * BURN ** 2
 FLIP = 49                                         # s: the Endeavor's flip
@@ -505,9 +515,9 @@ def light(p):
     s = (math.cos(math.radians(SUN)), math.sin(math.radians(SUN)))
     behind = -(p[0] * s[0] + p[1] * s[1])        # distance behind Maren along the anti-sun axis
     off = abs(p[0] * s[1] - p[1] * s[0])         # distance from that axis
-    if behind <= 0 or off >= R_MAREN + behind * math.tan(SUN_R):
+    if behind <= 0 or off >= R_SHADOW + behind * math.tan(SUN_R):
         return "sun"
-    return "umbra" if off < R_MAREN - behind * math.tan(SUN_R) else "penumbra"
+    return "umbra" if off < R_SHADOW - behind * math.tan(SUN_R) else "penumbra"
 
 
 def escort_at(t):
@@ -549,11 +559,15 @@ def eclipse_text():
     es_in = next(sec for sec, st in SHADOW["the escorts"] if st == "umbra")
     (b0, b1), (e0, e1), (a0, a1) = sunrise("Breakwater"), sunrise("the escorts"), sunrise("the Astrid")
     c = lambda sec: fmt_clock(sec)
-    return (f"Maren's shadow reaches past Breakwater's orbit. Breakwater is in it from {c(bw_in)}; its sunrise falls inside "
-            f"{{#The wait}}: first light {c(b0)}, full sun {c(b1)}, before the slug lands. The escorts are in the shadow from "
-            f"{c(es_in)} to {c(e0)}–{c(e1)}, and the Astrid, at its stop, until {c(a0)}–{c(a1)}. In the shadow nothing is sunlit: "
-            "hulls are lit by the thin red ring of Maren's atmosphere (sunlight bent round the limb), the night side's city glow "
-            "from below, and their own lenses, plumes and flashes. First light is red through the limb and turns white as the sun clears it.")
+    return (f"Maren's shadow (the solid planet plus ~75 km of air) reaches past Breakwater's orbit. Breakwater is in it from "
+            f"{c(bw_in)}; its sunrise falls inside The wait (shot {{#The wait}}): first light {c(b0)}, full sun {c(b1)}, before "
+            f"the slug lands. The escorts are in the shadow from {c(es_in)} to {c(e0)}–{c(e1)}, and the Astrid, at its stop, "
+            f"until {c(a0)}–{c(a1)}. In the shadow nothing is sunlit. Sunlight bent round the limb reaches only the shadow's outer "
+            "few hundred kilometres, so deeper in the key light is Skerry: sunlit, clear of Maren's disc, a dim, cool moonlight "
+            "(~0.01 lux, a quarter-moon night). The red ring of Maren's air is a faint rim, the night side's city lights are "
+            "detail on the disc, and the scene's own lenses, ports, plumes and flashes do the rest. The red rises only in the "
+            f"last minutes before each sunrise (from ~{c(b0 - 300)} on Breakwater, ~{c(e0 - 300)} on the escorts): first light "
+            "is red through the limb and turns white as the sun clears it.")
 
 
 def light_note(s):
@@ -744,8 +758,8 @@ def maren_shadow(length=120_000):
     """Maren's umbra in the ring plane: from the terminator back along the anti-sun axis, narrowing with distance."""
     back, side = SUN + 180, SUN + 90
     far = pol(length, back)
-    w = R_MAREN - length * math.tan(SUN_R)
-    return [pol(R_MAREN, side), pol(R_MAREN, side + 180), pol(w, side + 180, far), pol(w, side, far)]
+    w = R_SHADOW - length * math.tan(SUN_R)
+    return [pol(R_SHADOW, side), pol(R_SHADOW, side + 180), pol(w, side + 180, far), pol(w, side, far)]
 
 
 def shadow_label(m, text, a, b):
@@ -1129,9 +1143,10 @@ def shot_card(s):
 
 
 def bench_key(s, keys):
-    """The most specific key for a shot among `keys`: its title, its class in its World preset ('A@C'), its class."""
-    for k in (s["title"], f"{s['cost']}@{world_of(s)}", s["cost"]):
-        if k in keys:
+    """The most specific key for a shot among `keys`: its title, the benchmark BENCH_ALIAS points it at, its class
+    in its World preset ('A@C'), its class."""
+    for k in (s["title"], D.BENCH_ALIAS.get(s["title"]), f"{s['cost']}@{world_of(s)}", s["cost"]):
+        if k and k in keys:
             return k
     return None
 
@@ -1169,14 +1184,23 @@ def worksheet():
 
 
 def gate_text():
-    """Where the budget stands against the gate, and each class's break-even cost."""
+    """Where the budget stands against the gate, and each class's break-even cost. It must still read right once
+    the gate fires: an overrun is 'N h over', and a class that can't bring the total under the gate even at zero
+    cost says so."""
     rows, total = render_budget()
     cap = D.GATE_HOURS / (1 + MARGIN)
-    even = [(c, (cap - (total - h)) * 3600 / fr) for c, _, _, _, fr, h in sorted(rows, key=lambda r: -r[5]) if h >= 5]
+    spare = D.GATE_HOURS - total * (1 + MARGIN)
+    where = f"{spare:,.1f} h to spare" if spare >= 0 else f"{-spare:,.1f} h over"
+    even = []
+    for c, _, _, _, fr, h in sorted(rows, key=lambda r: -r[5]):
+        if h < 5:
+            continue
+        x = (cap - (total - h)) * 3600 / fr
+        cost = f"{'measured' if c in D.MEASURED else 'estimate'} {SEC_PER_FRAME[c]:g}"
+        even.append(f"{c} {x:,.0f} s/frame ({cost})" if x > 0 else f"{c} can't close the gap alone ({cost})")
     state = "measured" if D.MEASURED else "estimated"
-    return (f"The gate: {total * (1 + MARGIN):,.0f} h with the allowance ({state}), against {D.GATE_HOURS} h, so "
-            f"{D.GATE_HOURS - total * (1 + MARGIN):,.0f} h to spare. Break-even for one class on its own, the others as they stand: "
-            + ", ".join(f"{c} {x:,.0f} s/frame ({'measured' if c in D.MEASURED else 'estimate'} {SEC_PER_FRAME[c]:g})" for c, x in even) + ".")
+    return (f"The gate: {total * (1 + MARGIN):,.1f} h with the allowance ({state}), against {D.GATE_HOURS} h, so {where}. "
+            "Break-even for one class on its own, the others as they stand: " + ", ".join(even) + ".")
 
 
 def sets_text():
@@ -1261,7 +1285,7 @@ def build_html():
 <p class="action">{E(gate_text())}</p>
 <div class="tbl"><table><thead><tr><th>Class</th><th>Kind</th><th>Cost</th><th>Shots</th><th>Frames</th><th>Time</th></tr></thead><tbody>{brow}
 <tr><td></td><td><b>Total</b></td><td></td><td class="mono">{len(D.SHOTS)}</td><td class="mono">{FRAMES:,}</td><td class="mono"><b>{total:,.0f} h</b></td></tr>
-<tr><td></td><td>With {MARGIN:.0%} for re-renders</td><td></td><td></td><td></td><td class="mono"><b>{total * (1 + MARGIN):,.0f} h</b></td></tr></tbody></table></div></div>
+<tr><td></td><td>With {MARGIN:.0%} for re-renders</td><td></td><td></td><td></td><td class="mono"><b>{total * (1 + MARGIN):,.1f} h</b></td></tr></tbody></table></div></div>
 <div class="card"><h3>Plan</h3><dl class="kv">{plan}</dl></div>
 <div class="card span2"><h3>Assets</h3><p class="action">{len(new_assets)} of {len(D.ASSETS)} assets are new or need additions; {len(concept)} of them go through concept sheets first (per the user's rule for new designs): {", ".join(concept)}. The full list, with the shots that need each one, is in <code>ASSET_REQUESTS.md</code>.</p>
 <p class="action">Legend: <span class="chip">built</span><span class="chip new">new or extended</span><span class="chip concept">concept first</span></p></div>
@@ -1453,7 +1477,7 @@ def check_script(page):
     """Parse the page's script with node, when it is installed: one stray quote in a sketch stops every sketch drawing."""
     node = shutil.which("node")
     if not node:
-        return
+        return False
     with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as f:
         f.write(re.search(r"<script>(.*?)</script>", page, re.S).group(1))
     try:
@@ -1463,6 +1487,7 @@ def check_script(page):
     if r.returncode:
         err = next((ln for ln in r.stderr.splitlines() if "Error" in ln), r.stderr.strip()[:200])
         NOTES.append(f"the page's script doesn't parse ({err}), so no sketch will draw")
+    return True
 
 
 def main():
@@ -1473,7 +1498,8 @@ def main():
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
             + head + "</head>\n<body>\n" + body + "</body>\n</html>\n")
     (SB / "index.html").write_text(page)
-    check_script(page)
+    if not check_script(page):
+        print("(the page script wasn't parsed: node isn't installed, so only the per-sketch quote check ran)")
     if "--fragment" in sys.argv:
         frag = pathlib.Path(sys.argv[sys.argv.index("--fragment") + 1])
         frag.parent.mkdir(parents=True, exist_ok=True)
@@ -1487,7 +1513,7 @@ def main():
     write_audience()
     budget, total = render_budget()
     print(f"{len(D.SHOTS)} shots, {RUNTIME} s ({RUNTIME // 60}:{RUNTIME % 60:02d}), {FRAMES} frames; "
-          f"render estimate {total:,.0f} h, {total * (1 + MARGIN):,.0f} h with margin")
+          f"render estimate {total:,.1f} h, {total * (1 + MARGIN):,.1f} h with margin")
     print(f"final approach {FINAL_KM:,.0f} km, turnover {fmt_clock(T_TURN * 3600)}, stop {fmt_clock(T_STOP * 3600)}")
     print(f"spinal: {math.dist(AST_FIRE, HIT):,.0f} km in {(T_HIT - T_FIRE) * 3600:.1f} s, impact {fmt_clock(T_HIT * 3600)}, "
           f"a miss passes {line_miss(AST_FIRE, HIT) - 6_400:,.0f} km above Maren")

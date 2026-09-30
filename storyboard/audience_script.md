@@ -1,6 +1,6 @@
 # Operation Tidebreak: the film as a viewer gets it
 
-6:58, 69 shots. Each shot gives the mission clock shown in the corner (from the arrival), what is on screen, any text on screen, the subtitled lines (speaker tags are shown as written), and the sound.
+6:40, 69 shots. Each shot gives the mission clock shown in the corner (from the arrival), what is on screen, any text on screen, the subtitled lines (speaker tags are shown as written), and the sound.
 
 ## 1. (8 s) · clock no clock yet
 
@@ -8,58 +8,58 @@ Black. A still field of stars fades up, and with it the header of an official re
 On screen: “UNITED NATIONS ARMED FORCES · LONG RANGE EXPEDITIONARY FORCES” · “AFTER ACTION REPORT · OPERATION TIDEBREAK” · “RESTRICTED”
 Sound: Silence; a low tone under the text.
 
-## 2. (16 s) · clock no clock yet
+## 2. (15 s) · clock no clock yet
 
 The same stars. The header gives way to the report's first numbered paragraph.
-On screen: “1. BACKGROUND. Artificial intelligence was outlawed after it first escaped human control. A later government licensed Charon Innovations to build one; it escaped in turn (the Charon Innovations incident) and is referred to below as the AI.”
+On screen: “1. BACKGROUND. Artificial intelligence was outlawed after it first escaped human control. A later licensed system, built by Charon Innovations, escaped too (the Charon Innovations incident) and is referred to below as the AI.”
 Sound: The low tone holds.
 
-## 3. (19 s) · clock no clock yet
+## 3. (16 s) · clock no clock yet
 
 The same stars; the second numbered paragraph.
-On screen: “2. SITUATION. The Maren Compact, a human splinter faction allied with the AI, held Maren and turned its foundries to arming the AI. The monitor BREAKWATER and four ground laser sites guarded its orbit. The Breakers, a debris ring, barred warp travel inside it and hid AI-run weapons.”
+On screen: “2. SITUATION. The Maren Compact, a human splinter faction allied with the AI, held Maren and armed the AI from its foundries. The Breakers, a debris ring round the planet, barred warp travel inside it and hid AI-run weapons.”
 Sound: The low tone holds.
 
 ## 4. (13 s) · clock no clock yet
 
 The same stars; the third numbered paragraph.
-On screen: “3. MISSION. Task Group Tidebreak, commanded from L.R.E.F.S. ASTRID (callsign TIDEBREAK ACTUAL), was to take Maren's orbit so that T-SEC ground forces could land and shut the foundries down.”
+On screen: “3. MISSION. Task Group Tidebreak, commanded from L.R.E.F.S. ASTRID (callsign TIDEBREAK ACTUAL), was to take Maren's orbit so T-SEC ground forces could land and shut the foundries down.”
 Sound: The low tone holds.
 
-## 5. (6 s) · clock no clock yet
+## 5. (8 s) · clock no clock yet
 
 The same stars; the fourth paragraph, alone on the screen.
-On screen: “4. RESTRICTIONS. No fire was to fall on the planet's surface, its laser sites included.”
+On screen: “4. RESTRICTIONS. No fire was to fall on the planet's surface, laser sites included; they could be dazzled, not struck.”
 Sound: The low tone holds.
 
-## 6. (10 s) · clock no clock yet
+## 6. (8 s) · clock no clock yet
 
 The same stars; a last paragraph, which fades to black.
-On screen: “5. SOURCES. The following has been collated from ship logs, camera and sensor records, and laser-link traffic. Times are from warp exit.”
+On screen: “5. SOURCES. The following has been collated from ship logs, sensor records and laser-link traffic. Times from warp exit.”
 Sound: The tone fades out.
 
-## 7. (6 s) · clock T+0:00:00
+## 7. (8 s) · clock T+0:00:00
 
 Stars. A point of light swells into a blue-white flash, and a long grey warship resolves out of it, bow to the right, a gold plate across its bow and two rings round its hull glowing blue. A clock appears in the corner at T+0:00:00.
 On screen: “L.R.E.F.S. ENDEAVOR · CRUISER”
 Sound: Silence; a sub-bass drop as the bubble collapses.
 
-## 8. (4 s) · clock T+0:00:06
+## 8. (4 s) · clock T+0:00:08
 
 Close along the warship's forward ring: its emitters fade from blue to dark, and small thrusters puff.
-> **TIDEBREAK ACTUAL:** All Tidebreak, Actual. Report exit.
+> **ENDEAVOR:** Endeavor, good exit.
 Sound: Ticking metal and thruster thumps through the truss.
 
-## 9. (8 s) · clock T+0:00:10 → T+0:01:06 (the clock runs fast)
+## 9. (8 s) · clock T+0:00:12 → T+0:01:08 (the clock runs fast)
 
 Far out on the flank: more flashes, seconds and far apart, each leaving a warship behind. Beyond them, screen right, a thin bright crescent: a planet with the sun behind it, ringed by a faint glowing haze.
-> **ENDEAVOR:** Endeavor, good exit.
 > **ASTRID:** Fourteen of fourteen. Four-fifty thousand, on the mark.
+> **TIDEBREAK ACTUAL:** All Tidebreak, Actual. Shields off.
 Sound: The score's distant low thuds, one per exit.
 
 ## 10. (6 s) · clock T+0:02:00 → T+0:02:42 (the clock runs fast)
 
-From a camera on the gold plate itself: small thrusters fire and the plate backs away from the warship's bow; the rings stay on the ship. Around it, other gold plates hang still in space.
+From a camera on the gold plate itself: small thrusters fire and the plate backs away from the warship's bow, uncovering the gun turrets and sensors behind it; the rings stay on the ship. Around it, other gold plates hang still in space.
 > **ENDEAVOR:** Nauvoo, shield's yours.
 > **NAUVOO · TENDER:** Got it. Here for the ride home.
 Sound: Clamp bangs through the backplate, then silence.
@@ -67,7 +67,7 @@ Sound: Clamp bangs through the backplate, then silence.
 ## 11. (3 s) · clock T+0:02:45 → T+0:03:15 (the clock runs fast)
 
 A slimmer warship, its gold plate gone: long sensor booms run out, a flat dish sits exposed on a truss behind where the plate was, and small drones scatter ahead of it.
-> **CANTERBURY · SENSOR DESTROYER:** Sensor net up.
+> **CANTERBURY · E-WAR DESTROYER:** Sensor net up.
 Sound: Silence.
 
 ## 12. (3 s) · clock T+0:03:20 → T+0:03:50 (the clock runs fast)
@@ -82,16 +82,16 @@ A grainy telescope feed on a grey moon: a thread of light runs along its dark ed
 On screen: “SKERRY · MAREN'S MOON” · “ARRIVE T+6:40”
 > **ASTRID:** Launch on Skerry! Mass driver, three rounds, in our lane.
 > **ACTUAL:** Time of flight?
-> **ASTRID:** Six hours, give or take.
+> **ASTRID:** Six and a half, give or take.
 > **ASTRID:** Laser on the dish! Skerry's painting us!
 Sound: Soft sensor tones.
 
-## 14. (20 s) · clock T+0:09:00 → T+0:14:20 (the clock runs fast)
+## 14. (14 s) · clock T+0:09:00 → T+0:12:44 (the clock runs fast)
 
 A tactical plot, the planet at right: a red diamond parked over a point on the planet; the moon; a wide dotted ring; a line from the fleet toward the planet. Labels appear as each is named.
 On screen: “BREAKWATER” · “SITE 1” · “SKERRY” · “THE BREAKERS”
-> **ACTUAL:** All Tidebreak, Actual. Breakwater's on station over Site One, the one laser site that covers her.
-> **ACTUAL:** Skerry's laser has range on our radiators. It's the priority. Radiators stay stowed till it's down.
+> **ACTUAL:** All Tidebreak, Actual. Breakwater's parked under Site One's cover.
+> **ACTUAL:** Skerry's laser can burn radiators from there. It dies first.
 Sound: Sensor tones.
 
 ## 15. (5 s) · clock T+0:18:00
@@ -113,11 +113,11 @@ Through a long lens, the whole group: eleven drive plumes light one after anothe
 > **ENDEAVOR:** Endeavor, burning.
 Sound: Sub-bass swell.
 
-## 18. (7 s) · clock T+1:02:00 → T+1:02:35 (the clock runs fast)
+## 18. (5 s) · clock T+1:02:00 → T+1:02:25 (the clock runs fast)
 
 Through a very long lens, the grey moon as a thin crescent: pinpricks of white light spark across its dark side.
-> **ASTRID:** Good hits. Laser and driver down.
-> **ACTUAL:** Eighteen rounds still inbound. Keep tracking.
+> **ASTRID:** Laser and driver down.
+> **ASTRID:** Eighteen rounds still inbound.
 Sound: Nothing; a swell of score.
 
 ## 19. (7 s) · clock T+1:10:00 → T+3:20:00 (the clock runs fast)
@@ -129,7 +129,7 @@ Sound: Silence; the score carries the coast.
 ## 20. (4 s) · clock T+3:20:00
 
 A faint haze thickens around the cruiser, lit from behind; its fins slide back in. A huge rock slides past, gone in under two seconds. Small ships spread out ahead.
-> **ACTUAL:** Breakers ahead. Radiators in. Corvettes, point.
+> **ACTUAL:** Breakers ahead. Radiators in. Corvettes, sweep.
 Sound: Silence; a low drone in the score.
 
 ## 21. (3 s) · clock T+3:30:00
@@ -157,7 +157,7 @@ Sound: Capacitor whine and the yoke's servo through the hull, one tick per pulse
 ## 25. (4 s) · clock T+3:45:04
 
 Along the cruiser's flank: flares and chaff bloom, a smoke screen spreads, gun tracers streak out, and incoming missiles burst one by one.
-> **ENDEAVOR:** Decoys away. Point defence free.
+> **ENDEAVOR:** Decoys away. Smoke's out.
 Sound: Silence; the score's pulse.
 
 ## 26. (2 s) · clock T+3:52:00
@@ -201,9 +201,9 @@ Sound: A rising whine in the score.
 
 A tactical plot: a cloud of red drone tracks. A block of them flips to teal and turns on the rest; the red ones keep coming. Labels appear.
 On screen: “LINKED → OURS” · “AUTONOMOUS”
-> **EXTENUATING · SENSOR DESTROYER:** We're in their drone links.
-> **EXTENUATING:** Turning them. Return to sender.
-> **EXTENUATING:** The rest are AI-run, no links. Can't touch those.
+> **ACTUAL:** Extenuating, you're the whole net now.
+> **EXTENUATING · E-WAR DESTROYER:** In their drone links. Turning them.
+> **EXTENUATING:** The rest are AI-run. Can't touch those.
 Sound: Clipped data chatter.
 
 ## 33. (5 s) · clock T+4:25:00
@@ -219,12 +219,12 @@ On the cruiser's back, looking aft: smoke drifts past, the stars wheel as the sh
 > **ENDEAVOR:** Flipping.
 Sound: thruster thumps, then the drive's roar through the hull.
 
-## 35. (14 s) · clock T+5:08:00
+## 35. (11 s) · clock T+5:08:00
 
 A zoomed tactical plot: a lumpy rock, its shadow drawn pointing away from a ground-laser marker; two nearby rocks tagged '?'; a heat readout.
 On screen: “ANCHOR” · “SITE 1” · “?” · “?” · “ENDEAVOR HEAT 94%”
-> **ACTUAL:** Anchor. We tuck into her lee: eighteen klicks of rock between us and Site One.
-> **ENDEAVOR:** Actual, Endeavor. Heat sink at nine-four. We need to vent.
+> **ACTUAL:** Anchor. Tuck into her lee, out of Site One's sight.
+> **ENDEAVOR:** Endeavor. Heat sink at nine-four, need to vent.
 Sound: Sensor tones.
 
 ## 36. (4 s) · clock T+5:09:00 → T+5:10:20 (the clock runs fast)
@@ -298,20 +298,20 @@ Through a long lens, the rock that fired on the cruiser: a flash. The picture ho
 > **ENDEAVOR:** Splash platform. Radiators out, all three.
 Sound: The score.
 
-## 48. (24 s) · clock T+5:40:00
+## 48. (21 s) · clock T+5:40:00
 
-The master plot: the fleet at the rock; two dotted tracks from it to where the enemy warship will be, labelled with two times; then a solid track from the rock to a violet marker short of the enemy, the flagship's firing point; a heat readout.
-On screen: “ON TARGET: SPEND 7:52 · KILL 7:53” · “ASTRID” · “ENDEAVOR HEAT 31%”
-> **ACTUAL:** Infinity, Galactica: fire from here. Donnager, Wallfish: guard them. Everyone else, on me.
-> **ACTUAL:** Spend wave draws her fire. Kill wave, ninety seconds behind: forty Casaba nukes on her drive.
+The master plot: the fleet at the rock; the planet's shadow drawn as a dark band with the enemy warship inside it; two dotted tracks from the rock to where the warship will be, labelled with two times; then a solid track from the rock to a violet marker short of the enemy, the flagship's firing point; a heat readout.
+On screen: “SPEND 7:52:00 · KILL 7:53:30” · “ASTRID” · “ENDEAVOR HEAT 31%”
+> **ACTUAL:** Missile frigates hold here with Donnager and Wallfish. Everyone else, on me.
+> **ACTUAL:** Spend wave draws her fire; the kill wave puts forty Casaba nukes on her drive.
 > **ACTUAL:** Once she can't move, Astrid takes the kill.
 Sound: Sensor tones; the score gathers.
 
 ## 49. (8 s) · clock T+6:40:00 → T+6:42:40 (the clock runs fast)
 
 Through a long lens from a destroyer: ahead, drones' lamps light a spreading cloud of glittering pellets; a small warship's drive angles off and it slides aside.
-> **EXTENUATING:** Pellet cloud dead ahead. Skerry's first salvo, right on time.
-> **ACTUAL:** Come left two degrees.
+> **EXTENUATING:** Pellet cloud ahead. Skerry's first salvo, right on time.
+> **ACTUAL:** Everyone on me, come left two degrees.
 Sound: Silence; the score ticks.
 
 ## 50. (4 s) · clock T+6:55:00 → T+6:56:00 (the clock runs fast)
@@ -335,17 +335,17 @@ Sound: Silence.
 
 ## 53. (4 s) · clock T+7:25:00 → T+7:25:40 (the clock runs fast)
 
-Above a huge dark warship, the planet's night side below, glittering with city lights. No sunlight: the ship is lit only from below, red, by a thin glowing ring round the planet's edge and by the city glow, and by rows of small lit ports along its flank. Its turrets track but stay silent. Rows of cell doors open and missiles ripple out, their plumes lighting its hull. Far along its orbit, points of light wake.
-On screen: “BREAKWATER · MONITOR · NO WARP DRIVE”
+Above a huge dark warship: a dark shape against the planet's night side, which glitters with city lights. No sunlight: the ship is edged by a faint, cold moonlight, a thin red rim of light lies along the planet's edge, and rows of small lit ports run along its flank. Its turrets track but stay silent. Rows of cell doors open and missiles ripple out, their plumes lighting its hull. Far along its orbit, points of light wake.
+On screen: “BREAKWATER · COMPACT MONITOR · NO WARP DRIVE”
 Sound: A low brass sting.
 
-## 54. (14 s) · clock T+7:25:40
+## 54. (13 s) · clock T+7:25:40
 
-A tactical plot: sixty-four red tracks leave the enemy warship and converge on one friendly ship among the fleet. A second label appears beside the flagship.
-On screen: “BACKUP: ASTRID DIRECT”
+A tactical plot: sixty-four red tracks leave the enemy warship and converge on one friendly ship among the fleet, now far out from the rock; a heat readout.
+On screen: “ENDEAVOR HEAT 77%”
 > **ASTRID:** Vampires, sixty-four! All tracking on Extenuating!
 > **EXTENUATING:** She's going for our guidance.
-> **ACTUAL:** Astrid, umbrella on Extenuating. If she drops, the waves are yours.
+> **ACTUAL:** Astrid, umbrella on Extenuating. You're backup on the waves.
 Sound: Sensor tones; the score tightens.
 
 ## 55. (3 s) · clock T+7:31:00
@@ -356,16 +356,15 @@ Sound: Silence; the score's pulse.
 
 ## 56. (5 s) · clock T+7:50:00
 
-In darkness, the cruiser's laser turrets: their lenses go from a dim violet glow to full, the brightest things on the hull.
+In darkness, the cruiser's laser turrets split onto two bearings: the lenses of one pair go from a dim violet glow to full, the brightest things on the hull; the others stay dim.
 On screen: “HEAT 88%”
-> **EXTENUATING:** Their net's jammed.
-> **ENDEAVOR:** Arrays on Site One. Dazzle only.
+> **ENDEAVOR:** Arrays full on Breakwater. Site One, dazzle only.
 Sound: The lenses' capacitor whine through the hull.
 
 ## 57. (4 s) · clock T+7:52:00
 
-Through a long lens from the flagship, just off the planet's glowing red edge: a sparkle of hundreds of tiny flashes, and among them a few larger bursts.
-> **EXTENUATING:** Her guns are firing. Kill wave steering clear.
+Through a long lens from the flagship, just off the planet's faint red rim: a sparkle of hundreds of tiny flashes, and among them a few larger bursts.
+> **EXTENUATING:** Point defence lit. Kill wave steering clear.
 Sound: The score.
 
 ## 58. (4 s) · clock T+7:53:14 → T+7:53:28 (the clock runs fast)
@@ -388,18 +387,18 @@ Sound: The comm channels white out, then silence.
 ## 61. (5 s) · clock T+7:54:00
 
 The warship hangs dead-engined in the dark over the planet's night side, venting from glowing wounds, its turrets still tracking.
-> **ACTUAL:** Breakwater, Tidebreak. You're disabled. Surrender your ship.
+> **ACTUAL:** Breakwater, Tidebreak. You're disabled. Surrender.
 Sound: Silence where the answer should be.
 
 ## 62. (3 s) · clock T+7:54:38
 
-The flagship end-on in the dark: it settles, and a blue-white bloom lights its kilometre-long barrel and fills the frame.
-> **ACTUAL:** No response. Astrid, fire.
+The flagship end-on in the dark, picked out by its running lights and small thruster puffs as it settles; then a blue-white bloom lights its kilometre-long barrel and fills the frame.
+> **ACTUAL:** Astrid, fire.
 Sound: Everything drops out.
 
 ## 63. (6 s) · clock T+7:54:41 → T+7:57:23 (the clock runs fast)
 
-A locked-off view of the crippled warship, turrets swinging uselessly, while the clock races. Behind it the planet's red edge brightens and flares, the sun breaks over it, and the light on the hull climbs from red to white.
+A locked-off view of the crippled warship, turrets swinging uselessly, while the clock races. Near the edge of the frame the planet's red rim brightens and flares, the sun breaks over it, and a raking light climbs along the hull from red to white.
 > **ASTRID:** Round away. Time of flight two forty-nine.
 Sound: Silence; one held note.
 
@@ -410,17 +409,17 @@ Sound: One deep boom in the score, on the cut.
 
 ## 65. (4 s) · clock T+8:00:00
 
-Along the cruiser's scorched flank, still in the dark: a valve opens and a white plume of boiling water streams off the ship, lit faintly red.
+Along the cruiser's scorched flank, still in the dark: a work light at a valve rakes the scarred armour, the valve opens and a white plume of boiling water streams off the ship, lit by the work light and a faint, cold moonlight.
 On screen: “HEAT 98%”
 > **ENDEAVOR:** Heat sink at nine-eight. Dumping water.
 Sound: A roar through the hull, then a long hiss.
 
-## 66. (14 s) · clock T+8:10:00
+## 66. (13 s) · clock T+8:10:00
 
 Through a very long lens: the wreck, a glittering smear venting in sunlight over the night side. Then a tactical plot holds alone on two dark channels.
 On screen: “CANTERBURY · NORMANDY: NO CARRIER”
-> **EXTENUATING:** Actual, Extenuating. Maren requests terms. Says the AI's guns don't answer to them.
-> **ACTUAL:** Then they chart them. Site One dark, foundries cold.
+> **EXTENUATING:** Maren requests terms. Says the AI's guns don't answer to them.
+> **ACTUAL:** Then they map them. Site One dark, foundries cold.
 Sound: The score, low.
 
 ## 67. (3 s) · clock T+8:24:00
@@ -437,7 +436,7 @@ Sound: The score resolves; then silence.
 
 ## 69. (4 s) · clock no clock
 
-The still stars of the opening fade up with the report's last line in the same white type; then everything fades to black.
+Black for a second; then the still stars of the opening fade up with the report's last line in the same white type, and everything fades to black.
 On screen: “END OF REPORT”
 Sound: Silence.
 

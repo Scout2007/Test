@@ -42,7 +42,7 @@ if "--doc-base" in sys.argv:
 E = html.escape
 FPS = D.FPS
 ESTIMATE = {c: float(re.search(r"([\d.]+) s/frame", cost).group(1)) for c, (_, cost) in D.RENDER_CLASSES.items()}
-SEC_PER_FRAME = {**ESTIMATE, **D.MEASURED}   # the step 1 benchmarks replace the estimates
+SEC_PER_FRAME = {**ESTIMATE, **{k: v for k, v in D.MEASURED.items() if k in ESTIMATE}}
 MAX_CPS = 12          # subtitle reading speed ceiling (round 1 cinematography review)
 MARGIN = 0.30         # re-render allowance on the render budget
 BODY_LABEL = {"hull": "hull camera", "drone": "drone camera", "tracker": "tracker", "hud": "HUD insert"}
@@ -122,6 +122,11 @@ t = 0
 for n, s in enumerate(D.SHOTS, 1):
     s["n"] = n
     s.setdefault("hud", [])
+    s.setdefault("see", "")
+    s.setdefault("group", None)
+    # A comm line may carry a cue: the second in the shot where it starts, after its event.
+    s["cues"] = [c[2] if len(c) > 2 else None for c in s["comm"]]
+    s["comm"] = [(c[0], c[1]) for c in s["comm"]]
     if s["comm"] and "SUB" not in s["assets"]:
         s["assets"].append("SUB")
     s["t0"], s["t1"] = t, t + s["dur"]
@@ -205,11 +210,48 @@ def state_of(asset, clock):
     return out
 
 
-# Words a camera that can't hear must not be given, unless the same clause puts them in the
-# score or a channel ("no bangs" is fine).
-HEARD = re.compile(r"through the|(?<!no )\b(roar|clang|bang|thump|thud|clunk|groan|shear|whine|boom|tick|hiss|crack|rumble|pop|hum)"
-                   r"(s|es|ed|ing|ming|ping)?\b", re.I)
+# Words a camera that can't hear must not be given, unless the same clause (split at , ; and .)
+# puts them in the score or a channel ("no bangs" is fine).
+HEARD = re.compile(r"through the|(?<!no )\b(roar|clang|bang|thump|thud|clunk|groan|shear|whin|boom|tick|hiss|crack|"
+                   r"rumbl|pop|hum(?!an))\w*", re.I)
 EXEMPT = re.compile(r"score|channel|sub-bass", re.I)
+
+
+def world_of(s):
+    """The World preset a shot renders in: its own `world`, else its map's."""
+    return s.get("world") or s["map"]
+
+
+def reading_groups():
+    """Runs of shots that share one reading window: consecutive shots with the same `group`, else one shot each."""
+    out = []
+    for s in D.SHOTS:
+        if out and s["group"] and out[-1][0]["group"] == s["group"]:
+            out[-1].append(s)
+        else:
+            out.append([s])
+    return out
+
+
+def cue_windows(run):
+    """(shot, line, start s, window s) for every cued line in a run of shots; a shot's last line may run on
+    over the following shots of the run that have no lines of their own."""
+    out = []
+    for i, s in enumerate(run):
+        for j, ((sp, line), cue) in enumerate(zip(s["comm"], s["cues"])):
+            if cue is None:
+                continue
+            later = [c for c in s["cues"][j + 1:] if c is not None]
+            if later:
+                end = later[0]
+            else:
+                end = s["dur"]
+                for nxt in run[i + 1:]:
+                    if nxt["comm"]:
+                        break
+                    end += nxt["dur"]
+            out.append((s, line, cue, end - cue))
+    return out
 
 
 def rig_controls(item):
@@ -234,13 +276,12 @@ def check():
                ([f"reference frame {s['render']}"] if s["render"] and s["render"][4:] not in IMG_SOURCES else []))
         if bad:
             sys.exit(f"{tag}: unknown " + ", ".join(bad))
-        chars = sum(len(line) for _, line in s["comm"]) + sum(len(h) for h in s["hud"])
-        if chars / s["dur"] > MAX_CPS:
-            NOTES.append(f"{tag}: subtitles and HUD text at {chars / s['dur']:.1f} characters a second (ceiling {MAX_CPS})")
         if len(s["comm"]) > s["dur"]:
             NOTES.append(f"{tag}: {len(s['comm'])} lines in {s['dur']} s (at least 1 s a line)")
+        if not s["see"]:
+            NOTES.append(f"{tag}: no `see` line, so the audience script can't show it")
         if s["body"] != "hull":
-            for clause in re.split(r"[;.]", s["sound"]):
+            for clause in re.split(r"[;.,]", s["sound"]):
                 if HEARD.search(clause) and not EXEMPT.search(clause):
                     NOTES.append(f"{tag}: a {s['body']} camera can't hear '{clause.strip()}'")
         if s["body"] == "hud" and "plot" in s["cam"] and s["dur"] < 5:
@@ -255,6 +296,21 @@ def check():
         for asset, start, needed in D.STATE_ASSETS:
             if asset in s["assets"] and clock_s(s["clock"]) >= clock_s(start) and needed not in s["assets"]:
                 NOTES.append(f"{tag}: {asset} is in its '{state_of(asset, s['clock'])}' state, so it needs {needed}")
+        if s["body"] != "hud" and world_of(s) not in D.ENVS:
+            NOTES.append(f"{tag}: no World preset '{world_of(s)}'")
+    for run in reading_groups():
+        chars = sum(len(line) for s in run for _, line in s["comm"]) + sum(len(h) for s in run for h in s["hud"])
+        dur = sum(s["dur"] for s in run)
+        if chars / dur > MAX_CPS:
+            where = f"shot {run[0]['n']}" + (f"–{run[-1]['n']}" if len(run) > 1 else "") + f" ({run[0]['title']})"
+            NOTES.append(f"{where}: subtitles and HUD text at {chars / dur:.1f} characters a second (ceiling {MAX_CPS})")
+        for s, line, cue, window in cue_windows(run):
+            if window <= 0 or len(line) / window > MAX_CPS:
+                NOTES.append(f"shot {s['n']} ({s['title']}): '{line}' has {window:.1f} s from its cue ({len(line) / max(window, 0.01):.1f} cps)")
+    wait = D.SHOTS[shot_no("The wait", "the sunrise check") - 1]
+    first, full = sunrise("Breakwater")
+    if not clock_s(wait["clock"]) <= first < full <= shot_end(wait):
+        NOTES.append(f"Breakwater's sunrise ({fmt_clock(first)}–{fmt_clock(full)}) doesn't fall inside shot {wait['n']} (The wait)")
     for a, b in zip(D.SHOTS, D.SHOTS[1:]):
         end = shot_end(a)
         if end is None:
@@ -293,7 +349,10 @@ G1 = 9.80665e-3                                   # 1 g, km/s²
 W_MAREN = 360 / 23.934                            # °/h (sidereal day)
 W_ANCHOR = math.degrees(1.63 / 150_000 * 3600)    # °/h (1.63 km/s at 150,000 km)
 T_ALIGN = 5 + 9 / 60                              # hours: Anchor over Site 1
-SUN = 30                                          # direction of the sun from Maren
+SUN = 33.2                                        # direction of the sun from Maren, in the ring plane (Maren's
+                                                  # equinox); chosen so Breakwater's sunrise falls in The wait
+SUN_R = math.radians(0.2666)                      # the sun's angular radius at 1 AU
+R_MAREN = 6_400
 BURN = 20 / G1                                    # s: 0 → 20 km/s at 1 g
 BURN_KM = 0.5 * G1 * BURN ** 2
 FLIP = 49                                         # s: the Endeavor's flip
@@ -417,6 +476,77 @@ def _spinal():
 
 
 AST_FIRE, HIT, T_HIT = _spinal()
+
+
+# ----------------------------------------------------------------- Maren's shadow
+def light(p):
+    """'sun', 'penumbra' or 'umbra' at a point (km, Maren-centred), from the solid planet's shadow."""
+    s = (math.cos(math.radians(SUN)), math.sin(math.radians(SUN)))
+    behind = -(p[0] * s[0] + p[1] * s[1])        # distance behind Maren along the anti-sun axis
+    off = abs(p[0] * s[1] - p[1] * s[0])         # distance from that axis
+    if behind <= 0 or off >= R_MAREN + behind * math.tan(SUN_R):
+        return "sun"
+    return "umbra" if off < R_MAREN - behind * math.tan(SUN_R) else "penumbra"
+
+
+def escort_at(t):
+    return final_at(t) if t < T_STOP else off_zenith(t, *ESCORTS)
+
+
+def astrid_at(t):
+    """The Astrid trails the line, then holds 10,000 km out, 15° off Breakwater's zenith."""
+    return escort_at(t) if t < T_STOP else off_zenith(t, *ASTRID)
+
+
+BODIES = {"Breakwater": bw_at, "the escorts": escort_at, "the Astrid": astrid_at}
+BODY_ASSETS = {"Breakwater": ["BW"], "the escorts": ["EN", "DD", "CV"], "the Astrid": ["AST"]}
+
+
+def shadow_changes(fn, t0="T+6:00:00", t1="T+8:30:00", step=1):
+    """[(clock s, state)] each time a body's light changes between two clocks."""
+    out, prev = [], None
+    for sec in range(clock_s(t0), clock_s(t1) + 1, step):
+        st = light(fn(sec / 3600))
+        if st != prev:
+            out.append((sec, st))
+            prev = st
+    return out
+
+
+SHADOW = {name: shadow_changes(fn) for name, fn in BODIES.items()}
+
+
+def sunrise(name):
+    """(first light, full sun) in clock seconds: the last time a body leaves Maren's umbra."""
+    ch = SHADOW[name]
+    i = max(k for k, (_, st) in enumerate(ch) if st == "umbra")
+    return ch[i + 1][0], ch[i + 2][0]
+
+
+def eclipse_text():
+    bw_in = next(sec for sec, st in SHADOW["Breakwater"] if st == "umbra")
+    es_in = next(sec for sec, st in SHADOW["the escorts"] if st == "umbra")
+    (b0, b1), (e0, e1), (a0, a1) = sunrise("Breakwater"), sunrise("the escorts"), sunrise("the Astrid")
+    c = lambda sec: fmt_clock(sec)
+    return (f"Maren's shadow reaches past Breakwater's orbit. Breakwater is in it from {c(bw_in)}; its sunrise falls inside "
+            f"{{#The wait}}: first light {c(b0)}, full sun {c(b1)}, before the slug lands. The escorts are in the shadow from "
+            f"{c(es_in)} to {c(e0)}–{c(e1)}, and the Astrid, at its stop, until {c(a0)}–{c(a1)}. In the shadow nothing is sunlit: "
+            "hulls are lit by the thin red ring of Maren's atmosphere (sunlight bent round the limb), the night side's city glow "
+            "from below, and their own lenses, plumes and flashes. First light is red through the limb and turns white as the sun clears it.")
+
+
+def light_note(s):
+    """Where Breakwater, the escorts (Endeavor, destroyers) and the Astrid stand in Maren's shadow during a shot."""
+    t0 = clock_s(s["clock"])
+    t1 = shot_end(s) or t0
+    if s["map"] not in ("D", "E") or t1 < clock_s("T+6:00:00"):
+        return ""
+    out = []
+    for name, ids in (("Breakwater", ["BW"]), ("the escorts", ["EN", "DD"]), ("the Astrid", ["AST"])):
+        if any(a in s["assets"] for a in ids):
+            states = [light(BODIES[name](t0 / 3600))] + [st for sec, st in SHADOW[name] if t0 < sec <= t1]
+            out.append(f"{name} in {' → '.join('sun' if x == 'sun' else x for x in states)}")
+    return "; ".join(out)
 
 
 # ----------------------------------------------------------------- maps
@@ -589,6 +719,20 @@ def map_b():
     return m.svg(D.MAPS["B"])
 
 
+def maren_shadow(length=120_000):
+    """Maren's umbra in the ring plane: from the terminator back along the anti-sun axis, narrowing with distance."""
+    back, side = SUN + 180, SUN + 90
+    far = pol(length, back)
+    w = R_MAREN - length * math.tan(SUN_R)
+    return [pol(R_MAREN, side), pol(R_MAREN, side + 180), pol(w, side + 180, far), pol(w, side, far)]
+
+
+def shadow_label(m, text, a, b):
+    """Label a band along the segment a→b, whichever way reads left to right."""
+    (x0, _), (x1, _) = m.P(*a), m.P(*b)
+    m.text_along(*((a, b) if x1 >= x0 else (b, a)), text, "m-t m-muted", 0.05, 4)
+
+
 def map_c():
     """Local frame around Anchor, km; Site 1 and Breakwater off to +x."""
     m = Map(-420, 420, -420, 330, 2)
@@ -597,6 +741,10 @@ def map_c():
     x0, y0 = m.P(-420, 9)
     x1, y1 = m.P(-9, -9)
     m.add(f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{x1 - x0:.1f}" height="{y1 - y0:.1f}" class="m-shadow"/>')
+    back = SUN + 180
+    m.poly([pol(9, SUN + 90), pol(9, SUN - 90), pol(9, SUN - 90, pol(430, back)), pol(9, SUN + 90, pol(430, back))], "m-shadow")
+    shadow_label(m, "Site 1's shadow", (-400, -14), (-250, -14))
+    shadow_label(m, "the sun's shadow", pol(250, back), pol(400, back))
     m.circle(0, 0, 9, "m-rock", 2.5)
     m.text(0, 0, "Anchor (18 km)", "m-t", "start", 7, 17)
     m.arrow((330, 0), (412, 0))
@@ -606,7 +754,7 @@ def map_c():
     m.text(*pol(360, SUN), "sun", "m-t m-muted", "end", -4, -4)
     m.mark(14, 8, "m-comp", "x", 3)
     m.text(14, 8, "mine, T+5:10", "m-t m-compt", "start", 6, 4)
-    en = (-15, 0)
+    en = pol(15, 180 + SUN / 2)          # on the bisector of the two shadows, ~4 km inside each
     for p, lab, shape, anchor, dx, dy in ((en, "Endeavor", "sq", "end", -4, -9), ((-80, 5), "", "dot", "", 0, 0),
                                           ((-150, -4), "", "dot", "", 0, 0), ((-180, 4), "the pack", "dot", "middle", 0, -9),
                                           ((-210, -3), "", "dot", "", 0, 0), ((-290, 0), "Astrid", "sq", "middle", 0, -9)):
@@ -615,9 +763,9 @@ def map_c():
             m.text(*p, lab, "m-t", anchor, dx, dy)
     m.mark(-150, 190, "m-lreff", "dot", 2.2)
     m.text(-150, 190, "Donnager, shelling outward", "m-t", "middle", 0, -8)
-    for p in ((-60, 70), (60, -60), (-250, -150)):
+    for p in ((-60, 70), (60, -60), (-120, -250)):
         m.mark(*p, "m-lreff", "dot", 1.6)
-    m.text(-250, -150, "corvettes and drones sweep", "m-t m-muted", "middle", 0, 14)
+    m.text(-120, -250, "corvettes and drones sweep", "m-t m-muted", "middle", 0, 14)
     moon, frig = pol(42, 220, en), pol(46, 220, en)
     m.circle(*moon, 3, "m-rockdot", 2.6)
     m.mark(*frig, "m-comp", "dia", 2.6)
@@ -640,6 +788,8 @@ def map_d():
     m = Map(-160_000, 50_000, -52_000, 46_000, 1_000 / 3)
     t52 = hours("T+7:52:00")
     m.halfplane(site1_at(t52), th_bw(t52), "m-sky")
+    m.poly(maren_shadow(200_000), "m-shadow")
+    shadow_label(m, "Maren's shadow", pol(78_000, SUN + 180), pol(95_000, SUN + 180))
     m.text(*pol(33_000, th_bw(t52) + 90), "Site 1's sky at T+7:52", "m-t m-compt", "middle")
     m.circle(0, 0, 42_164, "m-orbit")
     for k in range(1, 12):
@@ -674,8 +824,7 @@ def map_d():
         m.text(*p, lab, "m-t", anchor, dx, dy)
     m.mark(*STOP, "m-lreff", "sq", 3)
     m.text(*STOP, f"stop, {fmt_clock(T_STOP * 3600)[:-3]}", "m-t m-lreft", "end", -7, 16)
-    m.text(-157_000, -47_000, "Inertial frame: Maren turns 15°/h under Breakwater, Anchor drifts 2.2°/h. Map E has the detail.",
-           "m-t m-muted")
+    m.text(-157_000, 42_000, "Inertial frame: Maren turns 15°/h under Breakwater; Anchor drifts 2.2°/h.", "m-t m-muted")
     m.scalebar(20_000, "20,000 km")
     return m.svg(D.MAPS["D"])
 
@@ -686,6 +835,7 @@ def map_e():
     z = th_bw(t_kill)
     m = Map(b[0] - 27_000, b[0] + 19_000, b[1] - 15_000, b[1] + 17_000, 80)
     nad = z + 180
+    m.poly(maren_shadow(200_000), "m-shadow")
     m.poly([b, pol(80_000, nad - MAREN_HALF, b), pol(80_000, nad + MAREN_HALF, b)], "m-wedge")
     m.text(*pol(12_000, nad + MAREN_HALF + 4, b), "towards Maren", "m-t m-muted", "end", -6, 0)
     m.text(*pol(12_000, nad + MAREN_HALF + 4, b), f"(its disc ±{MAREN_HALF:.1f}°)", "m-t m-muted", "end", -6, 12)
@@ -726,6 +876,9 @@ def map_e():
     m.text(b[0] + 18_500, b[1] - 13_500, "At Breakwater: spend wave T+7:52:00; kill wave and Casaba jets",
            "m-t m-muted", "end", 0, -12)
     m.text(b[0] + 18_500, b[1] - 13_500, f"T+7:53:30; spinal fired T+7:54:40, impact {fmt_clock(T_HIT * 3600)}.", "m-t m-muted", "end")
+    first, full = sunrise("Breakwater")
+    m.text(b[0] + 18_500, b[1] - 13_500, f"Breakwater leaves Maren's shadow {fmt_clock(first)}–{fmt_clock(full)}.",
+           "m-t m-muted", "end", 0, 12)
     m.scalebar(5_000, "5,000 km")
     return m.svg(D.MAPS["E"])
 
@@ -881,6 +1034,7 @@ td.mono{white-space:nowrap;}
 .action{margin:0; font-size:.9rem;}
 .comm{margin:0; padding:.5rem .7rem; border-left:2px solid var(--clock); background:var(--panel2); display:grid; gap:.25rem; font-size:.86rem;}
 .comm b{font:600 .72rem var(--f-mono); letter-spacing:.04em; color:var(--clock); margin-right:.4rem;}
+.comm .cue{font:400 .68rem var(--f-mono); color:var(--muted); margin-left:.5rem; white-space:nowrap;}
 .rows{display:grid; grid-template-columns:4.6rem minmax(0,1fr); gap:.3rem .7rem; margin:0; font-size:.82rem;}
 .rows dt{font:500 .7rem/1.7 var(--f-mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
 .rows dd{margin:0; min-width:0;}
@@ -929,7 +1083,9 @@ def shot_card(s):
         media = f'<div class="sketch" data-shot="{s["n"]}" role="img" aria-label="Sketch: {E(s["title"])}"></div>'
     comm = ""
     if s["comm"]:
-        comm = '<div class="comm">' + "".join(f"<div><b>{E(sp)}</b>{E(line)}</div>" for sp, line in s["comm"]) + "</div>"
+        comm = '<div class="comm">' + "".join(
+            f"<div><b>{E(sp)}</b>{E(line)}" + (f'<span class="cue">at {cue:g} s</span>' if cue is not None else "") + "</div>"
+            for (sp, line), cue in zip(s["comm"], s["cues"])) + "</div>"
     rig = "".join(f"<code>{E(r)}</code>" for r in s["rig"]) or '<span class="mono">none</span>'
     extra = ""
     if s["hud"]:
@@ -937,16 +1093,32 @@ def shot_card(s):
     states = [f"{a}: {state_of(a, s['clock'])}" for a in D.STATES if a in s["assets"]]
     if states:
         extra += f"<dt>State</dt><dd>{E('; '.join(states))}</dd>"
-    world = "" if s["body"] == "hud" else f"<span>World: {E(D.ENVS[s['map']])}</span>"
+    if light_note(s):
+        extra += f"<dt>Light</dt><dd>{E(light_note(s))}</dd>"
+    world = "" if s["body"] == "hud" else f"<span>World: {E(D.ENVS[world_of(s)])}</span>"
     return f"""<article class="shot" id="shot-{s['n']}">
 <div class="media">{media}<span class="badge n">{s['n']}</span><span class="badge t">{mmss(s['t0'])}–{mmss(s['t1'])} · {s['dur']} s</span></div>
 <div class="body"><h4>{E(s['title'])}</h4>
 <div class="meta"><span>{E(s['cam'])}</span><span>{BODY_LABEL[s['body']]}</span><span>frames {s['f0']}–{s['f1']}</span></div>
-<div class="meta"><span class="clock">{E(s['clock'])}</span><span>{E(s['real'])}</span><span>map {s['map']}</span><span>render class {s['cost']}</span>{world}</div>
+<div class="meta"><span class="clock">{E("no clock" if s['act'] == "P" else s['clock'])}</span><span>{E(s['real'])}</span><span>map {s['map']}</span><span>render class {s['cost']}</span>{world}</div>
 <p class="action">{E(s['action'])}</p>{comm}
-<dl class="rows"><dt>Doctrine</dt><dd>{rule_chips(s['rules'])}</dd>{extra}<dt>VFX</dt><dd>{E(s['vfx'])}</dd>
+<dl class="rows">{f"<dt>Doctrine</dt><dd>{rule_chips(s['rules'])}</dd>" if s['rules'] else ""}{extra}<dt>VFX</dt><dd>{E(s['vfx'])}</dd>
 <dt>Rig</dt><dd>{rig}</dd><dt>Assets</dt><dd>{asset_chips(s['assets'])}</dd><dt>Sound</dt><dd>{E(s['sound'])}</dd></dl>
 </div></article>"""
+
+
+def bench_key(s, keys):
+    """The most specific key for a shot among `keys`: its title, its class in its World preset ('A@C'), its class."""
+    for k in (s["title"], f"{s['cost']}@{world_of(s)}", s["cost"]):
+        if k in keys:
+            return k
+    return None
+
+
+def spf(s):
+    """Seconds per frame for a shot: the most specific measured entry, else its class's estimate."""
+    k = bench_key(s, D.MEASURED)
+    return D.MEASURED[k] if k else ESTIMATE[s["cost"]]
 
 
 def render_budget():
@@ -954,12 +1126,25 @@ def render_budget():
     for c, (name, note) in D.RENDER_CLASSES.items():
         shots = [s for s in D.SHOTS if s["cost"] == c]
         fr = sum(s["dur"] for s in shots) * FPS
-        hrs = fr * SEC_PER_FRAME[c] / 3600
+        hrs = sum(s["dur"] * FPS * spf(s) for s in shots) / 3600
         total += hrs
-        if c in D.MEASURED:
-            note = f"{D.MEASURED[c]:g} s/frame, measured"
+        if any(bench_key(s, D.MEASURED) for s in shots):
+            note = f"{note}, partly measured"
         rows.append((c, name, note, [s["n"] for s in shots], fr, hrs))
     return rows, total
+
+
+def worksheet():
+    """One row per benchmark entry, with the shots it stands for: the gate as arithmetic anyone can do."""
+    keys = [k for k, _ in D.BENCHMARKS]
+    rows = []
+    for k, what in D.BENCHMARKS:
+        shots = [s for s in D.SHOTS if bench_key(s, keys) == k]
+        fr = sum(s["dur"] for s in shots) * FPS
+        est = ESTIMATE[shots[0]["cost"]] if shots else 0
+        rows.append((k, resolve(what), [s["n"] for s in shots], fr, est, D.MEASURED.get(k)))
+    rest = [s for s in D.SHOTS if bench_key(s, keys) is None]
+    return rows, rest
 
 
 def gate_text():
@@ -980,7 +1165,7 @@ def sets_text():
 def batches_text():
     out = []
     for k, env in D.ENVS.items():
-        nums = [s["n"] for s in D.SHOTS if s["map"] == k and s["body"] != "hud"]
+        nums = [s["n"] for s in D.SHOTS if world_of(s) == k and s["body"] != "hud"]
         out.append(f"{env}: {ranges(nums)}")
     return "Render in batches by World preset: " + "; ".join(out) + "."
 
@@ -1010,9 +1195,11 @@ def build_html():
     new_assets = [a for a, v in D.ASSETS.items() if v[1] != "built"]
     concept = [a for a, v in D.ASSETS.items() if v[2]]
     reviews = "".join(
-        f'<h3>{E(rnd)} · on {E(on.lower())}</h3><div class="tbl"><table><thead><tr><th>Lens</th><th>Major issue</th><th>How it was answered</th></tr></thead><tbody>'
-        + "".join(f'<tr><td class="lens">{E(lens)}</td><td>{E(issue)}</td><td>{E(fix)}</td></tr>' for lens, issue, fix in rows)
-        + "</tbody></table></div>" for rnd, on, rows in D.REVIEWS)
+        (f'<h3>{E(rnd)} · on {E(on.lower())}</h3><div class="tbl"><table><thead><tr><th>Lens</th><th>Major issue</th><th>How it was answered</th></tr></thead><tbody>'
+         + "".join(f'<tr><td class="lens">{E(lens)}</td><td>{E(issue)}</td><td>{E(fix)}</td></tr>' for lens, issue, fix in rows)
+         + "</tbody></table></div>") if rows else
+        f'<h3>{E(rnd)} · on {E(on.lower())}</h3><p class="action">No reviewer raised a major issue.</p>'
+        for rnd, on, rows in D.REVIEWS)
     sk = ",\n".join(f"{s['n']}: function () {{ SHIELDS = {'true' if s['shields'] else 'false'}; return {s['sketch']}; }}"
                     for s in D.SHOTS if s["sketch"])
     lib = (SB / "sketchlib.js").read_text()
@@ -1038,14 +1225,14 @@ def build_html():
 <div class="tbl"><table><thead><tr><th>Key number</th><th>Value</th><th>Source</th></tr></thead><tbody>{keyn}</tbody></table></div>
 </section>
 <section id="film"><h2>Film rules</h2>
-<div class="grid2"><div class="card"><h3>Lighting</h3>{lis(D.LIGHTING)}</div>
+<div class="grid2"><div class="card"><h3>Lighting</h3>{lis(D.LIGHTING + [resolve(eclipse_text())])}</div>
 <div class="card"><h3>Mission clock and HUD</h3>{lis(D.CLOCK_HUD)}</div>
 <div class="card"><h3>Screen direction</h3>{lis(D.SCREEN_DIRECTION)}</div>
 <div class="card"><h3>Camera bodies and sound</h3><dl class="kv">{bodies}</dl></div></div>
 </section>
 <section id="timeline"><h2>Film time and mission time</h2><figure class="figure"><div class="scrollx">{timeline_svg()}</div></figure></section>
 <section id="maps"><h2>Tactical maps</h2>
-<div class="legend"><span><i class="lg-lref"></i>LREF</span><span><i class="lg-comp"></i>Maren Compact</span><span><i class="lg-mis"></i>missile track</span><span><i class="lg-kin"></i>kinetic rounds</span><span><i class="lg-spinal"></i>spinal shot</span><span><span class="sw lg-sky"></span>Site 1's sky</span><span><span class="sw lg-shadow"></span>Anchor's shadow</span></div>
+<div class="legend"><span><i class="lg-lref"></i>LREF</span><span><i class="lg-comp"></i>Maren Compact</span><span><i class="lg-mis"></i>missile track</span><span><i class="lg-kin"></i>kinetic rounds</span><span><i class="lg-spinal"></i>spinal shot</span><span><span class="sw lg-sky"></span>Site 1's sky</span><span><span class="sw lg-shadow"></span>shadow</span></div>
 <div class="maps">{maps}</div></section>
 <section id="shots"><h2>Shot list</h2>{"".join(acts_html)}</section>
 <section id="production"><h2>Production</h2>
@@ -1086,13 +1273,14 @@ def write_csv():
     with open(SB / "shots.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["shot", "act", "title", "film_start_s", "film_end_s", "frame_start", "frame_end", "duration_s",
-                    "mission_clock", "time_treatment", "camera", "camera_body", "world", "action", "comms", "on_screen",
-                    "doctrine", "state", "vfx", "rig", "assets", "sound", "render_class", "map", "reference_frame"])
+                    "mission_clock", "time_treatment", "camera", "camera_body", "world", "viewer_sees", "action", "comms",
+                    "on_screen", "doctrine", "state", "light", "vfx", "rig", "assets", "sound", "render_class", "map",
+                    "reference_frame"])
         for s in D.SHOTS:
             w.writerow([s["n"], s["act"], s["title"], s["t0"], s["t1"], s["f0"], s["f1"], s["dur"], s["clock"],
-                        s["real"], s["cam"], s["body"], "" if s["body"] == "hud" else D.ENVS[s["map"]], s["action"],
-                        " | ".join(f"{a}: {b}" for a, b in s["comm"]), " | ".join(s["hud"]), " ".join(s["rules"]),
-                        "; ".join(f"{a}: {state_of(a, s['clock'])}" for a in D.STATES if a in s["assets"]),
+                        s["real"], s["cam"], s["body"], "" if s["body"] == "hud" else D.ENVS[world_of(s)], s["see"],
+                        s["action"], " | ".join(comm_text(s)), " | ".join(s["hud"]), " ".join(s["rules"]),
+                        "; ".join(f"{a}: {state_of(a, s['clock'])}" for a in D.STATES if a in s["assets"]), light_note(s),
                         s["vfx"], "; ".join(s["rig"]), " ".join(s["assets"]), s["sound"],
                         s["cost"], s["map"], s["render"] or ""])
 
@@ -1107,7 +1295,7 @@ def write_md():
          "; ".join(f"**{k}** {v[0]} ({v[1]})" for k, v in D.RENDER_CLASSES.items()) + ".", "",
          "## Mission phases", "", "| Mission time | Phase | What happens |", "|---|---|---|"]
     L += [f"| {a}–{b} | {n} | {d} |" for a, b, n, d in D.PHASES]
-    L += ["", "## Film rules", "", "**Lighting**", ""] + [f"- {x}" for x in D.LIGHTING]
+    L += ["", "## Film rules", "", "**Lighting**", ""] + [f"- {x}" for x in D.LIGHTING + [resolve(eclipse_text())]]
     L += ["", "**Mission clock and HUD**", ""] + [f"- {x}" for x in D.CLOCK_HUD]
     L += ["", "**Screen direction**", ""] + [f"- {x}" for x in D.SCREEN_DIRECTION]
     L += ["", "**Camera bodies**", ""] + [f"- {v}" for v in D.CAMERA_BODIES.values()]
@@ -1120,16 +1308,19 @@ def write_md():
                   f"- **Film:** {mmss(s['t0'])}–{mmss(s['t1'])} ({s['dur']} s), frames {s['f0']}–{s['f1']}",
                   f"- **Mission:** {s['clock']} · {s['real']}",
                   f"- **Camera:** {s['cam']} ({BODY_LABEL[s['body']]})",
+                  f"- **Viewer sees:** {s['see']}",
                   f"- **Action:** {s['action']}"]
             if s["comm"]:
-                L.append("- **Comms:** " + " / ".join(f"{a}: “{b}”" for a, b in s["comm"]))
+                L.append("- **Comms:** " + " / ".join(comm_text(s, quote=True)))
             if s["hud"]:
                 L.append("- **On screen:** " + " · ".join(f"`{h}`" for h in s["hud"]))
             states = [f"{a}: {state_of(a, s['clock'])}" for a in D.STATES if a in s["assets"]]
             if states:
                 L.append("- **State:** " + "; ".join(states))
+            if light_note(s):
+                L.append(f"- **Light:** {light_note(s)}")
             if s["body"] != "hud":
-                L.append(f"- **World:** {D.ENVS[s['map']]}")
+                L.append(f"- **World:** {D.ENVS[world_of(s)]}")
             L += [f"- **Doctrine:** {', '.join(s['rules'])}",
                   f"- **VFX:** {s['vfx']}",
                   f"- **Rig:** {'; '.join(s['rig']) if s['rig'] else 'none'}",
@@ -1137,6 +1328,39 @@ def write_md():
                   f"- **Sound:** {s['sound']}",
                   f"- **Render class:** {s['cost']} · **Map:** {s['map']}" + (f" · **Reference frame:** `{s['render']}`" if s["render"] else "")]
     (SB / "shots.md").write_text("\n".join(L) + "\n")
+
+
+def comm_text(s, quote=False):
+    """The shot's lines as 'SPEAKER: line', with their cue when they have one."""
+    q = (lambda x: f"“{x}”") if quote else (lambda x: x)
+    return [f"{sp}: {q(line)}" + (f" (at {cue:g} s)" if cue is not None else "") for (sp, line), cue in zip(s["comm"], s["cues"])]
+
+
+def audience_clock(s):
+    """The mission clock as a viewer sees it over a shot."""
+    if s["act"] == "P":
+        return "no clock yet"
+    t0, t1 = clock_s(s["clock"]), shot_end(s)
+    if t1 is None or t1 - t0 < 10:
+        return fmt_clock(t0)
+    return f"{fmt_clock(t0)} → {fmt_clock(t1)} (the clock runs fast)"
+
+
+def write_audience():
+    """What a viewer gets and nothing else: the picture, the words on screen, the lines, the sound, the clock.
+    It is the only file the cold-read test sees."""
+    L = [f"# {D.TITLE}: the film as a viewer gets it", "",
+         f"{RUNTIME // 60}:{RUNTIME % 60:02d}, {len(D.SHOTS)} shots. Each shot gives the mission clock shown in the corner "
+         "(from the arrival), what is on screen, any text on screen, the subtitled lines (speaker tags are shown as "
+         "written), and the sound.", ""]
+    for s in D.SHOTS:
+        L += [f"## {s['n']}. ({s['dur']} s) · clock {audience_clock(s)}", "", s["see"]]
+        if s["hud"]:
+            L.append("On screen: " + " · ".join(f"“{h}”" for h in s["hud"]))
+        for sp, line in s["comm"]:
+            L.append(f"> **{sp}:** {line}")
+        L += [f"Sound: {s['sound']}", ""]
+    (SB / "audience_script.md").write_text("\n".join(L) + "\n")
 
 
 ASSET_GROUPS = [
@@ -1185,7 +1409,20 @@ def write_assets():
     L += [f"| | **Total** | | {len(D.SHOTS)} shots | {FRAMES:,} | **{total:,.1f} h** |",
           f"| | With {MARGIN:.0%} for re-renders | | | | **{total * (1 + MARGIN):,.1f} h** |", "",
           D.RENDER_NOTE + " The ceiling is a week (168 h) per full pass.", "", gate_text(), "",
-          "## Production plan", ""]
+          "### The benchmark worksheet", "",
+          "Each benchmark stands for the shots listed. Fill in the measured column; each row's hours are frames × s/frame ÷ 3,600. "
+          "Add the rows, multiply by 1.3 for re-renders, and compare with the gate "
+          f"({D.GATE_HOURS} h). Then send the measured numbers back to the storyboard session, which enters them in "
+          "`MEASURED` and rebuilds the board with them.", "",
+          "| Entry | Benchmark | Stands for (shots) | Frames | Estimate, s/frame | Measured, s/frame | Hours at the estimate |",
+          "|---|---|---|---|---|---|---|"]
+    rows, rest = worksheet()
+    L += [f"| `{k}` | {what} | {ranges(ns) or '—'} | {fr:,} | {est:g} | {m if m is not None else ''} | {fr * est / 3600:,.1f} h |"
+          for k, what, ns, fr, est, m in rows]
+    rest_fr = sum(s["dur"] for s in rest) * FPS
+    rest_h = sum(s["dur"] * FPS * spf(s) for s in rest) / 3600
+    L += [f"| — | not benchmarked: their class estimates stand | {ranges([s['n'] for s in rest])} | {rest_fr:,} | — | — | {rest_h:,.1f} h |",
+          "", "## Production plan", ""]
     L += [f"- **{k}:** {v}" for k, v in [("Sets", sets_text()), ("Batches", batches_text())] + list(D.PRODUCTION_PLAN)]
     (ROOT / "ASSET_REQUESTS.md").write_text("\n".join(L) + "\n")
 
@@ -1207,6 +1444,7 @@ def main():
     write_csv()
     write_md()
     write_assets()
+    write_audience()
     budget, total = render_budget()
     print(f"{len(D.SHOTS)} shots, {RUNTIME} s ({RUNTIME // 60}:{RUNTIME % 60:02d}), {FRAMES} frames; "
           f"render estimate {total:,.0f} h, {total * (1 + MARGIN):,.0f} h with margin")

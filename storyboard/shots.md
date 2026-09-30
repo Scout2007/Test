@@ -1,8 +1,8 @@
 # Operation Tidebreak: shot list
 
-Revision 4 · after review round 3. Runtime 4:08 (5,952 frames at 24 fps), 61 shots, mission span T+0:00 → T+8:24, 2.39:1 · 1920×804 · 24 fps · Cycles. Generated from `storyboard/tidebreak_data.py`; the page with maps and sketches is `storyboard/index.html`.
+Revision 5 · the eclipse, the prologue and the new dialogue. Runtime 5:55 (8,520 frames at 24 fps), 65 shots, mission span T+0:00 → T+8:24, 2.39:1 · 1920×804 · 24 fps · Cycles. Generated from `storyboard/tidebreak_data.py`; the page with maps and sketches is `storyboard/index.html`.
 
-Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_doctrine.md` (HO, HD, H). Asset IDs refer to `ASSET_REQUESTS.md`. Render classes: **A** Endeavor close-up (~45 s/frame); **A2** Endeavor close-up with heavy FX (~90 s/frame); **V** Close-up with a hero volume (the water dump) (~250 s/frame); **B** One hero ship or rock, full view (~75 s/frame); **C** Several ships or heavy FX (FX in own layers) (~200 s/frame); **S** Small subject on black with its FX (up to ~350 px) (~30 s/frame); **P** Locked camera: a plate rendered once, plus one moving layer (~30 s/frame); **D** Wide, distant, small subject on black, or plate (~15 s/frame); **E** 2D comp / HUD (~2 s/frame).
+Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_doctrine.md` (HO, HD, H). Asset IDs refer to `ASSET_REQUESTS.md`. Render classes: **A** Endeavor close-up (~45 s/frame); **A2** Endeavor close-up with heavy FX (~90 s/frame); **V** Close-up with a hero volume (the water dump) (~250 s/frame); **B** One hero ship or rock, full view (~75 s/frame); **C** Several ships or heavy FX (FX in own layers) (~200 s/frame); **S** Small subject on black with its FX (up to ~350 px) (~30 s/frame); **P** Locked camera: a plate or two rendered once, plus one moving layer (~30 s/frame); **D** Wide, distant, small subject on black, or plate (~15 s/frame); **E** 2D comp / HUD (~2 s/frame).
 
 ## Mission phases
 
@@ -14,35 +14,37 @@ Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_do
 | T+3:20–T+4:34 | The Breakers | Fins stowed in the debris. Site 1 dazzles; the pods wake; the Canterbury is lost (T+3:52); the Astrid answers; drones wake; the Normandy is lost (T+4:25). |
 | T+4:34–T+5:09 | Turnover | Flip (49 s) and brake at 1 g for 34 min, ending on Anchor's orbital velocity (1.63 km/s; thrust tilted ~4.7°). |
 | T+5:09–T+5:43 | Anchor | An 18 km rock that at T+5:09 lies over Site 1. The fleet sweeps it (a mine) but can't finish before the heat forces the fins out; it loses the port fin to a platform 400 km off, lances a frigate hidden on a moonlet, kills the platform, and vents again with three fins (94 % → 31 %). |
-| T+5:43–T+7:51 | Final approach | The pack stays at Anchor as a fire base, guarded by the Donnager and the Wallfish, in the slot of the rock's shadow that hides it from Site 1 and, after T+6:55, the western site. The rest fly an inertial path of ~113,000 km: 1 g to 20 km/s (burn tilted ~4.5° to cancel the rock's orbital velocity), coast, a turnover at T+7:16 under smoke and an EW peak, one ship at a time (D8), then brake to a stop ~8,500 km from Breakwater (T+7:51), holding station on it. The Astrid, trailing, stops 10,000 km out. Site 1 dazzles and burns from the moment the fleet clears the shadow; the fleet rolls, lays smoke and dazzles back at low power. Skerry's five nets on the lane from T+6:40, ten minutes apart, side-stepped one by one; its sixth salvo sweeps past Anchor as the pack fires (T+7:07), with the garrison's last drones behind it, and the guard kills them. Breakwater's answer to ~900 inbound birds is its 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31). |
-| T+7:07–T+7:58 | Hammer and anvil | Each wave leaves Anchor in one launch and flies one 45-minute profile, killers, decoys and EW birds together, so the defender can't sort them by launch time or speed (O3). The spend wave (the Infinity, ~570) leaves at T+7:07 and lands at T+7:52:00; the kill wave (the Galactica: ~40 Casaba killers among ~300 decoy and EW birds) leaves at T+7:08:30 and lands at T+7:53:30, each within a second. Both fly straight in, nose-on to Breakwater and ~49° off its zenith, so misses and wreckage clear Maren. The Casaba jets cut the drive. The Astrid hails, then fires from rest at T+7:54:40, 15° off Breakwater's zenith; impact T+7:57:29. |
-| T+7:58–T+8:24 | Terms | The Endeavor's arrays stand down when Breakwater dies; the Astrid keeps Site 1 dazzled. Sink 98 %: the Endeavor dumps water (T+8:00), which buys it to ~T+8:30. Maren asks for terms (T+8:10). Site 1 goes dark; the fleet vents at last (T+8:24). |
+| T+5:43–T+7:51 | Final approach | The pack stays at Anchor as a fire base, guarded by the Donnager and the Wallfish, in the slot of the rock's shadow that hides it from Site 1 and, after T+6:55, the western site. The rest fly an inertial path of ~113,000 km: 1 g to 20 km/s (burn tilted ~4.5° to cancel the rock's orbital velocity), coast, a turnover at T+7:16 under smoke and an EW peak, one ship at a time (D8), then brake to a stop ~8,500 km from Breakwater (T+7:51), holding station on it. The Astrid, trailing, stops 10,000 km out. Site 1 dazzles and burns from the moment the fleet clears the shadow; the fleet rolls, lays smoke and dazzles back at low power. Skerry's five nets on the lane from T+6:40, ten minutes apart, side-stepped one by one; its sixth salvo, steered onto the pack's slot in its last hour, sweeps through as the pack fires (T+7:07); the pack has slid 20 km down the shadow, and the guard kills the garrison's last drones behind the clouds. Breakwater's answer to ~900 inbound birds is its 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31). |
+| T+7:07–T+7:58 | Hammer and anvil | Each wave leaves Anchor in one launch and flies one 45-minute profile, boosting at the killers' 30 g (the multi-packs throttle down), killers, decoys and EW birds together, so the defender can't sort them by launch, boost, speed or signature (O3). The spend wave is mostly decoy, EW and kill-cloud birds with a few dozen warheads fused to burst 1–3 km out: it strips the sensors, radiators and point defence on the side facing it and leaves the hull whole. The spend wave (the Infinity, ~570) leaves at T+7:07 and lands at T+7:52:00; the kill wave (the Galactica: ~40 Casaba killers among ~300 decoy and EW birds) leaves at T+7:08:30 and lands at T+7:53:30, each within a second. Both fly straight in, nose-on to Breakwater and ~49° off its zenith, so misses and wreckage clear Maren. The Casaba jets cut the drive. The Astrid hails, then fires from rest at T+7:54:40, 15° off Breakwater's zenith; impact T+7:57:29. |
+| T+7:58–T+8:24 | Terms | The Endeavor's arrays stand down when Breakwater dies; the Astrid keeps Site 1 dazzled. Sink 98 %: the Endeavor dumps water (T+8:00), which buys it to ~T+8:30. Maren asks for terms (T+8:10): Site 1 dark, and the charts of the Breakers' mines. Site 1 goes dark; the fleet vents at last (T+8:24). |
 
 ## Film rules
 
 **Lighting**
 
-- The sun sits behind Maren, about 30° off the approach line and ~12° above the ring plane: Maren's axis tilts like Earth's and the battle falls about a month from its equinox, so nothing at Breakwater's height passes through Maren's shadow. From the fleet Maren is a thin crescent with a bright limb, and the Breakers glow faintly lit from behind (dust scatters forward).
+- The sun sits behind Maren, about 33° off the approach line and in the ring plane: the battle falls at Maren's equinox. From the fleet Maren is a thin crescent with a bright limb, and the Breakers glow faintly lit from behind (dust scatters forward).
 - Hulls are lit hard from ahead and to one side; the shadow side falls to black. No stars behind sunlit hulls.
-- Anchor's lee faces away from both Site 1 and the sun. The Endeavor sits within ~9 km of the rock's surface, where the two shadows overlap, so the fins, muzzle flashes and the lance light the scene (the M-1C 'fins1dark' look).
+- Anchor's lee faces away from both Site 1 and the sun. The Endeavor sits ~6 km off the rock's surface on the bisector of the two shadows (map C), ~4 km inside each, and holds that spot through every lee shot; the fins, muzzle flashes and the lance light the scene (the M-1C 'fins1dark' look).
 - At the end Site 1 is on the night side: a long lens sees its lights go out, and the final frame puts the Endeavor against the night side's city lights, with the sun kept just out of frame so they read.
+- Maren's shadow reaches past Breakwater's orbit. Breakwater is in it from T+6:47:41; its sunrise falls inside 60: first light T+7:55:12, full sun T+7:57:20, before the slug lands. The escorts are in the shadow from T+7:24:36 to T+8:06:09–T+8:08:17, and the Astrid, at its stop, until T+8:00:03–T+8:02:10. In the shadow nothing is sunlit: hulls are lit by the thin red ring of Maren's atmosphere (sunlight bent round the limb), the night side's city glow from below, and their own lenses, plumes and flashes. First light is red through the limb and turns white as the sun clears it.
 
 **Mission clock and HUD**
 
-- The mission clock is small, persistent and clear of the subtitles. It starts on the flash in shot 1 (T+0:00:00).
+- The prologue is text on the stars and has no clock. The mission clock is small, persistent and clear of the subtitles; it starts on the flash in shot 4 (T+0:00:00).
 - It runs at the shot's rate: spinning seconds mean compressed time, crawling ones slowed. Every jump of 30 minutes or more rolls the digits.
 - One master tactical plot, always with Maren screen right. Geography inserts hold for at least 5 s, and their labels count toward the reading-speed ceiling like subtitles.
-- The SINK readout appears only on HUD inserts and on hull-camera shots where the heat matters, with values that build to the dump: 94 % (31), 31 % (42), 88 % (49), 98 % (58).
-- Subtitles read at no more than 12 characters a second over the shot, and nearer 10 where a line waits for an event.
+- The SINK readout appears only on HUD inserts and on hull-camera shots where the heat matters, with values that build to the dump: 94 % (34), 31 % (45), 63 % (47, the one drone-camera exception, since that shot is about the heat Site 1 puts on the fleet), 88 % (53), 98 % (62).
+- Subtitles read at no more than 12 characters a second over the shot, or over its dialogue group when an exchange runs over quick cuts; a line that waits for an event carries its cue, and the builder checks it within its own window.
+- Record captions name each ship or place once, the first time the film shows it (L.R.E.F.S. ENDEAVOR · CRUISER). They count toward the reading speed like any text.
 - Subtitles and the clock go in during the edit, after the grade, so a changed line never forces a re-render.
 
 **Screen direction**
 
 - Maren and the enemy stay screen right. The LREF travels and fires left to right.
-- Until the turnover (shot 28) bows point right. After it bows point left while travel stays left to right, so the drives burn toward screen right.
+- Until the turnover (shot 31) bows point right. After it bows point left while travel stays left to right, so the drives burn toward screen right.
 - The final approach repeats the pattern: bows right from Anchor to the second turnover (T+7:16), bows left while braking, and the Astrid swings its bow back to screen right for the spinal shot.
-- At Anchor the Endeavor's bow points at the frigate's moonlet. The frigate, off the port bow, is the one enemy on screen left; the platform, off the port quarter, stays screen right. Shots 32–41 share that axis: the platform's slugs and the broadside cross from and toward the right, the lance from right to left.
-- The kill wave, the Casaba jets and the spinal slug come in from screen left, the side the waves and the Astrid are on, and Breakwater faces them from screen right (51–57).
+- At Anchor the Endeavor's bow points at the frigate's moonlet. The frigate, off the port bow, is the one enemy on screen left; the platform, off the port quarter, stays screen right. Shots 35–44 share that axis: the platform's slugs and the broadside cross from and toward the right, the lance from right to left.
+- The kill wave, the Casaba jets and the spinal slug come in from screen left, the side the waves and the Astrid are on, and Breakwater faces them from screen right (55–61).
 - Enemy reverses only over an enemy foreground.
 
 **Camera bodies**
@@ -56,78 +58,133 @@ Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_do
 
 | # | Film | Frames | Mission clock | Time | Title | Camera | Doctrine |
 |---|---|---|---|---|---|---|---|
-| 1 | 0:00.0–0:06.0 | 1–144 | T+0:00:00 | 1:1 | Black, then a star | EWS · 35 mm · locked off (drone camera) | O1 |
-| 2 | 0:06.0–0:10.0 | 145–240 | T+0:00:06 | 1:1 | Rings cool | CU · 50 mm · slow push along the bow ring truss (hull camera) | O1 |
-| 3 | 0:10.0–0:15.0 | 241–360 | T+0:00:10 | compressed 7× (13 exits over ~36 s) | The task group | EWS · 85 mm · locked off, far out on the group's flank (drone camera) | O1 D2 |
-| 4 | 0:15.0–0:20.0 | 361–480 | T+0:02:00 | compressed 8× (~40 s) | Shields to the park | MS · 35 mm · riding the shield's backplate, looking back at the bow (hull camera) | O1 D9 D11 |
-| 5 | 0:20.0–0:23.0 | 481–552 | T+0:02:40 | compressed 10× (the booms run out over ~30 s) | Net up | MS · 40 mm · off the Canterbury's bow (drone camera) | O2 D10 |
-| 6 | 0:23.0–0:26.0 | 553–624 | T+0:03:20 | compressed 10× (the slew takes ~30 s) | The Astrid looks | MS · 50 mm · along the Astrid's dorsal hull (drone camera) | O2 D3 |
-| 7 | 0:26.0–0:32.0 | 625–768 | T+0:04:10 | 1:1 | Skerry throws | HUD insert · the Astrid's telescope feed, 2,000 mm equivalent (HUD insert) | HO3 HO5 O2 |
-| 8 | 0:32.0–0:39.0 | 769–936 | T+0:09:00 | compressed ~43× (the picture builds over ~5 min) | The picture | HUD insert · the master plot (HUD insert) | O2 D3 |
-| 9 | 0:39.0–0:44.0 | 937–1056 | T+0:18:00 | 1:1 | Wave one | WS · 24 mm · on the Infinity's hull, shaking with each launch (hull camera) | O3 O9 D3 |
-| 10 | 0:44.0–0:47.0 | 1057–1128 | T+0:19:00 | 1:1 | Birds away | CU · 85 mm · a drone camera pacing one missile (cinematic licence: it keeps up with a 30 g boost) (drone camera) | O3 O9 |
-| 11 | 0:47.0–0:53.0 | 1129–1272 | T+0:25:00 | compressed 8× (the turn takes ~49 s) | Turn and burn | EWS · 400 mm · the whole group (tracker) | O1 D2 |
-| 12 | 0:53.0–0:57.0 | 1273–1368 | T+1:02:00 | compressed 5× (~20 s of hits); the digits roll 36 min into it | Skerry burns | EWS · 1,200 mm · Skerry a quarter-frame disc (tracker) | O3 O9 HO8 |
-| 13 | 0:57.0–1:03.0 | 1369–1512 | T+1:10:00 | compressed; the digits roll through a 2 h 10 min coast | Fins edge-on | MS · 40 mm · arcing round to dead ahead (drone camera) | D3 |
-| 14 | 1:03.0–1:07.0 | 1513–1608 | T+3:20:00 | 1:1 | The Breakers | WS · 24 mm · tracking alongside (drone camera) | O8 D3 D5 D6 |
-| 15 | 1:07.0–1:10.0 | 1609–1680 | T+3:30:00 | 1:1 | Blind | CU · 85 mm · the sensor mast, with its POV feed inset (hull camera) | HO5 |
-| 16 | 1:10.0–1:13.0 | 1681–1752 | T+3:40:00 | compressed 10× (~30 s) | The belt wakes | WS · 40 mm · beside a rock ahead of the fleet (drone camera) | HO2 HD3 |
-| 17 | 1:13.0–1:14.0 | 1753–1776 | T+3:45:00 | 1:1 | Spin-up | ECU · 100 mm · a CIWS (hull camera) | D1 |
-| 18 | 1:14.0–1:17.0 | 1777–1848 | T+3:45:01 | 1:1 | Lenses | ECU · 135 mm · a laser focusing array on its yoke (hull camera) | D1 |
-| 19 | 1:17.0–1:21.0 | 1849–1944 | T+3:45:04 | 1:1 | Countermeasures | MS · 35 mm · along the port flank (drone camera) | D1 |
-| 20 | 1:21.0–1:23.0 | 1945–1992 | T+3:52:00 | 1:1 | The platform | WS · 50 mm · over the platform's shoulder (drone camera) | HO1 HO2 HO9 |
-| 21 | 1:23.0–1:25.0 | 1993–2040 | T+3:52:05 | compressed 4× (13 s flight) | Canterbury | Tracker · 1,500 mm · from the Extenuating Circumstances (tracker) | D4 |
-| 22 | 1:25.0–1:30.0 | 2041–2160 | T+3:52:13 | 1:1 | Holed | Tracker · 1,500 mm · holding on the Canterbury (tracker) | HO9 |
-| 23 | 1:30.0–1:34.0 | 2161–2256 | T+3:52:38 | 1:1 (the last degrees of the slew; it fires two seconds in) | Answer | EWS · 135 mm · the Astrid in profile, bow screen right (drone camera) | O4 |
-| 24 | 1:34.0–1:37.0 | 2257–2328 | T+3:54:28 | the clock jumps 108 s from the shot | Payback | WS · 50 mm · the platform shot's framing (drone camera) | O4 |
-| 25 | 1:37.0–1:41.0 | 2329–2424 | T+4:10:00 | compressed ~30× (2 min) | Screens out | WS · 28 mm · behind the corvettes (drone camera) | HO4 D6 O7 |
-| 26 | 1:41.0–1:46.0 | 2425–2544 | T+4:14:00 | 1:1 | Return to sender | HUD insert · the Extenuating Circumstances' plot (HUD insert) | O5 HD9 D10 |
-| 27 | 1:46.0–1:51.0 | 2545–2664 | T+4:25:00 | 1:1 | Normandy | Tracker · 800 mm · from the Wallfish (tracker) | HO4 |
-| 28 | 1:51.0–1:57.0 | 2665–2808 | T+4:34:10 | rotation at ~4×, the middle of the 49 s flip cut out | Turnover | WS · 24 mm · on the dorsal hull looking aft (hull camera) | D8 O8 |
-| 29 | 1:57.0–2:02.0 | 2809–2928 | T+5:08:00 | 1:1; the digits roll 33 min into it | Anchor | HUD insert · the master plot, zoomed (HUD insert) | D5 D2 |
-| 30 | 2:02.0–2:06.0 | 2929–3024 | T+5:09:00 | compressed ~20× (minutes) | The sweep | WS · 24 mm · low over Anchor's surface (drone camera) | O8 D6 O4 |
-| 31 | 2:06.0–2:10.0 | 3025–3120 | T+5:12:00 | compressed 5× (the fins take ~20 s) | Too hot | MS · 35 mm · on the stern shoulder (hull camera) | D3 D5 |
-| 32 | 2:10.0–2:11.0 | 3121–3144 | T+5:13:00 | 1:1 | The flash | Tracker · 1,200 mm · on a rock 400 km off the port quarter (tracker) | HO7 HO1 |
-| 33 | 2:11.0–2:14.0 | 3145–3216 | T+5:13:01 | compressed 5× (the fins crawl in against a 16 s flight) | Fins in | MS · 35 mm · the same shoulder, the clock large (hull camera) | HO7 HO1 D3 |
-| 34 | 2:14.0–2:17.0 | 3217–3288 | T+5:13:16 | 1:1 | Fin hit | CU · 50 mm · on the port fin (hull camera) | HO7 D7 |
-| 35 | 2:17.0–2:21.0 | 3289–3384 | T+5:13:30 | 1:1 | Off the port bow | Hull camera · 600 mm · on the Endeavor's port side (hull camera) | HO6 O6 |
-| 36 | 2:21.0–2:23.0 | 3385–3432 | T+5:13:53 | 1:1 | Lance channels | CU · 28 mm · the Endeavor's nose (hull camera) | O12 |
-| 37 | 2:23.0–2:25.0 | 3433–3480 | T+5:13:55 | 1:1 | Lance | Tracker · 1,000 mm · on the frigate, 45 km out (tracker) | O12 O6 |
-| 38 | 2:25.0–2:28.0 | 3481–3552 | T+5:14:00 | compressed 5× (the roll) | Broadside | MS · 35 mm · the port batteries, the rock beyond (hull camera) | O6 O4 D3 |
-| 39 | 2:28.0–2:32.0 | 3553–3648 | T+5:14:15 | compressed 2× (the ~8 s wake) | Rails wake | CU · 50 mm · on one M-1C turret (hull camera) | O4 O6 |
-| 40 | 2:32.0–2:35.0 | 3649–3720 | T+5:14:23 | 1:1 | Fire | CU · 85 mm · on the barrels and the crest vent (hull camera) | O4 O6 |
-| 41 | 2:35.0–2:37.0 | 3721–3768 | T+5:14:40 | the clock jumps 16 s of flight from the shot | The platform dies | Tracker · 1,200 mm · the flash's framing (tracker) | O4 |
-| 42 | 2:37.0–2:45.0 | 3769–3960 | T+5:40:00 | 1:1 | The fire plan | HUD insert · the master plot (HUD insert) | O9 O3 O10 O11 D11 |
-| 43 | 2:45.0–2:49.0 | 3961–4056 | T+6:40:00 | compressed ~30× (2 min); the digits roll 60 min into it | The net | WS · 50 mm · over the Extenuating Circumstances (drone camera) | HO3 D4 O8 |
-| 44 | 2:49.0–2:53.0 | 4057–4152 | T+6:55:00 | compressed ~15× (a minute) | Site One | WS · 40 mm · ahead of the Extenuating Circumstances (drone camera) | HO5 D1 D3 O5 |
-| 45 | 2:53.0–2:58.0 | 4153–4272 | T+7:06:57 | 1:1 | The pack fires | WS · 24 mm · among the pack, 150 km down Anchor's shadow, looking toward Breakwater (drone camera) | O3 O11 D11 D6 HO3 HO4 |
-| 46 | 2:58.0–3:01.0 | 4273–4344 | T+7:08:30 | 1:1 | Kill wave away | Tracker · 300 mm · from the Pillar of Autumn, across Anchor's shadow (tracker) | O3 O10 O11 |
-| 47 | 3:01.0–3:05.0 | 4345–4440 | T+7:25:00 | compressed 10× (the ripple takes ~40 s) | The anvil | WS · 40 mm · above Breakwater, Maren's night side below (drone camera) | HD7 HO9 HD1 HO1 D1 |
-| 48 | 3:05.0–3:08.0 | 4441–4512 | T+7:31:00 | 1:1 | Umbrella | Tracker · 400 mm · from the Extenuating Circumstances, the Astrid 50 km above (tracker) | D1 D2 D10 HO9 O13 |
-| 49 | 3:08.0–3:12.0 | 4513–4608 | T+7:50:00 | 1:1 | Blind it | MS · 35 mm · the Endeavor's laser arrays (hull camera) | O5 HD9 |
-| 50 | 3:12.0–3:16.0 | 4609–4704 | T+7:52:00 | 1:1 | The spend wave | Tracker · 250 mm · from the Astrid, Maren's limb in frame (tracker) | O3 O5 HD5 |
-| 51 | 3:16.0–3:20.0 | 4705–4800 | T+7:53:14 | compressed ~3.5× (the last 14 s of flight) | Seeker | ECU · 100 mm · riding a Casaba killer's nose (drone camera) | O3 O10 HD5 |
-| 52 | 3:20.0–3:24.0 | 4801–4896 | T+7:53:28 | slowed 5× (the wave arrives within ~1 s) | Wall of fire | WS · 40 mm · above Breakwater (drone camera) | O3 HD5 O9 |
-| 53 | 3:24.0–3:28.0 | 4897–4992 | T+7:53:30 | slowed 3× | Casaba | WS · 35 mm · off Breakwater's quarter (drone camera) | O10 |
-| 54 | 3:28.0–3:33.0 | 4993–5112 | T+7:54:00 | 1:1 | The hail | MS · 50 mm · slow push on Breakwater over the night side (drone camera) | O10 |
-| 55 | 3:33.0–3:36.0 | 5113–5184 | T+7:54:38 | 1:1 (the last degree of the slew; it fires two seconds in, at T+7:54:40) | Spinal | MS · 200 mm · the Astrid end-on (drone camera) | O4 O10 HD7 O9 |
-| 56 | 3:36.0–3:42.0 | 5185–5328 | T+7:54:41 | compressed ~27× (163 of the slug's 169 s; the clock races) | The wait | WS · 35 mm · locked off at the Casaba shot's angle (drone camera) | O10 |
-| 57 | 3:42.0–3:45.0 | 5329–5400 | T+7:57:29 | 1:1 | Impact | WS · 35 mm · the Casaba shot's angle (drone camera) | O4 |
-| 58 | 3:45.0–3:49.0 | 5401–5496 | T+8:00:00 | 1:1 | Heat | MS · 35 mm · along the Endeavor's scorched port flank (hull camera) | D3 D7 |
-| 59 | 3:49.0–3:58.0 | 5497–5712 | T+8:10:00 | 1:1 | Terms | Tracker · 2,000 mm · from the Endeavor's standoff (tracker) | O4 D7 |
-| 60 | 3:58.0–4:01.0 | 5713–5784 | T+8:24:00 | 1:1 | Site One goes dark | Tracker · 2,000 mm · on Site 1's plateau, night side (tracker) | §13 D3 |
-| 61 | 4:01.0–4:08.0 | 5785–5952 | T+8:24:03 | 1:1 | Hold | EWS · 35 mm · locked off, the Endeavor end-on (drone camera) | D3 |
+| 1 | 0:00.0–0:07.0 | 1–168 | T+0:00:00 | before the record: no mission clock | The record | Title card · white text over a still starfield (HUD insert) |  |
+| 2 | 0:07.0–0:20.0 | 169–480 | T+0:00:00 | before the record: no mission clock | Maren | Title card · white text over a still starfield (HUD insert) |  |
+| 3 | 0:20.0–0:34.0 | 481–816 | T+0:00:00 | before the record: no mission clock | Orders | Title card · white text over a still starfield (HUD insert) | §13 |
+| 4 | 0:34.0–0:40.0 | 817–960 | T+0:00:00 | 1:1 | Black, then a star | EWS · 35 mm · locked off (drone camera) | O1 |
+| 5 | 0:40.0–0:44.0 | 961–1056 | T+0:00:06 | 1:1 | Rings cool | CU · 50 mm · slow push along the bow ring truss (hull camera) | O1 |
+| 6 | 0:44.0–0:52.0 | 1057–1248 | T+0:00:10 | compressed 7× (13 exits over ~56 s) | The task group | EWS · 85 mm · locked off, far out on the group's flank (drone camera) | O1 D2 |
+| 7 | 0:52.0–0:58.0 | 1249–1392 | T+0:02:00 | compressed 7× (~40 s) | Shields to the park | MS · 35 mm · riding the shield's backplate, looking back at the bow (hull camera) | O1 D9 D11 |
+| 8 | 0:58.0–1:01.0 | 1393–1464 | T+0:02:45 | compressed 10× (the booms run out over ~30 s) | Net up | MS · 40 mm · off the Canterbury's bow (drone camera) | O2 D10 |
+| 9 | 1:01.0–1:04.0 | 1465–1536 | T+0:03:20 | compressed 10× (the slew takes ~30 s) | The Astrid looks | MS · 50 mm · along the Astrid's dorsal hull (drone camera) | O2 D3 |
+| 10 | 1:04.0–1:19.0 | 1537–1896 | T+0:04:10 | 1:1 | Skerry throws | HUD insert · the Astrid's telescope feed, 2,000 mm equivalent (HUD insert) | HO3 HO5 O2 |
+| 11 | 1:19.0–1:37.0 | 1897–2328 | T+0:09:00 | compressed ~16× (the picture builds over ~5 min) | The picture | HUD insert · the master plot (HUD insert) | O2 D3 |
+| 12 | 1:37.0–1:42.0 | 2329–2448 | T+0:18:00 | 1:1 | Wave one | WS · 24 mm · on the Infinity's hull, shaking with each launch (hull camera) | O3 O9 D3 |
+| 13 | 1:42.0–1:45.0 | 2449–2520 | T+0:19:00 | 1:1 | Birds away | CU · 85 mm · a drone camera pacing one missile (cinematic licence: it keeps up with a 30 g boost) (drone camera) | O3 O9 |
+| 14 | 1:45.0–1:52.0 | 2521–2688 | T+0:25:00 | compressed 8× (the turn takes ~49 s) | Turn and burn | EWS · 400 mm · the whole group (tracker) | O1 D2 |
+| 15 | 1:52.0–1:57.0 | 2689–2808 | T+1:02:00 | compressed 5× (~20 s of hits); the digits roll 36 min into it | Skerry burns | EWS · 1,200 mm · Skerry a quarter-frame crescent, its night side dark (tracker) | O3 O9 HO8 |
+| 16 | 1:57.0–2:04.0 | 2809–2976 | T+1:10:00 | compressed; the digits roll through a 2 h 10 min coast | Fins edge-on | MS · 40 mm · arcing round to dead ahead (drone camera) | D3 |
+| 17 | 2:04.0–2:08.0 | 2977–3072 | T+3:20:00 | 1:1 | The Breakers | WS · 24 mm · tracking alongside (drone camera) | O8 D3 D5 D6 |
+| 18 | 2:08.0–2:11.0 | 3073–3144 | T+3:30:00 | 1:1 | Blind | CU · 85 mm · the sensor mast, with its POV feed inset (hull camera) | HO5 |
+| 19 | 2:11.0–2:14.0 | 3145–3216 | T+3:40:00 | compressed 10× (~30 s) | The belt wakes | WS · 40 mm · beside a rock ahead of the fleet (drone camera) | HO2 HD3 |
+| 20 | 2:14.0–2:15.0 | 3217–3240 | T+3:45:00 | 1:1 | Spin-up | ECU · 100 mm · a CIWS (hull camera) | D1 |
+| 21 | 2:15.0–2:18.0 | 3241–3312 | T+3:45:01 | 1:1 | Lenses | ECU · 135 mm · a laser focusing array on its yoke (hull camera) | D1 |
+| 22 | 2:18.0–2:22.0 | 3313–3408 | T+3:45:04 | 1:1 | Countermeasures | MS · 35 mm · along the port flank (drone camera) | D1 |
+| 23 | 2:22.0–2:24.0 | 3409–3456 | T+3:52:00 | 1:1 | The platform | WS · 50 mm · over the platform's shoulder (drone camera) | HO1 HO2 HO9 |
+| 24 | 2:24.0–2:26.0 | 3457–3504 | T+3:52:05 | compressed 4× (13 s flight) | Canterbury | Tracker · 1,500 mm · from the Extenuating Circumstances (tracker) | D4 |
+| 25 | 2:26.0–2:31.0 | 3505–3624 | T+3:52:13 | 1:1 | Holed | Tracker · 1,500 mm · holding on the Canterbury (tracker) | HO9 |
+| 26 | 2:31.0–2:35.0 | 3625–3720 | T+3:52:38 | 1:1 (the last degrees of the slew; it fires two seconds in) | Answer | EWS · 135 mm · the Astrid in profile, bow screen right (drone camera) | O4 |
+| 27 | 2:35.0–2:38.0 | 3721–3792 | T+3:54:28 | the clock jumps 108 s from the shot | Payback | WS · 50 mm · the platform shot's framing (drone camera) | O4 |
+| 28 | 2:38.0–2:42.0 | 3793–3888 | T+4:10:00 | compressed ~30× (2 min) | Screens out | WS · 28 mm · behind the corvettes (drone camera) | HO4 D6 O7 |
+| 29 | 2:42.0–2:53.0 | 3889–4152 | T+4:14:00 | 1:1 | Return to sender | HUD insert · the Extenuating Circumstances' plot (HUD insert) | O5 HD9 D10 |
+| 30 | 2:53.0–2:58.0 | 4153–4272 | T+4:25:00 | 1:1 | Normandy | Tracker · 800 mm · from the Wallfish (tracker) | HO4 |
+| 31 | 2:58.0–3:04.0 | 4273–4416 | T+4:34:10 | rotation at ~4×, the middle of the 49 s flip cut out | Turnover | WS · 24 mm · on the dorsal hull looking aft (hull camera) | D8 O8 |
+| 32 | 3:04.0–3:16.0 | 4417–4704 | T+5:08:00 | 1:1; the digits roll 33 min into it | Anchor | HUD insert · the master plot, zoomed (HUD insert) | D5 D2 |
+| 33 | 3:16.0–3:20.0 | 4705–4800 | T+5:09:00 | compressed ~20× (minutes) | The sweep | WS · 24 mm · low over Anchor's surface (drone camera) | O8 D6 O4 |
+| 34 | 3:20.0–3:25.0 | 4801–4920 | T+5:12:00 | compressed 5× (the fins take ~20 s) | Too hot | MS · 35 mm · on the stern shoulder (hull camera) | D3 D5 |
+| 35 | 3:25.0–3:26.0 | 4921–4944 | T+5:13:00 | 1:1 | The flash | Tracker · 1,200 mm · on a rock 400 km off the port quarter (tracker) | HO7 HO1 |
+| 36 | 3:26.0–3:29.0 | 4945–5016 | T+5:13:01 | compressed 5× (the fins crawl in against a 16 s flight) | Fins in | MS · 35 mm · the same shoulder, the clock large (hull camera) | HO7 HO1 D3 |
+| 37 | 3:29.0–3:32.0 | 5017–5088 | T+5:13:16 | 1:1 | Fin hit | CU · 50 mm · on the port fin (hull camera) | HO7 D7 |
+| 38 | 3:32.0–3:36.0 | 5089–5184 | T+5:13:30 | 1:1 | Off the port bow | Hull camera · 600 mm · on the Endeavor's port side (hull camera) | HO6 O6 |
+| 39 | 3:36.0–3:38.0 | 5185–5232 | T+5:13:53 | 1:1 | Lance channels | CU · 28 mm · the Endeavor's nose (hull camera) | O12 |
+| 40 | 3:38.0–3:40.0 | 5233–5280 | T+5:13:55 | 1:1 | Lance | Tracker · 1,000 mm · on the frigate, 45 km out (tracker) | O12 O6 |
+| 41 | 3:40.0–3:43.0 | 5281–5352 | T+5:14:00 | compressed 5× (the roll) | Broadside | MS · 35 mm · the port batteries, the rock beyond (hull camera) | O6 O4 D3 |
+| 42 | 3:43.0–3:47.0 | 5353–5448 | T+5:14:15 | compressed 2× (the ~8 s wake) | Rails wake | CU · 50 mm · on one M-1C turret (hull camera) | O4 O6 |
+| 43 | 3:47.0–3:50.0 | 5449–5520 | T+5:14:23 | 1:1 | Fire | CU · 85 mm · on the barrels and the crest vent (hull camera) | O4 O6 |
+| 44 | 3:50.0–3:52.0 | 5521–5568 | T+5:14:40 | the clock jumps 16 s of flight from the shot | The platform dies | Tracker · 1,200 mm · the flash's framing (tracker) | O4 |
+| 45 | 3:52.0–4:14.0 | 5569–6096 | T+5:40:00 | 1:1 | The fire plan | HUD insert · the master plot (HUD insert) | O9 O3 O10 O11 D11 |
+| 46 | 4:14.0–4:20.0 | 6097–6240 | T+6:40:00 | compressed ~20× (2 min); the digits roll 60 min into it | The net | Tracker · 300 mm · from the Extenuating Circumstances, looking ahead (tracker) | HO3 D4 O8 |
+| 47 | 4:20.0–4:24.0 | 6241–6336 | T+6:55:00 | compressed ~15× (a minute) | Site One | WS · 40 mm · ahead of the Extenuating Circumstances (drone camera) | HO5 D1 D3 O5 |
+| 48 | 4:24.0–4:29.0 | 6337–6456 | T+7:06:57 | 1:1 | The pack fires | WS · 24 mm · among the pack, 150 km down Anchor's shadow, looking toward Breakwater (drone camera) | O3 O11 D11 D6 HO3 HO4 |
+| 49 | 4:29.0–4:32.0 | 6457–6528 | T+7:08:30 | 1:1 | Kill wave away | Tracker · 300 mm · from the Pillar of Autumn, across Anchor's shadow: its shut pods sharp in the foreground, then a rack to the Galactica (tracker) | O3 O10 O11 |
+| 50 | 4:32.0–4:36.0 | 6529–6624 | T+7:25:00 | compressed 10× (the ripple takes ~40 s) | The anvil | WS · 40 mm · above Breakwater, Maren's night side below (drone camera) | HD7 HO9 HD1 HO1 D1 |
+| 51 | 4:36.0–4:49.0 | 6625–6936 | T+7:25:40 | 1:1 | Sixty-four | HUD insert · the master plot (HUD insert) | HO9 D10 D2 |
+| 52 | 4:49.0–4:52.0 | 6937–7008 | T+7:31:00 | 1:1 | Umbrella | Tracker · 400 mm · from the Extenuating Circumstances, the Astrid 50 km above (tracker) | D1 D2 D10 HO9 O13 |
+| 53 | 4:52.0–4:57.0 | 7009–7128 | T+7:50:00 | 1:1 | Blind it | MS · 35 mm · the Endeavor's laser arrays (hull camera) | O5 HD9 |
+| 54 | 4:57.0–5:01.0 | 7129–7224 | T+7:52:00 | 1:1 | The spend wave | Tracker · 250 mm · from the Astrid, Maren's limb in frame (tracker) | O3 O5 HD5 |
+| 55 | 5:01.0–5:05.0 | 7225–7320 | T+7:53:14 | compressed ~3.5× (the last 14 s of flight) | Seeker | ECU · 100 mm · riding a Casaba killer's nose (drone camera) | O3 O10 HD5 |
+| 56 | 5:05.0–5:09.0 | 7321–7416 | T+7:53:28 | slowed 5× (the wave arrives within ~1 s) | Wall of fire | WS · 40 mm · above Breakwater (drone camera) | O3 HD5 O9 |
+| 57 | 5:09.0–5:13.0 | 7417–7512 | T+7:53:30 | slowed 3× | Casaba | WS · 35 mm · off Breakwater's quarter (drone camera) | O10 |
+| 58 | 5:13.0–5:18.0 | 7513–7632 | T+7:54:00 | 1:1 | The hail | MS · 50 mm · slow push on Breakwater over the night side (drone camera) | O10 |
+| 59 | 5:18.0–5:21.0 | 7633–7704 | T+7:54:38 | 1:1 (the last degree of the slew; it fires two seconds in, at T+7:54:40) | Spinal | MS · 200 mm · the Astrid end-on (drone camera) | O4 O10 HD7 O9 |
+| 60 | 5:21.0–5:27.0 | 7705–7848 | T+7:54:41 | compressed ~27× (163 of the slug's 169 s; the clock races) | The wait | WS · 35 mm · locked off at the Casaba shot's angle, Maren's limb low in frame (drone camera) | O10 |
+| 61 | 5:27.0–5:30.0 | 7849–7920 | T+7:57:29 | 1:1 | Impact | WS · 35 mm · the Casaba shot's angle (drone camera) | O4 |
+| 62 | 5:30.0–5:34.0 | 7921–8016 | T+8:00:00 | 1:1 | Heat | MS · 35 mm · along the Endeavor's scorched port flank (hull camera) | D3 D7 |
+| 63 | 5:34.0–5:45.0 | 8017–8280 | T+8:10:00 | 1:1 | Terms | Tracker · 2,000 mm · from the Endeavor's standoff (tracker) | O4 D7 |
+| 64 | 5:45.0–5:48.0 | 8281–8352 | T+8:24:00 | 1:1 | Site One goes dark | Tracker · 2,000 mm · on Site 1's plateau, night side (tracker) | §13 D3 |
+| 65 | 5:48.0–5:55.0 | 8353–8520 | T+8:24:03 | 1:1 | Hold | EWS · 35 mm · locked off, the Endeavor end-on (drone camera) | D3 |
+
+## Act P: Prologue
+
+Text on the stars: what the record is, why the fleet has come, and the one order that shapes the battle.
+
+### 1. The record
+
+- **Film:** 0:00.0–0:07.0 (7 s), frames 1–168
+- **Mission:** T+0:00:00 · before the record: no mission clock
+- **Camera:** Title card · white text over a still starfield (HUD insert)
+- **Viewer sees:** Black. A still field of stars fades up, and a line of white text with it.
+- **Action:** The record opens: stars, still, and one line of text. There is no clock yet.
+- **On screen:** `The following has been collated from the records of Operation Tidebreak.`
+- **Doctrine:** 
+- **VFX:** Title text, slow fades
+- **Rig:** none
+- **Assets:** HUD (new), WORLD (extend)
+- **Sound:** Silence; a low tone under the text.
+- **Render class:** E · **Map:** A
+
+### 2. Maren
+
+- **Film:** 0:07.0–0:20.0 (13 s), frames 169–480
+- **Mission:** T+0:00:00 · before the record: no mission clock
+- **Camera:** Title card · white text over a still starfield (HUD insert)
+- **Viewer sees:** The same stars. The first text fades and new text takes its place.
+- **Action:** Who holds the sky and with what, in one card: the warship, the ground lasers, the debris ring.
+- **On screen:** `Maren has broken away from the GUN. Its sky is guarded by the warship Breakwater, by lasers on the ground, and by a ring of wreckage sown with weapons.`
+- **Doctrine:** 
+- **VFX:** Title text, slow fades
+- **Rig:** none
+- **Assets:** HUD (new), WORLD (extend)
+- **Sound:** The low tone holds.
+- **Render class:** E · **Map:** A
+
+### 3. Orders
+
+- **Film:** 0:20.0–0:34.0 (14 s), frames 481–816
+- **Mission:** T+0:00:00 · before the record: no mission clock
+- **Camera:** Title card · white text over a still starfield (HUD insert)
+- **Viewer sees:** The same stars; a last card of text, which fades to black.
+- **Action:** Who has come, why, and the order that shapes everything after (LREF §13): no shot at the world below.
+- **On screen:** `The GUN's Long Range Expeditionary Forces have sent a task group to take that sky, so its troops, T-SEC, can land. Its orders: not one shot at the world below.`
+- **Doctrine:** §13
+- **VFX:** Title text, slow fades to black
+- **Rig:** none
+- **Assets:** HUD (new), WORLD (extend)
+- **Sound:** The tone fades out.
+- **Render class:** E · **Map:** A
 
 ## Act I: Arrival
 
 The fleet arrives slow, parks its shields, reads the system, and strikes Skerry first because Skerry's laser can burn its fins.
 
-### 1. Black, then a star
+### 4. Black, then a star
 
-- **Film:** 0:00.0–0:06.0 (6 s), frames 1–144
+- **Film:** 0:34.0–0:40.0 (6 s), frames 817–960
 - **Mission:** T+0:00:00 · 1:1
 - **Camera:** EWS · 35 mm · locked off (drone camera)
+- **Viewer sees:** Stars. A point of light swells into a blue-white flash, and a long grey warship resolves out of it, bow to the right, a gold plate across its bow and two rings round its hull glowing blue. A clock appears in the corner at T+0:00:00.
 - **Action:** Starfield. A point of light swells into a blue-white bloom as the bubble collapses (~5 s). The Endeavor resolves out of it, bow screen right, shield forward, both warp rings glowing, fins stowed as they must be in warp. The mission clock starts on the flash.
+- **On screen:** `L.R.E.F.S. ENDEAVOR · CRUISER`
 - **State:** EN: shield on, four fins
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O1
@@ -137,44 +194,48 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Sound:** Silence; a sub-bass drop as the bubble collapses.
 - **Render class:** D · **Map:** A
 
-### 2. Rings cool
+### 5. Rings cool
 
-- **Film:** 0:06.0–0:10.0 (4 s), frames 145–240
+- **Film:** 0:40.0–0:44.0 (4 s), frames 961–1056
 - **Mission:** T+0:00:06 · 1:1
 - **Camera:** CU · 50 mm · slow push along the bow ring truss (hull camera)
+- **Viewer sees:** Close along the warship's forward ring: its emitters fade from blue to dark, and small thrusters puff.
 - **Action:** The front warp ring's emitters fade from blue to dark. A burst of bow RCS trims the drift.
+- **Comms:** ACTUAL · ASTRID: “All fourteen through. All on station.”
 - **State:** EN: shield on, four fins
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O1
 - **VFX:** Emitter glow fade, RCS puffs
 - **Rig:** warp_charge 0.3→0; rcs_bow pulse
-- **Assets:** EN (extend)
+- **Assets:** EN (extend), SUB (new)
 - **Sound:** Ticking metal and RCS thumps through the truss.
 - **Render class:** A · **Map:** A · **Reference frame:** `img/bow_v4b_combat.jpg`
 
-### 3. The task group
+### 6. The task group
 
-- **Film:** 0:10.0–0:15.0 (5 s), frames 241–360
-- **Mission:** T+0:00:10 · compressed 7× (13 exits over ~36 s)
+- **Film:** 0:44.0–0:52.0 (8 s), frames 1057–1248
+- **Mission:** T+0:00:10 · compressed 7× (13 exits over ~56 s)
 - **Camera:** EWS · 85 mm · locked off, far out on the group's flank (drone camera)
+- **Viewer sees:** Far out on the flank: more flashes, seconds and far apart, each leaving a warship behind. Beyond them, screen right, a thin bright crescent: a planet with the sun behind it, ringed by a faint glowing haze.
 - **Action:** Staggered warp flashes, seconds and 50+ km apart: the Astrid, the hedgehog pack, the Donnager, the Excelsior, both destroyers, four corvettes, the Nauvoo. Screen right, Maren is a thin crescent with the sun behind it, ringed by the faint backlit glow of the Breakers.
-- **Comms:** ACTUAL · ASTRID: “All fourteen. All home.”
+- **Comms:** ASTRID: “Four hundred fifty thousand klicks out: the debris won't let us jump closer.”
 - **State:** DD: intact
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O1, D2
 - **VFX:** 13 warp flashes, backlit ring glow
 - **Rig:** none
 - **Assets:** AST (new), GI (new), GI-MAV (new), DD (new), CV (new), TND (new), MAREN (extend), BRK (new), WORLD (extend), FX-WARP (new), FX-FAR (new), SUB (new)
-- **Sound:** Distant low thuds, one per exit (score, not diegetic).
+- **Sound:** The score's distant low thuds, one per exit.
 - **Render class:** D · **Map:** A
 
-### 4. Shields to the park
+### 7. Shields to the park
 
-- **Film:** 0:15.0–0:20.0 (5 s), frames 361–480
-- **Mission:** T+0:02:00 · compressed 8× (~40 s)
+- **Film:** 0:52.0–0:58.0 (6 s), frames 1249–1392
+- **Mission:** T+0:02:00 · compressed 7× (~40 s)
 - **Camera:** MS · 35 mm · riding the shield's backplate, looking back at the bow (hull camera)
+- **Viewer sees:** From a camera on the gold plate itself: small thrusters fire and the plate backs away from the warship's bow; the rings stay on the ship. Around it, other gold plates hang still in space.
 - **Action:** Separation thrusters fire between the front ring's spokes. The camera, riding the shield, backs away from the Endeavor's bow; both warp rings stay on the ship. Around it, other gold shields hang parked at near-zero speed, to be collected after the battle.
-- **Comms:** ENDEAVOR: “Nauvoo, Endeavor. The shield's yours.” / NAUVOO: “Porch light's off.”
+- **Comms:** ENDEAVOR: “Nauvoo, warp shield's yours. Keep it safe.” / NAUVOO: “Parked. Come home for it.”
 - **State:** EN: shield parked, four fins
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O1, D9, D11
@@ -184,13 +245,14 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Sound:** Clamp bangs through the backplate, then silence.
 - **Render class:** A · **Map:** A · **Reference frame:** `img/endeavor_combat_demo_f060.jpg`
 
-### 5. Net up
+### 8. Net up
 
-- **Film:** 0:20.0–0:23.0 (3 s), frames 481–552
-- **Mission:** T+0:02:40 · compressed 10× (the booms run out over ~30 s)
+- **Film:** 0:58.0–1:01.0 (3 s), frames 1393–1464
+- **Mission:** T+0:02:45 · compressed 10× (the booms run out over ~30 s)
 - **Camera:** MS · 40 mm · off the Canterbury's bow (drone camera)
+- **Viewer sees:** A slimmer warship, its gold plate gone: long sensor booms run out, a flat dish sits exposed on a truss behind where the plate was, and small drones scatter ahead of it.
 - **Action:** With its shield gone, the Canterbury's forward dish is clear on its truss. Its sensor booms run out and its drones scatter ahead. From here the fleet talks only by laser.
-- **Comms:** CANTERBURY: “Net's up. Going quiet.”
+- **Comms:** CANTERBURY: “Sensor net's up. Laser links only.”
 - **State:** DD: intact
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O2, D10
@@ -200,12 +262,14 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Sound:** Silence.
 - **Render class:** B · **Map:** A
 
-### 6. The Astrid looks
+### 9. The Astrid looks
 
-- **Film:** 0:23.0–0:26.0 (3 s), frames 553–624
+- **Film:** 1:01.0–1:04.0 (3 s), frames 1465–1536
 - **Mission:** T+0:03:20 · compressed 10× (the slew takes ~30 s)
 - **Camera:** MS · 50 mm · along the Astrid's dorsal hull (drone camera)
+- **Viewer sees:** A far larger warship, well over a kilometre long, slews a huge dish toward the planet. Stacks of folded radiator fins lie along its hull.
 - **Action:** The Astrid's 100 m AVPSA dish slews toward Maren. Its eight stacked fins stay stowed: Skerry's laser can see them.
+- **On screen:** `L.R.E.F.S. ASTRID · FLAGSHIP`
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O2, D3
 - **VFX:** 
@@ -214,14 +278,15 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Sound:** Silence.
 - **Render class:** B · **Map:** A
 
-### 7. Skerry throws
+### 10. Skerry throws
 
-- **Film:** 0:26.0–0:32.0 (6 s), frames 625–768
+- **Film:** 1:04.0–1:19.0 (15 s), frames 1537–1896
 - **Mission:** T+0:04:10 · 1:1
 - **Camera:** HUD insert · the Astrid's telescope feed, 2,000 mm equivalent (HUD insert)
+- **Viewer sees:** A grainy telescope feed on a grey moon: a thread of light runs along its dark edge, three times. A plot marker tags each launch with an arrival time. Then a white glare floods the feed.
 - **Action:** A thread of light runs along Skerry's dark limb: the mass driver throwing. Three rounds leave; the plot tags their arrival. Then a glare blooms across the feed: Skerry's laser has found the dish.
-- **Comms:** ASTRID: “Skerry's throwing down our lane.” / ACTUAL: “They'll be hours.”
-- **On screen:** `ARRIVE T+6:40`
+- **Comms:** ASTRID: “Skerry's mass driver just threw three rounds down our lane.” / ACTUAL: “At that speed they're six hours out. Log them.” / ASTRID: “Laser on the dish! Skerry's lit us up.” (at 11 s)
+- **On screen:** `SKERRY · MAREN'S MOON` · `ARRIVE T+6:40`
 - **Doctrine:** HO3, HO5, O2
 - **VFX:** HUD, telescope grain, dazzle glare
 - **Rig:** none
@@ -229,14 +294,15 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Sound:** Soft sensor tones.
 - **Render class:** E · **Map:** A
 
-### 8. The picture
+### 11. The picture
 
-- **Film:** 0:32.0–0:39.0 (7 s), frames 769–936
-- **Mission:** T+0:09:00 · compressed ~43× (the picture builds over ~5 min)
+- **Film:** 1:19.0–1:37.0 (18 s), frames 1897–2328
+- **Mission:** T+0:09:00 · compressed ~16× (the picture builds over ~5 min)
 - **Camera:** HUD insert · the master plot (HUD insert)
+- **Viewer sees:** A tactical plot, the planet at right: a red diamond parked over a point on the planet; the moon; a wide dotted ring; a line from the fleet toward the planet. Labels appear as each is named.
 - **Action:** The master plot, Maren screen right: Breakwater parked over Site 1; Skerry, with its laser and mass driver; the Breakers; the approach line. The fins stay in while Skerry's laser can see them.
-- **Comms:** ACTUAL: “Breakwater's right where the brief said.”
-- **On screen:** `BREAKWATER` · `SKERRY` · `THE BREAKERS`
+- **Comms:** ACTUAL: “Breakwater's right where the brief said: over Site One, the only ground laser that covers her sky.” / ACTUAL: “Skerry's laser can burn our radiators from anywhere out here. It dies first.”
+- **On screen:** `BREAKWATER` · `SITE 1` · `SKERRY` · `THE BREAKERS`
 - **Doctrine:** O2, D3
 - **VFX:** HUD
 - **Rig:** none
@@ -244,13 +310,14 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Sound:** Sensor tones.
 - **Render class:** E · **Map:** A
 
-### 9. Wave one
+### 12. Wave one
 
-- **Film:** 0:39.0–0:44.0 (5 s), frames 937–1056
+- **Film:** 1:37.0–1:42.0 (5 s), frames 2329–2448
 - **Mission:** T+0:18:00 · 1:1
 - **Camera:** WS · 24 mm · on the Infinity's hull, shaking with each launch (hull camera)
+- **Viewer sees:** On the hull of a long frigate bristling with launch pods: pod doors open in waves down the hull and missiles streak away to the right; the camera shakes with each launch.
 - **Action:** The Infinity ripple-fires 150 capital-ship killers at Skerry's laser, mass driver and depot in fifteen seconds. Pod doors open in waves down the hull and the plumes curve away screen right. Skerry goes first because its laser can burn the fleet's fins all the way in.
-- **Comms:** ACTUAL: “Infinity, wave one. Skerry.” / INFINITY: “Wave one away.”
+- **Comms:** ACTUAL: “Infinity, wave one: Skerry's laser and mass driver.”
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O3, O9, D3
 - **VFX:** 150 missiles (swarm system), pod doors
@@ -259,27 +326,30 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 - **Sound:** Launch cracks through the hull; the camera shakes with each.
 - **Render class:** C · **Map:** A
 
-### 10. Birds away
+### 13. Birds away
 
-- **Film:** 0:44.0–0:47.0 (3 s), frames 1057–1128
+- **Film:** 1:42.0–1:45.0 (3 s), frames 2449–2520
 - **Mission:** T+0:19:00 · 1:1
 - **Camera:** CU · 85 mm · a drone camera pacing one missile (cinematic licence: it keeps up with a 30 g boost) (drone camera)
-- **Action:** Alongside one of the 150, a minute into its boost: a capital-ship killer in a slow spin, its plume a white-hot needle, the Infinity already a spark far behind. Ahead, screen right, its target: Skerry, a small grey disc. Maren is out of frame.
+- **Viewer sees:** Alongside one of the missiles a minute into its flight: a sleek body turning slowly on a white-hot exhaust needle, the frigate a spark far behind. Ahead, screen right, a thin grey crescent: the moon.
+- **Action:** Alongside one of the 150, a minute into its boost: a capital-ship killer in a slow spin, its plume a white-hot needle, the Infinity already a spark far behind. Ahead, screen right, its target: Skerry, backlit, a thin bright crescent on a dark disc (~6 % lit, ~30 px). Maren is out of frame.
+- **Comms:** INFINITY: “A hundred and fifty birds away.”
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O3, O9
 - **VFX:** Hero missile and plume, far launch sparks
 - **Rig:** thrust 1; spin (swarm attribute)
-- **Assets:** MSL-V (new), SKR (new)
+- **Assets:** MSL-V (new), SKR (new), SUB (new)
 - **Sound:** Silence; the score lifts.
 - **Render class:** B · **Map:** A
 
-### 11. Turn and burn
+### 14. Turn and burn
 
-- **Film:** 0:47.0–0:53.0 (6 s), frames 1129–1272
+- **Film:** 1:45.0–1:52.0 (7 s), frames 2521–2688
 - **Mission:** T+0:25:00 · compressed 8× (the turn takes ~49 s)
 - **Camera:** EWS · 400 mm · the whole group (tracker)
+- **Viewer sees:** Through a long lens, the whole group: eleven drive plumes light one after another as the ships swing toward the planet and burn; three ships far behind stay dark.
 - **Action:** Through a long lens, eleven drives light one after another as the group turns onto the approach line, bows toward Maren and plumes streaming screen left; the three ships at the park stay dark behind them. One g for 34 minutes.
-- **Comms:** ACTUAL: “All ships, execute. One g.”
+- **Comms:** ACTUAL: “All ships, burn for Maren: one g for thirty-four minutes, then we coast.”
 - **State:** EN: shield parked, four fins; DD: intact
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O1, D2
@@ -293,13 +363,14 @@ The fleet arrives slow, parks its shields, reads the system, and strikes Skerry 
 
 Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid's answer, the drones and the Normandy.
 
-### 12. Skerry burns
+### 15. Skerry burns
 
-- **Film:** 0:53.0–0:57.0 (4 s), frames 1273–1368
+- **Film:** 1:52.0–1:57.0 (5 s), frames 2689–2808
 - **Mission:** T+1:02:00 · compressed 5× (~20 s of hits); the digits roll 36 min into it
-- **Camera:** EWS · 1,200 mm · Skerry a quarter-frame disc (tracker)
+- **Camera:** EWS · 1,200 mm · Skerry a quarter-frame crescent, its night side dark (tracker)
+- **Viewer sees:** Through a very long lens, the grey moon as a thin crescent: pinpricks of white light spark across its dark side.
 - **Action:** Pinpricks of white on Skerry's limb: wave one arriving, nose-on to the battery. The light left Skerry 0.9 s ago. Just before the hits, a faint spray of points leaves the depot: its drones, flushed toward the shield park. Its eighteen rounds are already on their way.
-- **Comms:** ASTRID: “Splash on Skerry. Their laser's gone.”
+- **Comms:** ASTRID: “Skerry's laser is gone. Its last rounds are still coming.”
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** O3, O9, HO8
 - **VFX:** Distant nuclear flashes, flushed drones
@@ -308,13 +379,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** Nothing; a swell of score.
 - **Render class:** D · **Map:** A
 
-### 13. Fins edge-on
+### 16. Fins edge-on
 
-- **Film:** 0:57.0–1:03.0 (6 s), frames 1369–1512
+- **Film:** 1:57.0–2:04.0 (7 s), frames 2809–2976
 - **Mission:** T+1:10:00 · compressed; the digits roll through a 2 h 10 min coast
 - **Camera:** MS · 40 mm · arcing round to dead ahead (drone camera)
+- **Viewer sees:** The cruiser from the opening: four long fins slide out of its hull, glowing dull red, and the camera swings round until they are edge-on to the planet, thin lines. Far behind, the flagship's fins glow like a lantern. The clock runs on through two hours.
 - **Action:** With Skerry's laser gone, the four fins run out, glowing a dull red. The camera arcs to dead ahead as they extend, until they collapse to slivers: edge-on to Site 1 and Breakwater, dead ahead. Far behind, the Astrid's eight fins glow like a lantern. The clock rolls on.
-- **Comms:** ENDEAVOR: “Fins out. Keep them edge-on.”
+- **Comms:** ENDEAVOR: “Radiator fins out, edge-on. Their lasers can't burn what they can't see.”
 - **State:** EN: shield parked, four fins
 - **World:** arrival and coast (sunlit crescent, Maren 1.6°)
 - **Doctrine:** D3
@@ -324,13 +396,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** Silence; the score carries the coast.
 - **Render class:** A · **Map:** A · **Reference frame:** `img/orbit_v8d.jpg`
 
-### 14. The Breakers
+### 17. The Breakers
 
-- **Film:** 1:03.0–1:07.0 (4 s), frames 1513–1608
+- **Film:** 2:04.0–2:08.0 (4 s), frames 2977–3072
 - **Mission:** T+3:20:00 · 1:1
 - **Camera:** WS · 24 mm · tracking alongside (drone camera)
+- **Viewer sees:** A faint haze thickens around the cruiser, lit from behind; its fins slide back in. A huge rock slides past, gone in under two seconds. Small ships spread out ahead.
 - **Action:** The fins retract before the debris. A faint haze thickens, lit from behind. A single large rock slides past twenty kilometres off, gone across the frame in under two seconds at 20 km/s. The corvettes spread ahead, screen right.
-- **Comms:** ACTUAL: “No shields from here. Corvettes, sweep.”
+- **Comms:** ACTUAL: “Into the Breakers. Fins in. Corvettes, sweep.”
 - **State:** EN: shield parked, four fins
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** O8, D3, D5, D6
@@ -340,13 +413,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** Silence; a low drone in the score.
 - **Render class:** B · **Map:** B
 
-### 15. Blind
+### 18. Blind
 
-- **Film:** 1:07.0–1:10.0 (3 s), frames 1609–1680
+- **Film:** 2:08.0–2:11.0 (3 s), frames 3073–3144
 - **Mission:** T+3:30:00 · 1:1
 - **Camera:** CU · 85 mm · the sensor mast, with its POV feed inset (hull camera)
+- **Viewer sees:** Close on a sensor mast: its lenses flare white, an inset video feed whites out, and armoured shutters slam over the lenses.
 - **Action:** Site 1's beam finds the Endeavor through the haze. The mast's optics flare, the inset feed whites out, and armoured shutters slam shut.
-- **Comms:** ENDEAVOR: “Site One's painting us. Shutters.”
+- **Comms:** ENDEAVOR: “Site One's laser has us! Shutters!”
 - **State:** EN: shield parked, four fins
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** HO5
@@ -356,13 +430,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** A static howl on the feed; the shutter slam through the hull.
 - **Render class:** A · **Map:** B · **Reference frame:** `img/lookmast_v8d.jpg`
 
-### 16. The belt wakes
+### 19. The belt wakes
 
-- **Film:** 1:10.0–1:13.0 (3 s), frames 1681–1752
+- **Film:** 2:11.0–2:14.0 (3 s), frames 3145–3216
 - **Mission:** T+3:40:00 · compressed 10× (~30 s)
 - **Camera:** WS · 40 mm · beside a rock ahead of the fleet (drone camera)
+- **Viewer sees:** Beside a rock ahead of the fleet: the surface heaves, doors open like petals, and missiles tumble out, then ignite and turn toward the fleet.
 - **Action:** Regolith heaves and petal doors open. Missiles tumble out cold, then light two kilometres clear and turn screen left, toward the fleet. Until now the pods were the temperature of the rock.
-- **Comms:** ROCINANTE: “Launch! Cold birds off the rocks!”
+- **Comms:** ROCINANTE: “Launch! Missiles hidden in the rocks!”
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** HO2, HD3
 - **VFX:** Pod doors, late motor ignition
@@ -371,11 +446,12 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** Silence; a sting in the score.
 - **Render class:** B · **Map:** B
 
-### 17. Spin-up
+### 20. Spin-up
 
-- **Film:** 1:13.0–1:14.0 (1 s), frames 1753–1776
+- **Film:** 2:14.0–2:15.0 (1 s), frames 3217–3240
 - **Mission:** T+3:45:00 · 1:1
 - **Camera:** ECU · 100 mm · a CIWS (hull camera)
+- **Viewer sees:** A rotary gun's seven barrels blur into motion.
 - **Action:** Seven barrels blur into motion inside the perforated jacket.
 - **State:** EN: shield parked, four fins
 - **World:** the Breakers (backlit haze)
@@ -386,11 +462,12 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** A rising whine through the hull.
 - **Render class:** A · **Map:** B
 
-### 18. Lenses
+### 21. Lenses
 
-- **Film:** 1:14.0–1:17.0 (3 s), frames 1777–1848
+- **Film:** 2:15.0–2:18.0 (3 s), frames 3241–3312
 - **Mission:** T+3:45:01 · 1:1
 - **Camera:** ECU · 135 mm · a laser focusing array on its yoke (hull camera)
+- **Viewer sees:** A laser turret swings onto a target and its violet lens pulses rapidly; no beam is visible. Far off, a spark, and the turret is already swinging to the next.
 - **Action:** The array's lens assembly slews onto an incoming pod missile, steadies, and flashes violet in rapid pulses, each one a shot; the beams themselves are invisible in vacuum. Far off, a spark as the missile's hardened nose gives way, under 300 km out, and the yoke is already swinging to the next.
 - **State:** EN: shield parked, four fins
 - **World:** the Breakers (backlit haze)
@@ -401,11 +478,12 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** Capacitor whine and the yoke's servo through the hull, one tick per pulse.
 - **Render class:** A · **Map:** B
 
-### 19. Countermeasures
+### 22. Countermeasures
 
-- **Film:** 1:17.0–1:21.0 (4 s), frames 1849–1944
+- **Film:** 2:18.0–2:22.0 (4 s), frames 3313–3408
 - **Mission:** T+3:45:04 · 1:1
 - **Camera:** MS · 35 mm · along the port flank (drone camera)
+- **Viewer sees:** Along the cruiser's flank: flares and chaff bloom, a smoke screen spreads, gun tracers streak out, and incoming missiles burst one by one.
 - **Action:** Chaff and flares bloom and a smoke screen unfurls, thinning as it spreads. The CIWS lay kill clouds in the missiles' paths; the laser lenses glow violet, beams invisible. Missiles pop one by one.
 - **State:** EN: shield parked, four fins
 - **World:** the Breakers (backlit haze)
@@ -416,43 +494,46 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** Silence (drone camera); the score's pulse.
 - **Render class:** A2 · **Map:** B · **Reference frame:** `img/lookpair_final.jpg`
 
-### 20. The platform
+### 23. The platform
 
-- **Film:** 1:21.0–1:23.0 (2 s), frames 1945–1992
+- **Film:** 2:22.0–2:24.0 (2 s), frames 3409–3456
 - **Mission:** T+3:52:00 · 1:1
 - **Camera:** WS · 50 mm · over the platform's shoulder (drone camera)
+- **Viewer sees:** A buried gun heaves out of a rock and fires a burst of slugs straight down the fleet's path.
 - **Action:** A buried twin railgun heaves out of a rock 600 km ahead of the fleet and fires a ten-slug pattern screen left, straight down the fleet's path.
+- **Comms:** EXTENUATING: “Railgun on the rock! Canterbury, jink!”
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** HO1, HO2, HO9
 - **VFX:** Muzzle flashes, slug glints
 - **Rig:** unmask / shot (new)
-- **Assets:** EMP-RG (new), BRK (new), FX-SLUG (new)
+- **Assets:** EMP-RG (new), BRK (new), FX-SLUG (new), SUB (new)
 - **Sound:** Silence.
 - **Render class:** B · **Map:** B
 
-### 21. Canterbury
+### 24. Canterbury
 
-- **Film:** 1:23.0–1:25.0 (2 s), frames 1993–2040
+- **Film:** 2:24.0–2:26.0 (2 s), frames 3457–3504
 - **Mission:** T+3:52:05 · compressed 4× (13 s flight)
 - **Camera:** Tracker · 1,500 mm · from the Extenuating Circumstances (tracker)
+- **Viewer sees:** Through a long lens: the sensor destroyer from before, fifty kilometres off, jinking hard on its thrusters.
 - **Action:** The Canterbury, fifty kilometres off, jinks hard on RCS, its dish forward.
-- **Comms:** EXTENUATING: “Canterbury, jink!”
 - **State:** DD: intact
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** D4
 - **VFX:** RCS puffs
 - **Rig:** rcs (new)
-- **Assets:** DD (new), SUB (new)
+- **Assets:** DD (new)
 - **Sound:** Silence.
 - **Render class:** D · **Map:** B
 
-### 22. Holed
+### 25. Holed
 
-- **Film:** 1:25.0–1:30.0 (5 s), frames 2041–2160
+- **Film:** 2:26.0–2:31.0 (5 s), frames 3505–3624
 - **Mission:** T+3:52:13 · 1:1
 - **Camera:** Tracker · 1,500 mm · holding on the Canterbury (tracker)
+- **Viewer sees:** The slugs arrive: three white flashes along the destroyer. It vents glittering ice, breaks in two and tumbles. Its channel dies to hiss.
 - **Action:** The slugs arrive from ahead. The Canterbury is holed bow to stern in three white flashes; it vents glittering ice, the hull parts in two and tumbles. Hold on it as its channel dies to hiss.
-- **Comms:** EXTENUATING: “Canterbury's gone.”
+- **Comms:** EXTENUATING: “Canterbury's gone. No survivors.” (at 1.5 s)
 - **State:** DD: intact
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** HO9
@@ -462,13 +543,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** The dying channel's hiss, then silence.
 - **Render class:** S · **Map:** B
 
-### 23. Answer
+### 26. Answer
 
-- **Film:** 1:30.0–1:34.0 (4 s), frames 2161–2256
+- **Film:** 2:31.0–2:35.0 (4 s), frames 3625–3720
 - **Mission:** T+3:52:38 · 1:1 (the last degrees of the slew; it fires two seconds in)
 - **Camera:** EWS · 135 mm · the Astrid in profile, bow screen right (drone camera)
+- **Viewer sees:** The flagship in profile, bow to the right: it swings its last few degrees, steadies, and a blue-white flash blooms at its bow and holds.
 - **Action:** The Astrid's 1.6-kilometre hull swings its last few degrees onto the platform, steadies on RCS, and two seconds in fires down the spinal: a blue-white bloom at the bow that holds to the cut.
-- **Comms:** ACTUAL: “Astrid, spinal on the platform.” / ASTRID: “Firing.”
+- **Comms:** ACTUAL: “Astrid, spinal gun on that platform. It can't dodge.”
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** O4
 - **VFX:** Spinal muzzle bloom
@@ -477,13 +559,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** A sub-bass punch.
 - **Render class:** B · **Map:** B
 
-### 24. Payback
+### 27. Payback
 
-- **Film:** 1:34.0–1:37.0 (3 s), frames 2257–2328
+- **Film:** 2:35.0–2:38.0 (3 s), frames 3721–3792
 - **Mission:** T+3:54:28 · the clock jumps 108 s from the shot
 - **Camera:** WS · 50 mm · the platform shot's framing (drone camera)
+- **Viewer sees:** The rock with the buried gun, from the same angle as before. The clock jumps almost two minutes, and the rock erupts.
 - **Action:** 8,600 km away and 108 seconds later, the platform's rock erupts. The platform could not move.
-- **Comms:** ASTRID GUNS: “Remember the Cant.”
+- **Comms:** ASTRID GUNS: “That's for the Canterbury.”
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** O4
 - **VFX:** Impact eruption on the rock
@@ -492,11 +575,12 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** A delayed boom in the score.
 - **Render class:** B · **Map:** B
 
-### 25. Screens out
+### 28. Screens out
 
-- **Film:** 1:37.0–1:41.0 (4 s), frames 2329–2424
+- **Film:** 2:38.0–2:42.0 (4 s), frames 3793–3888
 - **Mission:** T+4:10:00 · compressed ~30× (2 min)
 - **Camera:** WS · 28 mm · behind the corvettes (drone camera)
+- **Viewer sees:** Behind three small warships: on the rocks ahead, dark shells crack open and swarms of drones pour out; the small ships fan out to meet them, launching drones of their own.
 - **Action:** Ahead, cold hides crack open on the rocks and drones pour out. The corvettes fan out to meet them, their own drones ahead.
 - **Comms:** NORMANDY: “Drones waking on the rocks. Dozens.”
 - **World:** the Breakers (backlit haze)
@@ -507,13 +591,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** A rising whine in the score.
 - **Render class:** C · **Map:** B
 
-### 26. Return to sender
+### 29. Return to sender
 
-- **Film:** 1:41.0–1:46.0 (5 s), frames 2425–2544
+- **Film:** 2:42.0–2:53.0 (11 s), frames 3889–4152
 - **Mission:** T+4:14:00 · 1:1
 - **Camera:** HUD insert · the Extenuating Circumstances' plot (HUD insert)
+- **Viewer sees:** A tactical plot: a cloud of red drone tracks. A block of them flips to teal and turns on the rest; the red ones keep coming. Labels appear.
 - **Action:** A block of drone tracks flips from red to teal: the drones still on a control link are hijacked and turned on their own swarm. The control craft behind the rocks is found and dazzled; the Canterbury's drifting drones are picked up. The autonomous drones keep coming.
-- **Comms:** EXTENUATING: “Return to sender.”
+- **Comms:** EXTENUATING: “Their linked drones are ours now. Return to sender.” / EXTENUATING: “The autonomous ones we can't touch.”
 - **On screen:** `LINKED → OURS` · `AUTONOMOUS` · `NET DEGRADED`
 - **Doctrine:** O5, HD9, D10
 - **VFX:** HUD, EW overlay
@@ -522,13 +607,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 - **Sound:** Clipped data chatter.
 - **Render class:** E · **Map:** B
 
-### 27. Normandy
+### 30. Normandy
 
-- **Film:** 1:46.0–1:51.0 (5 s), frames 2545–2664
+- **Film:** 2:53.0–2:58.0 (5 s), frames 4153–4272
 - **Mission:** T+4:25:00 · 1:1
 - **Camera:** Tracker · 800 mm · from the Wallfish (tracker)
+- **Viewer sees:** Through a long lens: a lone drone slips past the screen and dives onto a small warship; a violet-white flash against its side, and the ship breaks apart. The picture holds on the wreck as its channel dies to hiss.
 - **Action:** One autonomous drone slips the screen and dives on the Normandy. A plasma bomb goes off against its flank and the corvette breaks up. Hold two seconds on the wreck as its channel dies to hiss.
-- **Comms:** WALLFISH: “One's through—on Normandy!”
+- **Comms:** WALLFISH: “One got through! It's on Normandy!”
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** HO4
 - **VFX:** Plasma-bomb flash, break-up
@@ -541,13 +627,14 @@ Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid'
 
 Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, the frigate, the lance and the broadside.
 
-### 28. Turnover
+### 31. Turnover
 
-- **Film:** 1:51.0–1:57.0 (6 s), frames 2665–2808
+- **Film:** 2:58.0–3:04.0 (6 s), frames 4273–4416
 - **Mission:** T+4:34:10 · rotation at ~4×, the middle of the 49 s flip cut out
 - **Camera:** WS · 24 mm · on the dorsal hull looking aft (hull camera)
+- **Viewer sees:** On the cruiser's back, looking aft: smoke drifts past, the stars wheel as the ship flips end over end, and its main drive lights, pointing toward the planet.
 - **Action:** Under smoke and an EW peak, one ship at a time, the fleet flips. The stars wheel over the hull as the stern swings toward Maren; now the bow points screen left while the ship still travels right. The drive lights: 34 minutes of braking toward Anchor.
-- **Comms:** ACTUAL: “Turnover, one at a time.”
+- **Comms:** ACTUAL: “Turnover, one ship at a time. Now we brake for Anchor.”
 - **State:** EN: shield parked, four fins
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** D8, O8
@@ -557,13 +644,14 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** RCS thumps, then the drive's roar through the hull.
 - **Render class:** A2 · **Map:** B
 
-### 29. Anchor
+### 32. Anchor
 
-- **Film:** 1:57.0–2:02.0 (5 s), frames 2809–2928
+- **Film:** 3:04.0–3:16.0 (12 s), frames 4417–4704
 - **Mission:** T+5:08:00 · 1:1; the digits roll 33 min into it
 - **Camera:** HUD insert · the master plot, zoomed (HUD insert)
+- **Viewer sees:** A zoomed tactical plot: a lumpy rock, its shadow drawn pointing away from a ground-laser marker; two nearby rocks tagged '?'; a heat readout.
 - **Action:** Anchor, an 18 km rock, with its shadow pointing away from Site 1. The fleet will string out along it; two nearby rocks are tagged '?'.
-- **Comms:** ACTUAL: “Into Anchor's lee.”
+- **Comms:** ACTUAL: “Anchor: eighteen klicks of rock between us and Site One's laser.” / ENDEAVOR: “Heat sink's at ninety-four. We have to vent soon.”
 - **On screen:** `ANCHOR` · `SITE 1` · `?` · `?` · `SINK 94%`
 - **Doctrine:** D5, D2
 - **VFX:** HUD
@@ -572,13 +660,14 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** Sensor tones.
 - **Render class:** E · **Map:** C
 
-### 30. The sweep
+### 33. The sweep
 
-- **Film:** 2:02.0–2:06.0 (4 s), frames 2929–3024
+- **Film:** 3:16.0–3:20.0 (4 s), frames 4705–4800
 - **Mission:** T+5:09:00 · compressed ~20× (minutes)
 - **Camera:** WS · 24 mm · low over Anchor's surface (drone camera)
+- **Viewer sees:** Low over the rock's surface, in darkness: the cruiser settles into the rock's shadow. Small craft sweep the rock; a flash lights its far edge from behind. Far off, shells burst on nearby rocks.
 - **Action:** The Endeavor settles into darkness in the lee, a few kilometres off the surface, where the rock blocks the sun as well as Site 1. Corvettes and drones sweep the rock: a drone trips a mine on the far side, and the flash lights Anchor's limb from behind. Far off, the Donnager's shells land on the nearest rocks.
-- **Comms:** DONNAGER: “Near rocks done. Moonlets next.”
+- **Comms:** DONNAGER: “Near rocks shelled. Moonlets next.”
 - **State:** EN: shield parked, four fins
 - **World:** Anchor's dark lee
 - **Doctrine:** O8, D6, O4
@@ -588,13 +677,14 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** Silence.
 - **Render class:** C · **Map:** C
 
-### 31. Too hot
+### 34. Too hot
 
-- **Film:** 2:06.0–2:10.0 (4 s), frames 3025–3120
+- **Film:** 3:20.0–3:25.0 (5 s), frames 4801–4920
 - **Mission:** T+5:12:00 · compressed 5× (the fins take ~20 s)
 - **Camera:** MS · 35 mm · on the stern shoulder (hull camera)
+- **Viewer sees:** On the cruiser's stern, in darkness: alarm tones; slot doors slide open and four fins telescope out, glowing orange, the only light.
 - **Action:** Heat alarms. The sweep isn't finished, but the sink can't wait: the slot doors slide open and all four fins telescope out, glowing orange against black, the only light in the lee.
-- **Comms:** DONNAGER: “Sweep's not done.” / ENDEAVOR: “Can't wait. Fins out.”
+- **Comms:** DONNAGER: “Sweep's not done.” / ENDEAVOR: “We're cooking in here. Fins out.”
 - **On screen:** `SINK 94%`
 - **State:** EN: shield parked, four fins
 - **World:** Anchor's dark lee
@@ -605,11 +695,12 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** Alarm tones; the fins' hydraulic groan.
 - **Render class:** A · **Map:** C · **Reference frame:** `img/lookaft_s1combat.jpg`
 
-### 32. The flash
+### 35. The flash
 
-- **Film:** 2:10.0–2:11.0 (1 s), frames 3121–3144
+- **Film:** 3:25.0–3:26.0 (1 s), frames 4921–4944
 - **Mission:** T+5:13:00 · 1:1
 - **Camera:** Tracker · 1,200 mm · on a rock 400 km off the port quarter (tracker)
+- **Viewer sees:** Through a long lens, a rock far off: a muzzle flash, half a second long.
 - **Action:** A muzzle flash on a rock: the platform, unmasked for half a second.
 - **World:** Anchor's dark lee
 - **Doctrine:** HO7, HO1
@@ -619,13 +710,14 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** Silence.
 - **Render class:** D · **Map:** C
 
-### 33. Fins in
+### 36. Fins in
 
-- **Film:** 2:11.0–2:14.0 (3 s), frames 3145–3216
+- **Film:** 3:26.0–3:29.0 (3 s), frames 4945–5016
 - **Mission:** T+5:13:01 · compressed 5× (the fins crawl in against a 16 s flight)
 - **Camera:** MS · 35 mm · the same shoulder, the clock large (hull camera)
+- **Viewer sees:** The same stern view, a large clock in frame: the fins start to crawl back in.
 - **Action:** The fins start in, crawling against the clock.
-- **Comms:** ENDEAVOR: “Launch, four hundred! Fins in!”
+- **Comms:** ENDEAVOR: “Railgun launch! Fins in!”
 - **State:** EN: shield parked, four fins
 - **World:** Anchor's dark lee
 - **Doctrine:** HO7, HO1, D3
@@ -635,13 +727,14 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** The call; alarms; the fins' groan.
 - **Render class:** A · **Map:** C
 
-### 34. Fin hit
+### 37. Fin hit
 
-- **Film:** 2:14.0–2:17.0 (3 s), frames 3217–3288
+- **Film:** 3:29.0–3:32.0 (3 s), frames 5017–5088
 - **Mission:** T+5:13:16 · 1:1
 - **Camera:** CU · 50 mm · on the port fin (hull camera)
+- **Viewer sees:** Close on one fin, halfway in: a slug from the right shatters it into glowing shards, and coolant sprays out as glittering ice.
 - **Action:** Halfway in, the port fin takes a slug from screen right. It shatters into glowing shards and its coolant flashes to glittering ice.
-- **Comms:** ENDEAVOR: “Port fin's gone.”
+- **Comms:** ENDEAVOR: “Port fin's gone!” (at 1 s)
 - **State:** EN: port fin shattering
 - **World:** Anchor's dark lee
 - **Doctrine:** HO7, D7
@@ -651,11 +744,12 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** Metal shear through the hull; a hiss.
 - **Render class:** A2 · **Map:** C
 
-### 35. Off the port bow
+### 38. Off the port bow
 
-- **Film:** 2:17.0–2:21.0 (4 s), frames 3289–3384
+- **Film:** 3:32.0–3:36.0 (4 s), frames 5089–5184
 - **Mission:** T+5:13:30 · 1:1
 - **Camera:** Hull camera · 600 mm · on the Endeavor's port side (hull camera)
+- **Viewer sees:** From a camera on the cruiser's side: a warship slides out of a cleft in a small moon and fires; two seconds later the camera shakes with a hit.
 - **Action:** A Compact frigate slides out of a pre-dug cleft on the far side of a moonlet, 45 km off the port bow, and fires its coilgun. Two seconds later the camera shakes as the slug spalls the port belt.
 - **Comms:** DONNAGER: “Frigate, off your port bow!”
 - **State:** EN: port fin a stump
@@ -667,13 +761,14 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** The hit through the hull.
 - **Render class:** A2 · **Map:** C
 
-### 36. Lance channels
+### 39. Lance channels
 
-- **Film:** 2:21.0–2:23.0 (2 s), frames 3385–3432
+- **Film:** 3:36.0–3:38.0 (2 s), frames 5185–5232
 - **Mission:** T+5:13:53 · 1:1
 - **Camera:** CU · 28 mm · the Endeavor's nose (hull camera)
+- **Viewer sees:** Close on the cruiser's nose: four channels glow violet-white.
 - **Action:** The four lance channels in the nose glow violet-white as the field builds.
-- **Comms:** ENDEAVOR: “Lance. Now.”
+- **Comms:** ENDEAVOR: “She's inside lance range. Burn her!”
 - **State:** EN: port fin a stump, port belt scorched
 - **World:** Anchor's dark lee
 - **Doctrine:** O12
@@ -683,11 +778,12 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** A rising electric whine through the hull.
 - **Render class:** A · **Map:** C
 
-### 37. Lance
+### 40. Lance
 
-- **Film:** 2:23.0–2:25.0 (2 s), frames 3433–3480
+- **Film:** 3:38.0–3:40.0 (2 s), frames 5233–5280
 - **Mission:** T+5:13:55 · 1:1
 - **Camera:** Tracker · 1,000 mm · on the frigate, 45 km out (tracker)
+- **Viewer sees:** Through a long lens on the enemy frigate: a spear of violet-white plasma crosses from the right, its midsection opens, and escape pods scatter as it breaks.
 - **Action:** The ship's field reaches out and a spear of plasma crosses the frame from the right to the frigate, forty-five kilometres off, inside the ~50 km the field can hold. The frigate's midsection opens; escape pods scatter as it breaks.
 - **World:** Anchor's dark lee
 - **Doctrine:** O12, O6
@@ -697,26 +793,29 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** A crack in the score.
 - **Render class:** B · **Map:** C
 
-### 38. Broadside
+### 41. Broadside
 
-- **Film:** 2:25.0–2:28.0 (3 s), frames 3481–3552
+- **Film:** 3:40.0–3:43.0 (3 s), frames 5281–5352
 - **Mission:** T+5:14:00 · compressed 5× (the roll)
 - **Camera:** MS · 35 mm · the port batteries, the rock beyond (hull camera)
+- **Viewer sees:** The cruiser rolls, bringing its gun turrets round toward the rock with the buried gun; the turrets still sit clamped in their cradles.
 - **Action:** Fins stowed, the Endeavor rolls to bring its port batteries onto the platform's rock, off the port quarter, screen right. The turrets still sit clamped in their travel locks.
+- **Comms:** ENDEAVOR: “Roll us. Port guns on that platform.”
 - **State:** EN: port fin a stump, port belt scorched
 - **World:** Anchor's dark lee
 - **Doctrine:** O6, O4, D3
 - **VFX:** 
 - **Rig:** rcs_bow / rcs_stern pulses (the roll)
-- **Assets:** EN (extend), EN-FIN (extend), EN-DMG (extend), M1C (extend)
+- **Assets:** EN (extend), EN-FIN (extend), EN-DMG (extend), M1C (extend), SUB (new)
 - **Sound:** The roll's RCS thumps through the hull.
 - **Render class:** A · **Map:** C · **Reference frame:** `img/house_s1combat.jpg`
 
-### 39. Rails wake
+### 42. Rails wake
 
-- **Film:** 2:28.0–2:32.0 (4 s), frames 3553–3648
+- **Film:** 3:43.0–3:47.0 (4 s), frames 5353–5448
 - **Mission:** T+5:14:15 · compressed 2× (the ~8 s wake)
 - **Camera:** CU · 50 mm · on one M-1C turret (hull camera)
+- **Viewer sees:** Close on one gun turret: lids open on rows of amber lights, beacons flash, clamps swing off, the gun lifts onto the rock, and its armoured shell splits and rises; its jaws open. The barrel stays dark.
 - **Action:** The turret wakes in its fixed order. The capacitor banks' lids open on rows of charge cells that light amber, the rear louvres ripple open and the beacons flash; the travel-lock clamps swing off the jaws and the crutch folds flat; the cradle lays onto the rock; the supershell's latches drop, its halves crack, rise and clunk against their stops, and the chisel jaws swing open. The barrel stays dark.
 - **State:** EN: port fin a stump, port belt scorched
 - **World:** Anchor's dark lee
@@ -727,11 +826,12 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** Clunks through the hull: the lids, the clamps, the shell's halves on their stops.
 - **Render class:** A · **Map:** C
 
-### 40. Fire
+### 43. Fire
 
-- **Film:** 2:32.0–2:35.0 (3 s), frames 3649–3720
+- **Film:** 3:47.0–3:50.0 (3 s), frames 5449–5520
 - **Mission:** T+5:14:23 · 1:1
 - **Camera:** CU · 85 mm · on the barrels and the crest vent (hull camera)
+- **Viewer sees:** The barrels: a shudder, a blue-white pulse up the bore, a blinding muzzle blast and the recoil; fins on the gun that fired burst out and glow.
 - **Action:** Gun A charges for a second: the barrel draws back and buzzes, the shell throbs, the flush fins chatter. Then the bore pulse (cinematic licence, Q12), a tracer blast toward the rock, and the recoil. Only the gun that fired vents: its crest fins burst out and glow; gun B waits its turn.
 - **State:** EN: port fin a stump, port belt scorched
 - **World:** Anchor's dark lee
@@ -742,31 +842,34 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Sound:** The charge's buzz, the shot's crack and the recoil's clunk through the hull.
 - **Render class:** A2 · **Map:** C
 
-### 41. The platform dies
+### 44. The platform dies
 
-- **Film:** 2:35.0–2:37.0 (2 s), frames 3721–3768
+- **Film:** 3:50.0–3:52.0 (2 s), frames 5521–5568
 - **Mission:** T+5:14:40 · the clock jumps 16 s of flight from the shot
 - **Camera:** Tracker · 1,200 mm · the flash's framing (tracker)
+- **Viewer sees:** Through a long lens, the rock with the buried gun, as before: a flash.
 - **Action:** The platform's rock flashes: sixteen seconds of flight, and a target that could not move.
+- **Comms:** ENDEAVOR: “Platform's down.”
 - **World:** Anchor's dark lee
 - **Doctrine:** O4
 - **VFX:** Impact flash
 - **Rig:** none
-- **Assets:** EMP-RG (new), BRK (new), FX-SLUG (new)
+- **Assets:** EMP-RG (new), BRK (new), FX-SLUG (new), SUB (new)
 - **Sound:** The score.
 - **Render class:** D · **Map:** C
 
 ## Act IV: Hammer and anvil
 
-Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches through a last try at it, Breakwater's answer at the last net ship, the spend wave, the kill wave, the Casaba jets, the hail and the spinal shot, then terms.
+Across to Breakwater: the plan, Skerry's nets, Site 1's fire, the pack's two launches through a last try at it, Breakwater's answer at the last net ship, all in Maren's shadow; the spend wave, the kill wave, the Casaba jets and the hail; the spinal slug flies into Breakwater's sunrise; then terms.
 
-### 42. The fire plan
+### 45. The fire plan
 
-- **Film:** 2:37.0–2:45.0 (8 s), frames 3769–3960
+- **Film:** 3:52.0–4:14.0 (22 s), frames 5569–6096
 - **Mission:** T+5:40:00 · 1:1
 - **Camera:** HUD insert · the master plot (HUD insert)
+- **Viewer sees:** The master plot: the fleet at the rock; two dotted tracks from it to where the enemy warship will be, labelled with two times; a violet marker for the flagship's firing point; a heat readout.
 - **Action:** The plan builds in two beats, each tied to a clause of the line. First the waves' two tracks from Anchor to where Breakwater will be; then the Astrid's firing point. The pack stays at Anchor with its guard.
-- **Comms:** ACTUAL: “Pack, Donnager, Wallfish: hold Anchor. Rest with me.”
+- **Comms:** ACTUAL: “The missile pack stays in Anchor's shadow and fires two waves at Breakwater.” / ACTUAL: “The first makes her shoot and show her guns. The second hides forty nuclear spears to cut her drive.” / ACTUAL: “The rest of us stop outside her guns' reach.”
 - **On screen:** `SPEND 7:52 · KILL 7:53` · `ASTRID` · `SINK 31%`
 - **Doctrine:** O9, O3, O10, O11, D11
 - **VFX:** HUD
@@ -775,30 +878,35 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** Sensor tones; the score gathers.
 - **Render class:** E · **Map:** D
 
-### 43. The net
+### 46. The net
 
-- **Film:** 2:45.0–2:49.0 (4 s), frames 3961–4056
-- **Mission:** T+6:40:00 · compressed ~30× (2 min); the digits roll 60 min into it
-- **Camera:** WS · 50 mm · over the Extenuating Circumstances (drone camera)
-- **Action:** Hours after Skerry threw them, the first of its rounds arrive. Ahead of the fleet the destroyer's drones light up a spreading cloud of pellets about 20 km across, glittering in their lamps. The fleet side-steps, drives angled off the line; four more nets follow on the lane, ten minutes apart.
-- **Comms:** EXTENUATING: “Skerry's rounds. On time.” / ACTUAL: “Left two degrees.”
+- **Film:** 4:14.0–4:20.0 (6 s), frames 6097–6240
+- **Mission:** T+6:40:00 · compressed ~20× (2 min); the digits roll 60 min into it
+- **Camera:** Tracker · 300 mm · from the Extenuating Circumstances, looking ahead (tracker)
+- **Viewer sees:** Through a long lens from a destroyer: ahead, drones' lamps light a spreading cloud of glittering pellets; a small warship's drive angles off and it slides aside.
+- **Action:** Hours after Skerry threw them, the first of its rounds arrive. Ahead of the fleet the destroyer's drones light up a spreading cloud of pellets about 20 km across, glittering in their lamps. The fleet side-steps, drives angled off the line; four more nets follow on the lane, ten minutes apart. A long-lens view, so it renders as a small subject on black.
+- **Comms:** EXTENUATING: “Skerry's rounds, on time. Pellet cloud ahead.” / ACTUAL: “Two degrees left.”
 - **State:** DD: intact
+- **Light:** the escorts in sun
 - **World:** the final approach (Maren growing, night side)
 - **Doctrine:** HO3, D4, O8
 - **VFX:** Canister cloud glitter (swarm system)
 - **Rig:** none
 - **Assets:** DD (new), DRN-L (new), FX-SWARM (new), SUB (new)
 - **Sound:** Silence; the score ticks.
-- **Render class:** B · **Map:** D
+- **Render class:** D · **Map:** D
 
-### 44. Site One
+### 47. Site One
 
-- **Film:** 2:49.0–2:53.0 (4 s), frames 4057–4152
+- **Film:** 4:20.0–4:24.0 (4 s), frames 6241–6336
 - **Mission:** T+6:55:00 · compressed ~15× (a minute)
 - **Camera:** WS · 40 mm · ahead of the Extenuating Circumstances (drone camera)
+- **Viewer sees:** Ahead of a destroyer: the tip of one of its long booms scorches and smokes under an invisible beam; the ships roll, and a new smoke screen blooms ahead of the fleet.
 - **Action:** Site 1 has been firing since the fleet cleared Anchor's shadow, against rolling hulls, smoke and the fleet's low-power dazzle. Now its invisible beam holds long enough on the destroyer's forward sensor boom: it scorches and smokes, the one visible cost. The ships roll on, and a fresh smoke screen blooms ahead, travelling with the fleet.
-- **Comms:** EXTENUATING: “Site One's on our booms. Smoke forward.”
+- **Comms:** EXTENUATING: “Site One's burning our booms! Smoke!”
+- **On screen:** `SINK 63%`
 - **State:** DD: Extenuating: forward boom scorched
+- **Light:** the escorts in sun
 - **World:** the final approach (Maren growing, night side)
 - **Doctrine:** HO5, D1, D3, O5
 - **VFX:** Scorching, fleet-scale smoke screen
@@ -807,27 +915,29 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** Silence.
 - **Render class:** C · **Map:** D
 
-### 45. The pack fires
+### 48. The pack fires
 
-- **Film:** 2:53.0–2:58.0 (5 s), frames 4153–4272
+- **Film:** 4:24.0–4:29.0 (5 s), frames 6337–6456
 - **Mission:** T+7:06:57 · 1:1
 - **Camera:** WS · 24 mm · among the pack, 150 km down Anchor's shadow, looking toward Breakwater (drone camera)
-- **Action:** The rock is a black disc ahead. Skerry's last salvo, thrown six hours ago at Anchor itself, sweeps past it in three glittering clouds, wide of the pack, and the garrison's last drones come round the rock behind them; in the distance the Wallfish and the Donnager's CIWS cut them down. On the clock, pod doors ripple open down the Infinity's hull and the spend wave leaves: hundreds of small plumes with its killers among them, all on one 45-minute flight.
-- **Comms:** DONNAGER: “Last drones down. Pack's clear.” / INFINITY: “Spend wave away.”
+- **Viewer sees:** Among the missile frigates, deep in the rock's shadow, the rock a black disc ahead: three glittering clouds sweep through the space the frigates have just left; drones come round the rock after them and die in bursts of tracer. Then pod doors ripple open down a frigate's hull and hundreds of small plumes streak away.
+- **Action:** The rock is a black disc ahead. Skerry's last salvo, thrown six hours ago at Anchor and steered onto the pack's slot in its last hour (~40 m/s of its divert kits), sweeps through in three glittering clouds; the pack, having watched the divert burns, slid 20 km down the shadow on RCS a few minutes before. The garrison's last drones come round the rock behind the clouds, and the Wallfish and the Donnager's CIWS cut them down. On the clock, pod doors ripple open down the Infinity's hull and the spend wave leaves: hundreds of small plumes with its killers among them, all on one 45-minute profile at 30 g.
+- **Comms:** DONNAGER: “Drones down. Pack's clear.” (at 0.5 s) / INFINITY: “Spend wave away.” (at 3.3 s)
 - **World:** the final approach (Maren growing, night side)
 - **Doctrine:** O3, O11, D11, D6, HO3, HO4
 - **VFX:** Canister-cloud glitter, CIWS tracers and drone kills, ripple launch (swarm system)
 - **Rig:** pod_ripple (new); ciws_phase / ciws_fire (new, on the Donnager)
-- **Assets:** GI (new), GI-MAV (new), MSL-V (new), FX-SWARM (new), FX-PD (new), ANCHOR (new), CV (new), DRN-C (new), SUB (new)
+- **Assets:** GI (new), GI-MAV (new), GI-GUN (new), MSL-V (new), FX-SWARM (new), FX-PD (new), ANCHOR (new), CV (new), DRN-C (new), SUB (new)
 - **Sound:** Silence; the score drops out.
 - **Render class:** C · **Map:** D
 
-### 46. Kill wave away
+### 49. Kill wave away
 
-- **Film:** 2:58.0–3:01.0 (3 s), frames 4273–4344
+- **Film:** 4:29.0–4:32.0 (3 s), frames 6457–6528
 - **Mission:** T+7:08:30 · 1:1
-- **Camera:** Tracker · 300 mm · from the Pillar of Autumn, across Anchor's shadow (tracker)
-- **Action:** Ninety seconds behind the spend wave, pod doors ripple open down the Galactica's hull and the kill wave leaves in one launch: ~40 Casaba killers among ~300 decoy and EW birds that look and fly like them, all on the same 45-minute flight. In the foreground the Pillar of Autumn's pods stay shut: the reserve.
+- **Camera:** Tracker · 300 mm · from the Pillar of Autumn, across Anchor's shadow: its shut pods sharp in the foreground, then a rack to the Galactica (tracker)
+- **Viewer sees:** Across the rock's shadow: in the foreground, sharp, a frigate's shut pod doors; focus shifts to a second frigate as its pods ripple open and heavier plumes stream away.
+- **Action:** Ninety seconds behind the spend wave. The shot opens on the Pillar of Autumn's shut pods, sharp in the foreground: the reserve. Focus racks to the Galactica as its pod doors ripple open and the kill wave leaves in one launch: ~40 Casaba killers among ~300 decoy and EW birds that look, boost and fly like them, all on the same 45-minute profile.
 - **Comms:** GALACTICA: “Kill wave away.”
 - **World:** the final approach (Maren growing, night side)
 - **Doctrine:** O3, O10, O11
@@ -837,30 +947,50 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** Silence.
 - **Render class:** C · **Map:** D
 
-### 47. The anvil
+### 50. The anvil
 
-- **Film:** 3:01.0–3:05.0 (4 s), frames 4345–4440
+- **Film:** 4:32.0–4:36.0 (4 s), frames 6529–6624
 - **Mission:** T+7:25:00 · compressed 10× (the ripple takes ~40 s)
 - **Camera:** WS · 40 mm · above Breakwater, Maren's night side below (drone camera)
-- **Action:** Breakwater's reveal, with ~900 birds inbound. Its turrets track the fleet but stay silent: the fleet never comes within the range they could hit. Its answer goes at the ship that will steer the birds: its 64 cells open and ripple-fire, every missile at the Extenuating Circumstances, 17,000 km off, into the fleet's braking burn. Far along the orbit, ring stations wake as points of light.
-- **Comms:** ASTRID: “Sixty-four inbound. All on Extenuating.”
+- **Viewer sees:** Above a huge dark warship, the planet's night side below, glittering with city lights. No sunlight: the ship is lit only from below, red, by a thin glowing ring round the planet's edge and by the city glow. Its turrets track but stay silent. Rows of cell doors open and missiles ripple out, their plumes lighting its hull. Far along its orbit, points of light wake.
+- **Action:** Breakwater's reveal, with ~900 birds inbound, in Maren's shadow: no sun reaches it. It is a dark hull lit from below by the thin red ring of Maren's atmosphere and the city glow, until its 64 cells open and ripple-fire and the plumes light it. Its turrets track the fleet but stay silent: the fleet never comes within their reach. Every missile goes at the Extenuating Circumstances, the ship that steers the birds, 17,000 km off, into the fleet's braking burn. Far along the orbit, ring stations wake as points of light.
+- **On screen:** `BREAKWATER · MONITOR · NO WARP DRIVE`
 - **State:** BW: intact
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** HD7, HO9, HD1, HO1, D1
 - **VFX:** Cell doors, missile launch (swarm system)
 - **Rig:** turret_traverse / cells_open (new)
-- **Assets:** BW (new), RING (new), MAREN (extend), MSL-V (new), FX-SWARM (new), SUB (new)
+- **Assets:** BW (new), RING (new), MAREN (extend), MSL-V (new), FX-SWARM (new)
 - **Sound:** A low brass sting.
 - **Render class:** C · **Map:** E
 
-### 48. Umbrella
+### 51. Sixty-four
 
-- **Film:** 3:05.0–3:08.0 (3 s), frames 4441–4512
+- **Film:** 4:36.0–4:49.0 (13 s), frames 6625–6936
+- **Mission:** T+7:25:40 · 1:1
+- **Camera:** HUD insert · the master plot (HUD insert)
+- **Viewer sees:** A tactical plot: sixty-four red tracks leave the enemy warship and converge on one friendly ship among the fleet. A second label appears beside the flagship.
+- **Action:** The plot answers the reveal: every one of Breakwater's missiles is at the destroyer that steers the waves (HO9). The backup is shown too: if the Extenuating goes dark, the Astrid steers the birds direct (LREF §3).
+- **Comms:** ASTRID: “Sixty-four inbound. Every one at Extenuating.” / EXTENUATING: “She wants the ship that steers our birds.” / ACTUAL: “If you go dark, Astrid steers them.”
+- **On screen:** `BACKUP: ASTRID DIRECT`
+- **Doctrine:** HO9, D10, D2
+- **VFX:** HUD
+- **Rig:** none
+- **Assets:** HUD (new), SUB (new)
+- **Sound:** Sensor tones; the score tightens.
+- **Render class:** E · **Map:** E
+
+### 52. Umbrella
+
+- **Film:** 4:49.0–4:52.0 (3 s), frames 6937–7008
 - **Mission:** T+7:31:00 · 1:1
 - **Camera:** Tracker · 400 mm · from the Extenuating Circumstances, the Astrid 50 km above (tracker)
-- **Action:** Breakwater's missiles arrive up the fleet's drive axis. The Astrid has cut its drive for the minute so its plume won't blind its own point defence: its lenses glow violet and its CIWS lay kill clouds across the missiles' path. The flashes walk in toward the Extenuating and stop short.
-- **Comms:** EXTENUATING: “Sixty-four down. Thanks, Actual.”
-- **World:** Breakwater over Maren's night side
+- **Viewer sees:** Through a long lens from a destroyer: the flagship 50 km above it, dark, its drive off; its violet lenses pulse, tracers lace the dark, and flashes walk in toward the camera and stop short.
+- **Action:** Breakwater's missiles arrive up the fleet's drive axis. The Astrid has cut its drive for the minute so its plume won't blind its own point defence: its lenses glow violet and its CIWS lay kill clouds across the missiles' path. In Maren's shadow the flashes are the only light; they walk in toward the Extenuating and stop short.
+- **Comms:** EXTENUATING: “Sixty-four down.” (at 1.5 s)
+- **Light:** the Astrid in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** D1, D2, D10, HO9, O13
 - **VFX:** Kill clouds, intercept flashes, lens glow, the drive's dying glow
 - **Rig:** engine_throttle 1→0 (new); laser_power (new); ciws_phase / ciws_fire (new, on the Astrid)
@@ -868,16 +998,18 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** Silence; the score's pulse.
 - **Render class:** C · **Map:** E
 
-### 49. Blind it
+### 53. Blind it
 
-- **Film:** 3:08.0–3:12.0 (4 s), frames 4513–4608
+- **Film:** 4:52.0–4:57.0 (5 s), frames 7009–7128
 - **Mission:** T+7:50:00 · 1:1
 - **Camera:** MS · 35 mm · the Endeavor's laser arrays (hull camera)
-- **Action:** The Extenuating Circumstances floods the ring's links. The arrays go from low power to full on Breakwater's optics and Site 1's trackers: lenses violet, beams invisible.
-- **Comms:** EXTENUATING: “Their net's down.” / ENDEAVOR: “Full power.”
+- **Viewer sees:** In darkness, the cruiser's laser turrets: their lenses go from a dim violet glow to full, the brightest things on the hull.
+- **Action:** The Extenuating Circumstances floods the ring's links. In Maren's shadow the Endeavor is a dark hull edged red; its arrays go from low power to full on Breakwater's optics and Site 1's trackers, lenses violet, beams invisible.
+- **Comms:** EXTENUATING: “Their net's down.” / ENDEAVOR: “Arrays, full power. Blind Site One.”
 - **On screen:** `SINK 88%`
 - **State:** EN: port fin a stump, port belt scorched
-- **World:** Breakwater over Maren's night side
+- **Light:** the escorts in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** O5, HD9
 - **VFX:** Lens glow, EW overlay on inserts
 - **Rig:** laser_power 0.2→1; laser_traverse; laser_elevation
@@ -885,15 +1017,17 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** The lenses' capacitor whine through the hull.
 - **Render class:** A · **Map:** E · **Reference frame:** `img/lookyoke_final.jpg`
 
-### 50. The spend wave
+### 54. The spend wave
 
-- **Film:** 3:12.0–3:16.0 (4 s), frames 4609–4704
+- **Film:** 4:57.0–5:01.0 (4 s), frames 7129–7224
 - **Mission:** T+7:52:00 · 1:1
 - **Camera:** Tracker · 250 mm · from the Astrid, Maren's limb in frame (tracker)
-- **Action:** Five degrees off Maren's limb, a sparkle: the spend wave dying against Breakwater's point defence, which lights up and gives away every battery. The destroyer steers the kill wave around them.
-- **Comms:** EXTENUATING: “Their batteries are lit. Steering round.”
+- **Viewer sees:** Through a long lens from the flagship, just off the planet's glowing red edge: a sparkle of hundreds of tiny flashes, and among them a few larger bursts.
+- **Action:** Just off Maren's red limb, a sparkle: the spend wave arriving. Its decoys, EW and kill-cloud birds soak up Breakwater's point defence, and a few dozen warheads burst 1–3 km out, stripping the sensors, radiators and PD mounts on the side facing them; the hull stays whole. Every battery that fires gives itself away, and the destroyer steers the whole kill wave round them.
+- **Comms:** EXTENUATING: “Her guns are lit. Steering round them.”
 - **State:** BW: intact
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** O3, O5, HD5
 - **VFX:** Distant PD sparkle
 - **Rig:** none
@@ -901,14 +1035,16 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** The score.
 - **Render class:** D · **Map:** E
 
-### 51. Seeker
+### 55. Seeker
 
-- **Film:** 3:16.0–3:20.0 (4 s), frames 4705–4800
+- **Film:** 5:01.0–5:05.0 (4 s), frames 7225–7320
 - **Mission:** T+7:53:14 · compressed ~3.5× (the last 14 s of flight)
 - **Camera:** ECU · 100 mm · riding a Casaba killer's nose (drone camera)
-- **Action:** The hardened nose of a Casaba killer through its last seconds, ~700 km out at ~45 km/s. The ablative cap glows where one of Breakwater's lasers is burning it; the glow fades as the beam swings off to another bird. Only then does the seeker shutter open, and focus racks from the cap to the target: ahead, screen right, Breakwater grows from a point to a sliver, its tracers converging in front of it.
+- **Viewer sees:** Riding the nose of a missile in its last seconds: its cap glows orange under a laser, then fades as the beam swings away; a small window shutter opens, and focus shifts to a dark warship ahead, growing from a point to a sliver, tracers converging in front of it.
+- **Action:** The hardened nose of a Casaba killer through its last seconds, ~700 km out at ~45 km/s. The ablative cap glows where one of Breakwater's lasers is burning it; the glow fades as the beam swings off to another bird. Only then does the seeker shutter open, and focus racks from the cap to the target, ending the shot: ahead, screen right, Breakwater grows from a point to a sliver, a dark hull in Maren's shadow picked out by its own tracers.
 - **State:** BW: intact
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** O3, O10, HD5
 - **VFX:** Glowing ablative cap (fading), the seeker window, rack focus, distant tracers
 - **Rig:** spin (swarm attribute); cap_glow (new); seeker_shutter (new)
@@ -916,15 +1052,17 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** Silence; the score climbs.
 - **Render class:** B · **Map:** E
 
-### 52. Wall of fire
+### 56. Wall of fire
 
-- **Film:** 3:20.0–3:24.0 (4 s), frames 4801–4896
+- **Film:** 5:05.0–5:09.0 (4 s), frames 7321–7416
 - **Mission:** T+7:53:28 · slowed 5× (the wave arrives within ~1 s)
 - **Camera:** WS · 40 mm · above Breakwater (drone camera)
-- **Action:** The kill wave arrives in the same second, nose-on to Breakwater, from screen left. Tracers and dying decoys fill the sky; the hardened noses keep coming.
+- **Viewer sees:** Above the dark warship: the missile wave arrives all at once from the left; tracers and dying missiles fill the dark, and the hardened noses keep coming.
+- **Action:** The kill wave arrives in the same second, nose-on to Breakwater, from screen left, into a wall thinned by the spend wave. In the dark, tracers and dying birds are all the light there is; the hardened noses keep coming.
 - **Comms:** GALACTICA: “Kill wave. Three, two—”
 - **State:** BW: intact
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** O3, HD5, O9
 - **VFX:** Tracer streams, intercept flashes, swarm
 - **Rig:** ciws_fire (new, on Breakwater)
@@ -932,15 +1070,17 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** A dense crackle in the score; no air, no bangs.
 - **Render class:** C · **Map:** E
 
-### 53. Casaba
+### 57. Casaba
 
-- **Film:** 3:24.0–3:28.0 (4 s), frames 4897–4992
+- **Film:** 5:09.0–5:13.0 (4 s), frames 7417–7512
 - **Mission:** T+7:53:30 · slowed 3×
 - **Camera:** WS · 35 mm · off Breakwater's quarter (drone camera)
-- **Action:** Two kilometres out, the surviving Casaba charges fire from screen left: nuclear jets lance into Breakwater's drive bells and its engines go dark. The monitor is whole, but it can no longer move.
-- **Comms:** ASTRID: “Spears in. Her drive's dark.”
+- **Viewer sees:** Off the warship's quarter: two kilometres out, nuclear jets lance into its engine bells, lighting the whole dark ship for an instant; its engines go dark.
+- **Action:** Two kilometres out, the surviving Casaba charges fire from screen left: nuclear jets lance into Breakwater's drive bells, and for an instant they light the whole dark monitor. Its engines go dark. The monitor is whole, but it can no longer move.
+- **Comms:** ASTRID: “Spears in. Her drive's dead.”
 - **State:** BW: drive breached, venting
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** O10
 - **VFX:** Casaba jets, drive breach, venting
 - **Rig:** drive_glow 1→0 (new); vent (new)
@@ -948,15 +1088,17 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** The comm channels white out, then silence.
 - **Render class:** C · **Map:** E
 
-### 54. The hail
+### 58. The hail
 
-- **Film:** 3:28.0–3:33.0 (5 s), frames 4993–5112
+- **Film:** 5:13.0–5:18.0 (5 s), frames 7513–7632
 - **Mission:** T+7:54:00 · 1:1
 - **Camera:** MS · 50 mm · slow push on Breakwater over the night side (drone camera)
-- **Action:** Breakwater hangs dead-engined over Maren's night side, venting from the spear wounds, its turrets still tracking. On an open channel the Astrid hails it. No answer comes.
-- **Comms:** ACTUAL: “Breakwater, you can't move. Strike, or we fire.”
+- **Viewer sees:** The warship hangs dead-engined in the dark over the planet's night side, venting from glowing wounds, its turrets still tracking.
+- **Action:** Breakwater hangs dead-engined in Maren's shadow over the night side, its spear wounds glowing and venting, its turrets still tracking. On an open channel the Astrid hails it. No answer comes.
+- **Comms:** ACTUAL: “Breakwater, you can't move, and we can't miss. Surrender.”
 - **State:** BW: drive breached, venting
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** O10
 - **VFX:** Venting
 - **Rig:** vent (new)
@@ -964,14 +1106,16 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** Silence where the answer should be.
 - **Render class:** B · **Map:** E
 
-### 55. Spinal
+### 59. Spinal
 
-- **Film:** 3:33.0–3:36.0 (3 s), frames 5113–5184
+- **Film:** 5:18.0–5:21.0 (3 s), frames 7633–7704
 - **Mission:** T+7:54:38 · 1:1 (the last degree of the slew; it fires two seconds in, at T+7:54:40)
 - **Camera:** MS · 200 mm · the Astrid end-on (drone camera)
-- **Action:** The Astrid, stopped 10,000 km out and 15° off Breakwater's zenith so a miss would clear Maren, settles its last degree and fires. The bloom fills the last second.
-- **Comms:** ACTUAL: “Fire.”
-- **World:** Breakwater over Maren's night side
+- **Viewer sees:** The flagship end-on in the dark: it settles, and a blue-white bloom lights its kilometre-long barrel and fills the frame.
+- **Action:** The Astrid, stopped 10,000 km out and 15° off Breakwater's zenith so a miss would clear Maren, settles its last degree and fires. In Maren's shadow the bloom lights its dark kilometre of barrel and fills the last second.
+- **Comms:** ACTUAL: “No answer. Fire.”
+- **Light:** the Astrid in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** O4, O10, HD7, O9
 - **VFX:** Spinal muzzle bloom
 - **Rig:** rcs_bow / rcs_stern (new); spinal_shot (new)
@@ -979,30 +1123,34 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** Everything drops out.
 - **Render class:** B · **Map:** E
 
-### 56. The wait
+### 60. The wait
 
-- **Film:** 3:36.0–3:42.0 (6 s), frames 5185–5328
+- **Film:** 5:21.0–5:27.0 (6 s), frames 7705–7848
 - **Mission:** T+7:54:41 · compressed ~27× (163 of the slug's 169 s; the clock races)
-- **Camera:** WS · 35 mm · locked off at the Casaba shot's angle (drone camera)
-- **Action:** Hold on the crippled monitor, turrets swinging uselessly, while the clock races through the slug's flight.
-- **Comms:** ASTRID: “Impact in two forty-nine.”
+- **Camera:** WS · 35 mm · locked off at the Casaba shot's angle, Maren's limb low in frame (drone camera)
+- **Viewer sees:** A locked-off view of the crippled warship, turrets swinging uselessly, while the clock races. Behind it the planet's red edge brightens and flares, the sun breaks over it, and the light on the hull climbs from red to white.
+- **Action:** Hold on the crippled monitor, turrets swinging uselessly, while the clock races through the slug's flight and Breakwater's sunrise with it: behind the monitor Maren's red limb brightens and flares, the sun breaks over it, and the light on the hull climbs from red to white.
+- **Comms:** ASTRID: “Impact in two minutes forty-nine.”
 - **State:** BW: drive breached, venting
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in umbra → penumbra → sun
+- **World:** after Breakwater's sunrise (a low sun just past Maren's limb, the night side below)
 - **Doctrine:** O10
-- **VFX:** Venting (turrets and vents as one moving layer over a plate of the hull)
+- **VFX:** Venting; the sunrise as a cross-fade from an eclipse plate to a sunlit plate, with the Sun keyed through the ~2 min penumbra; the turrets and vents as one moving layer
 - **Rig:** turret_traverse (new)
 - **Assets:** BW (new), BW-BRK (new), SUB (new)
 - **Sound:** Silence; one held note.
 - **Render class:** P · **Map:** E
 
-### 57. Impact
+### 61. Impact
 
-- **Film:** 3:42.0–3:45.0 (3 s), frames 5329–5400
+- **Film:** 5:27.0–5:30.0 (3 s), frames 7849–7920
 - **Mission:** T+7:57:29 · 1:1
 - **Camera:** WS · 35 mm · the Casaba shot's angle (drone camera)
-- **Action:** The slug arrives amidships, near the spear damage: a white flash, a spall cone, and Breakwater's back breaks in a chain of secondary flashes.
+- **Viewer sees:** In the first full sunlight: the slug strikes amidships, a white flash and a cone of debris, and the warship's back breaks in a chain of secondary flashes.
+- **Action:** The slug arrives amidships in the first full sunlight, near the spear damage: a white flash, a spall cone, and Breakwater's back breaks in a chain of secondary flashes.
 - **State:** BW: back broken
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in sun
+- **World:** after Breakwater's sunrise (a low sun just past Maren's limb, the night side below)
 - **Doctrine:** O4
 - **VFX:** Impact, spall, section break
 - **Rig:** break 0→1 (new)
@@ -1010,16 +1158,18 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** One deep boom in the score, on the cut.
 - **Render class:** C · **Map:** E
 
-### 58. Heat
+### 62. Heat
 
-- **Film:** 3:45.0–3:49.0 (4 s), frames 5401–5496
+- **Film:** 5:30.0–5:34.0 (4 s), frames 7921–8016
 - **Mission:** T+8:00:00 · 1:1
 - **Camera:** MS · 35 mm · along the Endeavor's scorched port flank (hull camera)
-- **Action:** Its arrays stood down when Breakwater died, but the Endeavor's sink still reads 98 %. A valve opens and a thousand tonnes of water boil out in a white plume streaming off the ship: half an hour of margin.
-- **Comms:** ENDEAVOR: “Dump the water.”
+- **Viewer sees:** Along the cruiser's scorched flank, still in the dark: a valve opens and a white plume of boiling water streams off the ship, lit faintly red.
+- **Action:** Its arrays stood down when Breakwater died, but the Endeavor, still in Maren's shadow, reads 98 %. A valve opens and a thousand tonnes of water boil out in a plume lit only by the red ring of Maren's limb: half an hour of margin.
+- **Comms:** ENDEAVOR: “Sink's full. Dump the water.”
 - **On screen:** `SINK 98%`
 - **State:** EN: port fin a stump, port belt scorched
-- **World:** Breakwater over Maren's night side
+- **Light:** the escorts in umbra
+- **World:** Maren's shadow (lit by the red ring of Maren's atmosphere, the night side's city glow, and the scene's own lights)
 - **Doctrine:** D3, D7
 - **VFX:** Water-dump plume
 - **Rig:** water_dump 0→1 (new)
@@ -1027,16 +1177,18 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** A roar through the hull, then a long hiss.
 - **Render class:** V · **Map:** E
 
-### 59. Terms
+### 63. Terms
 
-- **Film:** 3:49.0–3:58.0 (9 s), frames 5497–5712
+- **Film:** 5:34.0–5:45.0 (11 s), frames 8017–8280
 - **Mission:** T+8:10:00 · 1:1
 - **Camera:** Tracker · 2,000 mm · from the Endeavor's standoff (tracker)
-- **Action:** Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting over the night side; the Astrid's firing line has already swung onto the next ring station. The exchange plays first. The terms ask for the Breakers charts as well, since the garrison's emplacements answer to no one (HD9). Then the last plot holds alone for three seconds on the two dark channels.
-- **Comms:** EXTENUATING: “Maren's asking for terms.” / ACTUAL: “Site One dark, and the Breakers charts.”
+- **Viewer sees:** Through a very long lens: the wreck, a glittering smear venting in sunlight over the night side. Then a tactical plot holds alone on two dark channels.
+- **Action:** Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting in the new sunlight over the night side. The exchange plays first: the terms ask for the Breakers charts as well, since the garrison's emplacements answer to no one (HD9). Then the last plot holds alone for three seconds on the two dark channels.
+- **Comms:** EXTENUATING: “Maren's asking for terms.” / ACTUAL: “Site One goes dark, and they chart every mine in the Breakers.”
 - **On screen:** `CANTERBURY · NORMANDY: NO CARRIER`
 - **State:** BW: back broken
-- **World:** Breakwater over Maren's night side
+- **Light:** Breakwater in sun
+- **World:** after Breakwater's sunrise (a low sun just past Maren's limb, the night side below)
 - **Doctrine:** O4, D7
 - **VFX:** Distant wreck, HUD tag
 - **Rig:** none
@@ -1044,14 +1196,15 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** The score, low.
 - **Render class:** D · **Map:** E
 
-### 60. Site One goes dark
+### 64. Site One goes dark
 
-- **Film:** 3:58.0–4:01.0 (3 s), frames 5713–5784
+- **Film:** 5:45.0–5:48.0 (3 s), frames 8281–8352
 - **Mission:** T+8:24:00 · 1:1
 - **Camera:** Tracker · 2,000 mm · on Site 1's plateau, night side (tracker)
+- **Viewer sees:** Through a very long lens on the night side: a small cluster of lights on a dark plateau goes out, block by block.
 - **Action:** A cluster of lights about ten pixels wide, centred on an otherwise dark plateau whose relief just reads in the night-side glow: Site 1. They go out, block by block, and the Astrid, still dazzling it, reads the site's power and heat collapse. The fleet never struck it (§13): it goes dark on terms.
-- **Comms:** ASTRID: “Site One: no power, no heat.”
-- **World:** Breakwater over Maren's night side
+- **Comms:** ASTRID: “No power, no heat.” (at 1 s)
+- **World:** after Breakwater's sunrise (a low sun just past Maren's limb, the night side below)
 - **Doctrine:** §13, D3
 - **VFX:** City lights going out (a comp element over a plate)
 - **Rig:** none
@@ -1059,15 +1212,17 @@ Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches thro
 - **Sound:** The score falls away.
 - **Render class:** D · **Map:** E
 
-### 61. Hold
+### 65. Hold
 
-- **Film:** 4:01.0–4:08.0 (7 s), frames 5785–5952
+- **Film:** 5:48.0–5:55.0 (7 s), frames 8353–8520
 - **Mission:** T+8:24:03 · 1:1
 - **Camera:** EWS · 35 mm · locked off, the Endeavor end-on (drone camera)
+- **Viewer sees:** The cruiser end-on against the night side's city lights, its nose toward the planet: it runs out three glowing fins in a broken cross, a stump where the fourth was. Cut to black under the last line.
 - **Action:** The Endeavor, end-on, keeps its nose on Site 1 until the terms are signed, so its fins stay edge-on to it. It runs out its three fins (already part-way out) in silence, into a broken cross glowing orange against the night side, the stump where the fourth was. The sun is kept just out of frame and the thin crescent clipped, so the city lights read. Cut to black under the last line.
 - **Comms:** ACTUAL: “Nauvoo, bring the shields in. T-SEC, you're next.”
 - **State:** EN: port fin a stump, port belt scorched
-- **World:** Breakwater over Maren's night side
+- **Light:** the escorts in sun
+- **World:** after Breakwater's sunrise (a low sun just past Maren's limb, the night side below)
 - **Doctrine:** D3
 - **VFX:** Fin glow
 - **Rig:** fin_starboard / fin_dorsal / fin_ventral 0.5→1 (new); heat 2.4; radiator_glow

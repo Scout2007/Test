@@ -1,6 +1,6 @@
 # Asset requests
 
-Everything *Operation Tidebreak* (revision 6 · round 5's fixes: moonlight in the shadow, less to read, the dazzle within the rules) needs from the modelling session, with the shots that need each item. Generated from `storyboard/tidebreak_data.py`.
+Everything *Operation Tidebreak* (revision 6b · round 5's fixes and cold read 5's: moonlight in the shadow, less to read, breakwater named as the target) needs from the modelling session, with the shots that need each item. Generated from `storyboard/tidebreak_data.py`.
 
 - **Status:** *built* exists; *extend* exists but needs additions; *new* must be made.
 - **Concept first:** per the user's rule, new weapon and ship designs go through concept sheets and the user picks before modelling. Items without reference art are flagged too.

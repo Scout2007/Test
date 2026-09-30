@@ -215,7 +215,7 @@ Sound: The dying channel's hiss, then silence.
 ## 34. (6 s) · clock T+4:34:10 → T+4:34:59 (the clock runs fast)
 
 On the cruiser's back, looking aft: smoke drifts past, the stars wheel as the ship flips end over end, and its main drive lights, pointing toward the planet.
-> **ACTUAL:** All Tidebreak, turnover, one at a time. Keep PD up.
+> **ACTUAL:** All Tidebreak, turnover, one at a time.
 > **ENDEAVOR:** Flipping.
 Sound: thruster thumps, then the drive's roar through the hull.
 

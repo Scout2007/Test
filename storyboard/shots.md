@@ -1,6 +1,6 @@
 # Operation Tidebreak: shot list
 
-Revision 6 · round 5's fixes: moonlight in the shadow, less to read, the dazzle within the rules. Runtime 6:49 (9,816 frames at 24 fps), 69 shots, mission span T+0:00 → T+8:24, 2.39:1 · 1920×804 · 24 fps · Cycles. Generated from `storyboard/tidebreak_data.py`; the page with maps and sketches is `storyboard/index.html`.
+Revision 6b · round 5's fixes and cold read 5's: moonlight in the shadow, less to read, Breakwater named as the target. Runtime 6:49 (9,816 frames at 24 fps), 69 shots, mission span T+0:00 → T+8:24, 2.39:1 · 1920×804 · 24 fps · Cycles. Generated from `storyboard/tidebreak_data.py`; the page with maps and sketches is `storyboard/index.html`.
 
 Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_doctrine.md` (HO, HD, H). Asset IDs refer to `ASSET_REQUESTS.md`. Render classes: **A** Endeavor close-up (~45 s/frame); **A2** Endeavor close-up with heavy FX (~90 s/frame); **V** Close-up with a hero volume (the water dump) (~250 s/frame); **B** One hero ship or rock, full view (~75 s/frame); **C** Several ships or heavy FX (FX in own layers) (~200 s/frame); **S** Small subject on black with its FX (up to ~350 px) (~30 s/frame); **P** Locked camera: a plate or two rendered once, plus one moving layer (~30 s/frame); **D** Wide, distant, small subject on black, or plate (~15 s/frame); **E** 2D comp / HUD (~2 s/frame).
 
@@ -684,7 +684,7 @@ Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, t
 - **Camera:** WS · 24 mm · on the dorsal hull looking aft (hull camera)
 - **Viewer sees:** On the cruiser's back, looking aft: smoke drifts past, the stars wheel as the ship flips end over end, and its main drive lights, pointing toward the planet.
 - **Action:** Under smoke and an EW peak, one ship at a time, the fleet flips. The stars wheel over the hull as the stern swings toward Maren; now the bow points screen left while the ship still travels right. The drive lights: 34 minutes of braking toward Anchor.
-- **Comms:** ACTUAL: “All Tidebreak, turnover, one at a time. Keep PD up.” / ENDEAVOR: “Flipping.” (at 4.5 s)
+- **Comms:** ACTUAL: “All Tidebreak, turnover, one at a time.” / ENDEAVOR: “Flipping.” (at 3.5 s)
 - **State:** EN: shield parked, four fins
 - **World:** the Breakers (backlit haze)
 - **Doctrine:** D8, O8

@@ -38,7 +38,7 @@ Conventions
 """
 
 TITLE = "Operation Tidebreak"
-REVISION = "Revision 6 · round 5's fixes: moonlight in the shadow, less to read, the dazzle within the rules"
+REVISION = "Revision 6b · round 5's fixes and cold read 5's: moonlight in the shadow, less to read, Breakwater named as the target"
 FPS = 24
 FORMAT = "2.39:1 · 1920×804 · 24 fps · Cycles"
 SHIELDS_OFF = "T+0:02:00"   # the shields leave the ships; sketches drop them from here on
@@ -1061,7 +1061,7 @@ shot(act="III",
      cam="WS · 24 mm · on the dorsal hull looking aft",
      see="On the cruiser's back, looking aft: smoke drifts past, the stars wheel as the ship flips end over end, and its main drive lights, pointing toward the planet.",
      action="Under smoke and an EW peak, one ship at a time, the fleet flips. The stars wheel over the hull as the stern swings toward Maren; now the bow points screen left while the ship still travels right. The drive lights: 34 minutes of braking toward Anchor.",
-     comm=[("ACTUAL", "All Tidebreak, turnover, one at a time. Keep PD up."), ("ENDEAVOR", "Flipping.", 4.5)],
+     comm=[("ACTUAL", "All Tidebreak, turnover, one at a time."), ("ENDEAVOR", "Flipping.", 3.5)],
      rules=["D8", "O8"],
      vfx="Main plume, RCS, smoke screen",
      rig=["rcs_bow / rcs_stern pulses", "engine_throttle 0→1", "cm_smoke (new)"],

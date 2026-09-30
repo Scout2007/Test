@@ -105,13 +105,13 @@ Everything *Operation Tidebreak* (revision 6 · round 5's fixes: moonlight in th
 | S | Small subject on black with its FX (up to ~350 px) | ~30 s/frame | 28, 33 | 240 | 2.0 h |
 | P | Locked camera: a plate or two rendered once, plus one moving layer | ~30 s/frame | 63, 68 | 312 | 2.6 h |
 | D | Wide, distant, small subject on black, or plate | ~15 s/frame | 7, 9, 17–18, 27, 38, 47, 49, 57, 66–67 | 1,512 | 6.3 h |
-| E | 2D comp / HUD | ~2 s/frame | 1–6, 13–14, 32, 35, 48, 54, 69 | 3,888 | 2.2 h |
-| | **Total** | | 69 shots | 9,600 | **122.4 h** |
-| | With 30% for re-renders | | | | **159.1 h** |
+| E | 2D comp / HUD | ~2 s/frame | 1–6, 13–14, 32, 35, 48, 54, 69 | 4,104 | 2.3 h |
+| | **Total** | | 69 shots | 9,816 | **122.5 h** |
+| | With 30% for re-renders | | | | **159.2 h** |
 
 These costs are estimates, not measurements. Step 1 runs the benchmarks in the worksheet with stand-ins and first-version effects (PROXY), so nothing waits on new assets; record s/frame and VRAM for each. It also renders the C stand-in twice more, once with half-resolution FX layers and once with 16 spp swarm layers, to size levers 1 and 2. Gate before the full pass: fill in the worksheet (the arithmetic is in ASSET_REQUESTS.md). If the total with the re-render allowance is over the gate, apply the levers agreed in advance, in order, until it isn't: 1) half-resolution FX layers (the volumes already render at half resolution); 2) swarm layers at 16 spp with earlier LOD switches; 3) seconds trimmed where they cost most: 65 (~1.7 h raw a second), then class C holds such as 15, 51 and 59 (~1.3 h a second each), since trimming cards and plots saves nothing (~0.01 h a second); 4) if it is still over, the storyboard session and the user choose between a smaller re-render allowance (MARGIN; one full pass still fits the week) and shorter holds. With the estimate this close to the gate, step 4 is the likely outcome if the benchmarks run high (OPEN_QUESTIONS Q17). The ceiling is a week (168 h) per full pass.
 
-The gate: 159.1 h with the allowance (estimated), against 160 h, so 0.9 h to spare. Break-even for one class on its own, the others as they stand: C 203 s/frame (estimate 200), B 78 s/frame (estimate 75), A 47 s/frame (estimate 45), A2 95 s/frame (estimate 90), V 277 s/frame (estimate 250), D 17 s/frame (estimate 15).
+The gate: 159.2 h with the allowance (estimated), against 160 h, so 0.8 h to spare. Break-even for one class on its own, the others as they stand: C 202 s/frame (estimate 200), B 77 s/frame (estimate 75), A 47 s/frame (estimate 45), A2 94 s/frame (estimate 90), V 272 s/frame (estimate 250), D 16 s/frame (estimate 15).
 
 ### The benchmark worksheet
 
@@ -129,7 +129,7 @@ Each benchmark stands for the shots listed. Fill in the measured column; each ro
 | `Countermeasures` | 25: the Endeavor close up in the medium-scale smoke cache, with chaff, flares and tracers | 25, 34 | 240 | 90 |  | 6.0 h |
 | `Site One` | 50: the fleet-scale smoke | 50 | 96 | 200 |  | 5.3 h |
 | `V` | 65: the water dump | 65 | 96 | 250 |  | 6.7 h |
-| — | not benchmarked: their class estimates stand | 1–7, 9, 13–14, 17–18, 27–28, 32–33, 35, 38, 47–49, 54, 57, 63, 66–69 | 5,952 | — | — | 13.1 h |
+| — | not benchmarked: their class estimates stand | 1–7, 9, 13–14, 17–18, 27–28, 32–33, 35, 38, 47–49, 54, 57, 63, 66–69 | 6,168 | — | — | 13.2 h |
 
 ## Production plan
 

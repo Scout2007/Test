@@ -253,9 +253,14 @@ def reading_groups():
 def cue_windows(run):
     """(shot, characters to read, line, start s, window s) for every cued line in a run of shots, the characters
     counting a first tag and any uncued lines that follow it; a shot's last line may run on
-    over the following shots of the run that have no lines of their own."""
+    over the following shots of the run that have no lines of their own. The uncued lines that open a shot,
+    before its first cued line, get the window from the shot's start (0) to that cue."""
     out = []
     for i, s in enumerate(run):
+        lead = next((j for j, cue in enumerate(s["cues"]) if cue is not None), 0)     # lines before the first cue
+        if lead:
+            chars = sum(len(line) + c for (_, line), c in zip(s["comm"][:lead], s["tagc"][:lead]))
+            out.append((s, chars, " ".join(line for _, line in s["comm"][:lead]), 0, s["cues"][lead]))
         for j, ((sp, line), cue) in enumerate(zip(s["comm"], s["cues"])):
             if cue is None:
                 continue

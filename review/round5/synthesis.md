@@ -10,7 +10,7 @@ Round 5 read **storyboard revision 5** (commit bcc0994: 69 shots, 6:58), with th
 
 A session limit stopped all five reviewers once. Cinematography and production were stopped twice. Every report was finished from the frozen checkout of revision 5.
 
-**Revision 6** (commit 489d24c and after) applies the round's minor issues and nits, except where noted below. It is 69 shots, 6:40. The render estimate is 122.4 h raw and 159.1 h with the 30 % allowance: 0.9 h under the 160 h gate.
+**Revision 6** (commit 489d24c and after) applies the round's minor issues and nits, except where noted below. It is 69 shots, 6:49. The render estimate is 122.5 h raw and 159.2 h with the 30 % allowance: 0.8 h under the 160 h gate.
 
 No sixth round was run. Revision 6's changes are the reviewers' own fixes, and cold read 5 checks that the story still reads after the trims. The page says a sixth round is available if the user wants one.
 
@@ -57,7 +57,8 @@ Each cold read is a fresh agent with no lore. It reads only the builder's audien
 | 2 | The first chatter script | — | Cut off by a session limit; it never reported. |
 | 3 | Chatter, the report, the AI lore (19f7e24) | 7/10 | The climax's layout, Skerry's rounds seeming to arrive twice, the AI staying abstract, jargon. Fixed in bcc0994: "Everyone else, on me" and the Astrid's track, Skerry's "first" and "last" salvos, "the AI's guns don't answer to them", HEAT for SINK, first tags placed where they can be read. |
 | 4 | bcc0994 (round 5's version) | **8/10** | The AI still abstract; look-alike names; unstated steps in the endgame. Revision 6 names who crews Breakwater ("COMPACT MONITOR"), puts "you're the whole net now" on screen, gives the exact on-target times, and resolves the two "she"s in *Sixty-four*. What the AI wants and where it is are left to the user (Q18). |
-| 5 | Revision 6 | pending | Checks that the trims below kept the story readable. |
+| 5 | Revision 6 | 7/10 | The trims cost clarity: Breakwater unnamed until its reveal, the report's callsign wording, no reason for the no-fire rule, cryptic lines at the end. Fixed in revision 6b: Breakwater named as the target in *The picture* and in the plan, 'Maren is populated', the commander's callsign and the flagship given separately, a RESULT paragraph, 'map them for us', 'See you after', 'Surrender or abandon ship'. |
+| 6 | Revision 6b | pending | A final check. |
 
 ## Minor issues and nits: what revision 6 did
 

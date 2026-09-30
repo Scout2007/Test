@@ -301,9 +301,10 @@ def check():
     for run in reading_groups():
         chars = sum(len(line) for s in run for _, line in s["comm"]) + sum(len(h) for s in run for h in s["hud"])
         dur = sum(s["dur"] for s in run)
-        if chars / dur > MAX_CPS:
+        ceiling = min(s.get("cps", MAX_CPS) for s in run)     # title cards may set a higher one
+        if chars / dur > ceiling:
             where = f"shot {run[0]['n']}" + (f"–{run[-1]['n']}" if len(run) > 1 else "") + f" ({run[0]['title']})"
-            NOTES.append(f"{where}: subtitles and HUD text at {chars / dur:.1f} characters a second (ceiling {MAX_CPS})")
+            NOTES.append(f"{where}: subtitles and HUD text at {chars / dur:.1f} characters a second (ceiling {ceiling})")
         for s, line, cue, window in cue_windows(run):
             if window <= 0 or len(line) / window > MAX_CPS:
                 NOTES.append(f"shot {s['n']} ({s['title']}): '{line}' has {window:.1f} s from its cue ({len(line) / max(window, 0.01):.1f} cps)")

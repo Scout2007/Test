@@ -23,11 +23,14 @@ import csv
 import html
 import importlib.util
 import math
+import os
 import pathlib
 import random
 import re
 import shutil
+import subprocess
 import sys
+import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SB = ROOT / "storyboard"
@@ -280,6 +283,8 @@ def check():
             NOTES.append(f"{tag}: {len(s['comm'])} lines in {s['dur']} s (at least 1 s a line)")
         if not s["see"]:
             NOTES.append(f"{tag}: no `see` line, so the audience script can't show it")
+        if s["sketch"] and re.search(r"['\"]", re.sub(r"'(?:[^'\\\n]|\\.)*'|\"(?:[^\"\\\n]|\\.)*\"", "", s["sketch"])):
+            NOTES.append(f"{tag}: the sketch has an unmatched quote (an apostrophe in its text?), which breaks every sketch on the page")
         if s["body"] != "hull":
             for clause in re.split(r"[;.,]", s["sound"]):
                 if HEARD.search(clause) and not EXEMPT.search(clause):
@@ -1429,13 +1434,31 @@ def write_assets():
     (ROOT / "ASSET_REQUESTS.md").write_text("\n".join(L) + "\n")
 
 
+def check_script(page):
+    """Parse the page's script with node, when it is installed: one stray quote in a sketch stops every sketch drawing."""
+    node = shutil.which("node")
+    if not node:
+        return
+    with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as f:
+        f.write(re.search(r"<script>(.*?)</script>", page, re.S).group(1))
+    try:
+        r = subprocess.run([node, "--check", f.name], capture_output=True, text=True)
+    finally:
+        os.unlink(f.name)
+    if r.returncode:
+        err = next((ln for ln in r.stderr.splitlines() if "Error" in ln), r.stderr.strip()[:200])
+        NOTES.append(f"the page's script doesn't parse ({err}), so no sketch will draw")
+
+
 def main():
     prepare_images()
     check()
     head, body = build_html()
-    (SB / "index.html").write_text("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
-                                   "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
-                                   + head + "</head>\n<body>\n" + body + "</body>\n</html>\n")
+    page = ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
+            + head + "</head>\n<body>\n" + body + "</body>\n</html>\n")
+    (SB / "index.html").write_text(page)
+    check_script(page)
     if "--fragment" in sys.argv:
         frag = pathlib.Path(sys.argv[sys.argv.index("--fragment") + 1])
         frag.parent.mkdir(parents=True, exist_ok=True)

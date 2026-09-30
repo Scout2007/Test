@@ -461,7 +461,7 @@ shot(act="P",
      cost="E",
      map="A",
      render=None,
-     sketch="panel(['<text x=\"120\" y=\"40\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">3. MISSION</text>', '<text x=\"120\" y=\"50\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">4. RESTRICTIONS</text>', '<text x=\"120\" y=\"60\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">NO FIRE ON THE PLANET'S SURFACE</text>'], 2)")
+     sketch="panel(['<text x=\"120\" y=\"40\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">3. MISSION</text>', '<text x=\"120\" y=\"50\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">4. RESTRICTIONS</text>', '<text x=\"120\" y=\"60\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">NO FIRE ON THE PLANET’S SURFACE</text>'], 2)")
 shot(act="P",
      title="Sources",
      dur=10,

@@ -122,6 +122,7 @@ SETS = [(name, sorted(shot_no(t, f"SETS[{name}]") for t in titles)) for name, ti
 
 # ----------------------------------------------------------------- timing
 t = 0
+tagged = set()        # speakers whose tag the viewer has read once
 for n, s in enumerate(D.SHOTS, 1):
     s["n"] = n
     s.setdefault("hud", [])
@@ -130,6 +131,13 @@ for n, s in enumerate(D.SHOTS, 1):
     # A comm line may carry a cue: the second in the shot where it starts, after its event.
     s["cues"] = [c[2] if len(c) > 2 else None for c in s["comm"]]
     s["comm"] = [(c[0], c[1]) for c in s["comm"]]
+    # A speaker's first tag is read like any text (it may carry the ship's class); later ones, or a short form
+    # of it (ACTUAL after TIDEBREAK ACTUAL), are taken in at a glance.
+    s["tagc"] = []
+    for sp, _ in s["comm"]:
+        name = sp.split(" · ")[0]
+        s["tagc"].append(0 if any(p == name or p.endswith(" " + name) for p in tagged) else len(sp))
+        tagged.add(name)
     if s["comm"] and "SUB" not in s["assets"]:
         s["assets"].append("SUB")
     s["t0"], s["t1"] = t, t + s["dur"]
@@ -225,6 +233,11 @@ def world_of(s):
     return s.get("world") or s["map"]
 
 
+def clockless(s):
+    """The report's own cards, before the record and after it, carry no mission clock."""
+    return s["act"] in ("P", "E")
+
+
 def reading_groups():
     """Runs of shots that share one reading window: consecutive shots with the same `group`, else one shot each."""
     out = []
@@ -237,7 +250,8 @@ def reading_groups():
 
 
 def cue_windows(run):
-    """(shot, line, start s, window s) for every cued line in a run of shots; a shot's last line may run on
+    """(shot, characters to read, line, start s, window s) for every cued line in a run of shots, the characters
+    counting a first tag; a shot's last line may run on
     over the following shots of the run that have no lines of their own."""
     out = []
     for i, s in enumerate(run):
@@ -253,7 +267,7 @@ def cue_windows(run):
                     if nxt["comm"]:
                         break
                     end += nxt["dur"]
-            out.append((s, line, cue, end - cue))
+            out.append((s, len(line) + s["tagc"][j], line, cue, end - cue))
     return out
 
 
@@ -304,15 +318,16 @@ def check():
         if s["body"] != "hud" and world_of(s) not in D.ENVS:
             NOTES.append(f"{tag}: no World preset '{world_of(s)}'")
     for run in reading_groups():
-        chars = sum(len(line) for s in run for _, line in s["comm"]) + sum(len(h) for s in run for h in s["hud"])
+        chars = (sum(len(line) + c for s in run for (_, line), c in zip(s["comm"], s["tagc"]))
+                 + sum(len(h) for s in run for h in s["hud"]))
         dur = sum(s["dur"] for s in run)
         ceiling = min(s.get("cps", MAX_CPS) for s in run)     # title cards may set a higher one
         if chars / dur > ceiling:
             where = f"shot {run[0]['n']}" + (f"–{run[-1]['n']}" if len(run) > 1 else "") + f" ({run[0]['title']})"
             NOTES.append(f"{where}: subtitles and HUD text at {chars / dur:.1f} characters a second (ceiling {ceiling})")
-        for s, line, cue, window in cue_windows(run):
-            if window <= 0 or len(line) / window > MAX_CPS:
-                NOTES.append(f"shot {s['n']} ({s['title']}): '{line}' has {window:.1f} s from its cue ({len(line) / max(window, 0.01):.1f} cps)")
+        for s, chars, line, cue, window in cue_windows(run):
+            if window <= 0 or chars / window > MAX_CPS:
+                NOTES.append(f"shot {s['n']} ({s['title']}): '{line}' has {window:.1f} s from its cue ({chars / max(window, 0.01):.1f} cps)")
     wait = D.SHOTS[shot_no("The wait", "the sunrise check") - 1]
     first, full = sunrise("Breakwater")
     if not clock_s(wait["clock"]) <= first < full <= shot_end(wait):
@@ -903,13 +918,13 @@ def timeline_svg():
     for s in D.SHOTS:
         a = act_span.setdefault(s["act"], [s["t0"], s["t1"]])
         a[1] = s["t1"]
-    for i, (num, name, _) in enumerate(D.ACTS):
+    for num, name, _ in D.ACTS:
         a, b = act_span[num]
-        out.append(f'<rect x="{fx(a):.1f}" y="18" width="{fx(b) - fx(a):.1f}" height="22" class="tl-act tl-act{i}"/>')
-        out.append(f'<text x="{fx(a) + 6:.1f}" y="33" class="tl-actt">{num} · {E(name.upper())}</text>')
-    acts = [a[0] for a in D.ACTS]
+        out.append(f'<rect x="{fx(a):.1f}" y="18" width="{fx(b) - fx(a):.1f}" height="22" class="tl-act tl-act-{num}"/>')
+        wide = fx(b) - fx(a) > 90         # a narrow act gets its number only
+        out.append(f'<text x="{fx(a) + (6 if wide else 2):.1f}" y="33" class="tl-actt">{num}{" · " + E(name.upper()) if wide else ""}</text>')
     for s in D.SHOTS:
-        out.append(f'<line x1="{fx(s["t0"]):.1f}" y1="42" x2="{mx(hours(s["clock"])):.1f}" y2="196" class="tl-link tl-l{acts.index(s["act"])}"/>')
+        out.append(f'<line x1="{fx(s["t0"]):.1f}" y1="42" x2="{mx(hours(s["clock"])):.1f}" y2="196" class="tl-link tl-l-{s["act"]}"/>')
         out.append(f'<line x1="{fx(s["t0"]):.1f}" y1="40" x2="{fx(s["t0"]):.1f}" y2="46" class="tl-tick"/>')
     for sec in range(0, RUNTIME + 1, 15):
         out.append(f'<text x="{fx(sec):.1f}" y="12" class="tl-t" text-anchor="middle">{sec // 60}:{sec % 60:02d}</text>')
@@ -1015,11 +1030,11 @@ td.mono{white-space:nowrap;}
 .m-wedge{fill:var(--clock); fill-opacity:.14;}
 .m-scale{fill:none; stroke:var(--ink); stroke-width:1;}
 /* timeline */
-.tl-act{fill-opacity:.9;} .tl-act0{fill:var(--lref); fill-opacity:.35;} .tl-act1{fill:var(--clock); fill-opacity:.3;} .tl-act2{fill:var(--heat); fill-opacity:.3;} .tl-act3{fill:var(--comp); fill-opacity:.3;}
+.tl-act{fill-opacity:.9;} .tl-act-P,.tl-act-E{fill:var(--muted); fill-opacity:.25;} .tl-act-I{fill:var(--lref); fill-opacity:.35;} .tl-act-II{fill:var(--clock); fill-opacity:.3;} .tl-act-III{fill:var(--heat); fill-opacity:.3;} .tl-act-IV{fill:var(--comp); fill-opacity:.3;}
 .tl-actt{font:600 12px var(--f-display); letter-spacing:.06em; fill:var(--ink);}
 .tl-t{font:400 10px var(--f-mono); fill:var(--ink);} .tl-muted{fill:var(--muted);}
 .tl-tick, .tl-axis{stroke:var(--muted); stroke-width:1;}
-.tl-link{stroke-width:1; stroke-opacity:.6;} .tl-l0{stroke:var(--lref);} .tl-l1{stroke:var(--clock);} .tl-l2{stroke:var(--heat);} .tl-l3{stroke:var(--comp);}
+.tl-link{stroke-width:1; stroke-opacity:.6;} .tl-l-P,.tl-l-E{stroke:var(--muted);} .tl-l-I{stroke:var(--lref);} .tl-l-II{stroke:var(--clock);} .tl-l-III{stroke:var(--heat);} .tl-l-IV{stroke:var(--comp);}
 /* shots */
 .act{margin:2.2rem 0 1rem; display:grid; grid-template-columns:auto minmax(0,1fr); gap:.2rem 1rem; align-items:baseline;}
 .act .num{font:700 2.2rem/1 var(--f-display); color:var(--muted);}
@@ -1106,7 +1121,7 @@ def shot_card(s):
 <div class="media">{media}<span class="badge n">{s['n']}</span><span class="badge t">{mmss(s['t0'])}–{mmss(s['t1'])} · {s['dur']} s</span></div>
 <div class="body"><h4>{E(s['title'])}</h4>
 <div class="meta"><span>{E(s['cam'])}</span><span>{BODY_LABEL[s['body']]}</span><span>frames {s['f0']}–{s['f1']}</span></div>
-<div class="meta"><span class="clock">{E("no clock" if s['act'] == "P" else s['clock'])}</span><span>{E(s['real'])}</span><span>map {s['map']}</span><span>render class {s['cost']}</span>{world}</div>
+<div class="meta"><span class="clock">{E("no clock" if clockless(s) else s['clock'])}</span><span>{E(s['real'])}</span><span>map {s['map']}</span><span>render class {s['cost']}</span>{world}</div>
 <p class="action">{E(s['action'])}</p>{comm}
 <dl class="rows">{f"<dt>Doctrine</dt><dd>{rule_chips(s['rules'])}</dd>" if s['rules'] else ""}{extra}<dt>VFX</dt><dd>{E(s['vfx'])}</dd>
 <dt>Rig</dt><dd>{rig}</dd><dt>Assets</dt><dd>{asset_chips(s['assets'])}</dd><dt>Sound</dt><dd>{E(s['sound'])}</dd></dl>
@@ -1344,8 +1359,8 @@ def comm_text(s, quote=False):
 
 def audience_clock(s):
     """The mission clock as a viewer sees it over a shot."""
-    if s["act"] == "P":
-        return "no clock yet"
+    if clockless(s):
+        return "no clock yet" if s["act"] == "P" else "no clock"
     t0, t1 = clock_s(s["clock"]), shot_end(s)
     if t1 is None or (t1 - t0) / s["dur"] < 1.5:
         return fmt_clock(t0)

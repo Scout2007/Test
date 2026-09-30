@@ -1,10 +1,10 @@
-"""Operation Tidebreak: storyboard data (phase 2, revision 3).
+"""Operation Tidebreak: storyboard data (phase 2, revision 4).
 
 One source for the storyboard page, shots.csv, shots.md and ASSET_REQUESTS.md.
 Build with:  python3 storyboard/build_storyboard.py
 
-Revision 3 applies the round 2 reviews (review/round2/*.md, synthesis in
-review/round2/synthesis.md) and adds the user's five weapon close-ups
+Revision 4 applies the round 3 reviews (review/round3/*.md, synthesis in
+review/round3/synthesis.md). Revision 3 added the user's five weapon close-ups
 (Birds away, Lenses, Rails wake, Fire, Seeker).
 
 Conventions
@@ -19,7 +19,8 @@ Conventions
 - `rules` cite doctrine rule IDs (doctrine/LREF_doctrine.md, doctrine/Defence_doctrine.md).
 - `assets` cite IDs in ASSETS; `rig` names Endeavor rig properties
   (pack/project_docs/README_blender_project.md) or ones requested in ASSETS (marked "new").
-- `cost` is the render class in RENDER_CLASSES.
+- `cost` is the render class in RENDER_CLASSES; MEASURED replaces a class's estimate
+  once the step 1 benchmarks have timed it.
 - `sketch` is a call into storyboard/sketchlib.js; `render` is a current Blender
   frame used as look reference. Sketches drop the gold shields automatically once
   the shields are parked.
@@ -28,7 +29,7 @@ Conventions
 """
 
 TITLE = "Operation Tidebreak"
-REVISION = "Revision 3 · after review round 2"
+REVISION = "Revision 4 · after review round 3"
 FPS = 24
 FORMAT = "2.39:1 · 1920×804 · 24 fps · Cycles"
 SHIELDS_OFF = "T+0:02:00"   # the shields leave the ships; sketches drop them from here on
@@ -41,8 +42,8 @@ PHASES = [
     ("T+3:20", "T+4:34", "The Breakers", "Fins stowed in the debris. Site 1 dazzles; the pods wake; the Canterbury is lost (T+3:52); the Astrid answers; drones wake; the Normandy is lost (T+4:25)."),
     ("T+4:34", "T+5:09", "Turnover", "Flip (49 s) and brake at 1 g for 34 min, ending on Anchor's orbital velocity (1.63 km/s; thrust tilted ~4.7°)."),
     ("T+5:09", "T+5:43", "Anchor", "An 18 km rock that at T+5:09 lies over Site 1. The fleet sweeps it (a mine) but can't finish before the heat forces the fins out; it loses the port fin to a platform 400 km off, lances a frigate hidden on a moonlet, kills the platform, and vents again with three fins (94 % → 31 %)."),
-    ("T+5:43", "T+7:51", "Final approach", "The pack stays at Anchor as a fire base, guarded by the Donnager and the Wallfish, in the slot of the rock's shadow that hides it from Site 1 and, after T+6:55, the western site. The rest fly an inertial path of ~113,000 km: 1 g to 20 km/s (burn tilted ~4.5° to cancel the rock's orbital velocity), coast, a turnover at T+7:16 under smoke and an EW peak, one ship at a time (D8), then brake to a stop ~8,500 km from Breakwater (T+7:51), matching its orbit. The Astrid, trailing, stops 10,000 km out. Site 1 dazzles and burns from the moment the fleet clears the shadow; the fleet rolls, lays smoke and dazzles back at low power. Skerry's five nets on the lane from T+6:40, ten minutes apart, side-stepped one by one; its sixth salvo rings Anchor at T+6:52. Breakwater's 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31)."),
-    ("T+7:07", "T+7:58", "Hammer and anvil", "The waves leave Anchor in two parts so each lands within a second. The slow multi-packs go first (T+7:07 and T+7:08:30; 45 min flights), then the killers (T+7:27 and T+7:28:30; 25 min). The spend wave (the Infinity, ~570) lands at T+7:52:00; the kill wave (the Galactica: ~40 Casaba killers among ~300 decoy and EW birds) at T+7:53:30. Both fly straight in, nose-on to Breakwater and ~48° off its zenith, so misses and wreckage clear Maren. The Casaba jets cut the drive. The Astrid hails, then fires from rest at T+7:54:40, 15° off Breakwater's zenith; impact T+7:57:27."),
+    ("T+5:43", "T+7:51", "Final approach", "The pack stays at Anchor as a fire base, guarded by the Donnager and the Wallfish, in the slot of the rock's shadow that hides it from Site 1 and, after T+6:55, the western site. The rest fly an inertial path of ~113,000 km: 1 g to 20 km/s (burn tilted ~4.5° to cancel the rock's orbital velocity), coast, a turnover at T+7:16 under smoke and an EW peak, one ship at a time (D8), then brake to a stop ~8,500 km from Breakwater (T+7:51), holding station on it. The Astrid, trailing, stops 10,000 km out. Site 1 dazzles and burns from the moment the fleet clears the shadow; the fleet rolls, lays smoke and dazzles back at low power. Skerry's five nets on the lane from T+6:40, ten minutes apart, side-stepped one by one; its sixth salvo sweeps past Anchor as the pack fires (T+7:07), with the garrison's last drones behind it, and the guard kills them. Breakwater's answer to ~900 inbound birds is its 64 missiles at the Extenuating (T+7:25), killed under the Astrid's umbrella (T+7:31)."),
+    ("T+7:07", "T+7:58", "Hammer and anvil", "Each wave leaves Anchor in one launch and flies one 45-minute profile, killers, decoys and EW birds together, so the defender can't sort them by launch time or speed (O3). The spend wave (the Infinity, ~570) leaves at T+7:07 and lands at T+7:52:00; the kill wave (the Galactica: ~40 Casaba killers among ~300 decoy and EW birds) leaves at T+7:08:30 and lands at T+7:53:30, each within a second. Both fly straight in, nose-on to Breakwater and ~49° off its zenith, so misses and wreckage clear Maren. The Casaba jets cut the drive. The Astrid hails, then fires from rest at T+7:54:40, 15° off Breakwater's zenith; impact T+7:57:29."),
     ("T+7:58", "T+8:24", "Terms", "The Endeavor's arrays stand down when Breakwater dies; the Astrid keeps Site 1 dazzled. Sink 98 %: the Endeavor dumps water (T+8:00), which buys it to ~T+8:30. Maren asks for terms (T+8:10). Site 1 goes dark; the fleet vents at last (T+8:24)."),
 ]
 
@@ -50,31 +51,33 @@ KEY_NUMBERS = [
     ("Warp exit and shield park", "450,000 km from Maren", "LREF O1, A-01/A-02"),
     ("The Breakers", "120,000–260,000 km, ±25°", "Defence §4.1"),
     ("Anchor (the rock)", "~18 km, 150,000 km out; over Site 1 at T+5:09; drifts 12.8°/h relative to Site 1", "D5"),
-    ("Skerry", "380,000 km, 40° off the approach line; mass driver throws at up to 15.5 km/s (13.5–15.5 for the lane salvos, 12.5 for the one aimed at Anchor)", "H-14"),
+    ("Skerry", "380,000 km, 40° off the approach line; mass driver throws at up to 15.5 km/s (13.2–14.9 for the five lane salvos, ~12.7 for the one aimed at Anchor)", "H-14"),
     ("Breakwater", "synchronous orbit, 42,164 km, over Site 1", "H-04"),
     ("Cruise speed", "20 km/s (O8)", "WN §6"),
     ("Burns and flips", "1 g, 34 min; flips 49 s (Endeavor), 58 s (Astrid)", "WN §6"),
-    ("Final approach", "~113,000 km from Anchor; turnover T+7:16; the escorts stop ~8,500 km from Breakwater and match its orbit, the Astrid stops 10,000 km out", "WN §6"),
-    ("The pack's missiles", "~2,100: wave one 150; spend wave ~570 (~480 multi-packs + ~90 killers); kill wave ~340 (~300 decoy and EW multi-packs + ~40 Casaba killers); ~1,100 held in reserve", "A-26, O11, WN §3"),
-    ("Lines of fire", "The waves arrive ~48° off Breakwater's zenith, the spinal shot 15° off it. Maren fills ±8.7° around Breakwater's nadir, so misses and wreckage clear it: a wave's by ~25,000 km, a spinal miss (aimed ahead of the moving monitor) by ~7,000 km", "O9, §13"),
-    ("Site 1 against the waves", "~15 kills per wave: aimed at Breakwater, the waves never come within ~36,000 km of it", "WN §8"),
-    ("Spinal shot", "from rest at 10,000 km; flight ~167 s, about 17 s inside the time a crippled monitor needs to clear its own length (no-escape ~10,800 km with the range opening)", "WN §2, O10"),
-    ("Endeavor heat", "20 TJ sink: 94 % at Anchor, 31 % leaving it, 98 % at T+8:00; a 1,000 t water dump buys it to ~T+8:30", "WN §4, A-32"),
+    ("Final approach", "~113,000 km from Anchor; turnover T+7:16; the escorts stop ~8,500 km from Breakwater and hold station on it (3.65 km/s plus ~11 mg of thrust), the Astrid stops 10,000 km out", "WN §6"),
+    ("The pack's missiles", "~2,100: wave one 150; spend wave ~570 (~480 multi-packs + ~90 killers); kill wave ~340 (~40 Casaba killers among ~300 decoy and EW birds that mimic them); ~1,100 held in reserve. Each wave leaves in one launch on the multi-packs' 45-minute profile and arrives at ~45 km/s", "A-26, O3, O11, WN §3"),
+    ("Lines of fire", "The waves arrive ~49° off Breakwater's zenith, the spinal shot 15° off it. Maren fills ±8.7° around Breakwater's nadir, so misses and wreckage clear it: a wave's by ~25,000 km, a spinal miss (aimed ahead of the moving monitor) by ~7,000 km", "O9, §13"),
+    ("Site 1 against the waves", "~28 kills per wave at ~45 km/s (~16 at a killer's 80 km/s): aimed at Breakwater, the waves never come within ~36,000 km of it", "WN §8"),
+    ("The kill wave's odds", "~340 look-alike tracks at ~45 km/s. Breakwater's lasers (~21 nose-on), its CIWS (~7 in the arrival second) and Site 1 (~28) kill ~56, spread over decoys and killers alike, so ~33 of the ~40 Casabas reach the 2 km standoff", "WN §8, O3, O10"),
+    ("Spinal shot", "from rest at 10,000 km; the slug leads the monitor (3.07 km/s), so it flies ~10,150 km in ~169 s, about 15 s inside the time a crippled monitor needs to clear its own length (no-escape ~10,800 km with the range opening)", "WN §2, O10"),
+    ("Endeavor heat", "20 TJ sink: 94 % at Anchor, 31 % leaving it, 97–98 % at T+8:00 (the low-power dazzle stays under ~1 % of the arrays' power); a 1,000 t water dump buys it to ~T+8:30", "WN §4, A-32"),
     ("Light-lag", "0.87 s to Skerry at T+1:02; 0.48 s from Anchor to Site 1", "WN §5"),
 ]
 
 # ---------------------------------------------------------------- film rules
 LIGHTING = [
-    "The sun sits behind Maren, about 30° off the approach line. From the fleet Maren is a thin crescent with a bright limb, and the Breakers glow faintly lit from behind (dust scatters forward).",
+    "The sun sits behind Maren, about 30° off the approach line and ~12° above the ring plane: Maren's axis tilts like Earth's and the battle falls about a month from its equinox, so nothing at Breakwater's height passes through Maren's shadow. From the fleet Maren is a thin crescent with a bright limb, and the Breakers glow faintly lit from behind (dust scatters forward).",
     "Hulls are lit hard from ahead and to one side; the shadow side falls to black. No stars behind sunlit hulls.",
     "Anchor's lee faces away from both Site 1 and the sun. The Endeavor sits within ~9 km of the rock's surface, where the two shadows overlap, so the fins, muzzle flashes and the lance light the scene (the M-1C 'fins1dark' look).",
-    "At the end Site 1 is on the night side: a long lens sees its lights go out, and the final frame puts the Endeavor against the night side's city lights.",
+    "At the end Site 1 is on the night side: a long lens sees its lights go out, and the final frame puts the Endeavor against the night side's city lights, with the sun kept just out of frame so they read.",
 ]
 CLOCK_HUD = [
     "The mission clock is small, persistent and clear of the subtitles. It starts on the flash in shot {#Black, then a star} (T+0:00:00).",
     "It runs at the shot's rate: spinning seconds mean compressed time, crawling ones slowed. Every jump of 30 minutes or more rolls the digits.",
     "One master tactical plot, always with Maren screen right. Geography inserts hold for at least 5 s, and their labels count toward the reading-speed ceiling like subtitles.",
-    "The SINK readout appears only on HUD inserts and on hull-camera shots where the heat matters, with values that build to the dump: 94 % ({#Too hot}), 31 % ({#The fire plan}), 62 % ({#Anchor ringed}), 88 % ({#Blind it}), 98 % ({#Heat}).",
+    "The SINK readout appears only on HUD inserts and on hull-camera shots where the heat matters, with values that build to the dump: 94 % ({#Too hot}), 31 % ({#The fire plan}), 88 % ({#Blind it}), 98 % ({#Heat}).",
+    "Subtitles read at no more than 12 characters a second over the shot, and nearer 10 where a line waits for an event.",
     "Subtitles and the clock go in during the edit, after the grade, so a changed line never forces a re-render.",
 ]
 SCREEN_DIRECTION = [
@@ -106,7 +109,7 @@ STATES = {
            ("T+5:13:16", "port fin shattering"), ("T+5:13:19", "port fin a stump"),
            ("T+5:13:32", "port fin a stump, port belt scorched")],
     "DD": [("T+0:00:00", "intact"), ("T+6:55:00", "Extenuating: forward boom scorched")],
-    "BW": [("T+0:00:00", "intact"), ("T+7:53:30", "drive breached, venting"), ("T+7:57:27", "back broken")],
+    "BW": [("T+0:00:00", "intact"), ("T+7:53:30", "drive breached, venting"), ("T+7:57:29", "back broken")],
 }
 STATE_ASSETS = [("EN", "T+5:13:16", "EN-FIN"), ("EN", "T+5:13:32", "EN-DMG"),
                 ("BW", "T+7:53:30", "BW-BRK")]
@@ -115,8 +118,8 @@ STATE_ASSETS = [("EN", "T+5:13:16", "EN-FIN"), ("EN", "T+5:13:32", "EN-DMG"),
 FLEET = [
     ("L.R.E.F.S. Astrid", "Hanuman heavy cruiser, 1.6 km", "Flagship, 'Tidebreak Actual'. Spinal cannon, AVPSA, PD anchor. Trails the line; stops behind the escorts and fires from rest."),
     ("L.R.E.F.S. Endeavor", "Ryland cruiser", "The line. Loses its port fin at Anchor. Its 16 VLS cells stay loaded as the fast reserve: ~4 min to Breakwater from the stop."),
-    ("Infinity · Pillar of Autumn · Galactica", "Hedgehog frigates (~700 missiles each)", "Wave one (the Infinity, 150 killers). The spend wave: the rest of the Infinity (~570). The kill wave: ~40 Casaba killers among ~300 decoy and EW birds (the Galactica). The Pillar and the rest of the Galactica (~1,100) stay in reserve. The pack stays at Anchor as a fire base."),
-    ("Donnager", "Gun frigate", "Sweeps the rocks round Anchor; then guards the pack there with the Wallfish (D11)."),
+    ("Infinity · Pillar of Autumn · Galactica", "Hedgehog frigates (~700 missiles each)", "Wave one (the Infinity, 150 killers). The spend wave: the rest of the Infinity (~570). The kill wave: ~40 Casaba killers among ~300 decoy and EW birds (the Galactica), launched together. The Pillar and the rest of the Galactica (~1,100) stay in reserve. The pack stays at Anchor as a fire base."),
+    ("Donnager", "Gun frigate", "Sweeps the rocks round Anchor; then guards the pack there with the Wallfish (D11). Its CIWS and the corvette kill the garrison's last drones; its four batteries are there for the two Compact frigates behind the limb."),
     ("Excelsior · Tantive IV", "PD frigate · corvette", "Guard the Nauvoo and the parked shields (D11); beat off Skerry's drone raid."),
     ("Canterbury", "ECW destroyer", "Brings the net up; lost in the Breakers ambush (T+3:52)."),
     ("Extenuating Circumstances", "ECW destroyer", "Holds what's left of the net; rides under the Astrid's umbrella, which kills the 64 missiles Breakwater sends after it."),
@@ -127,7 +130,7 @@ DEFENDERS = [
     ("Breakwater", "Warpless monitor", "Synchronous orbit over Site 1. Its guns never get a shot (the LREF stays outside their no-escape range); it fires its 64 missiles at the last ECW destroyer."),
     ("Site 1 (of 4)", "Ground laser, 2 GW", "The only site that sees Breakwater's sky. Dazzles and burns from the moment the fleet leaves Anchor's shadow; never struck (ROE)."),
     ("Skerry", "Moon complex", "Throws three rounds every ten minutes from T+0:04 until wave one kills it: five nets on the fleet's lane and one ring of canister clouds on Anchor. Its laser dazzles the fleet; its depot flushes 40 drones at the shield park."),
-    ("The Breakers garrison", "Emplacements", "Cold pods, railgun platforms, mines, parked drones and a drone-control craft. Its last drones go for the pack at Anchor."),
+    ("The Breakers garrison", "Emplacements", "Cold pods, railgun platforms, mines, parked drones and a drone-control craft. Its last drones go for the pack at Anchor behind Skerry's ring. Its autonomous emplacements have no remote override (HD9), so the terms ask for its charts."),
     ("Inner ring", "12 emplacements", "Sensor pickets and sector defence along the orbit; too far apart to thicken Breakwater's wall."),
     ("Compact frigates", "3", "One waits in a cleft on a moonlet near Anchor; two hold behind Maren's limb."),
 ]
@@ -136,15 +139,15 @@ DEFENDERS = [
 # status: built / extend / new; concept: concept sheet first (user rule).
 ASSETS = {
     "EN": ("L.R.E.F.S. Endeavor (rigged)", "extend", False, "Hero ship. Rebuild after the M-1C wake-style and PDC picks that are still pending in the modelling session (Q15), then link it into shot files with a library override on the rig empty. Its states (STATES) are presets the shot files load."),
-    "EN-FIN": ("Endeavor: per-fin control and damage", "extend", False, "Per-fin deploy properties `fin_port`, `fin_starboard`, `fin_dorsal`, `fin_ventral` (the ship-wide `radiator_deploy` stays as a master). Port fin states via `fin_port_state`: intact, pre-fractured (shot {#Fin hit}), stump (every Endeavor shot after it)."),
+    "EN-FIN": ("Endeavor: per-fin control and damage", "extend", False, "Per-fin deploy properties `fin_port`, `fin_starboard`, `fin_dorsal`, `fin_ventral` (the ship-wide `radiator_deploy` stays as a master). Port fin states via `fin_port_state`: intact, pre-fractured (shot {#Fin hit}), stump (every Endeavor shot after it). For the dark lee, an area light on each fin with its strength driven by `heat`, and emission sampling off on the fin meshes."),
     "EN-PD": ("Endeavor: defence, countermeasure and emergency controls", "extend", False, "`ciws_phase` (a keyed angle, with a spin-blur swap above ~600 rpm, because `ciws_rpm` changes jump and strobe), `ciws_fire` (muzzle empties), `cm_chaff`, `cm_flare`, `cm_smoke`, `ew_active`, `water_dump` (valve and emitter for FX-DUMP)."),
     "EN-MAST": ("Endeavor: sensor-mast shutters", "extend", False, "`mast_shutter`: armoured shutters close over the mast windows."),
     "EN-DMG": ("Endeavor: hull damage", "extend", False, "`dmg_belt`: spall and scorching on the port belt from shot {#Off the port bow} on; it must read in shot {#Heat}, which runs along the port flank."),
-    "M1C": ("M-1C twin railcannon", "extend", False, "Fleet gun. Wake style still to be picked (split, ripple, bulk, extend, combined: Q15). Per-gun `charge_a/b`, `shot_a/b`, `fins_a/b`, `heat_a/b` for {#Rails wake} and {#Fire}, where only the gun that fired vents."),
-    "MSL": ("Missile asset (26 m, plume, thrust)", "built", False, "Base for every variant; the hero LOD flies alongside the camera in {#Birds away}."),
-    "MSL-V": ("Missile variants", "new", True, "Concept sheet first (five new weapon designs): the Casaba killer (hardened ablative nose, a seeker window behind a shutter, spin; seen in extreme close-up in {#Seeker}), the small multi-pack missile with MIRV bus, decoy, EW missile, Compact belt-pod missile. Three LODs each, dropped into the swarm system's slots."),
+    "M1C": ("M-1C twin railcannon", "extend", False, "Fleet gun. Wake style still to be picked (split, ripple, bulk, extend, combined: Q15). The ship's `rail_wake`, `rail_lock` and `rail_arm` play the wake in {#Rails wake} in the README's order (power up, unclamp, lay, open the shell); per-gun `charge_a/b`, `shot_a/b`, `fins_a/b`, `heat_a/b` play {#Fire}, where only the gun that fired vents."),
+    "MSL": ("Missile asset (26 m, plume, thrust)", "built", False, "The swarm system's stand-in and base mesh, not a hero: the variants (MSL-V) scale it down to fit the pods."),
+    "MSL-V": ("Missile variants", "new", True, "Concept sheet first (five new weapon designs). The capital-ship killer, sized to fit the hedgehog's pods (no more than ~20 m; the art's pods are ~6–7 m boxes in an array 32–49 m across), in a nuclear and a Casaba version with a hardened ablative nose, a seeker window behind a shutter and a slow spin: the hero missile, LOD0 built for the extreme close-up of {#Seeker} and flown in {#Birds away} too. The small multi-pack missile with MIRV bus; the decoy, which mimics a killer's signature and size with a deployable shroud; the EW missile; the Compact belt-pod missile. Controls: `seeker_shutter`, `cap_glow` (the ablative cap under laser fire), with spin as a per-instance attribute in the swarm. Three LODs each, dropped into the swarm system's slots."),
     "AST": ("L.R.E.F.S. Astrid (Hanuman heavy cruiser)", "new", False, "Hero, ~1,650 m. Build from lref_kit: M-1Cs, arrays, CIWS, fins, rings and shield are instances, so the new hero work is the hull, the AVPSA dish and the spinal. Concept sheet for the spinal muzzle and its FX look. Controls: `avpsa_az`, `avpsa_el`, `fins_deploy` (8), `spinal_charge`, `spinal_shot`, `engine_throttle`, `rcs_bow`/`rcs_stern`, `laser_power`/`laser_traverse`, plus the Endeavor's `ciws_phase` and `ciws_fire` on its instanced CIWS. Art exists."),
-    "GI": ("Garibaldi-Ivanova frigate hull", "new", False, "Hero, ~420 m. One hull for all five frigates; module bay; warp rings; shield; spinning hab section. Art exists."),
+    "GI": ("Garibaldi-Ivanova frigate hull", "new", False, "Hero, ~420 m. One hull for all five frigates; module bay; warp rings; shield; spinning hab section; CIWS instanced from the Endeavor's, with its `ciws_phase` and `ciws_fire` (the Donnager's in {#The pack fires}). Art exists."),
     "GI-MAV": ("Hedgehog (MAV) module", "new", False, "~360 pods; `pod_ripple` launch control, driven from the swarm system's per-pod launch-time attribute so doors and launches can't drift apart. Art exists."),
     "GI-GUN": ("Gun module (4 large kinetic batteries)", "new", True, "Four scaled M-1C twins; the concept sheet only settles the layout. Seen only far off in {#The sweep}: a silhouette is enough if the user agrees (Q13)."),
     "GI-PD": ("PD module", "new", True, "Build after the PDC pick. Seen only far off in shot {#Shields to the park}: a silhouette is enough if the user agrees (Q13)."),
@@ -163,11 +166,11 @@ ASSETS = {
     "EMP-RG": ("Breakers railgun platform", "new", True, "Concept first. Buried twin railgun. Controls: `unmask`, `shot`."),
     "RING": ("Inner-ring station", "new", True, "Only ever a point of light at ~21,800 km spacing: lights only, if the user agrees (Q13)."),
     "SKR": ("Skerry", "new", False, "One still plate of an airless moon; the battery, tracks and depot are flash and light positions only."),
-    "WORLD": ("World presets and sun", "extend", False, "Used by every 3D shot. One preset per environment (ENVS), with planet-shine scaled to each (Maren is 1.6° across from the exit, ~17.5° from Breakwater's orbit); a Sun object that drives the World (today `TO_SUN` needs a rebuild); Skerry as a second body at the right angular size; a sun-direction gradient on the Breakers haze in comp; each set-up's camera kept near the world origin."),
-    "MAREN": ("Maren: planet re-dress", "extend", False, "New continents and weather, night-side cities, the Site 1 plateau as a light cluster that goes out (shot {#Site One goes dark}), about 10 px at 2,000 mm."),
+    "WORLD": ("World presets and sun", "extend", False, "Used by every 3D shot. One preset per environment (ENVS), with planet-shine scaled to each (Maren is 1.6° across from the exit, ~17.5° from Breakwater's orbit); a Sun object that drives the World (today `TO_SUN` needs a rebuild), set 30° off the approach line and ~12° above the ring plane (LIGHTING); Skerry as a second body at the right angular size; a sun-direction gradient on the Breakers haze in comp; each set-up's camera kept near the world origin."),
+    "MAREN": ("Maren: planet re-dress", "extend", False, "New continents and weather, night-side cities. Site 1's light cluster in {#Site One goes dark} (about 10 px at 2,000 mm, where one pixel is ~340 m) is a masked texture or a comp element over a plate rendered once, not a feature of the World shader, centred on an otherwise dark plateau with enough relief to read as ground."),
     "BRK": ("The Breakers environment", "new", False, "The dust haze as the Mist pass plus a sparse glitter layer; a generic rock kit; large rocks at realistic spacing."),
     "ANCHOR": ("Anchor: hero rock", "new", False, "~18 km rubble pile: a Geometry Nodes boulder scatter from the BRK kit, with hero surface tiles only where the camera goes close (shots {#The sweep}, {#The pack fires}); the moonlet with the frigate's cleft."),
-    "PROXY": ("Blocking proxies", "new", False, "True-scale stand-ins for every ship and rock, built in step 1 for the timing animatic and the benchmarks."),
+    "PROXY": ("Blocking proxies and first-version effects", "new", False, "True-scale stand-ins for every ship and rock, built in step 1 for the timing animatic and the benchmarks, with benchmark-grade first versions of the effects the benchmarks need: stock tracer streaks and flashes (FX-PD), a Quick Smoke cache at both scales (FX-SMOKE), a point-cloud plume (FX-DUMP) and one displaced rock tile. The finished effects still come in step 3."),
     "FX-WARP": ("Warp-exit flash", "new", False, "Bubble collapse bloom (comp plus a light)."),
     "FX-SWARM": ("Swarm system", "new", False, "One Geometry Nodes system for missiles, drones and canister pellets: per-instance launch time, three LODs (hero mesh only for the nearest ~10), each plume a single emissive mesh with emission sampling off, real lights only on the ~5 nearest plumes or flashes (faded in and out over ~6 frames so the hull lighting doesn't pop), pellets as emissive points whose brightness follows the lamp angle, rendered in its own view layer. Built first on the existing missile (MSL); the variants drop into its LOD slots later."),
     "FX-FAR": ("Distant drive plumes", "new", False, "Cheap far plumes for long-lens fleet shots."),
@@ -194,9 +197,8 @@ CLOSEST = {
     "AST": ("The Astrid looks", "MS 50 mm along the dorsal hull (the muzzle: {#Spinal})", "fills the frame"),
     "GI": ("Wave one", "hull camera on the Infinity", "fills the frame"),
     "GI-MAV": ("Wave one", "hull camera beside the pods", "fills the frame"),
-    "MSL": ("Birds away", "CU 85 mm alongside one missile", "fills the frame"),
-    "MSL-V": ("Seeker", "ECU 100 mm on a Casaba killer's nose", "fills the frame"),
-    "M1C": ("Fire", "ECU 85 mm on the muzzles", "fills the frame"),
+    "MSL-V": ("Seeker", "ECU 100 mm on a Casaba killer's nose (and CU 85 mm alongside one in {#Birds away})", "fills the frame"),
+    "M1C": ("Fire", "CU 85 mm on the barrels and the crest vent", "fills the frame"),
     "DD": ("Net up", "MS 40 mm at ~600 m", "fills the frame"),
     "CV": ("Normandy", "800 mm at ~20 km", "~200 px"),
     "TND": ("Shields to the park", "behind the parked shields", "~40 px"),
@@ -219,17 +221,24 @@ RENDER_CLASSES = {
     "V": ("Close-up with a hero volume (the water dump)", "~250 s/frame"),
     "B": ("One hero ship or rock, full view", "~75 s/frame"),
     "C": ("Several ships or heavy FX (FX in own layers)", "~200 s/frame"),
-    "P": ("Planet plate rendered once, plus one ship layer", "~30 s/frame"),
+    "S": ("Small subject on black with its FX (up to ~350 px)", "~30 s/frame"),
+    "P": ("Locked camera: a plate rendered once, plus one moving layer", "~30 s/frame"),
     "D": ("Wide, distant, small subject on black, or plate", "~15 s/frame"),
     "E": ("2D comp / HUD", "~2 s/frame"),
 }
-RENDER_NOTE = ("These costs are estimates, not measurements. Step 1 benchmarks the methods with stand-ins, so nothing waits on new assets: "
+# Measured s/frame from the step 1 benchmarks, by class. Empty until they run; each
+# entry replaces that class's estimate in the budget and the gate.
+MEASURED = {}
+GATE_HOURS = 160   # the gate: the total with the re-render allowance must come in at or under this
+RENDER_NOTE = ("These costs are estimates, not measurements. Step 1 benchmarks the methods with stand-ins and first-version effects (PROXY), so nothing waits on new assets: "
                "class C (two or three linked Endeavors, 600 instances of the existing missile through the swarm system and an FX-PD layer at 16–32 spp; "
-               "record s/frame and VRAM), the volumes (the fleet-scale smoke of {#Site One} and the water dump of {#Heat}), the dark lee "
-               "(the Endeavor lit only by its fins, and one M-1C shot, as in {#Too hot} and {#Fire}), plus shots {#Rings cool} and {#Broadside}. "
-               "Gate before the full pass: if C comes in above ~230 s/frame or B above ~100 s/frame, apply the levers agreed in advance "
-               "(half-resolution volume and FX layers; swarm layers at 16 spp with earlier LOD switches; a second trimmed from each of "
-               "{#Wave one}, {#The pack fires} and {#Wall of fire}).")
+               "record s/frame and VRAM), class B (one linked Endeavor in full view, sunlit, its drive lit), the volumes (the fleet-scale smoke "
+               "of {#Site One} and the water dump of {#Heat}), the dark lee (the Endeavor lit only by its fins, and one M-1C shot, as in "
+               "{#Too hot} and {#Fire}), plus shots {#Rings cool} and {#Broadside}. "
+               "Gate before the full pass: enter each measured s/frame in MEASURED (storyboard/tidebreak_data.py) and rebuild, so the budget "
+               "uses it. If the total with the re-render allowance is over the gate, apply the levers agreed in advance, in this order, until "
+               "it isn't: 1) half-resolution volume and FX layers; 2) swarm layers at 16 spp with earlier LOD switches; 3) a second trimmed "
+               "from each of {#Wave one}, {#The pack fires} and {#Wall of fire}.")
 
 # Asset set-ups: each shot belongs to exactly one (the builder checks). Render
 # batches follow the World preset (ENVS) within each set-up.
@@ -246,17 +255,19 @@ SETS = [
     ("Breakwater over Maren", ["The anvil", "The spend wave", "Wall of fire", "Casaba", "The hail", "The wait",
                                "Impact", "Terms", "Site One goes dark"]),
     ("long-lens plates", ["The task group", "Turn and burn", "Skerry burns"]),
-    ("2D", ["Skerry throws", "The picture", "Return to sender", "Anchor", "The fire plan", "Anchor ringed"]),
+    ("2D", ["Skerry throws", "The picture", "Return to sender", "Anchor", "The fire plan"]),
 ]
 
 PRODUCTION_PLAN = [
-    ("Order", "1) Step 1: the user's pending picks (Q15); the Endeavor rebuild and its new rig items; the World presets; blocking proxies (PROXY) and a timing animatic; the method benchmarks and the gate (see the render note); the swarm system, built on the existing missile with LOD slots for the variants. "
+    ("Order", "1) Step 1: the user's pending picks (Q15); the Endeavor rebuild and its new rig items; the World presets; blocking proxies and first-version effects (PROXY) and a timing animatic; the method benchmarks and the gate (see the render note); the swarm system, built on the existing missile with LOD slots for the variants. "
               "2) One batched concept round, missile variants first, since it waits on the user. "
               "3) Meanwhile the assets with art: the FX library, the Breakers then Anchor, the frigate with its hedgehog module, the destroyer, the Astrid. "
               "4) The concept-gated assets: the missile variants into the swarm's slots, the corvette and drones, the emplacements, Breakwater, the gun module. Every breakable hull (DD, CV, CF, BW) is modelled in sections at its bulkhead frames. "
               "5) The long-lens plates last; {#Umbrella} renders last of all, since it waits on three gates (the Astrid, the missile variants, the PDC pick)."),
     ("Methods", "The foreground pods of {#Kill wave away} in their own layer, defocused in comp. Every rock and plume instanced, with a rock tile in the class C benchmark ({#The sweep}, {#The pack fires}). "
-                "In the dark lee, area lights on each fin driven by `heat`, with emission sampling off on the fin meshes. {#Hold} is a planet plate rendered once plus a ship layer."),
+                "In the dark lee, area lights on each fin driven by `heat`, with emission sampling off on the fin meshes (EN-FIN). "
+                "{#The wait} and {#Hold} are locked off: a plate rendered once plus one moving layer (the turrets and vents; the ship). "
+                "Site 1's lights in {#Site One goes dark} are a comp element over a plate."),
     ("Rendering", "One job per shot to multilayer EXR sequences (DWAA), Placeholders on and Overwrite off so a crashed render resumes; the grade (`LREF_Compositor`) as a separate pass; emissive FX in their own view layers at 16–32 spp with 1–3 proxy lights in the beauty layer; Persistent Data; adaptive sampling with denoising; vector blur in comp; plan ~150 GB of disk."),
 ]
 
@@ -264,7 +275,7 @@ ACTS = [
     ("I", "Arrival", "The fleet arrives slow, parks its shields, reads the system, and strikes Skerry first because Skerry's laser can burn its fins."),
     ("II", "The Breakers", "Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid's answer, the drones and the Normandy."),
     ("III", "Anchor", "Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, the frigate, the lance and the broadside."),
-    ("IV", "Hammer and anvil", "Across to Breakwater: Skerry's nets, the try at the pack, Site 1's fire, Breakwater's missiles at the last net ship, the spend wave, the kill wave, the Casaba jets, the hail and the spinal shot, then terms."),
+    ("IV", "Hammer and anvil", "Across to Breakwater: Skerry's nets, Site 1's fire, the pack's two launches through a last try at it, Breakwater's answer at the last net ship, the spend wave, the kill wave, the Casaba jets, the hail and the spinal shot, then terms."),
 ]
 
 MAPS = {
@@ -278,7 +289,7 @@ MAPS = {
 # ---------------------------------------------------------------- reviews
 # Each round: (name, what was reviewed, [(lens, major issue, how the next revision answers it)]).
 # Full reports and the syntheses are in review/.
-REVIEW_STATUS = "Round 3 reads revision 3 with the same five lenses; the rounds continue until no reviewer has a major issue left."
+REVIEW_STATUS = "Round 4 reads revision 4 with the same five lenses; the rounds continue until no reviewer has a major issue left."
 REVIEWS = [
     ("Round 1", "Revision 1", [
         ("Physics", "The Astrid could not stop after its spinal shot.", "It stops short of Breakwater and fires from rest."),
@@ -309,13 +320,17 @@ REVIEWS = [
         ("Production", "Swarms with hundreds of plumes.", "One Geometry Nodes swarm system with LODs, emissive plumes and few lights."),
     ]),
     ("Round 2", "Revision 2", [
-        ("Physics", "With the mirrored geometry, Skerry's 12.5 km/s rounds can't reach the nets on time.", "The mass driver throws at up to 15.5 km/s: five nets on the lane at T+6:40–7:30; the sixth salvo, at 12.5 km/s, rings Anchor instead."),
-        ("Physics", "The multi-pack missiles can't fly the 25-minute waves.", "They leave Anchor twenty minutes ahead of the killers (T+7:07 and T+7:08:30) on a 45-minute profile, so each wave still lands within a second."),
-        ("Doctrine", "The pack is left unguarded at Anchor, and the defender never tries for it.", "The Donnager and the Wallfish guard it (D11 now covers fire bases); Skerry's clouds ring Anchor and drones wake behind them, and the guard beats them off (new shot {#Anchor ringed})."),
+        ("Physics", "With the mirrored geometry, Skerry's 12.5 km/s rounds can't reach the nets on time.", "The mass driver throws at up to 15.5 km/s: five nets on the lane at T+6:40–7:20; the sixth salvo rings Anchor instead."),
+        ("Physics", "The multi-pack missiles can't fly the 25-minute waves.", "They leave Anchor on a 45-minute profile (T+7:07 and T+7:08:30), so each wave still lands within a second. Since revision 4 the killers fly it with them (round 3)."),
+        ("Doctrine", "The pack is left unguarded at Anchor, and the defender never tries for it.", "The Donnager and the Wallfish guard it (D11 now covers fire bases); Skerry's clouds ring Anchor and drones follow them, and the guard beats them off (since revision 4, seen in {#The pack fires})."),
         ("Cinematography", "HUD text isn't counted, so the fire plan and the callback can't be read.", "The reading check now counts HUD labels; the fire plan carries two labels over 8 s, the lost ships' callback holds on its own, the Anchor insert runs 5 s."),
         ("Cinematography", "The spinal shots fire on their last frame, and Site 1's lights are 1–2 px.", "Both fire two seconds in, so the bloom stays on screen; a 2,000 mm tracker shows Site 1 going dark (new shot {#Site One goes dark})."),
         ("Production", "The week rests on unmeasured class B and C costs.", "Step 1 benchmarks the methods with stand-ins, and a go/no-go gate applies fallbacks agreed in advance."),
         ("Production", "Classes don't follow the pixels.", "Small subjects on black move down, the smoke and water-dump shots move up, the dump gets its own asset (FX-DUMP), and the last shot becomes a plate plus a ship layer."),
+    ]),
+    ("Round 3", "Revision 3", [
+        ("Doctrine", "The kill wave's two-part launch marks its ~40 Casabas: their decoys leave twenty minutes earlier and arrive at half their speed.", "Each wave leaves in one launch and flies one profile, killers, decoys and EW birds together (T+7:07 and T+7:08:30). {#Kill wave away} now plays before {#The anvil}, which becomes Breakwater's answer to ~900 inbound birds."),
+        ("Production", "The go/no-go gate fires above break-even, has no class B benchmark, and never reaches the modelling session.", "The gate works on the measured total (the levers in order until it is under 160 h with the allowance, with each class's break-even printed); a class B benchmark is added; three shots are reclassed to bank ~5 h; the budget, gate and plan now go into ASSET_REQUESTS.md."),
     ]),
 ]
 
@@ -379,7 +394,7 @@ shot(act="I", title="Skerry throws", dur=6, clock="T+0:04:10", real="1:1", body=
 shot(act="I", title="The picture", dur=7, clock="T+0:09:00", real="compressed ~43× (the picture builds over ~5 min)", body="hud",
      cam="HUD insert · the master plot",
      action="The master plot, Maren screen right: Breakwater parked over Site 1; Skerry, with its laser and mass driver; the Breakers; the approach line. The fins stay in while Skerry's laser can see them.",
-     comm=[("ACTUAL", "Picture's up. Breakwater's right where the brief said.")], hud=["BREAKWATER", "SKERRY", "THE BREAKERS"],
+     comm=[("ACTUAL", "Breakwater's right where the brief said.")], hud=["BREAKWATER", "SKERRY", "THE BREAKERS"],
      rules=["O2", "D3"], vfx="HUD", rig=[], assets=["HUD"], sound="Sensor tones.", cost="E", map="A", render=None,
      sketch="panel([hud(16,10,208,80), planet(200,50,9,'right'), label(166,36,'BREAKWATER','#e2603f'), label(120,22,'SKERRY','#e2603f'), '<ellipse cx=\"200\" cy=\"50\" rx=\"44\" ry=\"20\" fill=\"none\" stroke=\"#9fb0bc\" stroke-width=\"0.5\" stroke-dasharray=\"1 2\"/>', label(120,82,'THE BREAKERS','#9fb0bc'), '<line x1=\"24\" y1=\"50\" x2=\"150\" y2=\"50\" stroke=\"#33b3a2\" stroke-width=\"0.6\"/>'], 8)")
 shot(act="I", title="Wave one", dur=5, clock="T+0:18:00", real="1:1", body="hull",
@@ -392,10 +407,10 @@ shot(act="I", title="Wave one", dur=5, clock="T+0:18:00", real="1:1", body="hull
      sketch="panel([ship('hedgehog',70,60,1.4,-6,true), trail('M96,50 Q150,30 230,18','#ffd9a0','0.6 0.9',0.8), trail('M96,54 Q150,36 230,26','#ffd9a0','0.6 0.9',0.6), sparks(170,30,26,40,4)], 7)")
 shot(act="I", title="Birds away", dur=3, clock="T+0:19:00", real="1:1", body="drone",
      cam="CU · 85 mm · a drone camera pacing one missile (cinematic licence: it keeps up with a 30 g boost)",
-     action="Alongside one of the 150, a minute into its boost: the 26 m body in a slow spin, its plume a white-hot needle, the Infinity already a spark far behind. Ahead, screen right, Maren's thin crescent.",
-     comm=[], rules=["O3", "O9"], vfx="Hero missile and plume, far launch sparks", rig=["thrust 1 (MSL)", "spin"],
-     assets=["MSL", "MSL-V", "MAREN"], sound="Silence; the score lifts.", cost="B", map="A", render=None,
-     sketch="panel([planet(236,50,22,'right'), glow(24,58,3,'#ffffff',0.8), plume(81,50,60,180,2.6), ship('missile',120,50,2.6,0,true)], 10)")
+     action="Alongside one of the 150, a minute into its boost: a capital-ship killer in a slow spin, its plume a white-hot needle, the Infinity already a spark far behind. Ahead, screen right, its target: Skerry, a small grey disc. Maren is out of frame.",
+     comm=[], rules=["O3", "O9"], vfx="Hero missile and plume, far launch sparks", rig=["thrust 1", "spin (swarm attribute)"],
+     assets=["MSL-V", "SKR"], sound="Silence; the score lifts.", cost="B", map="A", render=None,
+     sketch="panel([moon(214,40,6), glow(24,58,3,'#ffffff',0.8), plume(81,50,60,180,2.6), ship('missile',120,50,2.6,0,true)], 10)")
 shot(act="I", title="Turn and burn", dur=6, clock="T+0:25:00", real="compressed 8× (the turn takes ~49 s)", body="tracker",
      cam="EWS · 400 mm · the whole group",
      action="Through a long lens, eleven drives light one after another as the group turns onto the approach line, bows toward Maren and plumes streaming screen left; the three ships at the park stay dark behind them. One g for 34 minutes.",
@@ -420,7 +435,7 @@ shot(act="II", title="Fins edge-on", dur=6, clock="T+1:10:00", end="T+3:20:00", 
 shot(act="II", title="The Breakers", dur=4, clock="T+3:20:00", real="1:1", body="drone",
      cam="WS · 24 mm · tracking alongside",
      action="The fins retract before the debris. A faint haze thickens, lit from behind. A single large rock slides past twenty kilometres off, gone across the frame in under two seconds at 20 km/s. The corvettes spread ahead, screen right.",
-     comm=[("ACTUAL", "No shields from here. Corvettes, sweep the lane.")], rules=["O8", "D3", "D5", "D6"],
+     comm=[("ACTUAL", "No shields from here. Corvettes, sweep.")], rules=["O8", "D3", "D5", "D6"],
      vfx="Dust haze (Mist pass), one rock fly-by", rig=["radiator_deploy 1→0.12"],
      assets=["EN", "BRK", "CV", "DRN-L"], sound="Silence; a low drone in the score.", cost="B", map="B", render=None,
      sketch="panel([rocks(3,1,40,70,40,60,14,16), ship('endeavorNoShield',130,54,0.7,0,true), ship('corvette',200,40,1.2,0,true), ship('drone',222,48,1.4,0,true), '<rect width=\"240\" height=\"100\" fill=\"#9fb0bc\" opacity=\"0.05\"/>'], 17)")
@@ -446,8 +461,8 @@ shot(act="II", title="Spin-up", dur=1, clock="T+3:45:00", real="1:1", body="hull
      sketch="panel([glow(120,50,30,'#2a3037',0.9), '<g fill=\"#9aa6b0\">' + [0,1,2,3,4,5,6].map(function(i){var a=i/7*6.283;return '<circle cx=\"'+(120+Math.cos(a)*14).toFixed(1)+'\" cy=\"'+(50+Math.sin(a)*14).toFixed(1)+'\" r=\"4\"/>';}).join('') + '</g>', '<circle cx=\"120\" cy=\"50\" r=\"24\" fill=\"none\" stroke=\"#6b737b\" stroke-width=\"2\" stroke-dasharray=\"2 2\"/>'], 15)")
 shot(act="II", title="Lenses", dur=3, clock="T+3:45:01", real="1:1", body="hull",
      cam="ECU · 135 mm · a laser focusing array on its yoke",
-     action="The array's lens assembly slews onto an incoming pod missile, steadies, and flashes violet in rapid pulses, each one a shot; the beams themselves are invisible in vacuum. Far off, a spark as the missile dies, and the yoke is already swinging to the next.",
-     comm=[], rules=["D1", "O5"], vfx="Lens glow pulses, a distant intercept flash",
+     action="The array's lens assembly slews onto an incoming pod missile, steadies, and flashes violet in rapid pulses, each one a shot; the beams themselves are invisible in vacuum. Far off, a spark as the missile's hardened nose gives way, under 300 km out, and the yoke is already swinging to the next.",
+     comm=[], rules=["D1"], vfx="Lens glow pulses, a distant intercept flash",
      rig=["laser_power pulses", "laser_traverse", "laser_elevation"], assets=["EN", "FX-PD"],
      sound="Capacitor whine and the yoke's servo through the hull, one tick per pulse.", cost="A", map="B",
      render=None,
@@ -478,7 +493,7 @@ shot(act="II", title="Holed", dur=5, clock="T+3:52:13", real="1:1", body="tracke
      comm=[("EXTENUATING", "Canterbury's gone.")],
      rules=["HO9"], vfx="Impact flashes, venting, section break", rig=["break 0→1 (new)"],
      assets=["DD", "DD-BRK", "FX-BREAK", "FX-VENT"], sound="The dying channel's hiss, then silence.",
-     cost="B", map="B", render=None,
+     cost="S", map="B", render=None,
      sketch="panel([ship('destroyer',110,50,3.2,10,true), glow(150,46,10,'#ffffff',0.85), glow(120,50,7,'#ffffff',0.7), sparks(140,50,30,30,11), smoke(100,56,14)], 33)")
 shot(act="II", title="Answer", dur=4, clock="T+3:52:38", real="1:1 (the last degrees of the slew; it fires two seconds in)", body="drone",
      cam="EWS · 135 mm · the Astrid in profile, bow screen right",
@@ -512,7 +527,7 @@ shot(act="II", title="Normandy", dur=5, clock="T+4:25:00", real="1:1", body="tra
      action="One autonomous drone slips the screen and dives on the Normandy. A plasma bomb goes off against its flank and the corvette breaks up. Hold two seconds on the wreck as its channel dies to hiss.",
      comm=[("WALLFISH", "One's through—on Normandy!")], rules=["HO4"], vfx="Plasma-bomb flash, break-up",
      rig=["break 0→1 (new)"], assets=["CV", "CV-BRK", "DRN-C", "FX-SWARM", "FX-BREAK"],
-     sound="The dying channel's hiss, then silence.", cost="B", map="B", render=None,
+     sound="The dying channel's hiss, then silence.", cost="S", map="B", render=None,
      sketch="panel([ship('corvette',120,50,5,-4,true), glow(128,48,16,'#e3c7ff',0.9), sparks(128,48,40,40,47)], 47)")
 
 # ============================================================ ACT III
@@ -533,7 +548,7 @@ shot(act="III", title="Anchor", dur=5, clock="T+5:08:00", real="1:1; the digits 
 shot(act="III", title="The sweep", dur=4, clock="T+5:09:00", real="compressed ~20× (minutes)", body="drone",
      cam="WS · 24 mm · low over Anchor's surface",
      action="The Endeavor settles into darkness in the lee, a few kilometres off the surface, where the rock blocks the sun as well as Site 1. Corvettes and drones sweep the rock: a drone trips a mine on the far side, and the flash lights Anchor's limb from behind. Far off, the Donnager's shells land on the nearest rocks.",
-     comm=[("DONNAGER", "Rocks inside three hundred done. Moonlets next.")], rules=["O8", "D6", "O4"],
+     comm=[("DONNAGER", "Near rocks done. Moonlets next.")], rules=["O8", "D6", "O4"],
      vfx="Mine flash behind the limb, distant impacts", rig=["rcs_bow / rcs_stern pulses"],
      assets=["EN", "ANCHOR", "BRK", "CV", "DRN-L", "GI", "GI-GUN", "FX-NUKE"], sound="Silence.",
      cost="C", map="C", render=None,
@@ -562,7 +577,7 @@ shot(act="III", title="Fins in", dur=3, clock="T+5:13:01", real="compressed 5× 
 shot(act="III", title="Fin hit", dur=3, clock="T+5:13:16", real="1:1", body="hull",
      cam="CU · 50 mm · on the port fin",
      action="Halfway in, the port fin takes a slug from screen right. It shatters into glowing shards and its coolant flashes to glittering ice.",
-     comm=[("ENDEAVOR", "Port fin's gone. Cut it loose.")], rules=["HO7", "D7"], vfx="Fin shatter, coolant venting",
+     comm=[("ENDEAVOR", "Port fin's gone.")], rules=["HO7", "D7"], vfx="Fin shatter, coolant venting",
      rig=["fin_port_state → pre-fractured (new)"], assets=["EN", "EN-FIN", "FX-FIN", "FX-VENT", "FX-SLUG"],
      sound="Metal shear through the hull; a hiss.", cost="A2", map="C", render=None,
      sketch="panel([ship('endeavorNoShield',110,50,1.9,0), glow(176,24,12,'#ff8a3c',0.8), sparks(178,22,40,36,55), smoke(184,20,16), streak(236,4,180,22,'#8fb1ff')], 57)")
@@ -588,24 +603,24 @@ shot(act="III", title="Lance", dur=2, clock="T+5:13:55", real="1:1", body="track
      sketch="panel(['<line x1=\"240\" y1=\"54\" x2=\"122\" y2=\"50\" stroke=\"#e3c7ff\" stroke-width=\"2.2\"/>', ship('hfrigate',100,50,3.2,0), glow(120,50,12,'#e3c7ff',0.9), sparks(100,50,40,40,63)], 63)")
 shot(act="III", title="Broadside", dur=3, clock="T+5:14:00", real="compressed 5× (the roll)", body="hull",
      cam="MS · 35 mm · the port batteries, the rock beyond",
-     action="Fins stowed, the Endeavor rolls to bring its port batteries onto the platform's rock, off the port quarter, screen right. The dorsal well battery rises.",
+     action="Fins stowed, the Endeavor rolls to bring its port batteries onto the platform's rock, off the port quarter, screen right. The turrets still sit clamped in their travel locks.",
      comm=[], rules=["O6", "O4", "D3"], vfx="",
-     rig=["rail_traverse", "rail_elevation", "battery_raise 0→1", "battery_traverse", "battery_elevation"],
-     assets=["EN", "EN-FIN", "EN-DMG", "M1C"], sound="The roll's RCS thumps and the battery's rise through the hull.",
+     rig=["rcs_bow / rcs_stern pulses (the roll)"],
+     assets=["EN", "EN-FIN", "EN-DMG", "M1C"], sound="The roll's RCS thumps through the hull.",
      cost="A", map="C", render="img/house_s1combat.jpg", sketch=None)
-shot(act="III", title="Rails wake", dur=4, clock="T+5:14:15", real="compressed 2× (the 6–9 s wake)", body="hull",
+shot(act="III", title="Rails wake", dur=4, clock="T+5:14:15", real="compressed 2× (the ~8 s wake)", body="hull",
      cam="CU · 50 mm · on one M-1C turret",
-     action="The rails unlock, the twin barrels rise onto the rock, and the charge builds: the capacitor bank's glow creeps up the housing until the turret locks.",
-     comm=[], rules=["O4", "O6"], vfx="Rail glow, capacitor glow",
-     rig=["rail_wake", "rail_lock", "rail_arm", "charge_a/b"], assets=["EN", "EN-FIN", "EN-DMG", "M1C"],
-     sound="A rising whine through the hull, then the lock's clunk.", cost="A", map="C", render=None,
-     sketch="panel(['<rect x=\"20\" y=\"38\" width=\"80\" height=\"30\" rx=\"4\" fill=\"#3a4048\"/>', '<rect x=\"96\" y=\"42\" width=\"130\" height=\"6\" fill=\"#9aa6b0\"/>', '<rect x=\"96\" y=\"56\" width=\"130\" height=\"6\" fill=\"#9aa6b0\"/>', glow(96,45,6,'#8fb1ff',0.7), glow(96,59,6,'#8fb1ff',0.7)], 39)")
-shot(act="III", title="Fire", dur=2, clock="T+5:14:23", real="1:1", body="hull",
-     cam="ECU · 85 mm · on the muzzles",
-     action="Gun A fires: the bore pulse (cinematic licence, Q12) and a tracer blast toward the rock. Only the gun that fired vents; gun B waits its turn.",
-     comm=[], rules=["O4", "O6"], vfx="Muzzle blast, tracer, venting",
-     rig=["shot_a", "fins_a", "heat_a"], assets=["EN", "EN-FIN", "EN-DMG", "M1C", "FX-SLUG"],
-     sound="The shot's crack and the recoil's clunk through the hull.", cost="A2", map="C", render=None,
+     action="The turret wakes in its fixed order. The capacitor banks' lids open on rows of charge cells that light amber, the rear louvres ripple open and the beacons flash; the travel-lock clamps swing off the jaws and the crutch folds flat; the cradle lays onto the rock; the supershell's latches drop, its halves crack, rise and clunk against their stops, and the chisel jaws swing open. The barrel stays dark.",
+     comm=[], rules=["O4", "O6"], vfx="Amber charge cells, meters, beacons (no glow on the barrel until it fires)",
+     rig=["rail_wake 0→1", "rail_lock 1→0", "rail_traverse / rail_elevation", "rail_arm 0→1"], assets=["EN", "EN-FIN", "EN-DMG", "M1C"],
+     sound="Clunks through the hull: the lids, the clamps, the shell's halves on their stops.", cost="A", map="C", render=None,
+     sketch="panel(['<rect x=\"20\" y=\"38\" width=\"80\" height=\"30\" rx=\"4\" fill=\"#3a4048\"/>', '<rect x=\"96\" y=\"44\" width=\"130\" height=\"14\" fill=\"#9aa6b0\"/>', '<path d=\"M96,44 L226,34 L226,40 L96,48Z\" fill=\"#6b737b\"/>', '<path d=\"M96,58 L226,68 L226,62 L96,54Z\" fill=\"#6b737b\"/>', '<g fill=\"#ffb347\">' + [0,1,2,3,4,5].map(function(i){return '<rect x=\"'+(28+i*11)+'\" y=\"44\" width=\"6\" height=\"4\"/>';}).join('') + '</g>', glow(34,34,4,'#ff6a3c',0.9), glow(86,34,4,'#ff6a3c',0.9)], 39)")
+shot(act="III", title="Fire", dur=3, clock="T+5:14:23", real="1:1", body="hull",
+     cam="CU · 85 mm · on the barrels and the crest vent",
+     action="Gun A charges for a second: the barrel draws back and buzzes, the shell throbs, the flush fins chatter. Then the bore pulse (cinematic licence, Q12), a tracer blast toward the rock, and the recoil. Only the gun that fired vents: its crest fins burst out and glow; gun B waits its turn.",
+     comm=[], rules=["O4", "O6"], vfx="Charge shudder, bore pulse, muzzle blast, tracer, the crest fins' glow",
+     rig=["charge_a", "shot_a", "fins_a", "heat_a"], assets=["EN", "EN-FIN", "EN-DMG", "M1C", "FX-SLUG"],
+     sound="The charge's buzz, the shot's crack and the recoil's clunk through the hull.", cost="A2", map="C", render=None,
      sketch="panel(['<rect x=\"0\" y=\"42\" width=\"170\" height=\"6\" fill=\"#9aa6b0\"/>', '<rect x=\"0\" y=\"56\" width=\"170\" height=\"6\" fill=\"#9aa6b0\"/>', glow(176,45,22,'#bfe1ff',0.95), streak(180,45,240,40,'#bfe1ff'), glow(60,40,8,'#ff8a3c',0.6)], 40)")
 shot(act="III", title="The platform dies", dur=2, clock="T+5:14:40", real="the clock jumps 16 s of flight from the shot", body="tracker",
      cam="Tracker · 1,200 mm · the flash's framing",
@@ -618,24 +633,17 @@ shot(act="III", title="The platform dies", dur=2, clock="T+5:14:40", real="the c
 shot(act="IV", title="The fire plan", dur=8, clock="T+5:40:00", real="1:1", body="hud",
      cam="HUD insert · the master plot",
      action="The plan builds in two beats, each tied to a clause of the line. First the waves' two tracks from Anchor to where Breakwater will be; then the Astrid's firing point. The pack stays at Anchor with its guard.",
-     comm=[("ACTUAL", "Pack, Donnager and Wallfish hold Anchor. The rest, with me.")], hud=["SPEND 7:52 · KILL 7:53", "ASTRID", "SINK 31%"],
+     comm=[("ACTUAL", "Pack, Donnager, Wallfish: hold Anchor. Rest with me.")], hud=["SPEND 7:52 · KILL 7:53", "ASTRID", "SINK 31%"],
      rules=["O9", "O3", "O10", "O11", "D11"], vfx="HUD", rig=[], assets=["HUD"],
      sound="Sensor tones; the score gathers.", cost="E", map="D", render=None,
      sketch="panel([hud(16,10,208,80), planet(196,60,12,'right'), ship('monitor',176,40,0.1,0), rocks(2,1,30,38,26,34,4,4.5), '<line x1=\"38\" y1=\"30\" x2=\"172\" y2=\"40\" stroke=\"#33b3a2\" stroke-width=\"0.6\" stroke-dasharray=\"1 1.5\"/>', label(60,24,'SPEND 7:52 · KILL 7:53','#33b3a2'), '<rect x=\"150\" y=\"20\" width=\"4\" height=\"4\" fill=\"#b476ff\"/>', label(132,16,'ASTRID','#b476ff'), label(20,86,'SINK 31%','#33b3a2')], 67)")
-shot(act="IV", title="The net", dur=5, clock="T+6:40:00", real="compressed ~24× (2 min); the digits roll 60 min into it", body="drone",
+shot(act="IV", title="The net", dur=4, clock="T+6:40:00", real="compressed ~30× (2 min); the digits roll 60 min into it", body="drone",
      cam="WS · 50 mm · over the Extenuating Circumstances",
      action="Hours after Skerry threw them, the first of its rounds arrive. Ahead of the fleet the destroyer's drones light up a spreading cloud of pellets about 20 km across, glittering in their lamps. The fleet side-steps, drives angled off the line; four more nets follow on the lane, ten minutes apart.",
-     comm=[("EXTENUATING", "Skerry's rounds. Right on time."), ("ACTUAL", "All ships, left two degrees.")],
+     comm=[("EXTENUATING", "Skerry's rounds. On time."), ("ACTUAL", "Left two degrees.")],
      rules=["HO3", "D4", "O8"], vfx="Canister cloud glitter (swarm system)", rig=[],
      assets=["DD", "DRN-L", "FX-SWARM"], sound="Silence; the score ticks.", cost="B", map="D", render=None,
      sketch="panel([ship('destroyer',50,60,1.6,0,true), sparks(170,40,90,70,67), glow(150,30,10,'#e8f2ff',0.3)], 67)")
-shot(act="IV", title="Anchor ringed", dur=6, clock="T+6:52:00", real="1:1", body="hud",
-     cam="HUD insert · the Donnager's plot at Anchor",
-     action="Skerry's sixth salvo was never meant for the lane: three canister clouds ring Anchor, and drones wake on the nearby rocks behind them. The pack has tucked in behind the rock, away from the clouds; the Donnager's batteries and the Wallfish pick the drones off as they come round.",
-     comm=[("DONNAGER", "Clouds on Anchor. Drones behind. Pack's tucked in.")], hud=["ANCHOR", "3 CLOUDS", "SINK 62%"],
-     rules=["HO3", "HO4", "HD6", "D11", "D6"], vfx="HUD, drone tracks dying", rig=[], assets=["HUD"],
-     sound="Sensor tones; clipped chatter.", cost="E", map="D", render=None,
-     sketch="panel([hud(16,10,208,80), rocks(2,1,116,124,46,54,5,5.5), sparks(96,40,30,14,44), sparks(144,62,30,14,45), sparks(120,24,24,12,46), label(128,52,'ANCHOR','#33b3a2'), label(150,24,'3 CLOUDS','#e2603f'), label(20,86,'SINK 62%','#33b3a2')], 44)")
 shot(act="IV", title="Site One", dur=4, clock="T+6:55:00", real="compressed ~15× (a minute)", body="drone",
      cam="WS · 40 mm · ahead of the Extenuating Circumstances",
      action="Site 1 has been firing since the fleet cleared Anchor's shadow, against rolling hulls, smoke and the fleet's low-power dazzle. Now its invisible beam holds long enough on the destroyer's forward sensor boom: it scorches and smokes, the one visible cost. The ships roll on, and a fresh smoke screen blooms ahead, travelling with the fleet.",
@@ -643,29 +651,31 @@ shot(act="IV", title="Site One", dur=4, clock="T+6:55:00", real="compressed ~15�
      vfx="Scorching, fleet-scale smoke screen", rig=["dmg_boom 0→1 (new)"], assets=["DD", "FX-SMOKE", "FX-DAZZLE"],
      sound="Silence.", cost="C", map="D", render=None,
      sketch="panel([ship('destroyer',90,56,2.2,-6,true), smoke(118,40,10), smoke(200,50,40), glow(122,40,4,'#ff8a3c',0.8)], 69)")
-shot(act="IV", title="The pack fires", dur=4, clock="T+7:07:00", real="1:1", body="drone",
-     cam="WS · 24 mm · low over Anchor, looking toward Breakwater",
-     action="From Anchor's shadow the Infinity ripple-fires its multi-pack missiles: hundreds of small plumes on a 45-minute flight, the slow part of the spend wave. Its last killers will follow at T+7:27 so everything lands together.",
-     comm=[("ACTUAL", "Spend wave, go."), ("INFINITY", "Slow birds away.")], rules=["O3", "O11"],
-     vfx="Ripple launch (swarm system)", rig=["pod_ripple (new)"],
-     assets=["GI", "GI-MAV", "MSL-V", "FX-SWARM", "ANCHOR"], sound="Silence; the score drops out.",
+shot(act="IV", title="The pack fires", dur=5, clock="T+7:06:57", real="1:1", body="drone",
+     cam="WS · 24 mm · among the pack, 150 km down Anchor's shadow, looking toward Breakwater",
+     action="The rock is a black disc ahead. Skerry's last salvo, thrown six hours ago at Anchor itself, sweeps past it in three glittering clouds, wide of the pack, and the garrison's last drones come round the rock behind them; in the distance the Wallfish and the Donnager's CIWS cut them down. On the clock, pod doors ripple open down the Infinity's hull and the spend wave leaves: hundreds of small plumes with its killers among them, all on one 45-minute flight.",
+     comm=[("DONNAGER", "Last drones down. Pack's clear."), ("INFINITY", "Spend wave away.")],
+     rules=["O3", "O11", "D11", "D6", "HO3", "HO4"],
+     vfx="Canister-cloud glitter, CIWS tracers and drone kills, ripple launch (swarm system)",
+     rig=["pod_ripple (new)", "ciws_phase / ciws_fire (new, on the Donnager)"],
+     assets=["GI", "GI-MAV", "MSL-V", "FX-SWARM", "FX-PD", "ANCHOR", "CV", "DRN-C"], sound="Silence; the score drops out.",
      cost="C", map="D", render=None,
-     sketch="panel([rocks(14,1,-20,60,60,120,50,52), ship('hedgehog',90,40,1.1,-4), ship('hedgehog',120,62,0.9,-4), trail('M112,38 Q170,28 240,24','#ffd9a0','0.6 0.9',0.8), trail('M136,60 Q190,44 240,40','#ffd9a0','0.6 0.9',0.7), sparks(200,34,30,40,63)], 73)")
-shot(act="IV", title="The anvil", dur=4, clock="T+7:25:00", real="compressed 10× (the ripple takes ~40 s)", body="drone",
-     cam="WS · 40 mm · above Breakwater, Maren's night side below",
-     action="Breakwater's reveal. Its turrets track the fleet but stay silent: the fleet never comes within the range they could hit. Its 64 cells open and ripple-fire, every missile at the Extenuating Circumstances, 17,000 km off, into the fleet's braking burn. Far along the orbit, ring stations wake as points of light.",
-     comm=[("ASTRID", "Sixty-four inbound. All on Extenuating.")], rules=["HD7", "HO9", "HD1", "HO1", "D1"],
-     vfx="Cell doors, missile launch (swarm system)", rig=["turret_traverse / cells_open (new)"],
-     assets=["BW", "RING", "MAREN", "MSL-V", "FX-SWARM"], sound="A low brass sting.", cost="C", map="E", render=None,
-     sketch="panel([planet(120,160,120,'right'), ship('monitor',120,34,0.9,0), trail('M86,30 Q50,20 10,24','#ff9d7a','0.6 1',0.6), trail('M86,36 Q50,34 10,40','#ff9d7a','0.6 1',0.6), sparks(226,90,6,10,71)], 71)")
-shot(act="IV", title="Kill wave away", dur=3, clock="T+7:28:30", real="1:1", body="tracker",
+     sketch="panel(['<circle cx=\"196\" cy=\"32\" r=\"20\" fill=\"#06080a\" stroke=\"#3a3f45\" stroke-width=\"0.6\"/>', sparks(166,18,40,24,44), sparks(228,56,36,20,45), tracers(128,36,-25,24,46), glow(150,26,2,'#ffffff',0.8), glow(138,44,1.6,'#ffffff',0.7), ship('hedgehog',80,64,1.3,-4), ship('hedgehog',30,42,0.7,-4), trail('M104,60 Q160,54 240,50','#ffd9a0','0.6 0.9',0.8), trail('M104,66 Q170,66 240,72','#ffd9a0','0.6 0.9',0.7)], 73)")
+shot(act="IV", title="Kill wave away", dur=3, clock="T+7:08:30", real="1:1", body="tracker",
      cam="Tracker · 300 mm · from the Pillar of Autumn, across Anchor's shadow",
-     action="Ninety seconds behind the spend wave's killers, pod doors open down the Galactica's hull and ~40 Casaba killers leave, to arrive among the ~300 decoy and EW birds it launched twenty minutes earlier. In the foreground the Pillar of Autumn's pods stay shut: the reserve.",
+     action="Ninety seconds behind the spend wave, pod doors ripple open down the Galactica's hull and the kill wave leaves in one launch: ~40 Casaba killers among ~300 decoy and EW birds that look and fly like them, all on the same 45-minute flight. In the foreground the Pillar of Autumn's pods stay shut: the reserve.",
      comm=[("GALACTICA", "Kill wave away.")], rules=["O3", "O10", "O11"],
      vfx="Ripple launch (swarm system), defocused foreground", rig=["pod_ripple (new)"],
      assets=["GI", "GI-MAV", "MSL-V", "FX-SWARM", "ANCHOR"], sound="Silence.",
      cost="C", map="D", render=None,
      sketch="panel([rocks(15,1,190,250,-10,30,40,42), ship('hedgehog',60,78,2.4,-3), ship('hedgehog',150,40,1.1,-4), trail('M172,36 Q208,26 240,22','#ffd9a0','0.6 0.9',0.8), trail('M172,42 Q208,38 240,36','#ffd9a0','0.6 0.9',0.7), sparks(212,30,30,30,64)], 74)")
+shot(act="IV", title="The anvil", dur=4, clock="T+7:25:00", real="compressed 10× (the ripple takes ~40 s)", body="drone",
+     cam="WS · 40 mm · above Breakwater, Maren's night side below",
+     action="Breakwater's reveal, with ~900 birds inbound. Its turrets track the fleet but stay silent: the fleet never comes within the range they could hit. Its answer goes at the ship that will steer the birds: its 64 cells open and ripple-fire, every missile at the Extenuating Circumstances, 17,000 km off, into the fleet's braking burn. Far along the orbit, ring stations wake as points of light.",
+     comm=[("ASTRID", "Sixty-four inbound. All on Extenuating.")], rules=["HD7", "HO9", "HD1", "HO1", "D1"],
+     vfx="Cell doors, missile launch (swarm system)", rig=["turret_traverse / cells_open (new)"],
+     assets=["BW", "RING", "MAREN", "MSL-V", "FX-SWARM"], sound="A low brass sting.", cost="C", map="E", render=None,
+     sketch="panel([planet(120,160,120,'right'), ship('monitor',120,34,0.9,0), trail('M86,30 Q50,20 10,24','#ff9d7a','0.6 1',0.6), trail('M86,36 Q50,34 10,40','#ff9d7a','0.6 1',0.6), sparks(226,90,6,10,71)], 71)")
 shot(act="IV", title="Umbrella", dur=3, clock="T+7:31:00", real="1:1", body="tracker",
      cam="Tracker · 400 mm · from the Extenuating Circumstances, the Astrid 50 km above",
      action="Breakwater's missiles arrive up the fleet's drive axis. The Astrid has cut its drive for the minute so its plume won't blind its own point defence: its lenses glow violet and its CIWS lay kill clouds across the missiles' path. The flashes walk in toward the Extenuating and stop short.",
@@ -677,7 +687,7 @@ shot(act="IV", title="Umbrella", dur=3, clock="T+7:31:00", real="1:1", body="tra
 shot(act="IV", title="Blind it", dur=4, clock="T+7:50:00", real="1:1", body="hull",
      cam="MS · 35 mm · the Endeavor's laser arrays",
      action="The Extenuating Circumstances floods the ring's links. The arrays go from low power to full on Breakwater's optics and Site 1's trackers: lenses violet, beams invisible.",
-     comm=[("EXTENUATING", "Their net's down."), ("ENDEAVOR", "All arrays, full power.")], hud=["SINK 88%"],
+     comm=[("EXTENUATING", "Their net's down."), ("ENDEAVOR", "Full power.")], hud=["SINK 88%"],
      rules=["O5", "HD9"],
      vfx="Lens glow, EW overlay on inserts", rig=["laser_power 0.2→1", "laser_traverse", "laser_elevation"],
      assets=["EN", "EN-FIN", "EN-DMG", "FX-EW"], sound="The lenses' capacitor whine through the hull.", cost="A", map="E",
@@ -691,11 +701,11 @@ shot(act="IV", title="The spend wave", dur=4, clock="T+7:52:00", real="1:1", bod
      sketch="panel([planet(170,150,110,'right'), sparks(150,36,40,30,75)], 75)")
 shot(act="IV", title="Seeker", dur=4, clock="T+7:53:14", real="compressed ~3.5× (the last 14 s of flight)", body="drone",
      cam="ECU · 100 mm · riding a Casaba killer's nose",
-     action="The hardened nose of a Casaba killer through its last seconds. The ablative cap glows where Breakwater's lasers are burning it, and tracers streak past; then the seeker shutter opens, and ahead, screen right, Breakwater grows from a point to a sliver.",
-     comm=[], rules=["O3", "O10", "HD5"], vfx="Glowing ablative cap, tracers, the seeker window",
-     rig=["spin", "seeker_shutter (new)"], assets=["MSL-V", "FX-PD", "BW"],
+     action="The hardened nose of a Casaba killer through its last seconds, ~700 km out at ~45 km/s. The ablative cap glows where one of Breakwater's lasers is burning it; the glow fades as the beam swings off to another bird. Only then does the seeker shutter open, and focus racks from the cap to the target: ahead, screen right, Breakwater grows from a point to a sliver, its tracers converging in front of it.",
+     comm=[], rules=["O3", "O10", "HD5"], vfx="Glowing ablative cap (fading), the seeker window, rack focus, distant tracers",
+     rig=["spin (swarm attribute)", "cap_glow (new)", "seeker_shutter (new)"], assets=["MSL-V", "FX-PD", "BW"],
      sound="Silence; the score climbs.", cost="B", map="E", render=None,
-     sketch="panel(['<path d=\"M10,32 L150,40 L150,60 L10,68Z\" fill=\"#6b737b\"/>', '<path d=\"M150,40 L196,50 L150,60Z\" fill=\"#3a3f45\"/>', glow(194,50,12,'#ff8a3c',0.85), '<circle cx=\"176\" cy=\"50\" r=\"3\" fill=\"#0a0d12\" stroke=\"#9aa6b0\" stroke-width=\"0.6\"/>', glow(232,49,2,'#ffffff',0.9), tracers(232,49,180,20,52)], 52)")
+     sketch="panel(['<path d=\"M10,32 L150,40 L150,60 L10,68Z\" fill=\"#6b737b\"/>', '<path d=\"M150,40 L196,50 L150,60Z\" fill=\"#3a3f45\"/>', glow(194,50,12,'#ff8a3c',0.85), '<circle cx=\"176\" cy=\"50\" r=\"3\" fill=\"#0a0d12\" stroke=\"#9aa6b0\" stroke-width=\"0.6\"/>', glow(232,49,2,'#ffffff',0.9), sparks(225,49,14,9,52)], 52)")
 shot(act="IV", title="Wall of fire", dur=4, clock="T+7:53:28", real="slowed 5× (the wave arrives within ~1 s)", body="drone",
      cam="WS · 40 mm · above Breakwater",
      action="The kill wave arrives in the same second, nose-on to Breakwater, from screen left. Tracers and dying decoys fill the sky; the hardened noses keep coming.",
@@ -723,13 +733,13 @@ shot(act="IV", title="Spinal", dur=3, clock="T+7:54:38", real="1:1 (the last deg
      comm=[("ACTUAL", "Fire.")], rules=["O4", "O10", "HD7", "O9"], vfx="Spinal muzzle bloom",
      rig=["rcs_bow / rcs_stern (new)", "spinal_shot (new)"], assets=["AST", "FX-SPINAL"], sound="Everything drops out.", cost="B", map="E", render=None,
      sketch="panel([glow(120,50,36,'#bfe1ff',0.8), '<circle cx=\"120\" cy=\"50\" r=\"10\" fill=\"#cfd6dc\"/>', '<g stroke=\"#ff8a3c\" stroke-width=\"2\">' + [0,1,2,3,4,5,6,7].map(function(i){var a=i/8*6.283;return '<line x1=\"'+(120+Math.cos(a)*12).toFixed(1)+'\" y1=\"'+(50+Math.sin(a)*12).toFixed(1)+'\" x2=\"'+(120+Math.cos(a)*34).toFixed(1)+'\" y2=\"'+(50+Math.sin(a)*34).toFixed(1)+'\"/>';}).join('') + '</g>', glow(120,50,8,'#ffffff',0.95)], 83)")
-shot(act="IV", title="The wait", dur=6, clock="T+7:54:41", real="compressed ~27× (163 of the slug's 167 s; the clock races)", body="drone",
-     cam="WS · 35 mm · the Casaba shot's angle",
+shot(act="IV", title="The wait", dur=6, clock="T+7:54:41", real="compressed ~27× (163 of the slug's 169 s; the clock races)", body="drone",
+     cam="WS · 35 mm · locked off at the Casaba shot's angle",
      action="Hold on the crippled monitor, turrets swinging uselessly, while the clock races through the slug's flight.",
-     comm=[("ASTRID", "Impact in two forty-seven.")], rules=["O10"], vfx="Venting", rig=["turret_traverse (new)"],
-     assets=["BW", "BW-BRK"], sound="Silence; one held note.", cost="B", map="E", render=None,
+     comm=[("ASTRID", "Impact in two forty-nine.")], rules=["O10"], vfx="Venting (turrets and vents as one moving layer over a plate of the hull)", rig=["turret_traverse (new)"],
+     assets=["BW", "BW-BRK"], sound="Silence; one held note.", cost="P", map="E", render=None,
      sketch="panel([ship('monitor',140,50,1.0,0), smoke(88,50,14), label(8,92,'T+7:56:10','#6fd3c4')], 85)")
-shot(act="IV", title="Impact", dur=3, clock="T+7:57:27", real="1:1", body="drone",
+shot(act="IV", title="Impact", dur=3, clock="T+7:57:29", real="1:1", body="drone",
      cam="WS · 35 mm · the Casaba shot's angle",
      action="The slug arrives amidships, near the spear damage: a white flash, a spall cone, and Breakwater's back breaks in a chain of secondary flashes.",
      comm=[], rules=["O4"], vfx="Impact, spall, section break", rig=["break 0→1 (new)"],
@@ -742,23 +752,23 @@ shot(act="IV", title="Heat", dur=4, clock="T+8:00:00", real="1:1", body="hull",
      rig=["water_dump 0→1 (new)"], assets=["EN", "EN-FIN", "EN-DMG", "EN-PD", "FX-DUMP"],
      sound="A roar through the hull, then a long hiss.", cost="V", map="E", render=None,
      sketch="panel([ship('endeavorNoShield',150,50,1.2,0), glow(120,30,20,'#e8eef4',0.6), glow(92,20,24,'#e8eef4',0.4), glow(60,12,26,'#e8eef4',0.25)], 89)")
-shot(act="IV", title="Terms", dur=8, clock="T+8:10:00", real="1:1", body="tracker",
+shot(act="IV", title="Terms", dur=9, clock="T+8:10:00", real="1:1", body="tracker",
      cam="Tracker · 2,000 mm · from the Endeavor's standoff",
-     action="Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting over the night side; the Astrid's firing line has already swung onto the next ring station. The exchange plays first; then the last plot holds alone for two seconds on the two dark channels.",
-     comm=[("EXTENUATING", "Actual, Maren's asking for terms."), ("ACTUAL", "Site One goes dark first.")], hud=["CANTERBURY · NORMANDY: NO CARRIER"],
+     action="Far off, 8,500 km away, Breakwater's wreck is a glittering smear venting over the night side; the Astrid's firing line has already swung onto the next ring station. The exchange plays first. The terms ask for the Breakers charts as well, since the garrison's emplacements answer to no one (HD9). Then the last plot holds alone for three seconds on the two dark channels.",
+     comm=[("EXTENUATING", "Maren's asking for terms."), ("ACTUAL", "Site One dark, and the Breakers charts.")], hud=["CANTERBURY · NORMANDY: NO CARRIER"],
      rules=["O4", "D7"], vfx="Distant wreck, HUD tag", rig=[], assets=["BW", "BW-BRK", "MAREN", "RING", "HUD"],
      sound="The score, low.", cost="D", map="E", render=None,
      sketch="panel([planet(120,170,120,'right'), sparks(120,50,30,20,90), glow(120,50,6,'#ffd9a0',0.6), label(8,92,'CANTERBURY · NORMANDY: NO CARRIER','#9fb0bc')], 90)")
-shot(act="IV", title="Site One goes dark", dur=2, clock="T+8:24:00", real="1:1", body="tracker",
+shot(act="IV", title="Site One goes dark", dur=3, clock="T+8:24:00", real="1:1", body="tracker",
      cam="Tracker · 2,000 mm · on Site 1's plateau, night side",
-     action="A cluster of lights on Maren's night side, about ten pixels wide: Site 1. They go out, block by block.",
-     comm=[("ENDEAVOR", "Site One's dark.")], rules=["O9"], vfx="City lights going out", rig=[],
+     action="A cluster of lights about ten pixels wide, centred on an otherwise dark plateau whose relief just reads in the night-side glow: Site 1. They go out, block by block, and the Astrid, still dazzling it, reads the site's power and heat collapse. The fleet never struck it (§13): it goes dark on terms.",
+     comm=[("ASTRID", "Site One: no power, no heat.")], rules=["§13", "D3"], vfx="City lights going out (a comp element over a plate)", rig=[],
      assets=["MAREN", "WORLD"], sound="The score falls away.", cost="D", map="E", render=None,
      sketch="panel([planet(120,190,160,'right'), sparks(120,52,24,16,61), glow(120,52,10,'#ffd9a0',0.25)], 61)")
-shot(act="IV", title="Hold", dur=7, clock="T+8:24:02", real="1:1", body="drone",
+shot(act="IV", title="Hold", dur=7, clock="T+8:24:03", real="1:1", body="drone",
      cam="EWS · 35 mm · locked off, the Endeavor end-on",
-     action="The Endeavor, end-on, runs out its three fins (already part-way out) in silence, into a broken cross glowing orange against the night side, the stump where the fourth was. Cut to black under the last line.",
-     comm=[("ACTUAL", "Nauvoo, bring the shields in. T-SEC, the sky's yours.")],
+     action="The Endeavor, end-on, keeps its nose on Site 1 until the terms are signed, so its fins stay edge-on to it. It runs out its three fins (already part-way out) in silence, into a broken cross glowing orange against the night side, the stump where the fourth was. The sun is kept just out of frame and the thin crescent clipped, so the city lights read. Cut to black under the last line.",
+     comm=[("ACTUAL", "Nauvoo, bring the shields in. T-SEC, you're next.")],
      rules=["D3"], vfx="Fin glow",
      rig=["fin_starboard / fin_dorsal / fin_ventral 0.5→1 (new)", "heat 2.4", "radiator_glow"],
      assets=["EN", "EN-FIN", "EN-DMG", "MAREN", "WORLD"], sound="The score resolves; then silence.",

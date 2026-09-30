@@ -519,9 +519,13 @@ print("**A ground site against a wave aimed at an orbital target.** The table "
       "above assumes missiles that run in to ~50 km of the laser. A wave aimed "
       "at a monitor in synchronous orbit over the site (42,164 km) never comes "
       "closer than ~35,800 km, where one 2 GW site needs ~12-15 s per flank "
-      "kill. One site, a wave closing at 80 km/s from 120,000 km out:\n")
-rows = [[f"{off}°", f"{site_kills_vs_orbit(off):.0f}"] for off in (0, 15, 30, 48, 90)]
-print(table(["Wave arrives this far off the target's zenith", "Kills by the site"], rows))
+      "kill. One site, a wave from 120,000 km out, closing at a killer's 80 km/s "
+      "or on the multi-packs' slow profile (~45 km/s), which Tidebreak's waves "
+      "fly whole so that decoys and killers can't be told apart (LREF O3):\n")
+rows = [[f"{off}°", f"{site_kills_vs_orbit(off):.0f}", f"{site_kills_vs_orbit(off, v=45e3):.0f}"]
+        for off in (0, 15, 30, 49, 90)]
+print(table(["Wave arrives this far off the target's zenith", "Kills by the site, 80 km/s",
+             "Kills by the site, 45 km/s"], rows))
 print()
 print("So against Breakwater, Site 1 matters little whatever the angle: the "
       "angle is chosen to keep misses and wreckage off the planet (LREF O9), "

@@ -12,8 +12,9 @@ Writes:
   storyboard/img/*.jpg       reference frames (converted once from pack/renders)
 
 It checks the data on the way (doctrine rule IDs, asset IDs, shot references,
-the mission clock, subtitle reading speed, camera bodies, set coverage) and
-prints what it finds.
+the mission clock, subtitle reading speed, what each camera body can hear,
+rig controls marked new, the spinal impact time, set coverage) and prints what
+it finds, with the render budget against the gate.
 
 --fragment writes the page without <html>/<head>/<body> for the artifact viewer.
 --doc-base sets where doctrine rule links point (default: the local reading edition).
@@ -40,7 +41,8 @@ if "--doc-base" in sys.argv:
 
 E = html.escape
 FPS = D.FPS
-SEC_PER_FRAME = {c: float(re.search(r"([\d.]+) s/frame", cost).group(1)) for c, (_, cost) in D.RENDER_CLASSES.items()}
+ESTIMATE = {c: float(re.search(r"([\d.]+) s/frame", cost).group(1)) for c, (_, cost) in D.RENDER_CLASSES.items()}
+SEC_PER_FRAME = {**ESTIMATE, **D.MEASURED}   # the step 1 benchmarks replace the estimates
 MAX_CPS = 12          # subtitle reading speed ceiling (round 1 cinematography review)
 MARGIN = 0.30         # re-render allowance on the render budget
 BODY_LABEL = {"hull": "hull camera", "drone": "drone camera", "tracker": "tracker", "hud": "HUD insert"}
@@ -63,6 +65,11 @@ def mmss(sec):
 
 def rule_doc(rid):
     return "maren" if rid.startswith("H") else "lref"
+
+
+def rule_anchor(rid):
+    """The rule's anchor in the reading edition; '§13' cites a section of the LREF doctrine."""
+    return f"lref-s{rid[1:]}" if rid.startswith("§") else f"{rule_doc(rid)}-{rid}"
 
 
 # ----------------------------------------------------------------- shot numbers and references
@@ -198,14 +205,25 @@ def state_of(asset, clock):
     return out
 
 
-# Words a camera that can't hear must not be given, unless they belong to the score or a channel.
-HEARD = re.compile(r"through the|\b(roar|clang|bang|thump|clunk|groan|shear|whine|boom|tick)", re.I)
+# Words a camera that can't hear must not be given, unless the same clause puts them in the
+# score or a channel ("no bangs" is fine).
+HEARD = re.compile(r"through the|(?<!no )\b(roar|clang|bang|thump|thud|clunk|groan|shear|whine|boom|tick|hiss|crack|rumble|pop|hum)"
+                   r"(s|es|ed|ing|ming|ping)?\b", re.I)
+EXEMPT = re.compile(r"score|channel|sub-bass", re.I)
+
+
+def rig_controls(item):
+    """The control names in a rig item marked '(new)': 'fin_* 0→1 (new)' -> ['fin_*']."""
+    head = re.split(r"[\d→]", item.split("(new")[0])[0]
+    return [p.split()[0] for p in head.split("/") if p.strip()]
 
 
 def check():
     rule_ids = set()
     for f in ("LREF_doctrine.md", "Defence_doctrine.md"):
         rule_ids |= set(re.findall(r"^\|\s*\*\*((?:O|D|HO|HD)\d+)\*\*", (ROOT / "doctrine" / f).read_text(), re.M))
+    rule_ids |= {f"§{n}" for n in re.findall(r"^## (\d+)\.", (ROOT / "doctrine" / "LREF_doctrine.md").read_text(), re.M)}
+    requested = set(re.findall(r"`([^`]+)`", " ".join(v[3] for v in D.ASSETS.values())))
     for s in D.SHOTS:
         tag = f"shot {s['n']} ({s['title']})"
         bad = ([f"rule {r}" for r in s["rules"] if r not in rule_ids] +
@@ -221,8 +239,17 @@ def check():
             NOTES.append(f"{tag}: subtitles and HUD text at {chars / s['dur']:.1f} characters a second (ceiling {MAX_CPS})")
         if len(s["comm"]) > s["dur"]:
             NOTES.append(f"{tag}: {len(s['comm'])} lines in {s['dur']} s (at least 1 s a line)")
-        if s["body"] != "hull" and HEARD.search(s["sound"]) and not re.search(r"score|channel|sub-bass", s["sound"]):
-            NOTES.append(f"{tag}: a {s['body']} camera can't hear '{s['sound']}'")
+        if s["body"] != "hull":
+            for clause in re.split(r"[;.]", s["sound"]):
+                if HEARD.search(clause) and not EXEMPT.search(clause):
+                    NOTES.append(f"{tag}: a {s['body']} camera can't hear '{clause.strip()}'")
+        if s["body"] == "hud" and "plot" in s["cam"] and s["dur"] < 5:
+            NOTES.append(f"{tag}: a geography insert holds {s['dur']} s (at least 5 s)")
+        for item in s["rig"]:
+            if "(new" in item:
+                for c in rig_controls(item):
+                    if not (any(r.startswith(c[:-1]) for r in requested) if c.endswith("*") else c in requested):
+                        NOTES.append(f"{tag}: rig control '{c}' is marked new but no asset requests it")
         if shot_end(s) is None:
             NOTES.append(f"{tag}: no stated rate or end clock, so its end can't be checked")
         for asset, start, needed in D.STATE_ASSETS:
@@ -236,6 +263,12 @@ def check():
             NOTES.append(f"shot {b['n']} ({b['title']}) starts at {b['clock']}, before shot {a['n']} ends at {fmt_clock(end)}")
         if clock_s(b["clock"]) - end >= 1800 and not re.search(r"roll|dissolve", b["real"]):
             NOTES.append(f"shot {b['n']} ({b['title']}) jumps {round((clock_s(b['clock']) - end) / 60)} min with no roll or dissolve marked")
+    impact = D.SHOTS[shot_no("Impact", "the spinal check") - 1]
+    if abs(clock_s(impact["clock"]) - T_HIT * 3600) > 1:
+        NOTES.append(f"shot {impact['n']} (Impact) starts at {impact['clock']}, but the slug arrives at {fmt_clock(T_HIT * 3600)}")
+    for start, text in D.STATES["BW"]:
+        if text == "back broken" and abs(clock_s(start) - T_HIT * 3600) > 1:
+            NOTES.append(f"Breakwater's back breaks at {start} in STATES, but the slug arrives at {fmt_clock(T_HIT * 3600)}")
     for a, (n, _, _) in CLOSEST.items():
         if a not in D.SHOTS[n - 1]["assets"]:
             NOTES.append(f"closest view of {a} is shot {n}, which doesn't use it")
@@ -370,6 +403,22 @@ def final_at(t):
     return path_point(A_DEP, STOP, d)
 
 
+V_SPINAL = 60.0                      # km/s: the Astrid's spinal slug (WN §2)
+T_FIRE = hours("T+7:54:40")
+
+
+def _spinal():
+    """The Astrid fires from rest and leads the moving monitor: where it fires from, the hit, the impact time."""
+    ast, t = off_zenith(T_FIRE, *ASTRID), T_FIRE
+    for _ in range(50):
+        hit = bw_at(t)
+        t = T_FIRE + math.dist(ast, hit) / V_SPINAL / 3600
+    return ast, hit, t
+
+
+AST_FIRE, HIT, T_HIT = _spinal()
+
+
 # ----------------------------------------------------------------- maps
 class Map:
     def __init__(self, x0, x1, y0, y1, scale, pad=12):
@@ -491,9 +540,9 @@ def map_a():
     net = final_at(hours("T+6:40:00"))
     m.curve(SKERRY, (-170_000, 95_000), net, "m-kin")
     m.mark(*net, "m-kindot", "dot", 2)
-    m.curve(SKERRY, (-230_000, 110_000), anchor_at(hours("T+6:52:00")), "m-kin m-thin")
+    m.curve(SKERRY, (-230_000, 110_000), anchor_at(hours("T+7:07:00")), "m-kin m-thin")
     m.text(-150_000, 132_000, "Skerry's 18 rounds · thrown T+0:04–0:54", "m-t m-compt", "middle")
-    m.text(-150_000, 132_000, "five nets on the lane T+6:40–7:30, one ring on Anchor", "m-t m-compt", "middle", 0, 12)
+    m.text(-150_000, 132_000, "five nets on the lane T+6:40–7:20, one ring on Anchor", "m-t m-compt", "middle", 0, 12)
     m.scalebar(100_000, "100,000 km")
     return m.svg(D.MAPS["A"])
 
@@ -610,12 +659,12 @@ def map_d():
     m.text(*pol(11_000, 11), "behind the limb", "m-t m-compt", "start", 9, 12)
     m.mark(*A_DEP, "m-rock", "dot", 3.5)
     m.text(*A_DEP, "Anchor: the pack stays, guarded", "m-t m-lreft", "start", 2, -9)
-    ring = anchor_at(hours("T+6:52:00"))
+    ring = anchor_at(hours("T+7:07:00"))
     m.circle(*ring, 2_400, "m-kin m-thin")
-    m.text(*ring, "Skerry's ring on Anchor, T+6:52", "m-t m-compt", "start", 2, 56)
-    a27 = anchor_at(hours("T+7:27:00"))
-    m.line([a27, b52], "m-missile")
-    m.text_along(a27, b52, "waves: slow birds T+7:07, killers T+7:27 → T+7:53", "m-t m-lreft", 0.03, 13)
+    m.text(*ring, "Skerry's ring on Anchor, T+7:07", "m-t m-compt", "start", 2, 56)
+    a07 = anchor_at(hours("T+7:07:00"))
+    m.line([a07, b52], "m-missile")
+    m.text_along(a07, b52, "waves away T+7:07 and 7:08, land T+7:52 and 7:53", "m-t m-lreft", 0.03, 13)
     m.line([A_DEP, STOP], "m-lref")
     ev = [("T+6:40:00", "T+6:40 Skerry's first net", "start", 4, -9), ("T+6:55:00", "T+6:55 Site 1 fires", "start", 4, -31),
           (fmt_clock(T_TURN * 3600), f"{fmt_clock(T_TURN * 3600)[:-3]} turnover", "middle", 0, -9)]
@@ -645,38 +694,38 @@ def map_e():
     m.text(*pol(15_500, z, b), "Breakwater's zenith", "m-t m-compt", "start", 6, 4)
     b25 = bw_at(hours("T+7:25:00"))
     m.mark(*b25, "m-comp", "dia", 2.6)
-    m.text(*b25, "Breakwater, T+7:25", "m-t m-compt", "start", 7, 4)
+    m.text(*b25, "Breakwater, T+7:25", "m-t m-compt", "middle", 0, -10)
     path = [final_at(hours(f"T+7:{mm:02d}:00")) for mm in range(10, 52)] + [STOP]
     m.line(path, "m-lref")
     f25, f31 = final_at(hours("T+7:25:00")), final_at(hours("T+7:31:00"))
     m.line([b25, f31], "m-kin")
-    m.text(-3_000 + (b25[0] + f31[0]) / 2, 2_600 + (b25[1] + f31[1]) / 2, "64 missiles at the Extenuating", "m-t m-compt", "middle")
+    m.text_along(f31, b25, "64 missiles at the Extenuating", "m-t m-compt", 0.1, 13)
     for p, lab, dy in ((f25, "fleet, T+7:25", -9), (f31, "umbrella, T+7:31", 17)):
         m.mark(*p, "m-lreff", "dot", 2.4)
         m.text(*p, lab, "m-t", "middle", 0, dy)
     m.mark(*STOP, "m-lreff", "sq", 3)
     m.text(*STOP, f"escorts stop, {ESCORTS[0]:,} km", "m-t m-lreft", "end", -8, 14)
-    ast = off_zenith(hours("T+7:54:40"), *ASTRID)
-    hit = bw_at(hours("T+7:57:44"))
+    ast, hit = AST_FIRE, HIT
     shot_dir = bearing(ast, hit)
     m.mark(*ast, "m-lreff", "sq", 3.6)
     m.text(*ast, f"Astrid, stopped {ASTRID[0]:,} km out", "m-t m-lreft", "end", -7, 14)
     m.line([ast, hit], "m-spinal")
     m.line([pol(8_000, shot_dir, hit), pol(60_000, shot_dir, hit)], "m-ghost")
     m.text(*pol(18_000, shot_dir, hit), f"a spinal miss passes {line_miss(ast, hit) - 6_400:,.0f} km above Maren",
-           "m-t m-muted", "end", 0, 14)
-    a27 = anchor_at(hours("T+7:27:00"))
-    come = bearing(b, a27)
+           "m-t m-muted", "end", 0, -8)
+    a_kill = anchor_at(hours("T+7:08:30"))
+    come = bearing(b, a_kill)
     m.line([pol(40_000, come, b), b], "m-missile")
     m.line([pol(8_000, come + 180, b), pol(60_000, come + 180, b)], "m-ghost")
     m.text(*pol(26_000, come, b), f"waves from Anchor, {angdiff(come, z):.0f}° off the zenith", "m-t m-lreft", "start", 0, -8)
-    m.text(b[0] + 18_700, pol(18_000, come + 180, b)[1], f"misses pass {line_miss(a27, bw_at(hours('T+7:52:00'))):,.0f} km from Maren",
+    miss = line_miss(anchor_at(hours("T+7:07:00")), bw_at(hours("T+7:52:00")))
+    m.text(b[0] + 18_700, pol(18_000, come + 180, b)[1], f"misses pass {miss:,.0f} km from Maren",
            "m-t m-muted", "end", 0, 16)
     m.mark(*b, "m-comp", "dia", 4.2)
     m.text(*b, "Breakwater", "m-t m-compt", "middle", 0, -12)
     m.text(b[0] + 18_500, b[1] - 13_500, "At Breakwater: spend wave T+7:52:00; kill wave and Casaba jets",
            "m-t m-muted", "end", 0, -12)
-    m.text(b[0] + 18_500, b[1] - 13_500, "T+7:53:30; spinal fired T+7:54:40, impact T+7:57:44.", "m-t m-muted", "end")
+    m.text(b[0] + 18_500, b[1] - 13_500, f"T+7:53:30; spinal fired T+7:54:40, impact {fmt_clock(T_HIT * 3600)}.", "m-t m-muted", "end")
     m.scalebar(5_000, "5,000 km")
     return m.svg(D.MAPS["E"])
 
@@ -859,7 +908,7 @@ def rule_chips(rules):
     out = []
     for r in rules:
         doc = rule_doc(r)
-        out.append(f'<a class="chip r-{doc}" href="{DOC_BASE}#{doc}-{r}" target="_blank" rel="noopener">{r}</a>')
+        out.append(f'<a class="chip r-{doc}" href="{DOC_BASE}#{rule_anchor(r)}" target="_blank" rel="noopener">{r}</a>')
     return "".join(out)
 
 
@@ -907,8 +956,21 @@ def render_budget():
         fr = sum(s["dur"] for s in shots) * FPS
         hrs = fr * SEC_PER_FRAME[c] / 3600
         total += hrs
+        if c in D.MEASURED:
+            note = f"{D.MEASURED[c]:g} s/frame, measured"
         rows.append((c, name, note, [s["n"] for s in shots], fr, hrs))
     return rows, total
+
+
+def gate_text():
+    """Where the budget stands against the gate, and each class's break-even cost."""
+    rows, total = render_budget()
+    cap = D.GATE_HOURS / (1 + MARGIN)
+    even = [(c, (cap - (total - h)) * 3600 / fr) for c, _, _, _, fr, h in sorted(rows, key=lambda r: -r[5]) if h >= 5]
+    state = "measured" if D.MEASURED else "estimated"
+    return (f"The gate: {total * (1 + MARGIN):,.0f} h with the allowance ({state}), against {D.GATE_HOURS} h, so "
+            f"{D.GATE_HOURS - total * (1 + MARGIN):,.0f} h to spare. Break-even for one class on its own, the others as they stand: "
+            + ", ".join(f"{c} {x:,.0f} s/frame ({'measured' if c in D.MEASURED else 'estimate'} {SEC_PER_FRAME[c]:g})" for c, x in even) + ".")
 
 
 def sets_text():
@@ -988,6 +1050,7 @@ def build_html():
 <section id="shots"><h2>Shot list</h2>{"".join(acts_html)}</section>
 <section id="production"><h2>Production</h2>
 <div class="grid2"><div class="card"><h3>Render budget</h3><p class="action">{E(D.RENDER_NOTE)} The ceiling is a week (168 h) per full pass.</p>
+<p class="action">{E(gate_text())}</p>
 <div class="tbl"><table><thead><tr><th>Class</th><th>Kind</th><th>Cost</th><th>Shots</th><th>Frames</th><th>Time</th></tr></thead><tbody>{brow}
 <tr><td></td><td><b>Total</b></td><td></td><td class="mono">{len(D.SHOTS)}</td><td class="mono">{FRAMES:,}</td><td class="mono"><b>{total:,.0f} h</b></td></tr>
 <tr><td></td><td>With {MARGIN:.0%} for re-renders</td><td></td><td></td><td></td><td class="mono"><b>{total * (1 + MARGIN):,.0f} h</b></td></tr></tbody></table></div></div>
@@ -1103,13 +1166,28 @@ def write_assets():
         for a in ids:
             name, status, concept, note = D.ASSETS[a]
             near = f"shot {CLOSEST[a][0]}: {CLOSEST[a][1]}, {CLOSEST[a][2]}" if a in CLOSEST else ""
-            shots = "every 3D shot" if a in ("WORLD", "PROXY") else (ranges(used[a]) or "—")
+            if a in ("WORLD", "PROXY"):
+                shots = "every 3D shot"
+            elif a == "MSL":
+                shots = f"inside FX-SWARM ({ranges(used['FX-SWARM'])})"
+            else:
+                shots = ranges(used[a]) or "—"
             L.append(f"| {a} | {name} | {status} | {'yes' if concept else ''} | {near} | {shots} | {note} |")
         L.append("")
-    unused = [a for a, v in used.items() if not v and a not in ("PROXY",)]
+    unused = [a for a, v in used.items() if not v and a not in ("PROXY", "MSL")]
     if unused:
         L += ["Not used by any shot yet: " + ", ".join(unused) + ".", ""]
-    (ROOT / "ASSET_REQUESTS.md").write_text("\n".join(L))
+    # The modelling session renders, so it gets the budget, the gate and the plan too.
+    budget, total = render_budget()
+    L += ["## Render budget and the gate", "",
+          "| Class | Kind | Cost | Shots | Frames | Time |", "|---|---|---|---|---|---|"]
+    L += [f"| {c} | {n} | {note} | {ranges(ns) or '—'} | {fr:,} | {h:,.1f} h |" for c, n, note, ns, fr, h in budget]
+    L += [f"| | **Total** | | {len(D.SHOTS)} shots | {FRAMES:,} | **{total:,.1f} h** |",
+          f"| | With {MARGIN:.0%} for re-renders | | | | **{total * (1 + MARGIN):,.1f} h** |", "",
+          D.RENDER_NOTE + " The ceiling is a week (168 h) per full pass.", "", gate_text(), "",
+          "## Production plan", ""]
+    L += [f"- **{k}:** {v}" for k, v in [("Sets", sets_text()), ("Batches", batches_text())] + list(D.PRODUCTION_PLAN)]
+    (ROOT / "ASSET_REQUESTS.md").write_text("\n".join(L) + "\n")
 
 
 def main():
@@ -1133,6 +1211,9 @@ def main():
     print(f"{len(D.SHOTS)} shots, {RUNTIME} s ({RUNTIME // 60}:{RUNTIME % 60:02d}), {FRAMES} frames; "
           f"render estimate {total:,.0f} h, {total * (1 + MARGIN):,.0f} h with margin")
     print(f"final approach {FINAL_KM:,.0f} km, turnover {fmt_clock(T_TURN * 3600)}, stop {fmt_clock(T_STOP * 3600)}")
+    print(f"spinal: {math.dist(AST_FIRE, HIT):,.0f} km in {(T_HIT - T_FIRE) * 3600:.1f} s, impact {fmt_clock(T_HIT * 3600)}, "
+          f"a miss passes {line_miss(AST_FIRE, HIT) - 6_400:,.0f} km above Maren")
+    print(gate_text())
     for c, name, _, ns, fr, h in budget:
         print(f"  class {c:2s} {len(ns):2d} shots {fr:5,d} frames {h:6.1f} h")
     print("checks: " + ("all clear" if not NOTES else f"{len(NOTES)} to look at"))

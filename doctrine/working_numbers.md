@@ -323,15 +323,15 @@ Laser kills are integrated over the missile's run-in: each kill takes the burn t
 
 A 16-mount battery therefore kills roughly 3 missiles a second while the wave arrives, and nothing that detonates outside ~5 km: a Casaba standing off at 2-4 km must be killed by the clouds at 5-30 km or by the lasers before that.
 
-**A ground site against a wave aimed at an orbital target.** The table above assumes missiles that run in to ~50 km of the laser. A wave aimed at a monitor in synchronous orbit over the site (42,164 km) never comes closer than ~35,800 km, where one 2 GW site needs ~12-15 s per flank kill. One site, a wave closing at 80 km/s from 120,000 km out:
+**A ground site against a wave aimed at an orbital target.** The table above assumes missiles that run in to ~50 km of the laser. A wave aimed at a monitor in synchronous orbit over the site (42,164 km) never comes closer than ~35,800 km, where one 2 GW site needs ~12-15 s per flank kill. One site, a wave from 120,000 km out, closing at a killer's 80 km/s or on the multi-packs' slow profile (~45 km/s), which Tidebreak's waves fly whole so that decoys and killers can't be told apart (LREF O3):
 
-| Wave arrives this far off the target's zenith | Kills by the site |
-|---|---|
-| 0° | 1 |
-| 15° | 5 |
-| 30° | 9 |
-| 48° | 15 |
-| 90° | 33 |
+| Wave arrives this far off the target's zenith | Kills by the site, 80 km/s | Kills by the site, 45 km/s |
+|---|---|---|
+| 0° | 1 | 1 |
+| 15° | 5 | 8 |
+| 30° | 9 | 17 |
+| 49° | 16 | 28 |
+| 90° | 33 | 58 |
 
 So against Breakwater, Site 1 matters little whatever the angle: the angle is chosen to keep misses and wreckage off the planet (LREF O9), not to hide from the site. A neighbouring site sees such a wave only early in its flight, far off and nearly nose-on, so it adds a handful of kills at most.
 

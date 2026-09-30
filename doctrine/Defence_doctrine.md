@@ -14,7 +14,7 @@
 
 **Mission:** deny an attacker orbital control of Maren, keep its population and its foundries safe, and make any assault cost more than it can win: in ships, in magazines, and in time far from its tender.
 
-**Who they are [H-01, decided].** The Maren Compact is a human splinter faction that broke from the GUN and allied itself with the AI. Artificial intelligence was outlawed after it first went rogue; a later government licensed Charron Innovations to try again, and it went rogue a second time, in the Charron Innovations incident [User]. Maren is a manufacturing world, and its foundries now arm the AI. Humans crew *Breakwater* and the laser sites; the AI runs the drones, the hidden emplacements and the foundries. The lore's extrasolar wars are the precedent for humans fighting the GUN (the dreadnought was built for "the final extrasolar war" [Lore]). Four things follow:
+**Who they are [H-01, decided].** The Maren Compact is a human splinter faction that broke from the GUN and allied itself with the AI. Artificial intelligence was outlawed after it first went rogue; a later government licensed Charon Innovations to try again, and it went rogue a second time, in the Charon Innovations incident [User]. Maren is a manufacturing world, and its foundries now arm the AI. Humans crew *Breakwater* and the laser sites; the AI runs the drones, the hidden emplacements and the foundries. The lore's extrasolar wars are the precedent for humans fighting the GUN (the dreadnought was built for "the final extrasolar war" [Lore]). Four things follow:
 - **The same technology base.** The same four weapon families, the same physics, the same kind of ships, so the two doctrines are symmetric.
 - **It knows LREF doctrine.** Its officers read the same manuals, so its doctrine is written against LREF habits: the destroyer net and EMCON (HO9, HD9), the hedgehog pack (HD5, HD10), the shield park (HO8) and the braking burn (HO1).
 - **No relief is coming.** It can't wait the LREF out. It has to make the assault cost more than it can win, and it can't afford to lose *Breakwater*.
@@ -210,7 +210,7 @@ This is the defender's side of the scenario the storyboard will use in phase 2. 
 
 | ID | Assumption | Note |
 |---|---|---|
-| H-01 ★ | The Maren Compact is a human splinter faction allied with the AI, holding the manufacturing world of Maren, with no warp fleet at Maren and no relief coming; the system defence must hold alone. Humans crew *Breakwater* and the sites; the AI runs the drones, emplacements and foundries | Decided at sign-off (`OPEN_QUESTIONS.md` Q1); the AI alliance and the Charron Innovations incident added by the user in phase 2 |
+| H-01 ★ | The Maren Compact is a human splinter faction allied with the AI, holding the manufacturing world of Maren, with no warp fleet at Maren and no relief coming; the system defence must hold alone. Humans crew *Breakwater* and the sites; the AI runs the drones, emplacements and foundries | Decided at sign-off (`OPEN_QUESTIONS.md` Q1); the AI alliance and the Charon Innovations incident added by the user in phase 2 |
 | H-02 | Maren is Earth-like: 6,400 km radius, 24 h day, populated | Matches the existing planet shader [Model] |
 | H-03 | Four ground laser sites, 90° apart in longitude; 2 GW, 10 m, 1.06 µm; 70 % atmospheric transmission | Grid-powered, ocean-cooled |
 | H-04 | Breakwater sits in synchronous orbit (42,000 km) above Site 1 | Keeps the monitor inside a laser umbrella at all times |

@@ -128,7 +128,7 @@ Rule IDs refer to `doctrine/LREF_doctrine.md` (O, D, A) and `doctrine/Defence_do
 
 ## Act P: Prologue
 
-An after action report on the stars: the outlawed AI and the Charron Innovations incident, the AI-allied Maren Compact and its foundries, the mission, the restriction that shapes the battle, and the records the film is collated from.
+An after action report on the stars: the outlawed AI and the Charon Innovations incident, the AI-allied Maren Compact and its foundries, the mission, the restriction that shapes the battle, and the records the film is collated from.
 
 ### 1. The record
 
@@ -152,7 +152,7 @@ An after action report on the stars: the outlawed AI and the Charron Innovations
 - **Camera:** Title card · an after action report, white monospace text over a still starfield (HUD insert)
 - **Viewer sees:** The same stars. The header gives way to the report's first numbered paragraph.
 - **Action:** Paragraph 1, the background the whole war rests on, in the report's flat past tense: the AI, outlawed after it went rogue, and the one exemption that went rogue again.
-- **On screen:** `1. BACKGROUND. Artificial intelligence was outlawed after it first went rogue. A later government licensed Charron Innovations to try again; it went rogue a second time, in the Charron Innovations incident.`
+- **On screen:** `1. BACKGROUND. Artificial intelligence was outlawed after it first went rogue. A later government licensed Charon Innovations to try again; it went rogue a second time, in the Charon Innovations incident.`
 - **Doctrine:** 
 - **VFX:** Report text, slow fades
 - **Rig:** none

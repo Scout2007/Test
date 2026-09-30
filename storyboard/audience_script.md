@@ -11,7 +11,7 @@ Sound: Silence; a low tone under the text.
 ## 2. (14 s) · clock no clock yet
 
 The same stars. The header gives way to the report's first numbered paragraph.
-On screen: “1. BACKGROUND. Artificial intelligence was outlawed after it first went rogue. A later government licensed Charron Innovations to try again; it went rogue a second time, in the Charron Innovations incident.”
+On screen: “1. BACKGROUND. Artificial intelligence was outlawed after it first went rogue. A later government licensed Charon Innovations to try again; it went rogue a second time, in the Charon Innovations incident.”
 Sound: The low tone holds.
 
 ## 3. (20 s) · clock no clock yet

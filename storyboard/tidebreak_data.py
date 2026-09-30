@@ -138,7 +138,7 @@ FLEET = [
     ("Nauvoo", "Tender", "Holds the shield park 450,000 km out; the T-SEC transports wait there for the sky (A-13)."),
 ]
 DEFENDERS = [
-    ("The AI", "Outlawed artificial intelligence", "Outlawed after it first went rogue; a later government's licence to Charron Innovations ended in the Charron Innovations incident. Allied with the Compact, it runs Maren's foundries, the drones and the Breakers' emplacements. It has no voice in the film."),
+    ("The AI", "Outlawed artificial intelligence", "Outlawed after it first went rogue; a later government's licence to Charon Innovations ended in the Charon Innovations incident. Allied with the Compact, it runs Maren's foundries, the drones and the Breakers' emplacements. It has no voice in the film."),
     ("Breakwater", "Warpless monitor, crewed by the Compact", "Synchronous orbit over Site 1. Its guns never get a shot (the LREF stays outside their no-escape range); it fires its 64 missiles at the last ECW destroyer."),
     ("Site 1 (of 4)", "Ground laser, 2 GW", "The only site that sees Breakwater's sky. Dazzles and burns from the moment the fleet leaves Anchor's shadow; never struck (ROE)."),
     ("Skerry", "Moon complex", "Throws three rounds every ten minutes from T+0:04 until wave one kills it: five nets on the fleet's lane and one ring of canister clouds on Anchor. Its laser dazzles the fleet; its depot flushes 40 drones at the shield park."),
@@ -300,7 +300,7 @@ PRODUCTION_PLAN = [
 ]
 
 ACTS = [
-    ("P", "Prologue", "An after action report on the stars: the outlawed AI and the Charron Innovations incident, the AI-allied Maren Compact and its foundries, the mission, the restriction that shapes the battle, and the records the film is collated from."),
+    ("P", "Prologue", "An after action report on the stars: the outlawed AI and the Charon Innovations incident, the AI-allied Maren Compact and its foundries, the mission, the restriction that shapes the battle, and the records the film is collated from."),
     ("I", "Arrival", "The fleet arrives slow, parks its shields, reads the system, and strikes Skerry first because Skerry's laser can burn its fins."),
     ("II", "The Breakers", "Hours of coasting, then the debris ring: the ambush, the Canterbury, the Astrid's answer, the drones and the Normandy."),
     ("III", "Anchor", "Turnover into the lee of a rock over Site 1: the sweep, the heat, the fin hit, the frigate, the lance and the broadside."),
@@ -408,7 +408,7 @@ shot(act="P",
      see="The same stars. The header gives way to the report's first numbered paragraph.",
      action="Paragraph 1, the background the whole war rests on, in the report's flat past tense: the AI, outlawed after it went rogue, and the one exemption that went rogue again.",
      comm=[],
-     hud=["1. BACKGROUND. Artificial intelligence was outlawed after it first went rogue. A later government licensed Charron Innovations to try again; it went rogue a second time, in the Charron Innovations incident."],
+     hud=["1. BACKGROUND. Artificial intelligence was outlawed after it first went rogue. A later government licensed Charon Innovations to try again; it went rogue a second time, in the Charon Innovations incident."],
      rules=[],
      vfx="Report text, slow fades",
      rig=[],
@@ -417,7 +417,7 @@ shot(act="P",
      cost="E",
      map="A",
      render=None,
-     sketch="panel(['<text x=\"120\" y=\"40\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">1. BACKGROUND</text>', '<text x=\"120\" y=\"50\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">ARTIFICIAL INTELLIGENCE WAS OUTLAWED</text>', '<text x=\"120\" y=\"60\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">THE CHARRON INNOVATIONS INCIDENT</text>'], 2)")
+     sketch="panel(['<text x=\"120\" y=\"40\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">1. BACKGROUND</text>', '<text x=\"120\" y=\"50\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">ARTIFICIAL INTELLIGENCE WAS OUTLAWED</text>', '<text x=\"120\" y=\"60\" font-size=\"4.2\" font-family=\"monospace\" fill=\"#e4e8ee\" text-anchor=\"middle\">THE CHARON INNOVATIONS INCIDENT</text>'], 2)")
 shot(act="P",
      title="Maren",
      dur=20,

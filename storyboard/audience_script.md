@@ -30,7 +30,7 @@ Sound: Silence; a sub-bass drop as the bubble collapses.
 
 Close along the warship's forward ring: its emitters fade from blue to dark, and small thrusters puff.
 > **ACTUAL · ASTRID:** All fourteen through. All on station.
-Sound: Ticking metal and RCS thumps through the truss.
+Sound: Ticking metal and thruster thumps through the truss.
 
 ## 6. (8 s) · clock T+0:00:10 → T+0:01:06 (the clock runs fast)
 
@@ -57,7 +57,7 @@ A far larger warship, well over a kilometre long, slews a huge dish toward the p
 On screen: “L.R.E.F.S. ASTRID · FLAGSHIP”
 Sound: Silence.
 
-## 10. (15 s) · clock T+0:04:10 → T+0:04:25 (the clock runs fast)
+## 10. (15 s) · clock T+0:04:10
 
 A grainy telescope feed on a grey moon: a thread of light runs along its dark edge, three times. A plot marker tags each launch with an arrival time. Then a white glare floods the feed.
 On screen: “SKERRY · MAREN'S MOON” · “ARRIVE T+6:40”
@@ -135,7 +135,7 @@ Sound: Capacitor whine and the yoke's servo through the hull, one tick per pulse
 ## 22. (4 s) · clock T+3:45:04
 
 Along the cruiser's flank: flares and chaff bloom, a smoke screen spreads, gun tracers streak out, and incoming missiles burst one by one.
-Sound: Silence (drone camera); the score's pulse.
+Sound: Silence; the score's pulse.
 
 ## 23. (2 s) · clock T+3:52:00
 
@@ -143,7 +143,7 @@ A buried gun heaves out of a rock and fires a burst of slugs straight down the f
 > **EXTENUATING:** Railgun on the rock! Canterbury, jink!
 Sound: Silence.
 
-## 24. (2 s) · clock T+3:52:05
+## 24. (2 s) · clock T+3:52:05 → T+3:52:13 (the clock runs fast)
 
 Through a long lens: the sensor destroyer from before, fifty kilometres off, jinking hard on its thrusters.
 Sound: Silence.
@@ -172,7 +172,7 @@ Behind three small warships: on the rocks ahead, dark shells crack open and swar
 > **NORMANDY:** Drones waking on the rocks. Dozens.
 Sound: A rising whine in the score.
 
-## 29. (11 s) · clock T+4:14:00 → T+4:14:11 (the clock runs fast)
+## 29. (11 s) · clock T+4:14:00
 
 A tactical plot: a cloud of red drone tracks. A block of them flips to teal and turns on the rest; the red ones keep coming. Labels appear.
 On screen: “LINKED → OURS” · “AUTONOMOUS” · “NET DEGRADED”
@@ -190,9 +190,9 @@ Sound: The dying channel's hiss, then silence.
 
 On the cruiser's back, looking aft: smoke drifts past, the stars wheel as the ship flips end over end, and its main drive lights, pointing toward the planet.
 > **ACTUAL:** Turnover, one ship at a time. Now we brake for Anchor.
-Sound: RCS thumps, then the drive's roar through the hull.
+Sound: thruster thumps, then the drive's roar through the hull.
 
-## 32. (12 s) · clock T+5:08:00 → T+5:08:12 (the clock runs fast)
+## 32. (12 s) · clock T+5:08:00
 
 A zoomed tactical plot: a lumpy rock, its shadow drawn pointing away from a ground-laser marker; two nearby rocks tagged '?'; a heat readout.
 On screen: “ANCHOR” · “SITE 1” · “?” · “?” · “SINK 94%”
@@ -252,9 +252,9 @@ Sound: A crack in the score.
 
 The cruiser rolls, bringing its gun turrets round toward the rock with the buried gun; the turrets still sit clamped in their cradles.
 > **ENDEAVOR:** Roll us. Port guns on that platform.
-Sound: The roll's RCS thumps through the hull.
+Sound: The roll's thruster thumps through the hull.
 
-## 42. (4 s) · clock T+5:14:15
+## 42. (4 s) · clock T+5:14:15 → T+5:14:23 (the clock runs fast)
 
 Close on one gun turret: lids open on rows of amber lights, beacons flash, clamps swing off, the gun lifts onto the rock, and its armoured shell splits and rises; its jaws open. The barrel stays dark.
 Sound: Clunks through the hull: the lids, the clamps, the shell's halves on their stops.
@@ -270,7 +270,7 @@ Through a long lens, the rock with the buried gun, as before: a flash.
 > **ENDEAVOR:** Platform's down.
 Sound: The score.
 
-## 45. (22 s) · clock T+5:40:00 → T+5:40:22 (the clock runs fast)
+## 45. (22 s) · clock T+5:40:00
 
 The master plot: the fleet at the rock; two dotted tracks from it to where the enemy warship will be, labelled with two times; a violet marker for the flagship's firing point; a heat readout.
 On screen: “SPEND 7:52 · KILL 7:53” · “ASTRID” · “SINK 31%”
@@ -312,7 +312,7 @@ Above a huge dark warship, the planet's night side below, glittering with city l
 On screen: “BREAKWATER · MONITOR · NO WARP DRIVE”
 Sound: A low brass sting.
 
-## 51. (13 s) · clock T+7:25:40 → T+7:25:53 (the clock runs fast)
+## 51. (13 s) · clock T+7:25:40
 
 A tactical plot: sixty-four red tracks leave the enemy warship and converge on one friendly ship among the fleet. A second label appears beside the flagship.
 On screen: “BACKUP: ASTRID DIRECT”
@@ -388,7 +388,7 @@ On screen: “SINK 98%”
 > **ENDEAVOR:** Sink's full. Dump the water.
 Sound: A roar through the hull, then a long hiss.
 
-## 63. (11 s) · clock T+8:10:00 → T+8:10:11 (the clock runs fast)
+## 63. (11 s) · clock T+8:10:00
 
 Through a very long lens: the wreck, a glittering smear venting in sunlight over the night side. Then a tactical plot holds alone on two dark channels.
 On screen: “CANTERBURY · NORMANDY: NO CARRIER”

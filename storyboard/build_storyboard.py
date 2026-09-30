@@ -1341,7 +1341,7 @@ def audience_clock(s):
     if s["act"] == "P":
         return "no clock yet"
     t0, t1 = clock_s(s["clock"]), shot_end(s)
-    if t1 is None or t1 - t0 < 10:
+    if t1 is None or (t1 - t0) / s["dur"] < 1.5:
         return fmt_clock(t0)
     return f"{fmt_clock(t0)} → {fmt_clock(t1)} (the clock runs fast)"
 
@@ -1359,7 +1359,8 @@ def write_audience():
             L.append("On screen: " + " · ".join(f"“{h}”" for h in s["hud"]))
         for sp, line in s["comm"]:
             L.append(f"> **{sp}:** {line}")
-        L += [f"Sound: {s['sound']}", ""]
+        heard = re.sub(r"\s*\([^)]*\)", "", s["sound"]).replace("RCS", "thruster")
+        L += [f"Sound: {heard}", ""]
     (SB / "audience_script.md").write_text("\n".join(L) + "\n")
 
 

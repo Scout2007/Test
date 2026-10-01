@@ -12,13 +12,12 @@
 
 ## 1. Mission and the defender's bargain
 
-**Mission:** deny an attacker orbital control of Maren, keep its population and its foundries safe, and make any assault cost more than it can win: in ships, in magazines, and in time far from its tender.
+**Mission:** deny an attacker orbital control of Maren, keep its population and industry safe, and make any assault cost more than it can win: in ships, in magazines, and in time far from its tender.
 
-**Who they are [H-01, decided].** The Maren Compact is a human splinter faction that broke from the GUN and allied itself with the AI. Artificial intelligence was outlawed after it first went rogue; a later government licensed Charon Innovations to try again, and it went rogue a second time, in the Charon Innovations incident [User]. Maren is a manufacturing world, and its foundries now arm the AI. Humans crew *Breakwater*, the laser sites and the two drone-control craft that fly the linked drones; the AI runs the unlinked drones, the hidden emplacements and the foundries. The lore's extrasolar wars are the precedent for humans fighting the GUN (the dreadnought was built for "the final extrasolar war" [Lore]). Four things follow:
+**Who they are [H-01, decided].** The Maren Compact is a human polity that broke away from the GUN. Humans crew *Breakwater*, the laser sites and the two drone-control craft that fly the linked drones; the unlinked drones and the hidden emplacements have no crew and run on their own (HD9). The lore's extrasolar wars are the precedent: human states outside Sol have fought the GUN before (the dreadnought was built for "the final extrasolar war" [Lore]). Three things follow:
 - **The same technology base.** The same four weapon families, the same physics, the same kind of ships, so the two doctrines are symmetric.
 - **It knows LREF doctrine.** Its officers read the same manuals, so its doctrine is written against LREF habits: the destroyer net and EMCON (HO9, HD9), the hedgehog pack (HD5, HD10), the shield park (HO8) and the braking burn (HO1).
 - **No relief is coming.** It can't wait the LREF out. It has to make the assault cost more than it can win, and it can't afford to lose *Breakwater*.
-- **The AI runs what has no crew.** Its unlinked drones and its emplacements fly and fire on their own, with no link to hijack and no override anyone can use, the Compact's own officers included (HD9).
 
 **The bargain.** The defender cannot out-build a GUN expeditionary fleet ship for ship, and it has no warp fleet at Maren [H-01]. So it doesn't fight fleet against fleet in open space. It turns the whole system into the weapon:
 - **ground the attacker has to cross;**
@@ -145,7 +144,7 @@ The network is the defender's soft spot and it knows it. Everything that can run
 | **HD6** | **Spend the cheap things** | Pods, mines, drones and decoys exist to drain the attacker's missiles, heat and time. | — | Unchanged. |
 | **HD7** | **Never hold still** | Breakwater random-walks within its slot and never lets the attacker's heavy guns get inside its no-escape range while its drive works. | Spinal against Breakwater: no-escape 3,600–4,800 km at 0.05 g; 11,000–14,700 km if its drive is crippled (WN §2) | New. Makes the LREF cripple before killing (LREF O10). |
 | **HD8** | **Shape the approach** | The Breakers and the polar gates leave the attacker two ways in. The gates are clear, closer and pre-registered: seeded with sand and mines, covered by the mass driver and lasers. The Breakers look cheaper; make them cost the same, spread over hours. | Gate warp line ~150,000 km against ~300,000 km in the ring plane [H-08] | New. |
-| **HD9** | **Hard nets** | Air-gapped fire control; buried fibre; authenticated laser links; no radio. The AI runs the emplacements and the unlinked drones on pre-loaded autonomous behaviour with no remote override: nobody can order them to stand down, the Compact included. The ECW destroyers can't hijack what has no receiver: "return to sender" works only on drones with links. | — | New. Answers the lore's destroyer threat. |
+| **HD9** | **Hard nets** | Air-gapped fire control; buried fibre; authenticated laser links; no radio. Emplacements and unlinked drones carry pre-loaded autonomous behaviour with no remote override: nobody can order them to stand down, the Compact included. The ECW destroyers can't hijack what has no receiver: "return to sender" works only on drones with links. | — | New. Answers the lore's destroyer threat. |
 | **HD10** | **Weather and horizon** | A ground site covers only the sky above its horizon, and only through clear air. Four dispersed sites, and Skerry's battery, cover each other's gaps. Weather is forecast into the fire plan. | Lethal above ~20° elevation [H-12] | New. |
 
 ---
@@ -210,7 +209,7 @@ This is the defender's side of the scenario the storyboard will use in phase 2. 
 
 | ID | Assumption | Note |
 |---|---|---|
-| H-01 ★ | The Maren Compact is a human splinter faction allied with the AI, holding the manufacturing world of Maren, with no warp fleet at Maren and no relief coming; the system defence must hold alone. Humans crew *Breakwater*, the sites and the drone-control craft; the AI runs the unlinked drones, the emplacements and the foundries | Decided at sign-off (`OPEN_QUESTIONS.md` Q1); the AI alliance and the Charon Innovations incident added by the user in phase 2 |
+| H-01 ★ | The Maren Compact is a human breakaway polity with no warp fleet at Maren and no relief coming; the system defence must hold alone. Humans crew *Breakwater*, the sites and the drone-control craft; the unlinked drones and the emplacements run on their own | Decided at sign-off (`OPEN_QUESTIONS.md` Q1) |
 | H-02 | Maren is Earth-like: 6,400 km radius, 24 h day, populated | Matches the existing planet shader [Model] |
 | H-03 | Four ground laser sites, 90° apart in longitude; 2 GW, 10 m, 1.06 µm; 70 % atmospheric transmission | Grid-powered, ocean-cooled |
 | H-04 | Breakwater sits in synchronous orbit (42,000 km) above Site 1 | Keeps the monitor inside a laser umbrella at all times |

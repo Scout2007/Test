@@ -144,3 +144,23 @@ Each cold read is a fresh agent with no lore. It reads only the builder's audien
 - The page's sketches had stopped drawing: an apostrophe in one sketch broke the whole script. The builder now checks each sketch's quotes and, where node is installed, parses the script.
 - Act IV's timeline band and links had lost their styles when the prologue was added. The styles are now keyed to act names.
 - The round 4 synthesis's revision 5 numbers (121 h, 157 h, 5:55) and its "SINK 63%" on *Site One* describe revision 5 as it stood then. The figures above supersede them.
+
+## After round 5: the user's revision 7
+
+After revision 6b the user asked for cuts: "The introduction is way too long. I want the full thing to be 5 mins max. The dialogue in some parts doesn't feel very military, the two waves of missiles for example. Just forget the whole AI plot line. Keep the intro really simple: collated from the after action report, Operation Tidebreak."
+
+Revision 7 applies that directly. It is the user's own cut, not a review round, and a cold read checks that the story still reads. Everything above this section describes revisions 5 and 6, which still had the AI plot line.
+
+- **Under five minutes.** 64 shots, 4:58 (was 69 shots, 6:49). The render estimate is 111.9 h raw and 145.4 h with the 30 % allowance: 14.6 h under the 160 h gate (was 159.2 h, 0.8 h under). 25 shots lost 1–7 s, and *The picture* gained one second. No 3D shot got longer.
+- **One title card.** *Background*, *Maren*, *Orders*, *Restrictions* and *Sources* are gone.
+  - *The record* is 5 s: "OPERATION TIDEBREAK" over "COLLATED FROM THE AFTER ACTION REPORT".
+  - *End of report* is 3 s: "END OF REPORT", with no RESULT paragraph.
+  - The no-fire rule is now an order in the briefing: "ROE: no fire on the surface." in *The picture* (§13).
+- **Military radio.** The two missile waves are salvo one and salvo two, with launch, TOT and terminal calls: "Salvo one away.", "Salvo two away.", "Salvo two terminal. Three, two—", and the fire plan's label reads "TOT 7:52:00 · 7:53:30". Other lines became calls and reports, such as "Infinity, Actual. Engage Skerry.", "Birds away, one-five-zero." and "Formation, come left two degrees."
+- **No AI plot line.** The AI, Charon Innovations and the foundries are gone from the film, the board and the doctrine (Defence §1, HD9 and H-01).
+  - The Compact is a human polity that broke away from the GUN.
+  - Its uncrewed emplacements and unlinked drones are autonomous, with no remote override (HD9), so the terms are Site One dark and charts of the Breakers' mines.
+  - Q18 (how much of the AI to show) is closed.
+- **Builder.** All checks clear. Two things had to change to pass them:
+  - *The picture*'s two lines read at 12.7 characters a second with its HUD labels, so "their" was dropped and "reaches our" became "burns" (11.9).
+  - *The wait* at 5 s needed its time compression restated as ~33×, so the clock still reaches Breakwater's full sun.

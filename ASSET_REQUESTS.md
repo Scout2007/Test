@@ -1,6 +1,6 @@
 # Asset requests
 
-Everything *Operation Tidebreak* (revision 7 · the user's cuts: under five minutes, one title card, no ai plot line, military radio) needs from the modelling session, with the shots that need each item. Generated from `storyboard/tidebreak_data.py`.
+Everything *Operation Tidebreak* (revision 8 · the dialogue review: orders and reports as a fleet net gives them, one name for each thing) needs from the modelling session, with the shots that need each item. Generated from `storyboard/tidebreak_data.py`.
 
 - **Status:** *built* exists; *extend* exists but needs additions; *new* must be made.
 - **Concept first:** per the user's rule, new weapon and ship designs go through concept sheets and the user picks before modelling. Items without reference art are flagged too.

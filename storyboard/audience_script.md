@@ -30,8 +30,8 @@ Sound: The score's distant low thuds, one per exit.
 ## 5. (6 s) · clock T+0:02:00 → T+0:02:42 (the clock runs fast)
 
 From a camera on the gold plate itself: small thrusters fire and the plate backs away from the warship's bow, uncovering the gun turrets and sensors behind it; the rings stay on the ship. Around it, other gold plates hang still in space.
-> **ENDEAVOR:** Nauvoo, shield's yours. Guns clear.
-> **NAUVOO · TENDER:** Copy. We'll hold them.
+> **ENDEAVOR:** Nauvoo, shield's yours. Guns unmasked.
+> **NAUVOO · TENDER:** Copy. Holding them.
 Sound: Clamp bangs through the backplate, then silence.
 
 ## 6. (3 s) · clock T+0:02:45 → T+0:03:15 (the clock runs fast)
@@ -60,8 +60,8 @@ Sound: Soft sensor tones.
 
 A tactical plot, the planet at right: a red diamond parked over a point on the planet; the moon; a wide dotted ring; a line from the fleet toward the planet. Labels appear as each is named.
 On screen: “BREAKWATER” · “SITE 1” · “SKERRY” · “THE BREAKERS”
-> **ACTUAL:** All Tidebreak, Actual. Primary target: warship Breakwater, under Site One's cover.
-> **ACTUAL:** ROE: no fire on the surface. Skerry's laser burns radiators; it dies first.
+> **ACTUAL:** All Tidebreak, Actual. Primary target: warship Breakwater, under Site One's laser.
+> **ACTUAL:** ROE: no fire on the planet. Skerry's laser dies first. Radiators stay in.
 Sound: Sensor tones.
 
 ## 10. (4 s) · clock T+0:18:00
@@ -73,26 +73,26 @@ Sound: Launch cracks through the hull; the camera shakes with each.
 ## 11. (3 s) · clock T+0:19:00
 
 Alongside one of the missiles a minute into its flight: a sleek body turning slowly on a white-hot exhaust needle, the frigate a spark far behind. Ahead, screen right, a thin grey crescent: the moon.
-> **INFINITY · MISSILE FRIGATE:** Birds away, one-five-zero.
+> **INFINITY · MISSILE FRIGATE:** One-fifty birds away.
 Sound: Silence; the score lifts.
 
 ## 12. (6 s) · clock T+0:25:00 → T+0:25:48 (the clock runs fast)
 
 Through a long lens, the whole group: eleven drive plumes light one after another as the ships swing toward the planet and burn; three ships far behind stay dark.
-> **ACTUAL:** All Tidebreak, execute. One g, thirty-four minutes.
+> **ACTUAL:** All Tidebreak, one g, thirty-four minutes. Execute.
 > **ENDEAVOR:** Endeavor, burning.
 Sound: Sub-bass swell.
 
 ## 13. (4 s) · clock T+1:02:00 → T+1:02:20 (the clock runs fast)
 
 Through a very long lens, the grey moon as a thin crescent: pinpricks of white light spark across its dark side.
-> **ASTRID:** Laser and driver down. Eighteen rounds inbound.
+> **ASTRID:** Laser and driver down. Fifteen more inbound.
 Sound: Nothing; a swell of score.
 
 ## 14. (5 s) · clock T+1:10:00 → T+3:20:00 (the clock runs fast)
 
 The cruiser from the opening: four long fins slide out of its hull, glowing dull red, and the camera swings round until they are edge-on to the planet, thin lines. Far behind, the flagship's fins glow like a lantern. The clock runs on through two hours.
-> **ENDEAVOR:** Skerry's blind. Radiators out, edge-on to the planet.
+> **ACTUAL:** All Tidebreak, radiators out, edge-on to Maren.
 Sound: Silence; the score carries the coast.
 
 ## 15. (4 s) · clock T+3:20:00
@@ -149,7 +149,7 @@ Sound: The dying channel's hiss, then silence.
 ## 24. (4 s) · clock T+3:52:38
 
 The flagship in profile, bow to the right: it swings its last few degrees, steadies, and a blue-white flash blooms at its bow and holds.
-> **ACTUAL:** Spinal on the platform.
+> **ACTUAL:** Spinal on that railgun.
 > **ASTRID:** Solution. Firing.
 Sound: A sub-bass punch.
 
@@ -157,7 +157,6 @@ Sound: A sub-bass punch.
 
 The rock with the buried gun, from the same angle as before. The clock jumps almost two minutes, and the rock erupts.
 > **ASTRID:** Splash.
-> **ASTRID:** That's for Canterbury.
 Sound: A delayed boom in the score.
 
 ## 26. (4 s) · clock T+4:10:00 → T+4:12:00 (the clock runs fast)
@@ -191,14 +190,14 @@ Sound: thruster thumps, then the drive's roar through the hull.
 
 A zoomed tactical plot: a lumpy rock, its shadow drawn pointing away from a ground-laser marker; two nearby rocks tagged '?'; a heat readout.
 On screen: “ANCHOR” · “SITE 1” · “?” · “?” · “ENDEAVOR HEAT 94%”
-> **ACTUAL:** Anchor. Into her lee, out of Site One's sight.
+> **ACTUAL:** Anchor. Into the lee, out of Site One's sight.
 > **ENDEAVOR:** Heat sink at nine-four. Need to vent.
 Sound: Sensor tones.
 
 ## 31. (4 s) · clock T+5:09:00 → T+5:10:20 (the clock runs fast)
 
 Low over the rock's surface, in darkness: the cruiser settles into the rock's shadow. Small craft sweep the rock; a flash lights its far edge from behind. Far off, shells burst on nearby rocks.
-> **DONNAGER · GUN FRIGATE:** Rocks done. Moonlets next.
+> **DONNAGER · GUN FRIGATE:** One mine. Moonlets next.
 Sound: Silence.
 
 ## 32. (4 s) · clock T+5:12:00 → T+5:12:20 (the clock runs fast)
@@ -216,7 +215,7 @@ Sound: Silence.
 ## 34. (3 s) · clock T+5:13:01 → T+5:13:16 (the clock runs fast)
 
 The same stern view, a large clock in frame: the fins start to crawl back in.
-> **ENDEAVOR:** Launch, four hundred klicks! Radiators in!
+> **ENDEAVOR:** Railgun, four hundred klicks! Radiators in!
 Sound: The call; alarms; the fins' groan.
 
 ## 35. (3 s) · clock T+5:13:16
@@ -235,7 +234,7 @@ Sound: The hit through the hull.
 ## 37. (2 s) · clock T+5:13:53
 
 Close on the cruiser's nose: four channels glow violet-white.
-> **ENDEAVOR:** Forty-five klicks. Lance her.
+> **ENDEAVOR:** Forty-five klicks. Lancing her.
 Sound: A rising electric whine through the hull.
 
 ## 38. (2 s) · clock T+5:13:55
@@ -246,7 +245,7 @@ Sound: A crack in the score.
 ## 39. (3 s) · clock T+5:14:00 → T+5:14:15 (the clock runs fast)
 
 The cruiser rolls, bringing its gun turrets round toward the rock that just fired; the turrets still sit clamped in their cradles.
-> **ENDEAVOR:** Roll to port. Batteries on that gun.
+> **ENDEAVOR:** Rolling to port. Engaging that gun.
 Sound: The roll's thruster thumps through the hull.
 
 ## 40. (4 s) · clock T+5:14:15 → T+5:14:23 (the clock runs fast)
@@ -270,13 +269,14 @@ Sound: The score.
 The master plot: the fleet at the rock; the planet's shadow drawn as a dark band with the enemy warship inside it; two dotted tracks from the rock to where the warship will be, labelled with two times; then a solid track from the rock to a violet marker short of the enemy, the flagship's firing point; a heat readout.
 On screen: “TOT 7:52:00 · 7:53:30” · “ASTRID” · “ENDEAVOR HEAT 31%”
 > **ACTUAL:** Missile frigates fire from here; Donnager, Wallfish, guard them. Rest, on me.
-> **ACTUAL:** First salvo decoys her point defence; second, forty Casabas, kills her drive.
+> **ACTUAL:** Salvo one draws her point defence; salvo two cuts her drive.
+> **ACTUAL:** Astrid takes the kill.
 Sound: Sensor tones; the score gathers.
 
 ## 44. (7 s) · clock T+6:40:00 → T+6:42:20 (the clock runs fast)
 
 Through a long lens from a destroyer: ahead, drones' lamps light a spreading cloud of glittering pellets; a small warship's drive angles off and it slides aside.
-> **EXTENUATING:** Pellet cloud dead ahead. Skerry's rounds, on time.
+> **EXTENUATING:** Pellet cloud dead ahead. Skerry's first rounds.
 > **ACTUAL:** Formation, come left two degrees.
 Sound: Silence; the score ticks.
 
@@ -302,7 +302,7 @@ Sound: Silence.
 ## 48. (4 s) · clock T+7:25:00 → T+7:25:40 (the clock runs fast)
 
 Above a huge dark warship: a dark shape against the planet's night side, which glitters with city lights. No sunlight: the ship is edged by a faint, cold moonlight, a thin red rim of light lies along the planet's edge, and rows of small lit ports run along its flank. Its turrets track but stay silent. Rows of cell doors open and missiles ripple out, their plumes lighting its hull. Far along its orbit, points of light wake.
-On screen: “BREAKWATER · COMPACT MONITOR · NO WARP DRIVE”
+On screen: “BREAKWATER · MAREN COMPACT · NO WARP DRIVE”
 Sound: A low brass sting.
 
 ## 49. (10 s) · clock T+7:25:40
@@ -310,7 +310,8 @@ Sound: A low brass sting.
 A tactical plot: sixty-four red tracks leave the enemy warship and converge on one friendly ship among the fleet, now far out from the rock.
 > **ASTRID:** Vampires, sixty-four! All on Extenuating!
 > **EXTENUATING:** She's after our guidance.
-> **ACTUAL:** Astrid, cover Extenuating; you're backup guidance.
+> **ACTUAL:** Astrid, cover Extenuating; take backup guidance.
+> **ASTRID:** Wilco.
 Sound: Sensor tones; the score tightens.
 
 ## 50. (3 s) · clock T+7:31:00
@@ -329,7 +330,7 @@ Sound: The lenses' capacitor whine through the hull.
 ## 52. (4 s) · clock T+7:52:00
 
 Through a long lens from the flagship, just off the planet's faint red rim: a sparkle of hundreds of tiny flashes, and among them a few larger bursts.
-> **EXTENUATING:** Point defence lit. Salvo two going round.
+> **EXTENUATING:** Point defence lit. Steering salvo two round it.
 Sound: The score.
 
 ## 53. (3 s) · clock T+7:53:14 → T+7:53:28 (the clock runs fast)
@@ -352,13 +353,13 @@ Sound: The comm channels white out, then silence.
 ## 56. (5 s) · clock T+7:54:00
 
 The warship hangs dead-engined in the dark over the planet's night side, venting from glowing wounds, its turrets still tracking.
-> **ACTUAL:** Breakwater, Tidebreak. Surrender or abandon ship.
+> **ACTUAL:** Breakwater, surrender or abandon ship. Thirty seconds.
 Sound: Silence where the answer should be.
 
 ## 57. (3 s) · clock T+7:54:38
 
 The flagship end-on in the dark, picked out by its running lights and small thruster puffs as it settles; then a blue-white bloom lights its kilometre-long barrel and fills the frame.
-> **ACTUAL:** Astrid, fire.
+> **ACTUAL:** Astrid, engage.
 Sound: Everything drops out.
 
 ## 58. (5 s) · clock T+7:54:41 → T+7:57:26 (the clock runs fast)
@@ -383,7 +384,7 @@ Sound: A roar through the hull, then a long hiss.
 
 Through a very long lens: the wreck, a glittering smear venting in sunlight over the night side. Then a tactical plot holds alone on two dark channels.
 On screen: “CANTERBURY · NORMANDY: NO CARRIER”
-> **EXTENUATING:** Maren is requesting terms.
+> **EXTENUATING:** Maren Compact requesting terms.
 > **ACTUAL:** Site One goes dark, and they chart their mines.
 Sound: The score, low.
 
@@ -396,7 +397,7 @@ Sound: The score falls away.
 ## 63. (5 s) · clock T+8:24:03
 
 The cruiser end-on against the night side's city lights, its nose toward the planet: it runs out three glowing fins in a broken cross, a stump where the fourth was. Cut to black under the last line.
-> **ACTUAL:** Nauvoo, Actual. Bring the shields in. T-SEC, you're next.
+> **ACTUAL:** Nauvoo, Actual. Bring the shields in. T-SEC, you land next.
 Sound: The score resolves; then silence.
 
 ## 64. (3 s) · clock no clock

@@ -68,7 +68,8 @@ def build():
         if h.name == "h3" and text.startswith("Option"):
             h["class"] = ["opt"]
         if h.name == "h2" or h.get("class") == ["opt"]:
-            label = re.split(r" \(|: | — ", text)[0] if h.name == "h3" else text.split(" (")[0]
+            em = h.find("em")
+            label = (f"{text.split()[1].rstrip(':')} · {em.get_text()}" if h.name == "h3" and em else text.split(" (")[0])
             cls = ' class="sub"' if h.name == "h3" else ""
             toc.append(f'<a href="#{sid}"{cls}>{html.escape(label)}</a>')
     for t in soup.find_all("table"):

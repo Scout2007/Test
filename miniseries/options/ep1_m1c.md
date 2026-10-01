@@ -1,137 +1,116 @@
-# Ep 1 · The M-1C twin railcannon (T−9)
+# Ep 1 · M-1C twin railcannon (T−9)
 
-Fixed for all three: the subject, 50–70 s, and the ending: the 5 s series tag (the film's title card; the clock rolls T−10 to T−9 over [release date]; the card's low tone), then the platform end card (+5 s, outside the runtime: Ep 2 (T−8), the playlist, the JCB and Sir_Lazz credit). The series look rules hold (invisible beams, blue only in the bore pulse, heat only on the fins' radiator faces, vacuum silent unless heard through a hull or an instrument); the "nearly 100 meter" barrel [P1 §6] is never measured on screen.
+Three separate events with one idea each. **A** is a factory acceptance shot at a fixed plate, seen on locked range cameras: the idea is *the wait*. **B** is a live-fire exercise at a target drone that keeps sidestepping, heard on the gun crew's own loop: the idea is *a slug can't turn, so the gun waits for the range to shrink*. **C** is one shot on a high-speed camera at the muzzle, with no speech: the idea is *how little time the gun takes to do its work*. They differ in place (a rock range, open space, a lab playback window), in people (range control, a gun crew, nobody) and in what the picture is about (the pause after the shot, the miss, the inside of the bore).
 
-**Q12:** 8 frames at 24 fps is the real ~8 ms filmed at 1,000 fps (×41.7 slower), so each option makes the film's 0.33 s bore pulse honest. **Q15:** all render the current `split` until the pick. **Render:** frames × class (2D 2 s; small subject on black 15 s; Endeavor close-up 45 s; heavy FX 200 s); held frames once.
-
-## Option A: *Acceptance Trial, Run 4*, weapons-test footage (60 s)
-
-### 1. Concept
-A declassified range record of one acceptance run: four locked cameras, one flat voice, nothing explained. It suits the M-1C because its story is a wait (a shot under a frame, four seconds of nothing, fifteen of cooling), and a test record shows a wait straight.
-
-### 2. Style bible
-- **Frame.** 4:3, 1440×1080: a 2×2 quad of locked cells for waking and cooling, one cell full-frame for the shot, replay and tracker. Three lamp colours: amber (powering), green (ready), red (hold).
-- **Camera and lens.** No moves: C1 WIDE 35 mm, C2 JAWS, C3 CREST, C4 PIT (`CAM_RC_*`), a 1,000 mm servo-stepping tracker, a mono high-speed camera (HS-1). None repeats the film's CU 50 or 85 mm.
-- **Grade and texture.** Instrument video, not cinema: lifted grey blacks, green-grey cast, clipped sun on black, fixed-pattern noise, CCD smear, an exposure pump after the flash. HS-1 is mono and cold-cast, so the pulse stays blue-white.
-- **Type and graphics.** White monospace: cell IDs, timecode, a data block (`SLUG 10.0 KG · V₀ 25.0 KM/S · RANGE 100 KM · TOF —`), a DECLASSIFIED stamp, redaction bars over the barrel length.
-- **Sound and voice.** No music. A laser-link range net (no radio), console tones, and the mount's contact mic, the only thing that hears the gun; tracker and replay silent. One voice, range control: level, clipped, never explaining; 56 words.
-- **Edit rhythm.** Cuts on a 1 Hz tick; 4–12 s shots; the grid returns for the wait; in the tracker, three ticks, then nothing where the fourth would be.
-- **Study.** Declassified nuclear-test films; NASA light-gas-gun ranges; US Navy railgun tests; launch-pad engineering cameras.
-
-### 3. Storyboard
-| # | Time | Shot | On screen | Text | Voice-over | Sound |
+| Option | The event | Who speaks | The one idea | Words | Runtime | Render |
 |---|---|---|---|---|---|---|
-| 1 | 0:00–0:04 | Slate (2D) | Slate types on; one field redacted | `ACCEPTANCE TRIAL · RUN 4` / `M-1C TWIN RAILCANNON · ARTICLE [no.]` / `[test range] · DECLASSIFIED [release date]` / `BORE ████ M` | "Run four. Cameras rolling." | Net chirp; a tick |
-| 2 | 0:04–0:10 | Quad: C1 35 mm ¾ front, C2, C3, C4; all locked | Stowed gun, hard sun; lids open on amber cells, louvres ripple, beacons flash | `1 POWER`, cell IDs | "Mount, power up." | Contact mic: clunks, servo whine |
-| 3 | 0:10–0:15 | Same quad | Clamps off, crutch folds, cradle lays, shell opens, jaws swing out; barrels dark | `2 UNCLAMP · 3 LAY · 4 OPEN`; green `ARMED` | "Clamps clear. Laying. Shell open." | A clunk per stage; armed tone |
-| 4 | 0:15–0:19 | C1 full frame, locked | The laid gun, still | Data block; `GUN A · ARMED` | "Plate is clear, one hundred kilometres. Mount, you're hot. Gun A, on the tone." | Near silence; a tone |
-| 5 | 0:19–0:22 | Same | 1.2 s buzz; one white frame; gas jet, 7 m recoil; A's fins burst orange | `GUN A · SHOT` | none | Buzz; one clipped crack; clunk |
-| 6 | 0:22–0:28 | HS-1 replay, locked on the bore | 8 frames: a blue-white pulse runs breech to muzzle; freeze at exit; steps again at 4 fps | `HS 1,000 FPS · PLAYBACK 24 · ×41.7 SLOWER` / `t = 0 … 8 MS` | none | Silent |
-| 7 | 0:28–0:34 | Tracker, 1,000 mm, servo steps | A speck in brackets (the witness plate); four seconds of nothing; flash at 4.0 | `RNG 100.0 KM · TOF 0.0 → 4.0 S` / `IMPACT · 3.1 GJ` | "Impact on the plate." | Ticks at 1, 2, 3 s; none at 4 |
-| 8 | 0:34–0:39 | Quad | B fires, its fins burst; A's, already out, have dimmed (only the firing gun vents) | `GUN B · SHOT` | "Gun B, on the tone." | Tone; buzz, crack |
-| 9 | 0:39–0:51 | Quad, HOLD | Fins cool orange to dull red; red banner pulses; timecode jumps 15 s; banner turns green | `HOLD · FIRE INHIBIT: FIN TEMP` / `SUSTAINED: 1 RD/GUN/~15 S` / `READY` | "Both fin banks hot. Hold for heat. One round per gun, every fifteen seconds, sustained." | Inhibit tone; thermal ticks |
-| 10 | 0:51–0:55 | End-of-run card (2D) | Grid dissolves | `END OF RUN 4 · 2 RDS · 2 IMPACTS` | "Run four complete. Safe the mount." | Net closes |
-| 11 | 0:55–1:00 | Series tag | Hard cut to star plate; counter rolls `T−10` to `T−9` | per plan | none | Low tone |
-| 12 | +5 s | End card (outside runtime) | Platform end screen over star plate | credit | none | Tone's tail |
+| A · *Run 4* | A factory acceptance shot at a plate 100 km out, on locked range cameras | Range control, the mount tech, the plate-camera tech | Four seconds of nothing, then the hit | 26 | 60 s | ~7.8 h |
+| B · *Jink* | Live fire at a target drone that jinks; two misses, then a hit | Gunner and fire control | A slug can't turn; the drone wins far out and loses close in | 30 | 60 s | ~6.8 h |
+| C · *Eight Milliseconds* | One shot replayed from a muzzle high-speed camera | Nobody | The whole job is over in 8 ms | 0 | 50 s | ~6.4 h |
 
-### 4. Lore facts shown
-- Kinetics, one of four families [P1 §3–4]; two railcannons of two rails a turret [User]; wake order, 1.2 s charge, 7 m recoil, fins on the firing gun only, blue only in the bore pulse [Model; User]; 10 kg, 25 km/s, 3.1 GJ and 4.0 s to 100 km [A-20; WN §2]; ~15 s a round per gun sustained [LREF §4.1]; ~8 ms from a ~100 m barrel [A-20]. A-20 becomes canon.
+---
 
-### 5. Assets and render
-- **Reused:** `LREF_Railcannon_M1C.blend` (`RC_M1C`, `RC_FireCycle`, Stage, `CAM_RC_*`, `tracer`, per-gun controls), `LREF_Compositor`, star plate, HUD kit. **New:** witness plate (series-only); comp flash until FX-SLUG; sensor-video comp; quad kit; HS keying (`shot_a` 0→0.33 in one frame live, unchanged in the replay).
-- **Render:** 2D 312 × 2 s 0.2 h; quad wake 264 × 45 s × ½ 1.7 h; shot A 1.4 h; HS-1 0.4 h; tracker 0.6 h; shot B 1.0 h; hold 0.5 h: **~6 h** (~3 h at the plan's measured stage rate).
+## Option A · *Run 4*: locked range cameras, 4:3, plain (60 s)
 
-### 6. Risks
-- **Q15.** The wake is on screen 11 s in quarter-size noisy cells; nothing in text, voice or timing names a style, and `ARMED` waits for the jaws, so any `arm_time()` only stretches row 3. Render after the pick.
-- The replay is honest only while its 8 frames and label stay exact; show a flash, never penetration. Flat video can look cheap: keep the grade strict.
+**Logline.** On a bare rock shelf, a range crew fires the M-1C at a plate far down the line, and the camera on the plate watches nothing happen for four seconds.
 
-## Option B: *Hull Cam*, a gun-camera reel (56 s)
+**The idea.** Distance is time. The viewer sits through the pause and feels the gun's reach in it. The heat limit arrives as glowing fins and one sigh.
 
-### 1. Concept
-A declassified reel of hull-camera clips from an Endeavor gunnery exercise: cameras bolted to the ship that hear the gun through the hull, and silent trackers that watch the plate. It suits the M-1C because the picture itself recoils, and one rule (the hull hears, the tracker doesn't) turns the four-second flight into silence between a crack and a flash.
+**Look and sound.**
+- Cuts between locked cameras, each labelled by a corner ID and timecode (MOUNT-1, MOUNT-2, PLATE). No camera moves. Sunlit, hard shadows, a black sky, sensor noise, flat clipped contrast.
+- The plate camera is a long lens on a rock outcrop beside the plate, 100 km down the line, so the plate is a few pixels wide.
+- Sound: no music. Voices only on the range loop, plus a contact mic on the mount (thuds, servo whine, metal ticking). Nothing is heard from the plate's side. Vacuum is silent.
+- The wait is a real four seconds in one locked frame, with no sound and no one speaking.
+- Overlays: IDs, timecode, a red HOLD, END OF RUN. No spec block.
 
-### 2. Style bible
-- **Frame.** 16:9, 1600×900 (the film's pixel count), one clip at a time on a 12-frame leader; thin white reticle, range tape, time-of-flight clock, amber `REC`.
-- **Camera and lens.** Fixed 24–35 mm cameras bolted to the Endeavor plus a slaved boresight cam. Each shot kicks the whole picture 2–3 frames and rings down: the camera recoils with the hull. The ship's IRST ball tracks the plate at 1,000 mm, dead still. New angles on `CAM_Railgun_House`, `CAM_Battery`, `CAM_Nose`.
-- **Grade and texture.** Modes `EO` and `IR`. EO: the film's grade (AgX High Contrast, −0.3 EV, crushed blacks) plus exposure steps, flash bloom, smear. IR: white-hot mono, fins white, the 300 K hull mid-grey, one calibration freeze; only fins and muzzle gas are hot.
-- **Type and graphics.** Tiny white monospace caps; typed reviewer notes (`RD 2 · HIT · TOF 4.0 S`); numbered leaders. "After action" stays off screen: Ep 9's finale owns it.
-- **Sound and voice.** No music, no narrator. The hull cam is the only body that hears: thumps through structure, servo whine, the 1.2 s buzz, the crack. The tracker is silent, and its cut drops everything to nothing. Subtitled crew traffic on the laser net (GUNNERY, MOUNT 3, TRACK); 30 words.
-- **Edit rhythm.** Hard cut on the trigger; 4–10 s clips; loud, silent, loud.
-- **Study.** WWII gun-camera reels; declassified weapon video (HUD burn-in, white-hot infrared); onboard rocket cameras; deck cameras on firing naval guns.
+**Storyboard.**
 
-### 3. Storyboard
-| # | Time | Shot | On screen | Text | Lines | Sound |
-|---|---|---|---|---|---|---|
-| 1 | 0:00–0:03 | Leader (2D) | Countdown leader; title types on | `HULL CAMERA REEL · GUNNERY QUALIFICATION · [exercise]` / `DECLASSIFIED [release date]` | none | Recorder ticks; room tone fades up |
-| 2 | 0:03–0:10 | Clip 1: H-14, port quarter, locked 28 mm, EO | Mount 3 on its travel lock, 60 m off, sun raking: amber cells light, clamps swing off, barrels lay, shell opens | `CLIP 1/6 · H-14 · MOUNT 3 · EO` | GUNNERY: "Mount three, wake." MOUNT 3: "Waking." | Hull-borne clunks, servo whine |
-| 3 | 0:10–0:14 | Clip 2a: B-3 boresight, 35 mm, slaved | Reticle on black sky; picture trembles 1.2 s; one white frame; the frame kicks and rings; orange fin light floods the top | `B-3 · RD 1 · GUN A · RNG 100 KM` | GUNNERY: "Mount three, shoot." MOUNT 3: "Shot." | Buzz; crack; thump; hull rings |
-| 4 | 0:14–0:18 | Clip 2b: IRST tracker, 1,000 mm, IR, locked | Grey speck in brackets; clock runs 0.0 to 4.0; nothing; a white flash | `TOF 4.0 S · RD 1 HIT` | TRACK: "Hit." (after the flash) | Total silence |
-| 5 | 0:18–0:25 | Clip 3: H-02, dorsal, looking aft, locked 24 mm | Dorsal battery rises 9 m out of its well, lays, opens, fires; 7 m recoil; fins burst | `CLIP 3/6 · H-02 · BATTERY D` | GUNNERY: "Dorsal, raise and shoot." DORSAL: "Shot." | Lift whine through the hull; deep thud |
-| 6 | 0:25–0:33 | Clip 4: H-09, bow, looking aft along the port side, locked 28 mm | Mount 3 fires A, then B 2.5 s later; gas jets light the hull; both fin banks glow | `CLIP 4/6 · MOUNT 3 · A, B` | GUNNERY: "Three, A then B." MOUNT 3: "Shot." "Shot." | Two cracks, the first ringing under the second |
-| 7 | 0:33–0:41 | Clip 5: two IR trackers side by side, 1,000 mm | Left, `RUN 11 · 100 KM`: the target steps aside; nothing at 4.0. Right, `RUN 12 · 80 KM`: flash at 3.2 | `TGT 4 G` / `NO IMPACT · TGT MANOEUVRED` / `HIT · 3.2 S` | TRACK: "Eleven, miss. Twelve, hit." | Silent, then the line |
-| 8 | 0:41–0:51 | Clip 6: H-14, locked 28 mm, IR | The clip-1 hull in white-hot: both fin banks white; clock jumps 15 s; fins dim to grey | `CLIP 6/6 · IR` / `SUSTAINED 1 RD/GUN/~15 S` / `READY` | GUNNERY: "Hold for heat." MOUNT 3: "Holding." … "Three, ready." | Room tone returns; thermal ticks |
-| 9 | 0:51–0:56 | Series tag | Hard cut to star plate; counter rolls `T−10` to `T−9` | per plan | none | Low tone |
-| 10 | +5 s | End card (outside runtime) | Platform end screen over star plate | credit | none | Tone's tail |
-
-### 4. Lore facts shown
-- Six M-1C turrets (four side, two in wells on 9 m lifts) [Model; LREF §2]; 10 kg, 25 km/s, 3.1 GJ [A-20]; 4.0 s to 100 km [WN §2]; the wake, charge and 7 m recoil [Model]; a 4 g target needs ~3.3 s to clear, so has no escape inside ~80 km [LREF §4.1; WN §2; A-10]; the hull camera "is the only body that hears" [`tidebreak_data.py`]. A-10 and A-20 become canon.
-
-### 5. Assets and render
-- **Reused:** `LREF_Endeavor.blend` (`rail_wake`, `rail_lock`, `rail_arm`, `battery_raise`, per-mount `charge`, `shot`, `fins`, `heat`), `RC_M1C`, the `tracer` blast, the IRST ball, HUD and SUB kits, star plate. **New:** hull-cam placements; EO/IR comp (IR from emission and `heat`); a target speck with a 2D path; the witness plate. No new 3D hero asset.
-- **Render:** 2D 384 × 2 s 0.2 h; clip 1 168 × 45 s 2.1 h; clip 2a 1.7 h; tracker 0.4 h; clip 3 2.2 h; clip 4 2.8 h; heat 60 frames 0.8 h: **~10 h**, the dearest.
-
-### 6. Risks
-- **Q15, and the Endeavor.** Its rebuild waits on the pick. Hull cams see guns at 60–120 m, so a style change reads as a silhouette; only clip 1 shows the opening, and it can end at "lay" if the pick is late.
-- The 4 g pair canonises A-10 and the no-escape arithmetic: keep the target a speck. Endeavor intact; no hull cam on the film's *Broadside* or *Fire* framings.
-
-## Option C: *One Round*, a gunnery-school lecture (66 s)
-
-### 1. Concept
-A [LREF gunnery school] lecture recording: an instructor's voice over frame-stepped replays, drawing on the picture with a stylus. It suits the M-1C because a gun that fires in 8 ms and then waits four seconds is best understood slowed down and pointed at, and the lecture teaches the film's time-of-flight and heat rules in the school's own words.
-
-### 2. Style bible
-- **Frame.** 16:9, 1600×900: the replay fills the frame under thin lecture chrome, a title strip and a transport bar (scrub head, speed readout, a cycle strip `WAKE 8 S · CHARGE 1.2 S · SHOT 8 MS · FLIGHT 4.0 S · HEAT ~15 S`).
-- **Camera and lens.** The rig's locked angles (new ones, not the film's CU 50 or 85 mm). The instructor does the camera work: freeze, frame-step (1 ms a step in the HS replay), speed change, one slow zoom into a circled part.
-- **Grade and texture.** The film's grade, dimmed ~15% and vignetted like a projection in a dark room. Marks are the only saturated colour: yellow (look here), cyan (path), red (limit); they wobble like a hand and fade after ~4 s.
-- **Type and graphics.** A plain humanist sans for titles, monospace for the clock, handwritten circles, arrows, brackets, numbered discs, dotted paths. No sports-broadcast chrome: no bug, lower third or wipe.
-- **Sound and voice.** No music. One instructor, close-miked in a quiet room (vent hum, a stylus tap per mark): brisk, direct, "you", one dry aside; 131 words. Replays carry the contact-mic track slowed with the picture, so the 8 ms crack becomes a low swell; the tracker is silent.
-- **Edit rhythm.** Lecture pace: 4–10 s takes, 2–4 s freezes while the instructor draws, cuts only on a change of topic: the slowest option.
-- **Study.** Edgerton-style high-speed lecture films; flight-school debrief replays with pencil marks; stylus-over-video lecture capture.
-
-### 3. Storyboard
-| # | Time | Shot | On screen | Text | Voice-over | Sound |
-|---|---|---|---|---|---|---|
-| 1 | 0:00–0:05 | Title slide (2D) | Dark slate; a pointer dot rests | `[LREF GUNNERY SCHOOL] · GUNNERY I · LECTURE 3: ONE ROUND` | "Right. One round, from an M-1C. Most of it is waiting." | Room tone; a stylus tap |
-| 2 | 0:05–0:11 | Wake replay ×3, locked 35 mm | Lids, amber cells, clamps, lay, shell opens; yellow discs 1–4 land as each stage happens | `1 POWER · 2 UNCLAMP · 3 LAY · 4 OPEN` | "Wake: power, unclamp, lay, open. Eight seconds, always in that order." | Contact mic sped into a flutter; taps |
-| 3 | 0:11–0:17 | Real-time shot, locked 50 mm, then freeze | 1.2 s buzz; one white frame; freeze; a yellow ring round the flash | `CHARGE 1.2 S` / `← THE SHOT` | "Charge: one point two seconds. Then that white frame is the shot." | Buzz and crack, then silence on the freeze |
-| 4 | 0:17–0:27 | HS replay ×0.024, stepped, locked on the bore | Stepped 1 ms at a time: a blue-white pulse runs breech to muzzle, a cyan arrow with it; freeze at muzzle exit | `HS 1,000 FPS · ×0.024` / `t = 0 … 8 MS` / `BLUE: ONLY HERE` | "Eight milliseconds, breech to muzzle, about forty times slower than life. Blue only here. After this the barrel stays dark." | The crack slowed 40× into a low swell |
-| 5 | 0:27–0:34 | Recoil and fins ×0.25, stepped, locked 50 mm on the crest | Shell slides 7 m into the receiver; A's fins burst, circled yellow; B circled grey | `7 M` / `A: FINS OUT` / `B: COLD` | "Seven metres of recoil. Fins out on the gun that fired, and only that gun." | Slowed thud; fin ticks |
-| 6 | 0:34–0:43 | Tracker still, 1,000 mm, with clock | A speck in a reticle; clock to 4.0; a cyan dotted line ticks 1, 2, 3 s; flash at 4.0 | `T+0.0 → 4.0 S` / `100 KM · 10 KG · 25 KM/S` / `3.1 GJ` | "Ten kilograms, twenty-five kilometres a second. It can't turn. A hundred kilometres is four seconds. The flash gets there first." | Silent; a tap per tick |
-| 7 | 0:43–0:50 | Plan sketch (2D) | The gun as a dot; hand-drawn rings, red at 80 km, yellow at 190 km; a dotted arc where a target steps aside | `80 KM · CORVETTE` / `190 KM · FRIGATE` | "A corvette can't dodge inside eighty kilometres. A frigate, a hundred and ninety. Past that, you're hoping." | Room tone; taps |
-| 8 | 0:50–0:57 | Heat replay, time-lapse, locked 50 mm on the crest | Fins cool orange to dull red; a yellow bracket spans `15 S` on the cycle strip | `1 RD/GUN/~15 S` | "Then the heat. One round per gun every fifteen seconds, sustained. Radiators, radiators, and more radiators." | Thermal ticks |
-| 9 | 0:57–1:01 | Homework slide (2D) | Dark slate; the pointer dot | `HOMEWORK · WHERE IS THE SLUG AT T+2.0 S?` | "Homework: where is the slug at two seconds?" | Room tone |
-| 10 | 1:01–1:06 | Series tag | Hard cut to star plate; counter rolls `T−10` to `T−9` | per plan | none | Low tone |
-| 11 | +5 s | End card (outside runtime) | Platform end screen over star plate | credit | none | Tone's tail |
-
-### 4. Lore facts shown
-- 10 kg, 25 km/s, 3.1 GJ [A-20]; 4.0 s to 100 km [WN §2]; the slug can't turn and the flash is always seen; no escape inside ~80 km (corvette, 4 g) or ~190 km (frigate, 2 g), and ~15 s a round per gun sustained [LREF §4.1]; "radiators, Radiators, and MORE RADIATORS!" [P1 §1D]; the wake, charge, 7 m recoil, blue only in the bore pulse [Model; User]; ~8 ms from a ~100 m barrel [A-20; Q12]. A-20 and the no-escape ranges become canon.
-
-### 5. Assets and render
-- **Reused:** Option A's rig (`RC_M1C`, `RC_FireCycle`, Stage, `CAM_RC_*`, `tracer`), `LREF_Compositor`, the witness plate, star plate, HUD kit. **New:** the telestrator kit (wobbling, fading strokes, discs, transport bar, cycle strip); stepped re-timing (×3, ×0.25, ×0.024). No new 3D.
-- **Render:** 2D 504 × 2 s 0.3 h; wake ×3 72 × 45 s 0.9 h; shot 1.1 h; HS replay 0.4 h; recoil 1.1 h; tracker flash 0.1 h; heat 42 × 45 s 0.5 h; marks 0.1 h: **~5 h**, the cheapest.
-
-### 6. Risks
-- **Q15.** The wake shows once, at ×3 for 6 s, with marks on stages, not parts: "open" is ringed on the jaws, which every style has.
-- Most numbers become canon, and the first slot goes to a voice: keep the lines to what the plate and the clock show. Telestrator marks are a sports trope (Ep 3) and a dry voice nears Ep 8's historian: keep the chrome plain and the instructor brisk.
-
-## Comparison and recommendation
-
-| | A · Acceptance Trial | B · Hull Cam | C · One Round |
+| # | s | Picture | Sound and words |
 |---|---|---|---|
-| The idea | A range record of a wait | The hull hears; the tracker doesn't | A lecture that slows the shot and points |
-| Voice | Range control, 56 words | Crew traffic, 30 words | Instructor, 131 words |
-| Extra lesson | None: time of flight, heat | No-escape, as a hit and a miss | No-escape ranges, in words |
-| Render | ~6 h | ~10 h | ~5 h |
-| Main risk | Looks cheap if the grade softens | Cost; waits on the Endeavor rebuild | Most numbers canon; voice-led |
+| 1 | 0–4 | MOUNT-1, wide: the M-1C on its test stand, clamped, barrels flat, sun low left. Lower third: [MAKER] · FACTORY ACCEPTANCE · RUN 4. | One low tone. No words. |
+| 2 | 4–14 | MOUNT-2, close on the mount: the stand's amber cells light one by one, the clamps swing off, the cradle lays the barrels on the line. | Servo whine, clunks through the mount mic. RANGE: "Mount, range is hot." MOUNT: "Hot. Clamps are off." |
+| 3 | 14–19 | PLATE, locked: a small bright plate on a sled among rocks, dead still. Timecode ticks. | Silence on the picture. RANGE: "Plate cam?" PLATE: "Green." |
+| 4 | 19–25 | MOUNT-2, tight on the breech and barrels. Three countdown tones. At the third: one white frame, the stand slams back on its slide, gun A's fins burst out glowing on their radiator faces. | RANGE: "Gun A, on the tone." Tones, then one hard thud through the mount. |
+| 5 | 25–29 | PLATE, the same locked frame. Nothing moves. The timecode counts the seconds. | Nothing. Not a word, not a tone. One faint intake of breath on the loop at about the third second. |
+| 6 | 29–33 | PLATE: a pinprick of white on the plate; the sled tumbles slowly, a puff of fragments. The plate now has a hole through it. | PLATE: "Impact." Then MOUNT: "Nice." RANGE: "Hold for temps." |
+| 7 | 33–48 | MOUNT-2, locked on gun A's fins: the glow fades from white to orange. A red HOLD appears. The timecode jumps forward twice. The fins go dark. | MOUNT sighs: "…Holding." Mount mic: metal ticking as it cools. |
+| 8 | 48–55 | MOUNT-1 wide again. The stand is back at rest. HOLD becomes END OF RUN 4. | RANGE: "Mount, you're safe." MOUNT: "Safe." |
+| 9 | 55–60 | **Tag.** Hard cut to the title card: OPERATION TIDEBREAK on the still stars, the counter rolling T−10 to T−9, the release date, the card's low tone. | The card's tone. |
 
-**Recommendation: A.** It is the planned style done properly: the subject you liked, with a real sound and colour identity and a storyboard built on a wait. It is the rawest, least narrated option, which suits an opener before the plan's voiced Eps 2 and 3; it needs only the built M-1C asset, so Ep 1 can finish first; and its HS replay makes Q12 honest where it matters most. B is the most cinematic but costs most; C teaches best and costs least but canonises most numbers and gives the first slot to a voice. If A feels thin, C's plan sketch (a 2D card, ~0.1 h) can follow A's impact.
+**Words.** 26 spoken. Numbers spoken: none. (The tones are not words, and "gun A" is a letter.)
+
+**Built from.** M1C (the rig, its cradle and fin controls), FX-SLUG (the impact flash and fragments) · additions: a test stand with clamps and amber cell lights (a few boxes and emissive strips); a plate on a sled (two flat boxes, one with a hole); a locked camera pylon (a box) · environment: a rock shelf and a distant rock field, generic rocks, black sky, a hard sun (WORLD).
+
+**Render.** At 4:3 (0.75 of full frame): class D for the static wides, the wait, and the fin glow (840 frames, 3.5 h); class A for the stand and the shot (384 frames, 4.8 h); class B for the plate impact (96 frames, 2.0 h); class E for the tag. 10.4 h at full frame, **~7.8 h** at 4:3.
+
+---
+
+## Option B · *Jink*: the gun crew's loop, heard through hull cameras (60 s)
+
+**Logline.** On a live-fire exercise, a gunner shoots twice at a target drone that sidesteps each time, then fires when it is too close to get out of the way.
+
+**The idea.** A slug can't turn, so every shot is a bet made seconds ago. The drone wins when the shot is long and loses when it is short. The crew goes from annoyed to quietly pleased.
+
+**Look and sound.**
+- Two hull cameras bolted to the turret housing, both locked. HULL-1 looks along the barrels; HULL-2 looks across them at the barrel's edge. Each frame holds a corner of the gun, a black sky, a banded gas giant low in the frame (generic) and a tiny drone with a thin drive plume.
+- The drone's sidestep is a plume flick: the plume jerks sideways and the dot slides. The slug is never seen. The only visible result of a shot is whether the drone is still there.
+- A small HUD readout shows range and a MISS or HIT tag. Nobody reads it out except as the crew would.
+- Sound: the camera hears the gun only through the hull (a dull knock each shot, a one-frame white flash on the barrel edge) and the crew's comm loop (a bit compressed, with breath and a chair creak). No music.
+- The waits are real: each one is the slug's flight, shorter each time.
+
+**Storyboard.**
+
+| # | s | Picture | Sound and words |
+|---|---|---|---|
+| 1 | 0–5 | HULL-1: the barrels lead into black; the drone's plume is a faint dot, dead centre. HUD range tags it far. | Loop hiss. FIRE CONTROL: "One-forty." GUNNER: "Firing." |
+| 2 | 5–15 | A one-frame white flash; the camera jolts. A long wait on the same frame; the dot is still. Then the plume flicks sideways. HUD: MISS. | A dull knock through the hull. FIRE CONTROL: "Miss." GUNNER: "It moved." FIRE CONTROL: "It does that." |
+| 3 | 15–25 | HULL-2, across the barrel edge: the drone is nearer, the plume clearer. Flash, a shorter wait, another sideways flick. MISS. | FIRE CONTROL: "Ninety." GUNNER: "Firing." Knock. FIRE CONTROL: "Miss." GUNNER: "I led it." FIRE CONTROL: "It knows." |
+| 4 | 25–33 | HULL-1: nothing fires. The drone's plume grows slowly as the range ticks down. | FIRE CONTROL: "Let it come." GUNNER: "That's not a plan." A chair creaks. |
+| 5 | 33–42 | The drone is now a shape, not a dot. Flash. A short wait. The plume begins its flick, and a white burst takes the drone before the flick finishes. HUD: HIT. | FIRE CONTROL: "Forty." GUNNER: "Firing." Knock. FIRE CONTROL: "Hit." |
+| 6 | 42–55 | HULL-1, locked on empty sky: a few pieces drift apart against the gas giant. | GUNNER, quietly: "…There." FIRE CONTROL: "That's a plan." A soft knock on the housing, a palm, heard through the hull. |
+| 7 | 55–60 | **Tag.** The title card; the counter T−10 to T−9; the release date; the low tone. | The card's tone. |
+
+**Words.** 30 spoken. Numbers spoken: "one-forty", "ninety", "forty" (three, each a range call the gunner needs).
+
+**Built from.** M1C (the turret, one barrel edge in each frame), DRN-L (the target drone, tiny), FX-FAR (its plume and the flick), FX-SLUG (the hit burst), HUD (the range readout) · additions: a plain girder deck under the turret, mostly out of frame (a few boxes); two hull camera mounts (boxes) · environment: a banded gas giant, generic, with a starfield (WORLD).
+
+**Render.** Class D for the locked shots with a rendered plate and a moving plume (1,248 frames, 5.2 h); class B for the hit (72 frames, 1.5 h); class E for the tag. **~6.8 h.** If the barrel edge needs hero shading in every frame, add about 3 h.
+
+---
+
+## Option C · *Eight Milliseconds*: a high-speed playback, no words (50 s)
+
+**Logline.** In a lab's playback window, a high-speed camera beside the muzzle shows the one blue pulse running down the bore, slowed until it takes 24 seconds, and then real time snaps back.
+
+**The idea.** The gun does its whole job in a moment too short to see. Slowed to a crawl it is still over before you are ready, and the real thing is only a crack.
+
+**Look and sound.**
+- A playback window: the clip, a scrubber, a file label (HS-02 · MUZZLE · [SERIAL]), a speed readout and a timestamp. All of it is 2D overlay on the 3D render.
+- The clip is monochrome and cold. The blue pulse is the only colour in the film, as the rules require.
+- The camera sits beside the muzzle and looks back along the slotted barrel shroud. The pulse starts small and far away and comes toward the lens.
+- Sound: the mount's contact mic. At real speed, a rising charge whine. In the slow section, the same sound stretched to a low groan with ticks as the rails flex. At snap-back, one hard crack and then silence. No words, no music.
+- The slow section runs the real 8 ms bore transit at about 3,000× slower. (The seed's 100,000× would take over 13 minutes, so this is sharpened.)
+
+**Storyboard.**
+
+| # | s | Picture | Sound and words |
+|---|---|---|---|
+| 1 | 0–5 | The playback window at ×1: the muzzle end of the barrels in monochrome, a rock edge in sun, the stand beyond. A scrubber sits at the start. | A charge whine rises from the mount mic. No words. |
+| 2 | 5–9 | The whine reaches its top and holds, with half a second of nothing. One overexposed frame. The readout flips from ×1 to ×1/3000; the timestamp reads 0.000 ms. | The whine drops to a long falling groan. |
+| 3 | 9–33 | The crawl, in monochrome. Far down the shroud's slot, a small blue pulse starts. It comes toward the lens, lighting the slot segment by segment. The shroud plates flex a hair. A dark slug rides the head of the pulse. The timestamp climbs in tenths of a millisecond. | The stretched groan, ticks as the metal moves. No words. |
+| 4 | 33–37 | The pulse reaches the muzzle in frame and the blue floods the lens; the dark slug crosses and is gone. The timestamp stops at 8.000 ms. | The groan drops out. A held silence. |
+| 5 | 37–40 | The readout snaps to ×1. The camera jolts hard in real time. The muzzle is already empty. | One hard crack through the mount. |
+| 6 | 40–45 | The muzzle held in monochrome: the stand settling, nothing else. The scrubber reads END. | A single metal tick, then silence. |
+| 7 | 45–50 | **Tag.** The title card; the counter T−10 to T−9; the release date; the low tone. | The card's tone. |
+
+**Words.** 0 spoken. Numbers spoken: none.
+
+**Built from.** M1C (the muzzle end, its bore pulse rig driven at sub-frame steps), FX-SLUG (the slug and the flare at exit) · additions: a slotted viewing strip along the shroud, flagged as a test fitting (one extruded box and a cutaway strip); a camera boom beside the muzzle (a box) · environment: the same generic rock shelf and sun as the range, so only a hint of it is in frame; a monochrome grade with the blue left in.
+
+**Render.** Class D for the real-time shots (408 frames, 1.7 h); class A for the crawl, rendered at 12 fps and interpolated (288 frames, 3.6 h); class B for the muzzle exit at 12 fps (48 frames, 1.0 h); class E for the tag. **~6.4 h.** The bore pulse must be sampled between the rig's 8 frames, so its progress needs to be a driven value, not keyed frames.
+
+---
+
+## Recommendation
+
+Pick **A** if you want the episode to feel like the film's real gun on a real afternoon, since it carries the idea with the least dialogue and the cheapest pause. Pick **C** if you'd rather have the one image no one has seen. Pick **B** only if you want the series to show people talking early. If you want two of these, A and C pair best and have no speakers in common. All three prices are raw, before the 30 % re-render allowance.

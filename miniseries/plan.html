@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tidebreak Mini-Series</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column with a section index; tables scroll inside their own frame. */
+:root{
+  --bg:#f3f4f7; --panel:#ffffff; --ink:#12161d; --muted:#5a6475; --line:#d8dde5;
+  --lref:#6232d4; --clock:#0e7c70; --heat:#c2510d; --code:#eef0f5;
+  --f-display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#07090c; --panel:#0e1218; --ink:#e4e8ee; --muted:#8a95a6; --line:#1f2631;
+  --lref:#a47bff; --clock:#6fd3c4; --heat:#ff9a4a; --code:#151b24; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#07090c; --panel:#0e1218; --ink:#e4e8ee; --muted:#8a95a6; --line:#1f2631;
+  --lref:#a47bff; --clock:#6fd3c4; --heat:#ff9a4a; --code:#151b24; color-scheme:dark}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--f-body); padding-inline:16px; padding-block:24px 64px}
+.wrap{max-width:68rem; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr); gap:24px}
+@media (min-width:980px){.wrap{grid-template-columns:13rem minmax(0,1fr)}}
+header.top{grid-column:1/-1; display:grid; gap:8px; padding-block:8px 16px; border-bottom:1px solid var(--line)}
+.eyebrow{font:600 12px/1.4 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--clock)}
+h1{font:700 clamp(2rem,5vw,3.2rem)/1.05 var(--f-display); letter-spacing:.01em; margin:0; text-wrap:balance}
+.lede{color:var(--muted); max-width:62ch; margin:0}
+nav.toc{font:500 13px/1.5 var(--f-mono); color:var(--muted); align-self:start; display:grid; gap:4px}
+@media (min-width:980px){nav.toc{position:sticky; top:calc(env(safe-area-inset-top, 0px) + 16px)}}
+nav.toc a{color:inherit; text-decoration:none; padding:2px 0; border-left:2px solid transparent; padding-left:8px}
+nav.toc a:hover, nav.toc a:focus-visible{color:var(--ink); border-left-color:var(--lref); outline:none}
+nav.toc .sub{padding-left:20px; font-size:12px}
+main{min-width:0; display:grid; gap:4px}
+main h2{font:700 1.9rem/1.15 var(--f-display); letter-spacing:.02em; margin:32px 0 4px; padding-top:12px; border-top:2px solid var(--ink); text-wrap:balance}
+main h3{font:700 1.35rem/1.2 var(--f-display); letter-spacing:.02em; margin:24px 0 2px; text-wrap:balance}
+main h3.ep{color:var(--lref)}
+main h4{font:600 12px/1.4 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:16px 0 0}
+main p, main li{max-width:68ch}
+main p{margin:6px 0}
+main ul, main ol{margin:6px 0; padding-left:1.4em; display:grid; gap:3px}
+main strong{font-weight:600}
+main code{font:13px var(--f-mono); background:var(--code); padding:1px 5px; border-radius:3px}
+main a{color:var(--lref)}
+.tbl{overflow-x:auto; margin:10px 0; border:1px solid var(--line); border-radius:6px; background:var(--panel)}
+.tbl table{border-collapse:collapse; width:100%; font-size:14px; line-height:1.45}
+.tbl th{font:600 11px/1.3 var(--f-mono); letter-spacing:.07em; text-transform:uppercase; color:var(--muted); text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); white-space:nowrap}
+.tbl td{padding:9px 12px; border-top:1px solid var(--line); vertical-align:top; font-variant-numeric:tabular-nums}
+.tbl tr:first-child td{border-top:0}
+main blockquote{margin:10px 0; padding:4px 14px; border-left:3px solid var(--heat); color:var(--muted)}
+footer{grid-column:1/-1; color:var(--muted); font:12px var(--f-mono); border-top:1px solid var(--line); padding-top:12px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="eyebrow">Operation Tidebreak · pre-release mini-series · plan for sign-off</div><h1><em>Operation Tidebreak</em>: the pre-release mini-series</h1><p class="lede">Nine short in-world films that count down to the film, one per main weapon system or ship class, each in its own style. Generated from <code>miniseries/SERIES_PLAN.md</code>.</p></header>
+<nav class="toc" aria-label="Sections"><a href="#1-concept">1. Concept</a><a href="#2-episode-table">2. Episode table</a><a href="#3-episodes">3. Episodes</a><a href="#ep-1-acceptance-trial-run-4-m-1c-weapons-test-footage-60-s" class="sub">Ep 1 · Acceptance Trial, Run 4</a><a href="#ep-2-unseen-laser-focusing-array-promotional-advertisement-4" class="sub">Ep 2 · Unseen</a><a href="#ep-3-six-layers-point-defence-vintage-training-film-75-s" class="sub">Ep 3 · Six Layers</a><a href="#ep-4-field-reach-plasma-lance-technical-manual-animation-41-" class="sub">Ep 4 · Field Reach</a><a href="#ep-5-the-multitool-garibaldi-ivanova-frigate-infomercial-90-" class="sub">Ep 5 · The Multitool</a><a href="#ep-6-standoff-nuclear-warheads-trade-show-reel-55-s" class="sub">Ep 6 · Standoff</a><a href="#ep-7-through-glass-ecw-destroyer-crew-safety-briefing-60-s" class="sub">Ep 7 · Through Glass</a><a href="#ep-8-the-pocket-battleship-hanuman-heavy-cruiser-and-spinal-" class="sub">Ep 8 · The Pocket Battleship</a><a href="#ep-9-undisclosed-ryland-cruiser-endeavor-news-segment-75-s" class="sub">Ep 9 · Undisclosed</a><a href="#4-open-questions">4. Open questions</a></nav>
+<main>
+<p><strong>Status:</strong> a draft plan for the user. <strong>Sources:</strong> the lore posts, <code>doctrine/</code>, <code>storyboard/tidebreak_data.py</code>, <code>ASSET_REQUESTS.md</code>, <code>OPEN_QUESTIONS.md</code>, <code>pack/project_docs/</code>.
+<strong>Tags:</strong> [P1 §n] is JCB's Part 1 post, point n ([P1 classes] is its class list); [P2] and [P3] are the frigate and destroyer posts; [Model] is the Blender README; A-nn, [LREF §n] and [WN §n] are the doctrine's assumptions, sections and working numbers; [User] is a decision already made.</p>
+<h2 id="1-concept">1. Concept</h2>
+<h3 id="title-options">Title options</h3>
+<ol>
+<li><em><strong>Spin-Up</strong></em> (recommended). Everything in the film spins up before it acts (warp rings, CIWS barrels, the M-1C), and the series is the film's spin-up.</li>
+<li><em><strong>Before Tidebreak</strong></em>. Plain: a stranger knows what it is.</li>
+<li><em><strong>Hard Coat</strong></em>. From JCB's "a soft sci fi setting wearing a hard sci fi coat".</li>
+<li><em><strong>Shields Off</strong></em>. The order that opens every LREF battle [P1 §10].</li>
+</ol>
+<h3 id="in-world-framing">In-world framing</h3>
+<p>Each episode is in-world media from the months before the operation, made by whoever really would make it: the LREF and its fleet units, GUN-EWCC [P3], two contractors, a shipyard and two broadcasters. Eight are peacetime pieces that can't know Tidebreak is coming, which is the spoiler guard. The ninth is the news of the task group leaving.</p>
+<h3 id="series-rules">Series rules</h3>
+<ul>
+<li><strong>Sound.</strong> Narration, music and graphics belong to the medium. Vacuum footage is silent unless the camera rides a hull or the sound comes on an instrument channel: comms, telemetry, a contact mic.</li>
+<li><strong>Numbers.</strong> Only the lore's and the doctrine's, with their limits. Assumptions shown on screen (A-20, A-22 to A-25) become canon, so each episode lists them.</li>
+<li><strong>Look [User].</strong> Invisible beams; lenses violet only while firing; blue only in the M-1C's bore pulse; heat only on the fins' radiator faces; fins stowed and shields on in warp.</li>
+<li><strong>No spoilers.</strong> No Maren, Breakwater, Compact, Skerry, Breakers or Anchor, and nothing from the dropped AI plot line. No task-group names but the Astrid and the Endeavor, nothing damaged, no film framing copied. Systems appear in tests, drills and diagrams, never in battle. The series does teach the film's rules (time of flight, invisible beams, kill clouds, field reach, standoff, heat), so the film has less to explain.</li>
+<li><strong>No people on screen.</strong> There are no character assets, so presenters are voices.</li>
+<li><strong>Assets.</strong> New 3D work is film assets pulled forward, plus four cheap series-only set-ups: a witness plate, a one-mount laser and CIWS stage, clay and line overrides, and the missile's exploded split. The rest is 2D, all at 24 fps.</li>
+</ul>
+<h3 id="what-counts-as-main">What counts as "main"</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Subject</th>
+<th>Decision</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M-1C; laser focusing arrays</td>
+<td>Own episodes</td>
+<td>Kinetics and DEWs are "the namestays" [P1 §4]; both built</td>
+</tr>
+<tr>
+<td>CIWS, PD lasers, countermeasures</td>
+<td>One episode</td>
+<td>Your suggestion; layers of one defence [LREF §6]</td>
+</tr>
+<tr>
+<td>Plasma lance</td>
+<td>Own episode</td>
+<td>One of the four families [P1 §3]; the torpedo appears as a drawing</td>
+</tr>
+<tr>
+<td>Nuclear warheads, with their missiles</td>
+<td>One episode</td>
+<td>Missiles are "a warhead delivery platform rather than a distinct weapon 'system'" [P1 §5]</td>
+</tr>
+<tr>
+<td>Spinal cannon</td>
+<td>In the heavy cruiser's</td>
+<td>SCCs "are effectively just built AROUND a big gun" [P1 classes]</td>
+</tr>
+<tr>
+<td>Cruiser, heavy cruiser, frigate, ECW destroyer</td>
+<td>Own episodes</td>
+<td>The task group's classes with art and a lore post</td>
+</tr>
+<tr>
+<td>Tender</td>
+<td>In the frigate's</td>
+<td>Its job is that episode's punchline [P2]; it has no art</td>
+</tr>
+<tr>
+<td>EW and drones</td>
+<td>In Eps 3 and 7</td>
+<td>Not systems of their own in the lore</td>
+</tr>
+<tr>
+<td>Corvette</td>
+<td>Dropped; a bonus later</td>
+<td>No art and no picked concept: an episode now would fix its look before you choose it</td>
+</tr>
+<tr>
+<td>Light cruiser, battleship, carrier, dreadnought, chem-rails</td>
+<td>Dropped</td>
+<td>Not in the task group; chem-rails are "near to obsolete" [P1 §3]</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="tag-and-end-card">Tag and end card</h3>
+<ul>
+<li><strong>Tag (5 s, every episode).</strong> A hard cut to the film's own title card, <em>The record</em>: OPERATION TIDEBREAK in white monospace on the still star plate. Under it, in place of the card's second line, a mission-clock counter rolls from T−[n+1] to T−[n] (the film's "digits roll" rule), with the release date. Sound: the card's low tone.</li>
+<li><strong>Finale.</strong> The counter reaches T−0 and gives way to the card's real second line, COLLATED FROM THE AFTER ACTION REPORT, so the series' last frame is the film's first.</li>
+<li><strong>End card</strong> (the platform's end screen): the next episode, the playlist, and "Based on JCB's <em>Wearing Power Armor to a Magic School</em>. Ship designs by Sir_Lazz."</li>
+</ul>
+<h3 id="order-and-cadence">Order and cadence</h3>
+<ul>
+<li><strong>Order:</strong> the guns, then the defences and missiles, then the ships up to the flagship, then the departure. The tone alternates: raw, glossy, vintage, silent, comic, loud, uncanny, grave, live. It follows the film's build order: Eps 1–4 need built assets, the Q15 picks and step 1's first-version effects; Eps 5–9 need step 3–4 assets.</li>
+<li><strong>Cadence:</strong> two a week, with the finale on release day as the film's pre-show. Finish Eps 1–4 before Ep 1 airs. If the series must run alongside production, go weekly.</li>
+</ul>
+<h3 id="runtime-and-render">Runtime and render</h3>
+<ul>
+<li><strong>Runtime:</strong> 9:26 over nine episodes of 41–90 s (13,584 frames), against the film's 4:58 since revision 7.</li>
+<li><strong>Method:</strong> the film's classes (A 45, A2 90, B 75, C 200, S 30, D 15, E 2 s/frame), scaled by each style's pixel count. A one-mount stage ("ST") comes from the measured M-1C stage (3–3.5 s/frame at 60 %): ~9 s/frame at full size, ~18 s as a macro.</li>
+<li><strong>Total: ~51 h raw, ~66 h with the film's 30 % re-render allowance</strong>, a little under half a film pass (112 h raw). Keep it out of the film's pass week: the film's gate has 14.6 h to spare (Q17), far less than the series needs.</li>
+</ul>
+<h2 id="2-episode-table">2. Episode table</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tag</th>
+<th>Subject</th>
+<th>Style</th>
+<th>Runtime</th>
+<th>In-world maker</th>
+<th>Hook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>T−9</td>
+<td>M-1C twin railcannon</td>
+<td>Weapons-test footage</td>
+<td>60 s</td>
+<td>The LREF (a declassified trial)</td>
+<td>It fires in under a frame, hits a plate 100 km off four seconds later, then waits for its fins.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>T−8</td>
+<td>Laser focusing array</td>
+<td>Promotional advertisement</td>
+<td>42 s</td>
+<td>The array's maker</td>
+<td>A luxury ad for a beam no one will ever see.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>T−7</td>
+<td>Point defence: CIWS, PD lasers, countermeasures</td>
+<td>Vintage training film</td>
+<td>75 s</td>
+<td>Fleet training (a re-issue)</td>
+<td>Six layers between a ship and a missile, and the one rule they serve.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>T−6</td>
+<td>Plasma lance</td>
+<td>Technical-manual animation</td>
+<td>41 s</td>
+<td>LREF technical publications</td>
+<td>A lance ends where the ship's field does: about 50 km.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>T−5</td>
+<td>Garibaldi-Ivanova frigate, with the tender</td>
+<td>Infomercial</td>
+<td>90 s</td>
+<td>The frigate's builder</td>
+<td>One hull, three modules, swapped at your nearest fleet tender. Sold in packs.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>T−4</td>
+<td>Nuclear warheads and their missiles</td>
+<td>Defence-contractor trade-show reel</td>
+<td>55 s</td>
+<td>A missile maker</td>
+<td>A Casaba breaches a hull from 2–4 km away.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>T−3</td>
+<td>ECW destroyer</td>
+<td>Crew safety briefing</td>
+<td>60 s</td>
+<td>GUN-EWCC</td>
+<td>Why the fleet never uses radio, and who keeps it quiet.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>T−2</td>
+<td>Hanuman heavy cruiser and its spinal cannon</td>
+<td>Documentary</td>
+<td>68 s</td>
+<td>A public documentary series</td>
+<td>How the glass cannon became a pocket battleship.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>T−1</td>
+<td>Ryland cruiser L.R.E.F.S. Endeavor</td>
+<td>News segment, handing over to the film</td>
+<td>75 s</td>
+<td>A news network</td>
+<td>A task group leaves for somewhere the LREF won't name.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The contractors, the shipyard and the broadcasters are placeholders to name (question 7).</p>
+<h2 id="3-episodes">3. Episodes</h2>
+<h3 class="ep" id="ep-1-acceptance-trial-run-4-m-1c-weapons-test-footage-60-s">Ep 1 · <em>Acceptance Trial, Run 4</em> (M-1C, weapons-test footage, 60 s)</h3>
+<p><strong>Premise.</strong> Declassified footage: an M-1C on a test stand wakes, fires at a witness plate 100 km downrange, and is held for heat.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 4:3; a 2×2 split of locked cameras with IDs and timecode.</li>
+<li><em>Grain, colour:</em> sensor noise, flat and clipped; sunlit; the high-speed window in monochrome.</li>
+<li><em>Type:</em> a monospace data block (SLUG 10.0 KG · V₀ 25.0 KM/S · RANGE 100 KM · TOF); a red HOLD.</li>
+<li><em>Camera:</em> locked cameras, a long-lens tracker, a replay marked HS 1,000 FPS.</li>
+<li><em>Sound:</em> no music; range comms, countdown tones, a contact mic on the mount.</li>
+<li><em>Voice:</em> range control: "Mount, you're hot."</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–4 s: The slate.</li>
+<li>4–16 s: In 2×2: amber cells light, the clamps swing off, the cradle lays, the shell opens in your wake style.</li>
+<li>16–21 s: "Gun A, on the tone." The 1.2 s charge; one white frame (the bore transit takes ~8 ms); the blast and the 7 m recoil; A's fins burst out, glowing.</li>
+<li>21–27 s: The replay: the blue pulse runs up the bore in the rig's 8 frames, 8 ms at 1,000 fps. Freeze at muzzle exit.</li>
+<li>27–33 s: The tracker: TOF counts to 4.0 s, then a white flash (3.1 GJ).</li>
+<li>33–38 s: Gun B fires; only B vents.</li>
+<li>38–50 s: HOLD for heat; the fins cool as the timecode jumps. SUSTAINED: 1 RD/GUN/~15 S.</li>
+<li>50–60 s: END OF RUN; the tag.</li>
+</ol>
+<p><strong>Lore.</strong> Kinetics [P1 §3]; two guns of two rails per turret [User]; 10 kg at 25 km/s, 3.1 GJ (A-20); 4.0 s to 100 km [WN §2]; one shot per gun every ~15 s sustained, because of heat [LREF §4.1]. The lore's "nearly 100 meter" length [P1 §6] stays off screen, so nobody measures the model against it.</p>
+<p><strong>Assets.</strong> Reused: <code>LREF_Railcannon_M1C.blend</code> (<code>RC_M1C</code>, <code>RC_FireCycle</code>, the Stage, its <code>CAM_RC_*</code> cameras, the <code>tracer</code> blast, the per-gun controls). New: a witness plate (series-only, from <code>plating.py</code>); a comp flash until FX-SLUG exists; 2D overlays.</p>
+<p><strong>Render.</strong> ST windows 0.7 h, ST full frame 1.5 h, D 0.6 h, E 0.2 h: <strong>~3 h</strong>.</p>
+<p><strong>Risks.</strong> It needs the wake-style pick (Q15). The real-time window keys <code>shot_a</code> 0→0.33 in one frame; the replay plays the rig unchanged and stops at muzzle exit, which makes Q12's 0.33 s licence honest.</p>
+<h3 class="ep" id="ep-2-unseen-laser-focusing-array-promotional-advertisement-4">Ep 2 · <em>Unseen</em> (laser focusing array, promotional advertisement, 42 s)</h3>
+<p><strong>Premise.</strong> The array maker's brand film, shot like a luxury-watch ad: beta cloth, a polished lens, a violet pulse, and nothing else to see.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 16:9, full bleed.</li>
+<li><em>Grain, colour:</em> clean, deep black, a hard sun key; saturated violet (glow ~1–2 under AgX).</li>
+<li><em>Type:</em> a thin, wide-tracked sans, one line per card.</li>
+<li><em>Camera:</em> motion-control macro slides, rack focus, a slow orbit.</li>
+<li><em>Sound:</em> a sparse pulse on the yoke servo's tick, heard through the hull as in the film's <em>Lenses</em>.</li>
+<li><em>Voice:</em> close-miked and unhurried.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–6 s: Macro over tufted beta cloth. "Some things are made to be seen."</li>
+<li>6–12 s: Rack focus to the lens lip. "This one isn't."</li>
+<li>12–18 s: The gear sector turns as the yoke slews. Tick. Tick.</li>
+<li>18–25 s: The lens pulses violet; far behind, defocused, a spark winks out. NO BEAM. ONLY THE LENS.</li>
+<li>25–30 s: 3.3 m · 350 nm · 25 MW.</li>
+<li>30–35 s: Pull back to the Endeavor's hull, a black PD laser beside the array. "It won't sink a ship. It takes its eyes, its radiators and its missiles."</li>
+<li>35–42 s: The logo; the tag.</li>
+</ol>
+<p><strong>Lore.</strong> DEWs are "the namestays" [P1 §4]; the Endeavor's 8 arrays and 8 PD lasers [Model]; the invisible beam and violet lens [User]; 3.3 m, 350 nm, 25 MW (A-22); lasers "strip; they don't sink" [LREF §4.2].</p>
+<p><strong>Assets.</strong> Reused: the Endeavor's arrays (<code>laser_power</code>, <code>laser_traverse</code>) and <code>CAM_LookDev_*</code> cameras. New: a one-mount laser stage (series-only); FX-PD's flash as the spark; 2D cards.</p>
+<p><strong>Render.</strong> Macro stage at 1080p 4.8 h, class A pull-back 2.0 h, E 0.1 h: <strong>~7 h</strong>.</p>
+<p><strong>Risks.</strong> Push the glow and AgX turns it lavender. An ad wants a visible beam, and it mustn't get one.</p>
+<h3 class="ep" id="ep-3-six-layers-point-defence-vintage-training-film-75-s">Ep 3 · <em>Six Layers</em> (point defence, vintage training film, 75 s)</h3>
+<p><strong>Premise.</strong> An old fleet training film, "revised edition: current fleet footage": a cheerful narrator walks new crews through the six layers between a ship and a missile.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 1.37:1, pillarboxed; a leader countdown, splice flashes.</li>
+<li><em>Grain, colour:</em> black and white; heavy 16 mm grain and scratches, which also hide first-version effects.</li>
+<li><em>Type:</em> hand-lettered intertitles, cel-animated diagrams.</li>
+<li><em>Camera:</em> locked tripod shots, slow zooms.</li>
+<li><em>Sound:</em> mono, optical hiss, a library orchestra. Hull shots carry the CIWS whine; drone shots stay silent.</li>
+<li><em>Voice:</em> a warm mid-century narrator.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–6 s: The leader; SIX LAYERS · A FLEET TRAINING FILM.</li>
+<li>6–14 s: Six rings round a ship. "Each layer gets what the last one missed."</li>
+<li>14–22 s: Layers 1–3: a jammer, a drawn decoy, the arrays' ring at 30,000 km. "Blind it. Fool it. Burn it."</li>
+<li>22–30 s: Layer 4, a PD laser, "from 5,000 kilometres in."</li>
+<li>30–40 s: Layer 5: chaff, flares and smoke bloom and thin. "No air holds a screen up. Fire it just in time."</li>
+<li>40–54 s: Layer 6: a CIWS side-on, barrels blurring; a cloud laid 5–30 km out. "The missile's own speed does the killing."</li>
+<li>54–66 s: A Casaba's jet reaching a hull from 2–4 km; a red line at 10 km. "Anything that might be a Casaba dies before ten kilometres."</li>
+<li>66–75 s: THE END; the tag.</li>
+</ol>
+<p><strong>Lore.</strong> "Lasers, classic bulletstorm CIWS', kinetic kill clouds" [P2]; the Endeavor's 16 CIWS, 8 PD lasers, 6 launchers and 2 jammers [Model]; the layers and the Casaba rule [LREF §6]; ~280 rounds/s, clouds at 5–30 km [WN §8]; powered flares, thinning screens (A-27, A-28).</p>
+<p><strong>Assets.</strong> Reused: the Endeavor after the PDC pick (<code>ciws_phase</code>, <code>ciws_fire</code>, <code>cm_chaff/flare/smoke</code>, <code>ew_active</code>); Ep 2's stage plus a CIWS mount; FX-PD and FX-SMOKE, whose step 1 versions pass under the grain. New: a vintage 2D kit.</p>
+<p><strong>Render.</strong> A2 smoke shot 3.7 h, A jammer 0.9 h, stage 0.7 h, E 0.7 h: <strong>~6 h</strong>.</p>
+<p><strong>Risks.</strong> The CIWS waits on the PDC pick (Q15); if that slips, swap Eps 3 and 4. The Casaba rule sets up the film's climax: fine, if no target looks like a monitor.</p>
+<h3 class="ep" id="ep-4-field-reach-plasma-lance-technical-manual-animation-41-">Ep 4 · <em>Field Reach</em> (plasma lance, technical-manual animation, 41 s)</h3>
+<p><strong>Premise.</strong> An animated page of the Ryland-class manual: how a lance works, and why it stops where the ship's field stops.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 16:9, a manual page with FIG. numbers.</li>
+<li><em>Grain, colour:</em> none: white paper, black lines, white clay, one violet-white accent.</li>
+<li><em>Type:</em> a condensed technical sans, callouts, a CAUTION box.</li>
+<li><em>Camera:</em> orthographic and exploded views.</li>
+<li><em>Sound:</em> a click per step; no music.</li>
+<li><em>Voice:</em> none; the captions narrate.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–4 s: FIG. 1: the bow in clay ortho, its four lance slots ringed.</li>
+<li>4–10 s: A block diagram of a field projector and a plasma source: boxes, not a design.</li>
+<li>10–17 s: STEP 1, FIELD: a dashed sheath runs from nose to target. STEP 2, PLASMA: a jet runs down it. ~1,000 KM/S · ~1 GJ A PULSE.</li>
+<li>17–24 s: FIELD REACH ~50 KM: the sheath ends; the jet blooms and fizzles.</li>
+<li>24–30 s: AIMING: the lances fire along the bow, so the hull turns to bear.</li>
+<li>30–34 s: FIG. 2: a torpedo carrying its own field generator.</li>
+<li>34–41 s: CAUTION: NOT FOR USE BEYOND FIELD REACH; the tag.</li>
+</ol>
+<p><strong>Lore.</strong> Plasma needs "an active electromagnetic field to maintain its form lest it just fizzles out" and is "finicky and specialized" [P1 §4]. Four nose lances [Model]; ~1,000 km/s, ~1 GJ, ~50 km (A-23); a knife weapon [LREF §4.3].</p>
+<p><strong>Assets.</strong> Reused: the Endeavor's nose and <code>lance_power</code>. New: a clay and Freestyle set-up (series-only); a stylised jet, keeping FX-LANCE for the film; 2D diagrams.</p>
+<p><strong>Render.</strong> Clay ortho at 1080p (class D) 2.3 h, E 0.3 h: <strong>~2.6 h</strong>.</p>
+<p><strong>Risks.</strong> A detailed cutaway would be a new design needing concept sheets [User], so it stays boxes. The manual states A-23, the doctrine's reading of a soft-SF weapon, as fact.</p>
+<h3 class="ep" id="ep-5-the-multitool-garibaldi-ivanova-frigate-infomercial-90-">Ep 5 · <em>The Multitool</em> (Garibaldi-Ivanova frigate, infomercial, 90 s)</h3>
+<p><strong>Premise.</strong> The shipyard's late-night infomercial: the pitch is JCB's frigate post nearly word for word, and its caveats become the fine print.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 4:3 SD video (rendered at 960×720), star wipes, an offer bar.</li>
+<li><em>Grain, colour:</em> soft, over-saturated video, chroma bleed, loud floodlight colours.</li>
+<li><em>Type:</em> chrome bevelled words, starbursts, a tiny crawl.</li>
+<li><em>Camera:</em> fast zooms, whip pans, before-and-after splits.</li>
+<li><em>Sound:</em> a cheesy synth, studio-audience "ooh"s, a BUT WAIT stinger; the launches silent (a drone camera).</li>
+<li><em>Voice:</em> a loud pitchman and a co-host feeding him problems.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–6 s: TIRED OF ONE-TRICK WARSHIPS? "Bought a battleship for a drone war?"</li>
+<li>6–18 s: The frigate turns. "One hull. Every job." Callouts: the shield, the warp rings, the hab section, radiators that retract for warp.</li>
+<li>18–28 s: The stripped hull ("like a fluffy cat out of a bath") beside the hedgehog. "Just shove in the hot-swappable missile pod module!"</li>
+<li>28–33 s: A drone along the hull as the pod doors ripple open. "About 360 pods!"</li>
+<li>33–53 s: "Need help at medium range?" Four kinetic batteries. "They've specced everything into drones?" Lasers, bulletstorm CIWS, kill clouds. Both modules appear as concept-sheet cards.</li>
+<li>53–61 s: "Just swap it out at your nearest fleet tender!" A tender cartoon.</li>
+<li>61–74 s: BUT WAIT: "the biggest, baddest, meanest dreadnought" against 5, 10 and 20 packs. "Does it really add up?"</li>
+<li>74–85 s: The crawl: "A sole MAV frigate is more than likely insufficient… Once expended, 4 CIWS mounts remain."</li>
+<li>85–90 s: The tag.</li>
+</ol>
+<p><strong>Lore.</strong> All [P2]: "the premier generalist platform"; ~400 m; ~360 pods; the gun module for "that awkward middle-range gap"; the PD fit; the tender; packs and "the economics of war"; the 4-CIWS limit; the cat. Plus ~700 missiles a hedgehog (A-26).</p>
+<p><strong>Assets.</strong> Reused: GI and GI-MAV with <code>pod_ripple</code> (film step 3); FX-SWARM, with MSL-V or, at SD, the scaled MSL. New: the 2D kit; module and tender cards from their concept sheets (silhouettes in the film, Q13); a dreadnought silhouette.</p>
+<p><strong>Render.</strong> B at SD 4.9 h, the C launch 3.0 h, E 0.8 h: <strong>~9 h</strong>.</p>
+<p><strong>Risks.</strong> Comedy against a grim film, but it's JCB's own voice. Use a hull number, not the pack's names.</p>
+<h3 class="ep" id="ep-6-standoff-nuclear-warheads-trade-show-reel-55-s">Ep 6 · <em>Standoff</em> (nuclear warheads, trade-show reel, 55 s)</h3>
+<p><strong>Premise.</strong> The loop a missile maker plays on its expo stand: the capital-ship killer and its Casaba warhead.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 16:9 for a video wall, centre-safe type.</li>
+<li><em>Grain, colour:</em> clean CG in navy and cyan; the missile photoreal on black; SIMULATION on engagement graphics.</li>
+<li><em>Type:</em> a bold geometric sans, kinetic type.</li>
+<li><em>Camera:</em> CG orbits, smash zooms, speed ramps.</li>
+<li><em>Sound:</em> driving electronic music, a hit per word; it loops.</li>
+<li><em>Voice:</em> none; the expo floor would drown it.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–4 s: The logo; the nose turns out of black.</li>
+<li>4–14 s: Exploded turntable: ablative nose, seeker shutter, warhead, MIRV bus, motor. HARDENED NOSE · SPIN · THREE GUIDANCE PATHS.</li>
+<li>14–20 s: 30 G · Δv 150 KM/S · 100,000 KM IN 18 MIN.</li>
+<li>20–28 s: NO BLAST WAVE IN VACUUM: a bare burst strips fins out to 1–3 km but breaches a hull only within ~30–110 m.</li>
+<li>28–38 s: SIMULATION, on a box hull: a Casaba jet breaches the belt from 2–4 km. STANDOFF 2–4 KM.</li>
+<li>38–44 s: The missile slides into a hedgehog pod.</li>
+<li>44–55 s: The logo, a stand number, the loop point; the tag.</li>
+</ol>
+<p><strong>Lore.</strong> Nuclear means "Casaba howitzers, conventional, etc", "much more commonplace and reliable than even plasma" [P1 §3–4]; missiles are platforms [P1 §5]; capital-ship killers and MIRVs [P2]; vacuum effects [LREF §4.4]; the Casaba jet (A-24); the missile's numbers (A-25).</p>
+<p><strong>Assets.</strong> Reused: MSL-V's capital-ship killer, whose LOD0 is built for the film's <em>Seeker</em>; a GI-MAV pod. New: the exploded split, with sections set by the concept sheet; 2D graphics.</p>
+<p><strong>Render.</strong> The missile as a one-object stage at 1080p 1.6 h, E 0.5 h: <strong>~2 h</strong>.</p>
+<p><strong>Risks.</strong> It waits on the missile concept and MSL-V (film steps 2 and 4); if they're late, swap Eps 6 and 7. The real Casaba jets stay in the film.</p>
+<h3 class="ep" id="ep-7-through-glass-ecw-destroyer-crew-safety-briefing-60-s">Ep 7 · <em>Through Glass</em> (ECW destroyer, crew safety briefing, 60 s)</h3>
+<p><strong>Premise.</strong> The GUN-EWCC briefing every crew sees on joining a task group: why the fleet never uses radio, and who keeps it quiet.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> a 16:9 safety-card layout; the destroyer in a rounded inset.</li>
+<li><em>Grain, colour:</em> flat pastel pictograms; the inset in the film's grade.</li>
+<li><em>Type:</em> a rounded sans, numbered rules, ISO-style pictograms.</li>
+<li><em>Camera:</em> static centred cards; a slow orbit in the inset.</li>
+<li><em>Sound:</em> soft muzak, a chime per rule; the destroyer silent.</li>
+<li><em>Voice:</em> a calm airline-safety announcer, faintly uncanny.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–5 s: GUN-EWCC · CREW BRIEFING · EMISSIONS CONTROL.</li>
+<li>5–13 s: Rule 1: "For your safety, this fleet does not use radio. Every transmission tells someone where you are."</li>
+<li>13–21 s: Rule 2: "Talk by laser. Only someone standing in the beam can hear it."</li>
+<li>21–37 s: From the stern quarter, a ~200 m destroyer, its dish forward on the truss, runs out its booms and scatters drones. "Your destroyer is your relay, your sensor net, and the screen that hides your chatter."</li>
+<li>37–49 s: Rule 3: "Two sensors, or it isn't real." Rule 4: "Every drone of ours has a kill switch, so no one can return it to sender."</li>
+<li>49–55 s: The motto: WARS FOUGHT THROUGH GLASS, AND ENDED WITH MATH.</li>
+<li>55–60 s: The tag.</li>
+</ol>
+<p><strong>Lore.</strong> From [P3]: ~200 m; no main weapons; banks of supercomputers; GUN-EWCC crews; drones; the dish as the "eyes and ears" once the shield is off; "return to sender"; the motto, JCB's own line. It can silence "the radio-emissions of an entire fleet" [P1 classes]. EMCON (A-29); D10.</p>
+<p><strong>Assets.</strong> Reused: DD (film step 3) with <code>booms_deploy</code> and <code>drone_bay</code>; an SHD shield; DRN-L as specks. New: a pictogram kit.</p>
+<p><strong>Render.</strong> B at 720p 4.8 h, E 0.6 h: <strong>~5.4 h</strong>.</p>
+<p><strong>Risks.</strong> The dish fills the inset, so Q14 must hold (dish forward, as in the art). Don't name the destroyer: the Canterbury is lost in the film.</p>
+<h3 class="ep" id="ep-8-the-pocket-battleship-hanuman-heavy-cruiser-and-spinal-">Ep 8 · <em>The Pocket Battleship</em> (Hanuman heavy cruiser and spinal cannon, documentary, 68 s)</h3>
+<p><strong>Premise.</strong> A public documentary segment: how the heavy cruiser went from glass cannon to pocket battleship, told through the Astrid.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 16:9; present-day footage letterboxed at 2.39:1, drawings at 4:3.</li>
+<li><em>Grain, colour:</em> a warm documentary grade; cyanotype and sepia drawings; a false-colour thermal insert.</li>
+<li><em>Type:</em> an elegant serif, chapter cards, lower thirds.</li>
+<li><em>Camera:</em> slow dollies, pans across drawings, a long-lens archive shot.</li>
+<li><em>Sound:</em> strings and piano over silent footage, dropping out for the spinal flash.</li>
+<li><em>Voice:</em> an older historian, measured and dry.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–6 s: "Every ship in the fleet is classed by one rule of thumb: length."</li>
+<li>6–15 s: Line drawings, MULTI-ROLE beside SPINAL CANNON CAPABLE. "Like designing a ship for a gun."</li>
+<li>15–24 s: I. THE GLASS CANNON: "a spinal cannon at the expense of everything"; a battlecruiser stamped NEVER WENT ANYWHERE.</li>
+<li>24–34 s: II. THE POCKET BATTLESHIP: a dolly along the Astrid's aft hull as eight stacked fins run out and glow. ASTRID · HANUMAN CLASS · 1,600 M.</li>
+<li>34–40 s: THERMAL: "She glows in thermals. Fins out, she can be seen fifteen AU away."</li>
+<li>40–45 s: The AVPSA tilts: "just over a hundred metres across."</li>
+<li>45–55 s: Archive, long lens: a distant heavy cruiser turns (compressed, and labelled so), steadies, and a small flash sparks at its bow. "A kilometre of her is gun. To aim it, she turns."</li>
+<li>55–63 s: A push on a still. "She turns slowly, her armour is thin, and she can't hide."</li>
+<li>63–68 s: The tag.</li>
+</ol>
+<p><strong>Lore.</strong> From [P1 classes]: classing by length; MRVs and SCCs; glass cannons and pocket battleships; a spinal of "a good kilometer or so"; the battlecruiser that "never went anywhere". From [P1 §7]: 8 fins past the warp-ring boundary; "GLOWS in thermals"; the AVPSA; weak manoeuvrability, armour and stealth. [P2]: 1,600 m. ~15 AU [WN §5]; aiming by turning [LREF §10].</p>
+<p><strong>Assets.</strong> Reused: AST (film step 3) with <code>fins_deploy</code>, <code>avpsa_az/el</code> and <code>rcs_bow/stern</code>; FX-SPINAL as a far flash only. New: line renders of EN and AST; 2D drawings and graphics.</p>
+<p><strong>Render.</strong> B 7.5 h, D 1.0 h, E 0.6 h: <strong>~9 h</strong>.</p>
+<p><strong>Risks.</strong> The Astrid's ~19 M-1Cs and its CIWS inherit Q15. Never show the bloom down the barrel, the film's climax. Sir_Lazz's art itself needs permission (question 8).</p>
+<h3 class="ep" id="ep-9-undisclosed-ryland-cruiser-endeavor-news-segment-75-s">Ep 9 · <em>Undisclosed</em> (Ryland cruiser Endeavor, news segment, 75 s)</h3>
+<p><strong>Premise.</strong> Evening news: a task group, the Endeavor nearest the camera, leaves on a deployment the LREF won't describe. The live picture ends as the warp rings light, and the segment hands over to the film.</p>
+<p><strong>Style</strong></p>
+<ul>
+<li><em>Frame:</em> 16:9 broadcast: a bug, a LIVE tag, a ticker, FILE tags.</li>
+<li><em>Grain, colour:</em> sharpened, compressed video, pumping exposure; no heat shimmer, as there's no air.</li>
+<li><em>Type:</em> the network's lower thirds and ticker.</li>
+<li><em>Camera:</em> a station's operator-driven long lens, the ship under a third of the frame; closer FILE clips.</li>
+<li><em>Sound:</em> the news theme and studio voices over silent pictures.</li>
+<li><em>Voice:</em> a neutral anchor and a live, slightly breathless reporter.</li>
+</ul>
+<p><strong>Beats</strong></p>
+<ol>
+<li>0–6 s: "An LREF task group is leaving tonight on a deployment the service won't describe."</li>
+<li>6–16 s: LIVE: the Endeavor over the planet, shield on, fins stowed, rings turning. L.R.E.F.S. ENDEAVOR · RYLAND-CLASS CRUISER.</li>
+<li>16–26 s: FILE: turrets on their travel locks, a laser array, the missile cells. "Every weapon family the fleet has, on one hull."</li>
+<li>26–34 s: LIVE: fourteen sets of running lights. "Behind her, the flagship Astrid."</li>
+<li>34–42 s: FILE: the gold shield. "It rides ahead of her in warp. Before a fight, they leave it with the tender."</li>
+<li>42–52 s: LIVE: the rings brighten as the clock jumps three minutes. "There's no sound out here. Just the light."</li>
+<li>52–58 s: A blue-white bloom whites out the camera, which recovers on empty stars. "And she's gone."</li>
+<li>58–64 s: "The LREF will release details when it can." Freeze; the signal drops.</li>
+<li>64–75 s: Black; the tag's counter rolls to T−0 and becomes COLLATED FROM THE AFTER ACTION REPORT: the film's first card.</li>
+</ol>
+<p><strong>Lore.</strong> [P1 §6]: the Ryland class, an exploratory Grace-class variant with railguns, arrays, lances and missiles but no spinal cannon. [P1 classes]: 950–1,400 m, "the workhorse of both the LREF and EAF". [P1 §10]: the shield, left before battle and collected after. [Model]: 1,194 m; rings at 2.4 rpm. A 3–5 min spool (A-05).</p>
+<p><strong>Assets.</strong> Reused: the Endeavor rebuilt after Q15 (<code>warp_charge</code>, <code>ring_rpm</code>); the World shader's Earth-like planet; FX-WARP; FX-FAR; the film's first card and star plate. New: the news 2D kit.</p>
+<p><strong>Render.</strong> S at 720p 3.1 h, A at 720p 3.2 h, D 0.5 h, E 0.3 h: <strong>~7 h</strong>.</p>
+<p><strong>Risks.</strong> The film defines only the arrival flash (A-04), so the departure's look is your call (question 6). The other ships stay as lights: the corvette and tender have no design yet.</p>
+<h2 id="4-open-questions">4. Open questions</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>The series title</td>
+<td><em>Spin-Up</em>; <em>Before Tidebreak</em> if you want it plain.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Which classes count as main</td>
+<td>The nine above, plus the corvette as a bonus recruitment ad between Eps 7 and 8 once its concept is picked.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Style swaps</td>
+<td>Keep them: only the news can end live into the film, and the lasers suit an ad about what you can't see. Two swaps work, less well: the Astrid as the ad (the documentary would then lose the one class the lore gives a history), or PD as gun-camera footage of a drill (rawer, but it explains less).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Episode length and cadence</td>
+<td>Keep 41–90 s and two a week. If 9:26 feels long beside a 4:58 film, cap episodes at 60 s: Eps 3, 5, 8 and 9 lose about 1:08 between them, mostly cards, which saves under an hour of render.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Q15: the wake style and the PDC design</td>
+<td>Your picks; nothing here favours one. They gate Eps 1 and 3 and reach Eps 5, 8 and 9. Pick both before rendering, or swap Eps 3 and 4 if the PDC waits.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Ep 9's warp departure</td>
+<td>Mirror the arrival: FX-WARP's bloom, seen as a broadcast whiteout.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Names for the in-world makers</td>
+<td>Use lore names where they exist; ask JCB to name the shipyard, the contractors and the broadcasters, or use logos alone.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Sir_Lazz's art on screen (Ep 8)</td>
+<td>Use line renders of the models; show the art itself only with JCB's and the artist's OK.</td>
+</tr>
+</tbody>
+</table></div>
+</main>
+<footer>Generated by miniseries/build_plan_page.py from miniseries/SERIES_PLAN.md.</footer>
+</div>
+</body>
+</html>

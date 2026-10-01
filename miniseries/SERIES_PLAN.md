@@ -1,7 +1,7 @@
 # *Operation Tidebreak*: the pre-release mini-series
 
 **Status:** a draft plan for the user. **Sources:** the lore posts, `doctrine/`, `storyboard/tidebreak_data.py`, `ASSET_REQUESTS.md`, `OPEN_QUESTIONS.md`, `pack/project_docs/`.
-**Tags:** [P1 §n] is JCB's Part 1 post, point n, and [P1 classes] its class list; [P2] and [P3] are the frigate and destroyer posts; [Model] is the Blender README; A-nn, [LREF §n] and [WN §n] are the doctrine's assumptions, sections and working numbers; [User] is a decision already made.
+**Tags:** [P1 §n] is JCB's Part 1 post, point n ([P1 classes] is its class list); [P2] and [P3] are the frigate and destroyer posts; [Model] is the Blender README; A-nn, [LREF §n] and [WN §n] are the doctrine's assumptions, sections and working numbers; [User] is a decision already made.
 
 ## 1. Concept
 
@@ -15,7 +15,7 @@
 Each episode is in-world media from the months before the operation, made by whoever really would make it: the LREF and its fleet units, GUN-EWCC [P3], two contractors, a shipyard and two broadcasters. Eight are peacetime pieces that can't know Tidebreak is coming, which is the spoiler guard. The ninth is the news of the task group leaving.
 
 ### Series rules
-- **Sound.** Narration, music and graphics belong to the medium. Footage of vacuum is silent unless the camera rides a hull or the sound comes on an instrument channel: comms, telemetry, a contact mic.
+- **Sound.** Narration, music and graphics belong to the medium. Vacuum footage is silent unless the camera rides a hull or the sound comes on an instrument channel: comms, telemetry, a contact mic.
 - **Numbers.** Only the lore's and the doctrine's, with their limits. Assumptions shown on screen (A-20, A-22 to A-25) become canon, so each episode lists them.
 - **Look [User].** Invisible beams; lenses violet only while firing; blue only in the M-1C's bore pulse; heat only on the fins' radiator faces; fins stowed and shields on in warp.
 - **No spoilers.** No Maren, Breakwater, Compact, Skerry, Breakers or Anchor, and nothing from the dropped AI plot line. No task-group names but the Astrid and the Endeavor, nothing damaged, no film framing copied. Systems appear in tests, drills and diagrams, never in battle. The series does teach the film's rules (time of flight, invisible beams, kill clouds, field reach, standoff, heat), so the film has less to explain.
@@ -38,18 +38,18 @@ Each episode is in-world media from the months before the operation, made by who
 | Light cruiser, battleship, carrier, dreadnought, chem-rails | Dropped | Not in the task group; chem-rails are "near to obsolete" [P1 §3] |
 
 ### Tag and end card
-- **Tag (5 s, every episode).** A hard cut to the film's still star plate. OPERATION TIDEBREAK types on in the report's white monospace, over a mission-clock counter rolling from T−[n+1] to T−[n] (the film's "digits roll" rule) and the release date. The only sound is the film's prologue tone.
-- **Finale.** The counter reaches T−0 and the card becomes the film's first card, *The record* (UNITED NATIONS ARMED FORCES · LONG RANGE EXPEDITIONARY FORCES / AFTER ACTION REPORT · OPERATION TIDEBREAK / RESTRICTED).
-- **End card** (the platform's end screen, outside the runtime): the next episode, the playlist, and "Based on JCB's *Wearing Power Armor to a Magic School*. Ship designs by Sir_Lazz."
+- **Tag (5 s, every episode).** A hard cut to the film's own title card, *The record*: OPERATION TIDEBREAK in white monospace on the still star plate. Under it, in place of the card's second line, a mission-clock counter rolls from T−[n+1] to T−[n] (the film's "digits roll" rule), with the release date. Sound: the card's low tone.
+- **Finale.** The counter reaches T−0 and gives way to the card's real second line, COLLATED FROM THE AFTER ACTION REPORT, so the series' last frame is the film's first.
+- **End card** (the platform's end screen): the next episode, the playlist, and "Based on JCB's *Wearing Power Armor to a Magic School*. Ship designs by Sir_Lazz."
 
 ### Order and cadence
-- **Order:** the guns, then the defences and missiles, then the ships up to the flagship, then the departure, with the tone alternating: raw, glossy, vintage, silent, comic, loud, uncanny, grave, live. It follows the film's build order: Eps 1–4 need built assets, the Q15 picks and step 1's first-version effects; Eps 5–9 need step 3–4 assets.
-- **Cadence:** two a week, with the finale on release day as the film's pre-show. Finish Eps 1–4 before Ep 1 airs; if the series must run alongside the film's production, go weekly.
+- **Order:** the guns, then the defences and missiles, then the ships up to the flagship, then the departure. The tone alternates: raw, glossy, vintage, silent, comic, loud, uncanny, grave, live. It follows the film's build order: Eps 1–4 need built assets, the Q15 picks and step 1's first-version effects; Eps 5–9 need step 3–4 assets.
+- **Cadence:** two a week, with the finale on release day as the film's pre-show. Finish Eps 1–4 before Ep 1 airs. If the series must run alongside production, go weekly.
 
 ### Runtime and render
-- **Runtime:** 9:26 over nine episodes of 41–90 s (13,584 frames).
-- **Method:** the film's classes (A 45, A2 90, B 75, C 200, S 30, D 15, E 2 s/frame at 1920×804), scaled by each style's pixel count. A one-mount stage ("ST") is costed from the measured M-1C stage (3–3.5 s/frame at 60 % and 64 spp): ~9 s/frame at full size, ~18 s as a 128 spp macro.
-- **Total: ~51 h raw, ~66 h with the film's 30 % re-render allowance**, about 40 % of a film pass. Keep it out of the film's pass week: the film's gate has under an hour to spare (Q17).
+- **Runtime:** 9:26 over nine episodes of 41–90 s (13,584 frames), against the film's 4:58 since revision 7.
+- **Method:** the film's classes (A 45, A2 90, B 75, C 200, S 30, D 15, E 2 s/frame), scaled by each style's pixel count. A one-mount stage ("ST") comes from the measured M-1C stage (3–3.5 s/frame at 60 %): ~9 s/frame at full size, ~18 s as a macro.
+- **Total: ~51 h raw, ~66 h with the film's 30 % re-render allowance**, a little under half a film pass (112 h raw). Keep it out of the film's pass week: the film's gate has 14.6 h to spare (Q17), far less than the series needs.
 
 ## 2. Episode table
 
@@ -75,28 +75,28 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 **Style**
 - *Frame:* 4:3; a 2×2 split of locked cameras with IDs and timecode.
 - *Grain, colour:* sensor noise, flat and clipped; sunlit; the high-speed window in monochrome.
-- *Type:* a monospace data block (SLUG 10.0 KG · V₀ 25.0 KM/S · RANGE 100 KM · TOF), a slate, a red HOLD.
+- *Type:* a monospace data block (SLUG 10.0 KG · V₀ 25.0 KM/S · RANGE 100 KM · TOF); a red HOLD.
 - *Camera:* locked cameras, a long-lens tracker, a replay marked HS 1,000 FPS.
 - *Sound:* no music; range comms, countdown tones, a contact mic on the mount.
 - *Voice:* range control: "Mount, you're hot."
 
 **Beats**
 1. 0–4 s: The slate.
-2. 4–16 s: In 2×2: amber cells light, the clamps swing off, the cradle lays, and the shell opens in your wake style.
-3. 16–21 s: "Gun A, on the tone." The 1.2 s charge, one white frame (the bore transit takes ~8 ms), the blast and the 7 m recoil; A's fins burst out, glowing.
+2. 4–16 s: In 2×2: amber cells light, the clamps swing off, the cradle lays, the shell opens in your wake style.
+3. 16–21 s: "Gun A, on the tone." The 1.2 s charge; one white frame (the bore transit takes ~8 ms); the blast and the 7 m recoil; A's fins burst out, glowing.
 4. 21–27 s: The replay: the blue pulse runs up the bore in the rig's 8 frames, 8 ms at 1,000 fps. Freeze at muzzle exit.
 5. 27–33 s: The tracker: TOF counts to 4.0 s, then a white flash (3.1 GJ).
 6. 33–38 s: Gun B fires; only B vents.
-7. 38–50 s: HOLD. "Hold for heat." The fins cool as the timecode jumps. SUSTAINED: 1 RD/GUN/~15 S.
+7. 38–50 s: HOLD for heat; the fins cool as the timecode jumps. SUSTAINED: 1 RD/GUN/~15 S.
 8. 50–60 s: END OF RUN; the tag.
 
 **Lore.** Kinetics [P1 §3]; two guns of two rails per turret [User]; 10 kg at 25 km/s, 3.1 GJ (A-20); 4.0 s to 100 km [WN §2]; one shot per gun every ~15 s sustained, because of heat [LREF §4.1]. The lore's "nearly 100 meter" length [P1 §6] stays off screen, so nobody measures the model against it.
 
-**Assets.** Reused: `LREF_Railcannon_M1C.blend` (`RC_M1C`, `RC_FireCycle`, the Stage and its `CAM_RC_*` cameras, the `tracer` blast, the per-gun controls). New: a witness plate (series-only, from `plating.py`); a comp flash until FX-SLUG exists; 2D overlays.
+**Assets.** Reused: `LREF_Railcannon_M1C.blend` (`RC_M1C`, `RC_FireCycle`, the Stage, its `CAM_RC_*` cameras, the `tracer` blast, the per-gun controls). New: a witness plate (series-only, from `plating.py`); a comp flash until FX-SLUG exists; 2D overlays.
 
 **Render.** ST windows 0.7 h, ST full frame 1.5 h, D 0.6 h, E 0.2 h: **~3 h**.
 
-**Risks.** It needs the wake-style pick (Q15). The real-time window keys `shot_a` 0→0.33 in one frame, and the replay plays the rig unchanged and stops at muzzle exit. That makes Q12's 0.33 s licence honest.
+**Risks.** It needs the wake-style pick (Q15). The real-time window keys `shot_a` 0→0.33 in one frame; the replay plays the rig unchanged and stops at muzzle exit, which makes Q12's 0.33 s licence honest.
 
 ### Ep 2 · *Unseen* (laser focusing array, promotional advertisement, 42 s)
 **Premise.** The array maker's brand film, shot like a luxury-watch ad: beta cloth, a polished lens, a violet pulse, and nothing else to see.
@@ -130,11 +130,11 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 **Premise.** An old fleet training film, "revised edition: current fleet footage": a cheerful narrator walks new crews through the six layers between a ship and a missile.
 
 **Style**
-- *Frame:* 1.37:1, pillarboxed; a leader countdown and splice flashes.
-- *Grain, colour:* black and white, with heavy 16 mm grain and scratches that also hide first-version effects.
+- *Frame:* 1.37:1, pillarboxed; a leader countdown, splice flashes.
+- *Grain, colour:* black and white; heavy 16 mm grain and scratches, which also hide first-version effects.
 - *Type:* hand-lettered intertitles, cel-animated diagrams.
 - *Camera:* locked tripod shots, slow zooms.
-- *Sound:* mono with optical hiss and a library orchestra. Hull shots carry the CIWS whine; drone shots stay silent.
+- *Sound:* mono, optical hiss, a library orchestra. Hull shots carry the CIWS whine; drone shots stay silent.
 - *Voice:* a warm mid-century narrator.
 
 **Beats**
@@ -143,17 +143,17 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 3. 14–22 s: Layers 1–3: a jammer, a drawn decoy, the arrays' ring at 30,000 km. "Blind it. Fool it. Burn it."
 4. 22–30 s: Layer 4, a PD laser, "from 5,000 kilometres in."
 5. 30–40 s: Layer 5: chaff, flares and smoke bloom and thin. "No air holds a screen up. Fire it just in time."
-6. 40–54 s: Layer 6: a CIWS side-on, barrels blurring, and a cloud laid 5–30 km out. "The missile's own speed does the killing."
-7. 54–66 s: A Casaba's jet reaching a hull from 2–4 km, and a red line at 10 km. "Anything that might be a Casaba dies before ten kilometres."
+6. 40–54 s: Layer 6: a CIWS side-on, barrels blurring; a cloud laid 5–30 km out. "The missile's own speed does the killing."
+7. 54–66 s: A Casaba's jet reaching a hull from 2–4 km; a red line at 10 km. "Anything that might be a Casaba dies before ten kilometres."
 8. 66–75 s: THE END; the tag.
 
-**Lore.** "Lasers, classic bulletstorm CIWS', kinetic kill clouds" [P2]; the Endeavor's 16 CIWS, 8 PD lasers, 6 launchers and 2 jammers [Model]; the layers and the Casaba rule [LREF §6]; ~280 rounds/s and clouds at 5–30 km [WN §8]; powered flares and thinning screens (A-27, A-28).
+**Lore.** "Lasers, classic bulletstorm CIWS', kinetic kill clouds" [P2]; the Endeavor's 16 CIWS, 8 PD lasers, 6 launchers and 2 jammers [Model]; the layers and the Casaba rule [LREF §6]; ~280 rounds/s, clouds at 5–30 km [WN §8]; powered flares, thinning screens (A-27, A-28).
 
-**Assets.** Reused: the Endeavor after the PDC pick, with `ciws_phase`, `ciws_fire`, `cm_chaff/flare/smoke` and `ew_active`; Ep 2's stage plus a CIWS mount; FX-PD and FX-SMOKE, whose step 1 versions pass under the grain. New: a vintage 2D kit.
+**Assets.** Reused: the Endeavor after the PDC pick (`ciws_phase`, `ciws_fire`, `cm_chaff/flare/smoke`, `ew_active`); Ep 2's stage plus a CIWS mount; FX-PD and FX-SMOKE, whose step 1 versions pass under the grain. New: a vintage 2D kit.
 
 **Render.** A2 smoke shot 3.7 h, A jammer 0.9 h, stage 0.7 h, E 0.7 h: **~6 h**.
 
-**Risks.** The CIWS waits on the PDC pick (Q15); if that slips, swap Eps 3 and 4. The Casaba rule sets up the film's climax, which is fine if no target looks like a monitor.
+**Risks.** The CIWS waits on the PDC pick (Q15); if that slips, swap Eps 3 and 4. The Casaba rule sets up the film's climax: fine, if no target looks like a monitor.
 
 ### Ep 4 · *Field Reach* (plasma lance, technical-manual animation, 41 s)
 **Premise.** An animated page of the Ryland-class manual: how a lance works, and why it stops where the ship's field stops.
@@ -169,15 +169,15 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 **Beats**
 1. 0–4 s: FIG. 1: the bow in clay ortho, its four lance slots ringed.
 2. 4–10 s: A block diagram of a field projector and a plasma source: boxes, not a design.
-3. 10–17 s: STEP 1, FIELD: a dashed sheath runs from the nose to the target. STEP 2, PLASMA: a jet runs down it. ~1,000 KM/S · ~1 GJ A PULSE.
-4. 17–24 s: FIELD REACH ~50 KM: the sheath ends, and the jet blooms and fizzles.
+3. 10–17 s: STEP 1, FIELD: a dashed sheath runs from nose to target. STEP 2, PLASMA: a jet runs down it. ~1,000 KM/S · ~1 GJ A PULSE.
+4. 17–24 s: FIELD REACH ~50 KM: the sheath ends; the jet blooms and fizzles.
 5. 24–30 s: AIMING: the lances fire along the bow, so the hull turns to bear.
-6. 30–34 s: FIG. 2: a torpedo that carries its own field generator.
+6. 30–34 s: FIG. 2: a torpedo carrying its own field generator.
 7. 34–41 s: CAUTION: NOT FOR USE BEYOND FIELD REACH; the tag.
 
 **Lore.** Plasma needs "an active electromagnetic field to maintain its form lest it just fizzles out" and is "finicky and specialized" [P1 §4]. Four nose lances [Model]; ~1,000 km/s, ~1 GJ, ~50 km (A-23); a knife weapon [LREF §4.3].
 
-**Assets.** Reused: the Endeavor's nose and `lance_power`. New: a clay and Freestyle set-up (series-only); a stylised jet, which keeps FX-LANCE for the film; 2D diagrams.
+**Assets.** Reused: the Endeavor's nose and `lance_power`. New: a clay and Freestyle set-up (series-only); a stylised jet, keeping FX-LANCE for the film; 2D diagrams.
 
 **Render.** Clay ortho at 1080p (class D) 2.3 h, E 0.3 h: **~2.6 h**.
 
@@ -188,15 +188,15 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 
 **Style**
 - *Frame:* 4:3 SD video (rendered at 960×720), star wipes, an offer bar.
-- *Grain, colour:* soft, over-saturated video with chroma bleed and loud floodlight colours.
+- *Grain, colour:* soft, over-saturated video, chroma bleed, loud floodlight colours.
 - *Type:* chrome bevelled words, starbursts, a tiny crawl.
 - *Camera:* fast zooms, whip pans, before-and-after splits.
-- *Sound:* a cheesy synth, studio-audience "ooh"s and a BUT WAIT stinger; the launches silent (a drone camera).
-- *Voice:* a loud pitchman, and a co-host feeding him problems.
+- *Sound:* a cheesy synth, studio-audience "ooh"s, a BUT WAIT stinger; the launches silent (a drone camera).
+- *Voice:* a loud pitchman and a co-host feeding him problems.
 
 **Beats**
 1. 0–6 s: TIRED OF ONE-TRICK WARSHIPS? "Bought a battleship for a drone war?"
-2. 6–18 s: The frigate turns. "One hull. Every job." Callouts: the shield, the warp rings, the hab section, the radiators that retract for warp.
+2. 6–18 s: The frigate turns. "One hull. Every job." Callouts: the shield, the warp rings, the hab section, radiators that retract for warp.
 3. 18–28 s: The stripped hull ("like a fluffy cat out of a bath") beside the hedgehog. "Just shove in the hot-swappable missile pod module!"
 4. 28–33 s: A drone along the hull as the pod doors ripple open. "About 360 pods!"
 5. 33–53 s: "Need help at medium range?" Four kinetic batteries. "They've specced everything into drones?" Lasers, bulletstorm CIWS, kill clouds. Both modules appear as concept-sheet cards.
@@ -217,18 +217,18 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 **Premise.** The loop a missile maker plays on its expo stand: the capital-ship killer and its Casaba warhead.
 
 **Style**
-- *Frame:* 16:9 for a video wall, with centre-safe type.
+- *Frame:* 16:9 for a video wall, centre-safe type.
 - *Grain, colour:* clean CG in navy and cyan; the missile photoreal on black; SIMULATION on engagement graphics.
 - *Type:* a bold geometric sans, kinetic type.
 - *Camera:* CG orbits, smash zooms, speed ramps.
-- *Sound:* driving electronic music with a hit on each word; it loops.
-- *Voice:* none, since the expo floor would drown it.
+- *Sound:* driving electronic music, a hit per word; it loops.
+- *Voice:* none; the expo floor would drown it.
 
 **Beats**
 1. 0–4 s: The logo; the nose turns out of black.
 2. 4–14 s: Exploded turntable: ablative nose, seeker shutter, warhead, MIRV bus, motor. HARDENED NOSE · SPIN · THREE GUIDANCE PATHS.
 3. 14–20 s: 30 G · Δv 150 KM/S · 100,000 KM IN 18 MIN.
-4. 20–28 s: NO BLAST WAVE IN VACUUM: a bare burst strips fins out to 1–3 km, but breaches a hull only within ~30–110 m.
+4. 20–28 s: NO BLAST WAVE IN VACUUM: a bare burst strips fins out to 1–3 km but breaches a hull only within ~30–110 m.
 5. 28–38 s: SIMULATION, on a box hull: a Casaba jet breaches the belt from 2–4 km. STANDOFF 2–4 KM.
 6. 38–44 s: The missile slides into a hedgehog pod.
 7. 44–55 s: The logo, a stand number, the loop point; the tag.
@@ -245,11 +245,11 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 **Premise.** The GUN-EWCC briefing every crew sees on joining a task group: why the fleet never uses radio, and who keeps it quiet.
 
 **Style**
-- *Frame:* a 16:9 safety-card layout, with the destroyer in a rounded inset.
+- *Frame:* a 16:9 safety-card layout; the destroyer in a rounded inset.
 - *Grain, colour:* flat pastel pictograms; the inset in the film's grade.
 - *Type:* a rounded sans, numbered rules, ISO-style pictograms.
 - *Camera:* static centred cards; a slow orbit in the inset.
-- *Sound:* soft muzak with a chime per rule; the destroyer is silent.
+- *Sound:* soft muzak, a chime per rule; the destroyer silent.
 - *Voice:* a calm airline-safety announcer, faintly uncanny.
 
 **Beats**
@@ -273,7 +273,7 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 **Premise.** A public documentary segment: how the heavy cruiser went from glass cannon to pocket battleship, told through the Astrid.
 
 **Style**
-- *Frame:* 16:9, with present-day footage letterboxed at 2.39:1 and drawings at 4:3.
+- *Frame:* 16:9; present-day footage letterboxed at 2.39:1, drawings at 4:3.
 - *Grain, colour:* a warm documentary grade; cyanotype and sepia drawings; a false-colour thermal insert.
 - *Type:* an elegant serif, chapter cards, lower thirds.
 - *Camera:* slow dollies, pans across drawings, a long-lens archive shot.
@@ -283,8 +283,8 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 **Beats**
 1. 0–6 s: "Every ship in the fleet is classed by one rule of thumb: length."
 2. 6–15 s: Line drawings, MULTI-ROLE beside SPINAL CANNON CAPABLE. "Like designing a ship for a gun."
-3. 15–24 s: I. THE GLASS CANNON: "a spinal cannon at the expense of everything", and a battlecruiser stamped NEVER WENT ANYWHERE.
-4. 24–34 s: II. THE POCKET BATTLESHIP: a dolly along the Astrid's aft hull as its eight stacked fins run out and glow. ASTRID · HANUMAN CLASS · 1,600 M.
+3. 15–24 s: I. THE GLASS CANNON: "a spinal cannon at the expense of everything"; a battlecruiser stamped NEVER WENT ANYWHERE.
+4. 24–34 s: II. THE POCKET BATTLESHIP: a dolly along the Astrid's aft hull as eight stacked fins run out and glow. ASTRID · HANUMAN CLASS · 1,600 M.
 5. 34–40 s: THERMAL: "She glows in thermals. Fins out, she can be seen fifteen AU away."
 6. 40–45 s: The AVPSA tilts: "just over a hundred metres across."
 7. 45–55 s: Archive, long lens: a distant heavy cruiser turns (compressed, and labelled so), steadies, and a small flash sparks at its bow. "A kilometre of her is gun. To aim it, she turns."
@@ -297,14 +297,14 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 
 **Render.** B 7.5 h, D 1.0 h, E 0.6 h: **~9 h**.
 
-**Risks.** The Astrid's ~19 M-1Cs and its CIWS inherit Q15. Never show the bloom down the barrel, which is the film's climax. Sir_Lazz's art itself needs permission (question 8).
+**Risks.** The Astrid's ~19 M-1Cs and its CIWS inherit Q15. Never show the bloom down the barrel, the film's climax. Sir_Lazz's art itself needs permission (question 8).
 
 ### Ep 9 · *Undisclosed* (Ryland cruiser Endeavor, news segment, 75 s)
 **Premise.** Evening news: a task group, the Endeavor nearest the camera, leaves on a deployment the LREF won't describe. The live picture ends as the warp rings light, and the segment hands over to the film.
 
 **Style**
-- *Frame:* 16:9 broadcast, with a bug, a LIVE tag, a ticker and FILE tags.
-- *Grain, colour:* sharpened, compressed video with pumping exposure; no heat shimmer, since there's no air.
+- *Frame:* 16:9 broadcast: a bug, a LIVE tag, a ticker, FILE tags.
+- *Grain, colour:* sharpened, compressed video, pumping exposure; no heat shimmer, as there's no air.
 - *Type:* the network's lower thirds and ticker.
 - *Camera:* a station's operator-driven long lens, the ship under a third of the frame; closer FILE clips.
 - *Sound:* the news theme and studio voices over silent pictures.
@@ -319,24 +319,24 @@ The contractors, the shipyard and the broadcasters are placeholders to name (que
 6. 42–52 s: LIVE: the rings brighten as the clock jumps three minutes. "There's no sound out here. Just the light."
 7. 52–58 s: A blue-white bloom whites out the camera, which recovers on empty stars. "And she's gone."
 8. 58–64 s: "The LREF will release details when it can." Freeze; the signal drops.
-9. 64–75 s: Black; the counter rolls to T−0; the film's first card and the release date.
+9. 64–75 s: Black; the tag's counter rolls to T−0 and becomes COLLATED FROM THE AFTER ACTION REPORT: the film's first card.
 
-**Lore.** [P1 §6]: the Ryland class, an exploratory variant of the Grace class, with railguns, arrays, lances and missiles but no spinal cannon. [P1 classes]: 950–1,400 m, "the workhorse of both the LREF and EAF". [P1 §10]: the shield, left before battle and collected after. [Model]: 1,194 m; rings at 2.4 rpm. A 3–5 min spool (A-05).
+**Lore.** [P1 §6]: the Ryland class, an exploratory Grace-class variant with railguns, arrays, lances and missiles but no spinal cannon. [P1 classes]: 950–1,400 m, "the workhorse of both the LREF and EAF". [P1 §10]: the shield, left before battle and collected after. [Model]: 1,194 m; rings at 2.4 rpm. A 3–5 min spool (A-05).
 
 **Assets.** Reused: the Endeavor rebuilt after Q15 (`warp_charge`, `ring_rpm`); the World shader's Earth-like planet; FX-WARP; FX-FAR; the film's first card and star plate. New: the news 2D kit.
 
 **Render.** S at 720p 3.1 h, A at 720p 3.2 h, D 0.5 h, E 0.3 h: **~7 h**.
 
-**Risks.** The film defines only the arrival flash (A-04), so the departure's look is your call (question 6). The other ships stay as lights, since the corvette and tender have no design yet.
+**Risks.** The film defines only the arrival flash (A-04), so the departure's look is your call (question 6). The other ships stay as lights: the corvette and tender have no design yet.
 
 ## 4. Open questions
 
 | # | Question | Recommendation |
 |---|---|---|
 | 1 | The series title | *Spin-Up*; *Before Tidebreak* if you want it plain. |
-| 2 | Which classes count as main | The nine above, with the corvette as a bonus recruitment ad between Eps 7 and 8 once its concept is picked. |
-| 3 | Style swaps | Keep them: only the news can end live into the film, and the lasers suit an ad about what you can't see. Possible swaps: the Astrid as the ad (but only the heavy cruiser has a lore history), or PD as gun-camera footage of a drill (rawer, but it explains less). |
-| 4 | Episode length and cadence | Keep 41–90 s (9:26) and two a week. A 60 s cap saves about a minute, mostly cards, so under an hour of render. |
+| 2 | Which classes count as main | The nine above, plus the corvette as a bonus recruitment ad between Eps 7 and 8 once its concept is picked. |
+| 3 | Style swaps | Keep them: only the news can end live into the film, and the lasers suit an ad about what you can't see. Two swaps work, less well: the Astrid as the ad (the documentary would then lose the one class the lore gives a history), or PD as gun-camera footage of a drill (rawer, but it explains less). |
+| 4 | Episode length and cadence | Keep 41–90 s and two a week. If 9:26 feels long beside a 4:58 film, cap episodes at 60 s: Eps 3, 5, 8 and 9 lose about 1:08 between them, mostly cards, which saves under an hour of render. |
 | 5 | Q15: the wake style and the PDC design | Your picks; nothing here favours one. They gate Eps 1 and 3 and reach Eps 5, 8 and 9. Pick both before rendering, or swap Eps 3 and 4 if the PDC waits. |
 | 6 | Ep 9's warp departure | Mirror the arrival: FX-WARP's bloom, seen as a broadcast whiteout. |
 | 7 | Names for the in-world makers | Use lore names where they exist; ask JCB to name the shipyard, the contractors and the broadcasters, or use logos alone. |

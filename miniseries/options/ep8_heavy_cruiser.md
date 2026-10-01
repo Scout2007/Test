@@ -114,4 +114,4 @@ Three separate events around the Astrid, each showing one idea and none explaini
 
 ## Recommendation
 
-C is my pick: it is the only option with a human memory in it, it costs the least to say, and the empty tin carries the idea without a spec. B is the best companion if you want a lighter piece, because it is almost silent; take it over A if you want a second option under 15 words. A is the one that needs a decision from you: it shows a 10,000 km shot with a roughly 2 min 48 s flight and a two-minute turn, which become canon if used, and C implies each shot needs about half a minute of fin time.
+C is my pick: it is the only option with a human memory in it, and the empty tin carries the idea without a spec. B is the cheap, nearly silent alternative (13 words) and the funniest in a run of nine. A needs your decision: it shows a 10,000 km shot with a flight of about 2 min 48 s and a two-minute turn, and C implies each shot costs about half a minute of fin time; both become canon if used.

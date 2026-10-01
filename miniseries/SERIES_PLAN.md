@@ -18,9 +18,10 @@ Each episode is in-world media from the months before the operation, made by who
 - **Sound.** Narration, music and graphics belong to the medium. Vacuum footage is silent unless the camera rides a hull or the sound comes on an instrument channel: comms, telemetry, a contact mic.
 - **Numbers.** Only the lore's and the doctrine's, with their limits. Assumptions shown on screen (A-20, A-22 to A-25) become canon, so each episode lists them.
 - **Look [User].** Invisible beams; lenses violet only while firing; blue only in the M-1C's bore pulse; heat only on the fins' radiator faces; fins stowed and shields on in warp.
-- **No spoilers.** No Maren, Breakwater, Compact, Skerry, Breakers or Anchor, and nothing from the dropped AI plot line. No task-group names but the Astrid and the Endeavor, nothing damaged, no film framing copied. Systems appear in tests, drills and diagrams, never in battle. The series does teach the film's rules (time of flight, invisible beams, kill clouds, field reach, standoff, heat), so the film has less to explain.
+- **No spoilers.** No Maren, Breakwater, Compact, Skerry, Breakers or Anchor, and nothing from the dropped AI plot line. No task-group names but the Astrid and the Endeavor, no film ship damaged (a retired hull or a target may be), no film framing copied. Systems appear in tests, drills and diagrams, never in battle. The series shows the film's rules (time of flight, invisible beams, kill clouds, field reach, standoff, heat) in picture and sound and never explains them.
 - **No people on screen.** There are no character assets, so presenters are voices.
-- **Assets.** New 3D work is film assets pulled forward, plus four cheap series-only set-ups: a witness plate, a one-mount laser and CIWS stage, clay and line overrides, and the missile's exploded split. The rest is 2D, all at 24 fps.
+- **Assets.** Every shot is a render of the film's 3D models, plus small additions (props, targets, set dressing) and environments; 2D only as overlays (titles, HUD, captions). No new hero models and no rigged characters.
+- **Speech (round 2).** Only what a real person in that job would say to the person they're talking to; never a line to inform the viewer. 15–60 spoken words an option, at most three spoken numbers. The full rules and the 27 seed premises are in `options/BRIEF.md`, which replaces the episode storyboards below once the picks are made.
 
 ### What counts as "main"
 

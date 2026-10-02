@@ -38,4 +38,18 @@ Taking every agent's pick comes to 7:43 and ~50 h raw, against round 1's 9:30 an
 
 ## How to pick
 
-Reply with a letter per episode, for example "1A 2B 3B 4C 5A 6C 7B 8C 9C". You can also mix parts of options, for example "Ep 2 C but with one Endeavor".
+Use the picker: the published options page, built by `miniseries/build_picker.py` into `miniseries/picker.html`.
+
+1. For each episode, choose a **base**: the option whose event you want to make.
+2. Tap a **picture** or a **sound and words** cell, or a **look** note, in another option to borrow it. Tap one in your base to cut it.
+3. Add a **note** for anything the taps can't say.
+
+The page keeps a live estimate of runtime and spoken words. Picks save to the page as you go; tell Claude "picks are in".
+
+Claude then reads them and briefs one writer per episode with:
+- the base;
+- the borrowed and cut pieces;
+- your note;
+- this brief.
+
+Each merged episode comes back as a single storyboard for a final yes or no.

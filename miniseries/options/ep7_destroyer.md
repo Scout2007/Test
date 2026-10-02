@@ -63,7 +63,7 @@ Three separate events on the same unnamed ship ([hull no.]), each about one thin
 | 3 | 17–23 | The frigate. A violet pin-blink from the destroyer's truss; a pause; one back from the frigate's side. | FRIG: "…Say again?" |
 | 4 | 23–31 | The ring keeps spreading. The crowd swells. | EW: "You're two down." |
 | 5 | 31–40 | The frigate again, small and plain. | FRIG: "Cutting it." EW: "Hold on." The ring stays. A crowd groan. |
-| 6 | 40–50 | The ring shrinks to a point and snaps off. Four seconds of just the hull. | EW: "Three. Okay." |
+| 6 | 40–50 | The ring shrinks to a point and snaps off. Four seconds of just the hull. | EW: "Three now." |
 | 7 | 50–55 | Hard cut: the title card tag. | Card tone. |
 
 **Words.** 18 spoken. Numbers spoken: two (a score, both times).

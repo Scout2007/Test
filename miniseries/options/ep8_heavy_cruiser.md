@@ -1,47 +1,46 @@
 # Ep 8 · Heavy cruiser and spinal cannon (T−2)
 
-Three separate events around the Astrid, each showing one idea and none explaining it. In *The Turn* a bridge crew points the ship at a rock and waits for the answer, talking about a plastic plant: the idea is that the gun is slow. In *Pass in Review* the Astrid takes so long to pass a review stand that the band plays its march twice: the idea is length. In *Gunner's Story* an old gunnery officer remembers the first trial and a tin of lemon drops: the idea is that every shot has to be paid for in waiting. The gun is shown firing only in A, and then as nothing visible. No option shows the bloom down the barrel, a 135 mm profile or a 200 mm end-on.
+Three quiet events around the Astrid, none explaining her. **A** and **B** are public occasions built on her length, as the user asked. **A** is her undocking after refit, watched through the yard gallery's glass by the families of the people who worked on her. **B** is the fleet review, kept as written. **C** is new: an inspection crawler's feed from inside the spinal's bore, a kilometre of tunnel that ends in daylight. The gun is never fired.
 
 | Option | The event | Who speaks | The one idea | Words | Runtime | Render |
 |---|---|---|---|---|---|---|
-| A · *The Turn* | A live trial: the Astrid turns on thrusters to point at a survey rock, fires once, and waits for the hit | The captain, the helm, the watch officer, on the bridge loop | She is slow: to aim she must turn, then the answer takes minutes to arrive | 41 | 62 s | ~3.6 h |
+| A · *Clear of the Glass* | The Astrid undocks after refit while the yard's families watch from the gallery | The yard PA, a parent and child, an old welder | She takes longer to leave than anyone has patience for | 39 | 60 s | ~6.6 h |
 | B · *Pass in Review* | A fleet-review pool feed: the Astrid passes the stand, and the pass outlasts the band | One hushed commentator | She is long | 13 | 50 s | ~3.1 h |
-| C · *Gunner's Story* | A retired gunnery officer recalls the first trial over archive reels | The retired officer, alone | Every shot costs waiting, and people fill it | 60 | 58 s | ~3.1 h |
+| C · *Bore Survey* | An inspection crawler drives the length of the spinal's bore | An inspection tech and a supervisor, on a loop | A kilometre of her is a tunnel, and it ends in daylight | 20 | 56 s | ~4.1 h |
 
 ---
 
-## Option A · *The Turn*: observational documentary, no narrator (62 s)
+## Option A · *Clear of the Glass*: the yard gallery (60 s)
 
-**Logline.** The Astrid spends two minutes turning to aim at a rock and nearly three more waiting for her shot to arrive, while her bridge talks about a plastic plant.
+**Logline.** After her refit the Astrid is released from the yard's slip while the families of the people who worked on her watch through the gallery glass, and she takes so long to slide past that a child's patience runs out first.
 
-**The idea.** Nothing about the gun is fast. A viewer comes away feeling the slowness: the pivot, the empty minutes, a hit that arrives long after everyone has stopped looking. The bridge is bored and fond of each other, and the weapon is the least interesting thing on their loop.
+**The idea.** Size, felt as time through a fixed window. Nobody describes her: the glass simply never stops being full of ship.
 
 **Look and sound.**
-- Camera A is a range buoy 4 km off, 30° above her dorsal plane and 40° forward of the beam: a wide 24 mm, locked off, seeing her three-quarter from the bow as she pivots. Camera B is the target buoy beside the rock, 35 mm, locked.
-- Neutral documentary grade with a little grain. HUD clock and an IMPACT countdown run in the corner, time-lapsed at stated speeds. Comm subtitles in the film's style.
-- Vacuum is silent. The only sound is the bridge loop relayed through the buoy (hiss, voices) and the buoy's own instrument ticks: a soft ping for each beacon blink, a confirm tone at the shot, carrier-loss static at the impact.
-- The shot itself shows nothing. The strobe, the stars and the hull stay unchanged, and the fins stay stowed (the single shot is cold).
-- Impact is the only bright thing in the piece: a silent whiteout on camera B that recovers to a dim scar on the rock.
+- One locked camera inside the gallery, low at the glass: only the rail, the window frame and faint reflections. The crowd is heard, never seen.
+- Inside, the room: shuffling, coats, a child, the PA chime. Outside is silent; the only outside cue is the row of clamp lights along the slip turning from red to green.
+- Her flank fills the glass edge to edge for most of the film: plate seams, a fin root, housings under covers, more plates. The slip's lights and the window frame give the scale.
+- Grade: cool yard floods outside, warm gallery light faintly reflected on the glass.
+- She slides out bow first; the bow passes before anyone has found it, which is the child's first joke.
 
 **Storyboard.**
 
 | # | s | Picture | Sound and words |
 |---|---|---|---|
-| 1 | 0–6 | Camera A: the Astrid hangs against stars with her bow turned away from the rock. Lower third: ASTRID · TURN TO BEARING · LIVE TRIAL. HUD clock 00:00. | Loop hiss. WATCH: "Rock's still there." (checking the beacon on the board) CAPTAIN: "It generally is." |
-| 2 | 6–14 | Camera A, time-lapse ×10: bow and stern thrusters puff; the hull swings a few degrees. Clock rolls. | CONN: "Coming round." (a helm call) |
-| 3 | 14–24 | Dissolve to the same camera, hull at about 45°, stars drifted. Clock 01:10. | CAPTAIN: "Has anyone watered Gerald?" CONN: "He's plastic, sir." CAPTAIN: "He still looks thirsty." |
-| 4 | 24–31 | Camera B: the survey rock turns slowly, a small sled with a beacon strobe on its dark face. The strobe blinks. | Ping per blink. Silence otherwise. |
-| 5 | 31–38 | Camera A: she settles on bearing; the thrusters stop. Clock 02:09. | CONN: "On bearing." CAPTAIN: "Go on, then." WATCH: "Firing." Confirm tone. |
-| 6 | 38–48 | Camera A, locked, countdown IMPACT 02:48 rolling at ×16. Nothing changes but the countdown and the HUD's SHOT stamp. | Ticks. CAPTAIN: "How's your sister?" CONN: "Better. Hates the food." WATCH: "Ten seconds." CAPTAIN: "Thank you." |
-| 7 | 48–52 | Camera B: the strobe blinks twice, then a silent whiteout. | Pings, then carrier-loss static. |
-| 8 | 52–57 | Camera B recovers: dust drifting, a dim scar, the sled gone, the rock still turning. | Static settles to hiss. CONN: "Well." CAPTAIN: "Round we go, then." |
-| 9 | 57–62 | Tag: hard cut to the title card, counter T−3 to T−2, release date. | The card's low tone. |
+| 1 | 0–5 | The gallery glass at night: floodlights on the slip, the Astrid's flank filling the window, motionless. A row of clamp lights along the slip, all red. | The gallery murmur. A PA chime. YARD PA: "Gallery, please stand clear of the glass." |
+| 2 | 5–11 | The clamp lights turn green one by one, bow to stern; the ripple runs out of frame and keeps going. | YARD PA: "Releasing, bow to stern." |
+| 3 | 11–20 | Nothing seems to move. Then a floodlight's reflection slides along the plates: she is moving, very slowly, left to right. | CHILD: "Which bit's the front?" PARENT: "That was the front." |
+| 4 | 20–32 | The flank keeps coming: seams, a covered housing, a fin root, more plates, in no hurry. Far down the slip, clamp lights are still flicking green. | A long murmur; a coat rustles. CHILD: "Can we go now?" PARENT: "When she's gone." |
+| 5 | 32–42 | A second fin root, then the stern section's thruster bells enter frame right. | OLD WELDER, near the glass, to nobody: "Did that seam. Night shift." |
+| 6 | 42–50 | The stern clears the glass. Behind her the slip is empty: rails, floodlights, dark. Far off, small RCS puffs as she turns away. | YARD PA: "All clamps clear. Thank you, everyone." A few people clap, unsure whether to. CHILD: "Now?" PARENT: "Now." |
+| 7 | 50–55 | The empty slip, held. One clamp light flickers back to amber; a floodlight switches off. | The gallery emptying: footsteps, a door. |
+| 8 | 55–60 | **Tag.** Hard cut to the title card; T−3 rolls to T−2. | The card's low tone. |
 
-**Words.** 41 spoken; numbers spoken: one ("ten seconds", a watch officer's countdown call). Every line is a call, an order or small talk between people who know the answer; none states a fact the listener has.
+**Words.** 39 spoken; numbers spoken: none.
 
-**Built from.** AST with its thruster rig · FX-SLUG (impact) · FX-DAZZLE (whiteout) · WORLD (sun) · HUD · SUB · additions: two range buoys (a sphere, a lens, a strobe), a beacon sled (a box and a light); each is a few primitives · environment: a rock range, one generic asteroid among a few others, which are generic rocks · I replaced the seed's hulk with a rock because a stripped hull sunk in an exercise belongs to Ep 4.
+**Built from.** AST, with RCS puffs and its turret housings under simple covers · additions: the slip's clamp row with status lights (one clamp, arrayed), the gallery window frame and rail (a few boxes and a glass plane), floodlight cards · environment: the refit yard's slip, a generic frame and rails around the hull (not the film's ring station).
 
-**Render.** Class A at 1080p (22.5 s/frame), time-lapse at 12 unique frames per second on shots 2, 3 and 5 (~315 frames, 2.0 h); class D for the rock (336 frames, 0.7 h); class B for the impact (72 frames, 0.75 h); tag and overlays 0.2 h. **~3.6 h.**
+**Render.** Class A at 1080p for the hull through the glass, on twos while she barely moves (about 30 s, 360 frames, 4.5 h); class D for the clamp ripple and the empty slip (about 20 s, 480 frames, 2.0 h); class E for the tag (0.1 h). **~6.6 h.**
 
 ---
 
@@ -78,40 +77,40 @@ Three separate events around the Astrid, each showing one idea and none explaini
 
 ---
 
-## Option C · *Gunner's Story*: oral history over archive reels (58 s)
+## Option C · *Bore Survey*: an inspection crawler's feed (56 s)
 
-**Logline.** A retired gunnery officer remembers the first trial, when the crew sat and waited for the ship to cool after each shot while the lieutenant passed round a tin of lemon drops.
+**Logline.** Between trials, a technician drives an inspection crawler up the Astrid's spinal bore from the breech, and a kilometre of identical dark tunnel later the crawler's lamp is drowned by daylight at the muzzle.
 
-**The idea.** Each shot has to be paid for in waiting, and people fill that time with small rituals. The viewer should feel the cost without hearing the word heat, and end on the empty tin.
+**The idea.** The ship is built around a tunnel. Her size, felt from inside the gun, with the only reveal a light at the end.
 
 **Look and sound.**
-- A 4:3 window of old trials film inside the 16:9 frame: a faded colour drift, gate weave, dust, scratches, 12 unique frames per second. The film is the Astrid model with an old-film grade, not an old asset.
-- Cameras: a hull-boom view from the dorsal spine looking aft along the fins (18 mm, never in frame as a prop), a low chase view beside the hull (50 mm), a distant locked view for the last shot.
-- Sound: an old voice, close, in a quiet room with a faint kettle tick in the room tone, over the clatter of a projector. The reel is silent. The only other sound is a tin lid at the very end.
-- The shot appears as an overexposed flare frame (FX-DAZZLE), never as a bloom at the muzzle. The fins' radiator faces go white, then orange, then dark.
-- Slates in the corner give the trial and shot numbers. Nothing is explained.
+- The crawler's camera: a 4:3 feed, slightly fish-eyed, its lamp lighting a few metres of bore. Segment rings pass like the ties of a railway tunnel. A metre counter and a timestamp sit in the corner (2D overlays).
+- Sound is the crawler's motor whine through its own chassis (it rides the bore) and the technicians' loop with its headset hiss. No music.
+- The bore looks the same at 40 m as at 720 m, which is the point. One ring carries a bright scuff that the tech marks with an on-screen box.
+- The ending: a point of white far ahead grows into a disc, the lamp washes out, the feed flares and steadies on stars past the muzzle ring. Then the only exterior: the whole Astrid in sunlight, with a pinprick of light at the very tip of her bow.
+- Grade: a green monochrome feed; the closing exterior in full colour.
 
 **Storyboard.**
 
 | # | s | Picture | Sound and words |
 |---|---|---|---|
-| 1 | 0–5 | Projector start: flutter and leader over the Astrid at rest in cold light. Slate: CLASS TRIALS · REEL 2 · TRIAL 1 · [DATE]. | Projector clatter. Room tone. RETIRED OFFICER: "Lemon drops." |
-| 2 | 5–14 | Hull-boom view aft along the dorsal: eight fins run out, slowly. | OFFICER: "That's what I remember about the first trial. Dev kept a tin on the console." |
-| 3 | 14–20 | Low chase beside the hull, moving forward at walking pace. | OFFICER: "Every shot, he'd hand it round." |
-| 4 | 20–24 | Four frames of flare, whiting out the reel. The hull returns, fins white. | Projector only. A silent breath of 3 s. |
-| 5 | 24–40 | Hull-boom view aft: the fins go white, orange, dull red, dark, over 16 s. | OFFICER: "After every shot she needs her minute, and you don't say 'again'." Then: "So we'd sit there sucking lemon drops, watching the orange go out of her." |
-| 6 | 40–47 | Distant locked view, slate: TRIAL 1 · SHOT 5. A last flare; the fins light and fall again. | OFFICER: "Last shot, the tin was empty." |
-| 7 | 47–53 | The hull dark, held. A burn creeps in from the frame edge; the reel runs out to white, then black. | OFFICER: "He passed it round anyway." A tin lid, close. |
-| 8 | 53–58 | Tag: hard cut to the title card, counter T−3 to T−2, release date. | The card's low tone. |
+| 1 | 0–5 | Black. The feed boots: a 4:3 frame, a timestamp, a counter at 0 m. The lamp comes on: a ribbed tube running away into the dark. | A relay click; the motor spins up. TECH: "Crawler's in." |
+| 2 | 5–15 | Rings pass at a walking pace. The counter climbs past 40 m, 80 m. | Motor whine. SUPERVISOR: "How long's a full run?" TECH: "Depends if you keep asking." |
+| 3 | 15–24 | The timestamp jumps: 410 m. A ring with a bright scuff; a box is drawn round it. | TECH: "Mark that one." |
+| 4 | 24–34 | Rings, rings. 720 m. The tube looks exactly as it did at 40 m. | Motor whine. SUPERVISOR: "Coffee's here." TECH: "Leave it." |
+| 5 | 34–43 | Far ahead, a point of white. It grows into a disc as the counter passes 990 m, and the lamp's pool fades into it. | The motor slows. TECH, quietly: "Daylight." |
+| 6 | 43–48 | The feed flares white, then steadies: the muzzle ring, and beyond it black sky and stars. | The motor stops. Silence on the loop. |
+| 7 | 48–51 | Exterior, long lens, full colour: the whole Astrid in sunlight, and a pinprick of light at the tip of her bow. | Silence. |
+| 8 | 51–56 | **Tag.** Hard cut to the title card; T−3 rolls to T−2. | The card's low tone. |
 
-**Words.** 60 spoken; numbers spoken: none ("again" is a word, not a count). The speaker is telling a memory to someone who wasn't there, in a gunner's idiom ("she needs her minute"), with a human detail that matters more to her than the gun.
+**Words.** 20 spoken; numbers spoken: none (the counter shows them).
 
-**Built from.** AST (`fins_deploy`, fin glow on the radiator faces) · FX-DAZZLE (the flare frames) · WORLD · additions: a slate overlay, film grade, leader, scratches and an end-of-reel burn, all comp work; the boom camera is a virtual camera, so no new model · environment: stars and a plain sun preset only.
+**Built from.** AST for the closing exterior · additions: none on the ship; the crawler is never seen, only its lamp's light and a sliver of its tether · environment: the bore interior, about a kilometre of repeating segment rings with service ports (one ring modelled and arrayed, plus a scuff decal) · overlays: counter, timestamp and the marker box (HUD, class E).
 
-**Render.** Class A at the 4:3 window (about 0.75 of 1080p, 17 s/frame) at 12 unique frames per second for 50 s (600 frames, 2.8 h); grade and slates 0.2 h; tag 0.1 h. **~3.1 h.**
+**Render.** Class D at 4:3 720p (about 0.45 of a 1080p frame) for the bore (43 s, 1,032 frames, 1.9 h); class B at 720p for the flare and muzzle (5 s, 120 frames, 1.1 h); class A at 1080p for the exterior (3 s, 72 frames, 0.9 h); overlays and tag 0.2 h. **~4.1 h.**
 
 ---
 
 ## Recommendation
 
-C is my pick: it is the only option with a human memory in it, and the empty tin carries the idea without a spec. B is the cheap, nearly silent alternative (13 words) and the funniest in a run of nine. A needs your decision: it shows a 10,000 km shot with a flight of about 2 min 48 s and a two-minute turn, and C implies each shot costs about half a minute of fin time; both become canon if used.
+B stays the safe pick: the cheapest and the calmest. A is its sibling with people in the room, warmer and dearer (~6.6 h), and showing her leave a refit hints at the glass-cannon-to-pocket-battleship history without a word. C is the one image the film doesn't have, the inside of the gun, and it fits the series' run of machine-eye pieces without copying any. Pick C if this episode should feel new, B if it should feel calm. To decide: A shows her turret housings under covers, which keeps the weapon count open until Q15 settles it; C needs the bore built as a simple environment, and its last shot fixes the muzzle's look from outside.

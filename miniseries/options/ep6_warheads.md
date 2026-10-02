@@ -1,113 +1,122 @@
 # Ep 6 · Warheads (T−4)
 
-Three separate events, three separate ideas. **A** is a trade-show loop whose whole pitch is how far away you can be. **B** is a night shift loading a hedgehog module, as a count that climbs, with tired people at the end of it. **C** is two people on a hillside on a quiet planet who see something far off light the clouds. The weapon is a product in A, a chore in B and a sight in C. No line, gag, shot idea or speaker is shared.
+Three product adverts for one missile range, one per format. In all three every missile type gets its moment and its spec card: the Casaba killer, the Teller killer, the multi-pack, the decoy, the EW missile, the kill-cloud bird and the ship-launched precision missile. **A** is a range-launch film that walks down a row of plinths. **B** is a configurator session with a flight preview for each choice. **C** is a catalogue with one spinning page per missile that ends on a silent wait. The Compact belt-pod missile stays out as a spoiler, and the maker stays [MAKER]. Card sources: WN is `doctrine/working_numbers.md`, LREF is `doctrine/LREF_doctrine.md`, AR is `ASSET_REQUESTS.md`.
 
 | Option | The event | Who speaks | The one idea | Words | Runtime | Render |
 |---|---|---|---|---|---|---|
-| A · *Keep Your Distance* | A video-wall loop on a maker's stand: a missile, a plate cut from far away | One warm brand voice, once | The product being sold is distance | 3 | 45 s | ~4.3 h |
-| B · *That's the Lot* | A night shift loads a hedgehog module, pod by pod, to a count | Arm operator and checker on their work loop | It is loaded like groceries | 29 | 51 s | ~5 h |
-| C · *Second Sun* | Two people on a hillside at night; a far flash lights the clouds, silently | Two voices, never seen | Something huge happened and they just watched | 22 | 41 s | ~5.3 h |
-
-Changes to the seeds. **A** drops the exploded view, the on-screen specification stack and the pod-loading shot. The loading shot would repeat B. **B** drops the time-lapse. Ep 5 *Six Hours* owns the time-lapse and the tender's arm camera, so B uses a locked gantry camera with cuts between hours. **C** is as seeded.
+| A · *Family Resemblance* | A launch film walks down a row of seven missiles, one trick and one line each, then takes the group photo | One warm announcer | The range is a family on purpose: the decoy looks like the killer, so nobody can tell which is which | 27 | 61 s | ~7.6 h |
+| B · *Build Your Salvo* | A configurator session: an airframe, a payload and a quantity, with a flight preview of each | The page's voice guide | A missile is a platform: you choose the payload, and the one dial buyers expect, blast radius, is greyed out | 11 | 58 s | ~4.4 h |
+| C · *Contactless* | A catalogue spins each missile on its own page with a delivery estimate, then waits | Nobody | Delivery is minutes of waiting, and nobody touches anything | 0 | 52 s | ~2.9 h |
 
 ---
 
-## Option A · *Keep Your Distance*: trade-show video-wall loop (45 s)
+## Option A · *Family Resemblance*: range-launch film (61 s)
 
-**Logline.** A missile turns out of the dark and leaves; far away a plate is cut through without a sound; a cyan line is drawn across the gap and a warm voice says three words.
+**Logline.** A launch film walks down a row of seven missiles, each doing one small trick under its spec card, then lines them up for a group photograph in which nobody can say which is which.
 
-**The idea.** Standing far away is the feature. Every shot is wider than the one before. The viewer comes away feeling that a brochure just sold them a comfortable distance from something terrible, and nobody said "nuclear".
+**The idea.** A weapons range sold the way a car range is sold: seven look-alikes, one trick and one line each. The viewer comes away knowing the family has one silhouette and seven jobs, because the shuffled name tags prove nobody could tell them apart.
 
 **Look and sound.**
-- 16:9 for the wall, with type kept in the centre-safe area. Clean navy-and-cyan CG; the missile photoreal against black.
-- Camera: slow orbit, then a locked wide, then one long dolly back. No smash zooms.
-- Music-led: warm, major-key, electronic, with an even pulse. It cuts to full silence for the jet (vacuum is silent), then a single low tone returns on the cooling plate.
-- Overlays only: the [MAKER] wordmark, the [PRODUCT NAME], a [TEST DATE] caption, a drawn distance line, and [STAND NUMBER] at the end. No specifications.
-- The loop point is the black of shot 1, so the wall restarts on the nose turning out of the dark.
+- 16:9 at 1280×720. A black hall with a mirror floor, a warm amber key and a thin white rim, and no blue. Slow 35–50 mm glides, one per plinth, settling as each pose starts.
+- Each card is a lower third: the type, then three or four numbers in warm white mono over an amber rule. It slides in on the beat, holds about three seconds and slides out.
+- The score gains one instrument per missile, so the family's chord builds. At the EW missile the whole mix drops out for one beat.
+- One warm, unhurried voice. It never reads a card and gives one short line per missile.
 
 **Storyboard.**
 
 | # | s | Picture | Sound and words |
 |---|---|---|---|
-| 1 | 0–4 | Black. The ablative nose turns slowly into a cyan rim light. The [MAKER] wordmark fades in below. | A single low pulse. Music starts under it. |
-| 2 | 4–11 | Close slow orbit along the body, with the seeker shutter closed. [PRODUCT NAME] slides on in plain bold type. | Music builds, warm and even. |
-| 3 | 11–18 | Locked wide: the missile hangs in black. Its motor lights and it leaves, shrinking to a point. The type stays where it was. | Rising swell, then a held chord. |
-| 4 | 18–26 | Test coupon on a sled, hard-lit from the side. A [TEST DATE] caption. At the far left of the frame a spark: the missile has arrived, very far away. A thin white jet joins the spark to the coupon. The coupon's near face brightens; a spray of molten metal leaves its far face. | The music cuts out entirely. Nothing. |
-| 5 | 26–31 | Push in to a neat round hole with a molten rim that goes orange, then red, then dark. | One low tone returns. |
-| 6 | 31–40 | A long dolly back from the hole. The coupon shrinks to a speck. A cyan dimension line draws itself across the dark to the spark's position. The wordmark and [STAND NUMBER] come up. | Music returns on a major chord. Voice: "Keep your distance." Three-note sting. |
-| Tag | 40–45 | Hard cut to the film's title card. | The card's low tone. |
+| 1 | 0–5 | A long dark hall with a mirror floor. Seven plinths light up one by one down the row, a missile standing nose-up on each in silhouette. Title: [MAKER] · THE RANGE. | One low note, a slow pulse. VOICE: "Meet the family." |
+| 2 | 5–11 | Plinth 1, the Casaba killer. A slow glide in; its seeker shutter slides open like an eye. Card: CAPITAL-SHIP KILLER · CASABA / 30 g · Δv 150 km/s · UP TO ~20 m / 100,000 km IN 18 MIN / STANDOFF 2–4 km. | A second instrument joins. VOICE: "Straight to the point." |
+| 3 | 11–16 | Plinth 2, the Teller killer, the same silhouette. A hairline of white light traces its warhead fairing and goes out. Card: CAPITAL-SHIP KILLER · TELLER / STRIPS FINS AND SENSORS TO ~1–3 km / HULL BREACHED ONLY WITHIN ~30–110 m. | A third instrument. VOICE: "Gentle on hulls." |
+| 4 | 16–22 | Plinth 3, the multi-pack: four small missiles bundled in one cradle. One MIRV bus opens its petals like a flower, then closes. Card: MULTI-PACK · MIRV BUS / ~4 PER PACK / 50 g · Δv 60 km/s / 100,000 km IN 38 MIN. | A fourth instrument. VOICE: "Four for one." |
+| 5 | 22–27 | Plinth 4, the decoy, slim enough for a cell. Its shroud unfurls like an umbrella to the killer's full height. Card: DECOY / BOOSTS AT A KILLER'S 30 g / COSTS THE DEFENCE 0.5–2 s OF LASER TIME. | A fifth instrument. VOICE: "Looks the part." |
+| 6 | 27–31 | Plinth 5, the EW missile, dark and still. Its card tears into glitch bands (FX-EW) and settles. Card: EW / BREAKS LINKS · SPOOFS SENSORS. | The whole mix drops out for one beat. VOICE (whispered): "Shh." Then the music returns. |
+| 7 | 31–36 | Plinth 6, the kill-cloud bird. Its dispenser cap clicks open on a honeycomb of pellet tubes; one pellet drifts out and glints in a shaft of light. Card: KILL-CLOUD · KINETIC / 50 g · Δv 60 km/s / 100,000 km IN 38 MIN. | A sixth instrument. VOICE: "Rain on their parade." |
+| 8 | 36–41 | Plinth 7, the precision missile (the built MSL), taller than the rest. Its drive lights for one second and the floor throws back a white needle. Card: PRECISION · SHIP-LAUNCHED / 40 g · Δv 100 km/s · 26 m / 100,000 km IN 24 MIN. | The full chord. VOICE: "Aim to please." |
+| 9 | 41–50 | From the end of the row all seven stand lit. Seven name tags appear over them, swap places at speed and settle on the wrong missiles. | The music holds. VOICE: "Family resemblance." |
+| 10 | 50–56 | A soft camera click, a whiteout (FX-DAZZLE), and the light clears to a framed still of the row. Caption: [MAKER] · THE RANGE. | The click, then one held tone. VOICE: "[Maker]." |
+| 11 | 56–61 | **Tag.** Hard cut to the title card: OPERATION TIDEBREAK on the still stars, the counter rolling T−5 to T−4, the release date. | The card's low tone. |
 
-**Words.** 3 spoken. Numbers spoken: none.
+**Words.** 27 spoken. Numbers spoken: "four" and "one", both in the sales line "Four for one".
 
-**Built from.** MSL-V (the Casaba killer), FX-CASABA, FX-NUKE (the spark), FX-FAR (the motor plume) · additions: a layered armour coupon on a sled (a slab and a frame), the wordmark and type (overlay) · environments: black studio cyc for 1–2; empty space with one WORLD sun for 3–6. The jet is the only effect of any size.
+**Built from.** Film assets: MSL-V (the killer in its Casaba and conventional versions, the multi-pack with its MIRV bus, the decoy with its shroud, the EW missile, with `seeker_shutter`), MSL (26 m, standing in as the precision missile), FX-EW, FX-DAZZLE. Additions: seven plinths (a cylinder and a light ring each); a dispenser cap with a honeycomb of tubes on the multi-pack body (one mesh swap and instanced cylinders: it makes the kill-cloud bird); keyed shroud and bus moves (part transforms on parts the designs already have); the framed still (an overlay). Environment: the dark hall (a floor, two walls and six area lights).
 
-**Render.** Shots 1–3 (18 s, 432 frames) on a one-object missile stage at ~9 s/frame, 1.1 h. Shot 4: 6 s class D (144 frames, 0.6 h) plus 2 s class B for the jet (48 frames, 1.0 h). Shot 5: class D, 120 frames, 0.5 h. Shot 6: class D, 216 frames, 0.9 h. Overlays and tag, class E, 0.2 h. **~4.3 h** at 1080p.
+**Specs shown.** Casaba card: 30 g, Δv 150 km/s and 18 min to 100,000 km (WN §3; LREF §4.5); up to ~20 m (AR, MSL-V); standoff 2–4 km (LREF §3 range bands, §4.4). Teller card: fins and sensors ~1–3 km (~1 km at 100 kt, ~3 km at 1 Mt) and hull ~30–110 m (LREF §4.4; WN §7). Multi-pack card: ~4 per pack (LREF §5, A-26); 50 g, Δv 60 km/s and 38 min (WN §3). Decoy card: a killer's 30 g (WN §3; AR, MSL-V, where the decoy's motor matches a killer's through the 30 g boost); 0.5–2 s of laser time (LREF §5, point 3). Kill-cloud card: the multi-pack's 50 g, Δv 60 km/s and 38 min (WN §3), because the kill-cloud birds are multi-pack birds (`tidebreak_data.py`, the pack's missiles). EW card: words only (LREF §7). Precision card: 40 g, Δv 100 km/s and 24 min (WN §3; LREF §4.5); 26 m (AR, MSL). No other number appears.
 
----
+**Render.** At 1280×720 (0.44 of 1080p), 24 fps: class D for the opening (120 frames, 0.2 h); class A for the seven poses (864 frames, 4.8 h); class B for the group wide and the flash (240 frames, 2.2 h); class E for cards, tags, frame and tag (0.4 h). **~7.6 h.** Cheapest cut: render the poses at 12 fps doubled (saves 2.4 h).
 
-## Option B · *That's the Lot*: night-shift site camera (51 s)
+## Option B · *Build Your Salvo*: online configurator, screen capture (58 s)
 
-**Logline.** A fixed gantry camera watches a two-person crew seat canisters into a hedgehog module cell by cell, hour after hour, until the last green light comes on and they go for coffee.
+**Logline.** On the maker's site an airframe, a payload and a quantity are clicked in turn, each choice plays a short flight preview, and the page ends by promising that someone will be in touch.
 
-**The idea.** The most destructive load in the film is moved like freight at the end of a long shift. The count and the wall of lights carry it. The crew are bored, tired and fond of each other.
+**The idea.** A missile is a platform: you choose the payload, not the missile. The one dial a buyer might expect, blast radius, is greyed out, and the tooltip says why.
 
 **Look and sound.**
-- Locked site-camera frame at the same angle for every shot: a CCTV grade, slightly soft, amber work lamps against cold LED strips, with an on-screen shift clock and a pod counter. Cuts jump forward in hours.
-- Sound is hull-borne through the camera's gantry mount: a dull thump each time a canister seats, the servo whine of the arm, the lamp buzz.
-- The voices are the crew's work loop: close, a little compressed, with breath and a yawn.
-- Nobody is seen. Vacuum dock, so nothing drifts or echoes.
-- Every shot keeps the same frame. The only things that change are the count, the lamps and how many cells are lit.
+- A 16:9 screen capture at 1920×1080: a step rail on the left, a live 3D viewport in the middle, a spec panel on the right. Graphite and warm white with one amber accent; no blue.
+- A 2D cursor clicks the tiles and the panel's digits roll like odometers. PRICE: ON REQUEST never changes. Viewport previews run at 12 fps doubled, as a web viewer's would.
+- The viewport is a chase orbit round the missile in open space: stars, a sun, a generic planet limb, a white-needle plume. Effects play only as short SIMULATE runs against a target plate or a sample fin.
+- UI ticks, chimes and a soft pad; the previews themselves are silent. A flat, friendly synthetic voice guide speaks four times.
 
 **Storyboard.**
 
 | # | s | Picture | Sound and words |
 |---|---|---|---|
-| 1 | 0–8 | Gantry frame. The module's cell face in rows, nearly all dark. The loader arm swings a grey canister from a rack at the left to the first empty cell and pushes it home. One green marker lights. Counter POD 001 / 360. Clock 19:02. | Thump. Operator: "Going in." Checker: "Seated. Next." |
-| 2 | 8–16 | Same frame. Clock 22:40, counter POD 060. A block of rows is green. The arm seats another; the lamp has been moved. | Thump. A yawn on the loop. Checker: "Sorry." A second yawn. Operator: "Don't." |
-| 3 | 16–26 | Same frame. Clock 01:15, counter POD 211. More than half the face is green. | Operator: "What are we on?" Checker: "Two-eleven." Operator: "Thought it was more." |
-| 4 | 26–36 | Same frame. Clock 03:05, counter POD 298. The arm stops with a canister held at the cell. A close insert on a long pale scrape down the canister's side. Back to the frame. The arm resumes. | Servo stops. Checker: "Scuffed." Operator: "Send it back?" Checker: "…Nah. Next." Thump. |
-| 5 | 36–46 | Same frame. Clock 04:40. The arm carries the last canister. Counter 359, then the seat, then 360 / 360: the whole face is a grid of green. The arm retracts. A cell cover slides across and the lamps go out one by one. | Operator: "Last one." Checker: "Seated." A pause. Checker: "That's the lot." Operator: "Coffee?" Checker: "Please." The lamp buzz stops. |
-| Tag | 46–51 | Hard cut to the title card. | The card's low tone. |
+| 1 | 0–5 | The page loads: BUILD YOUR SALVO. In the viewport one missile boosts alone across the stars. Rail: 1 AIRFRAME · 2 PAYLOAD · 3 QUANTITY. Panel: PRICE: ON REQUEST. | A soft chime over a low pad. |
+| 2 | 5–11 | The cursor crosses three tiles; the viewport swaps the missile each time and the panel's digits roll: KILLER 30 g · Δv 150 km/s · UP TO ~20 m · 18 MIN TO 100,000 km; PRECISION 40 g · Δv 100 km/s · 26 m · 24 MIN; MULTI-PACK 50 g · Δv 60 km/s · 38 MIN. It clicks KILLER. | Three ticks, an odometer whirr. ASSISTANT: "Great choice." |
+| 3 | 11–19 | Six PAYLOAD tiles: CASABA, TELLER, MIRV, DECOY, EW, KILL-CLOUD. It clicks CASABA; a YIELD slider drags from 20 kt to 100 kt as STANDOFF rolls from 2 km to 4 km. SIMULATE: in a wide side view the missile runs at a target plate on a stand and a thin spear (FX-CASABA) cuts the plate from far off. | A click and a rising pad; the spear is silent. ASSISTANT: "Great choice." |
+| 4 | 19–26 | It clicks TELLER. A BLAST RADIUS row is greyed out; its tooltip reads NOT AVAILABLE IN VACUUM. SIMULATE: a bare burst (FX-NUKE) beside a sample radiator fin on a mast; the fin's face glows dull red and flakes away (FX-FIN), the mast untouched. Panel: FINS AND SENSORS ~1 km AT 100 kt, ~3 km AT 1 Mt · HULL ~30–110 m. | The pad drops out; one soft thud on the flash. |
+| 5 | 26–31 | Airframe MULTI-PACK, payload MIRV. An X-RAY toggle turns the shroud glass-clear and four small missiles stand inside. Panel: ~4 PER PACK. | Four quick ticks. |
+| 6 | 31–37 | DECOY. A killer and a decoy fly side by side, the same size. Two acceleration traces overlay, merge into one line and read 30 g. | One held tone, then a click as the lines merge. |
+| 7 | 37–41 | EW. A track-plot insert shows one clean dot that splits into a scatter of false ones. Panel: BREAKS LINKS · SPOOFS SENSORS. | A burst of static under the pad. |
+| 8 | 41–46 | KILL-CLOUD. SIMULATE: the missile bursts open ahead of the target plate and a pellet cloud (FX-PD) swallows it; the plate tumbles away peppered. | A click, then silence. |
+| 9 | 46–53 | QUANTITY: SINGLE or FULL MAGAZINE. It clicks FULL MAGAZINE; the viewport pulls back from one missile to a dense block of identical ones (FX-SWARM). Panel: ~700 MISSILES · ~360 PODS. The cursor clicks REQUEST A QUOTE. | The pad swells. ASSISTANT: "Great choice." After the click, ASSISTANT: "Someone will be in touch." |
+| 10 | 53–58 | **Tag.** Hard cut to the title card: OPERATION TIDEBREAK on the still stars, the counter rolling T−5 to T−4, the release date. | The card's low tone. |
 
-**Words.** 29 spoken (4 + 2 + 9 + 6 + 8). Numbers spoken: "two-eleven" (one). The checker answers a count the operator asked for.
+**Words.** 11 spoken. Numbers spoken: none.
 
-**Built from.** GI hull with GI-MAV (the module's cell face) · additions: a loader arm (four cylinders and a gripper), a canister rack and plain grey canisters (cylinders sized to the MSL), a gantry frame with work lamps, green marker lights on the cells (emissive dots), a scuff mask on one canister, shift clock and counter (overlay) · environment: a generic berth gantry in empty space; no ring station, no tender.
+**Built from.** Film assets: MSL-V (both killers, the multi-pack, the decoy, the EW missile), MSL (the precision airframe and the block's instances), FX-SWARM, FX-CASABA, FX-NUKE, FX-FIN, FX-PD, WORLD (the sun and a generic planet limb). Additions: a target plate on a stand (a box on a mast); a sample radiator fin on a mast (one thin panel); the multi-pack's dispenser-cap variant (the same one mesh swap as in A); an X-ray override on the shroud (a material swap, no model); the configurator itself as overlays (rail, tiles, panel, slider, tooltip, cursor, track plot, traces). Environment: open space with a generic planet. No ship appears.
 
-**Render.** Class D, fixed camera, 42 s of wides (1,008 frames, 4.2 h); one class A insert for the scuff at 720p (4 s, 96 frames, 0.5 h); overlays and tag 0.2 h. **~5 h** at 1080p. The lamp changes are the only lighting work.
+**Specs shown.** Killer 30 g, Δv 150 km/s and 18 min to 100,000 km; precision 40 g, Δv 100 km/s and 24 min; multi-pack 50 g, Δv 60 km/s and 38 min (WN §3; LREF §4.5). Killer up to ~20 m and precision 26 m (AR, MSL-V and MSL). Casaba yield 20–100 kt (LREF §14, A-24) and standoff 2–4 km (LREF §3 range bands, §4.4; WN §7). Teller: fins and sensors ~1 km at 100 kt and ~3 km at 1 Mt, hull ~30–110 m (LREF §4.4; WN §7). Multi-pack ~4 per pack, full magazine ~700 missiles in ~360 pods (LREF §5, A-26). The decoy's 30 g (WN §3; AR, MSL-V). EW is words only (LREF §7). "Not available in vacuum" is LREF §4.4. No other number appears.
 
----
+**Render.** The viewport at 1120×630 (0.34 of 1080p), 12 fps doubled: class A for the plain previews (34 s, 408 frames, 1.7 h); class A2 for the three effect runs (14 s, 168 frames, 1.4 h); class B for the magazine block (5 s, 60 frames, 0.4 h); class E for the interface at 1080p (58 s, 0.8 h). **~4.4 h.**
 
-## Option C · *Second Sun*: night on a hillside (41 s)
+## Option C · *Contactless*: catalogue spin (52 s)
 
-**Logline.** Two people wait out a dull night on a hillside with a camera, and a far-off flash lights the whole cloud bank for a second without a sound.
+**Logline.** A catalogue turns each missile on its own page with a spec table and a delivery estimate; the last page is the order, and then the wait.
 
-**The idea.** The extraordinary thing is silent and far off, and what we get is two people's reaction. They mostly talk about whether the camera is on. The flash makes the dull night into something else. They hold on to the dull talk.
+**The idea.** Even the fastest missile is a wait, and nobody touches anything: delivery is contactless and takes eighteen minutes. The viewer learns the time of flight by sitting through the countdown.
 
 **Look and sound.**
-- Locked low frame at the camp, facing the horizon. Nothing else moves except the lantern, the thermos steam and the clouds. Fine film grain, a cool night grade.
-- Voices only. The people are never seen: two folding chairs with a blanket thrown over one, a thermos, a lantern, and a camera on a tripod with a blinking red record light.
-- Sound: the wind in the scrub and crickets (insect-like chirps; this is an unnamed quiet planet). At the flash everything stops, and the flash itself makes no sound. The crickets come back one at a time.
-- The flash is warm white, never blue. It lights the underside of the cloud bank first, then the whole hill: the chairs' shadows swing across the grass and settle back.
-- The older voice is dry and tired; the younger voice is keen and a little nervous.
+- 16:9 at 1920×1080: a catalogue photo studio with a pale seamless floor and wall, a soft top light and no hard shadows. Each missile stands on a thin turntable ring and turns on its own slow spin; the camera is fixed at mid-height. Warm black type, one orange accent, no blue.
+- Overlays on every page: a product code [REF], a three-line spec table at right, a tracker strip at the foot (LAUNCHED · IN TRANSIT · DELIVERED) with an ETA. Pages change on a sideways wipe; stamps land with a soft thud.
+- No voice. A light catalogue bed and one chime per page; the bed stutters on the EW page. The last nine seconds are silent but for a clock tick.
+- The last shot is the point: the ETA runs in real seconds over a far, faint needle, so the wait is the time of flight.
 
 **Storyboard.**
 
 | # | s | Picture | Sound and words |
 |---|---|---|---|
-| 1 | 0–12 | Locked wide. A black hillside. A low cloud bank on the horizon. Stars and a thin crescent moon. The lantern, the two chairs, and the camera's red light blinking. | Wind and crickets. Older: "Is it still recording?" Younger: "Since sundown." Older: "Of nothing." |
-| 2 | 12–19 | Close on the camera's red light, then the thermos with steam drifting. No words. | Wind. Crickets. |
-| 3 | 19–29 | Back to the wide, same frame. The cloud bank glows from inside, then goes white-gold; the hillside is hard-lit; the chairs' shadows swing across the grass. It holds for about a second, then fades to dull orange, then dark. The crickets stop. | At the flash: nothing. After it, a pause of three seconds. Younger: "Tell me that's on the camera." Older: "It's on the camera." |
-| 4 | 29–36 | Same frame. The red light still blinks. The steam rises straight up. The cloud bank drifts. A long hold. | Silence, then older: "Well. It wasn't nothing." One cricket, then another. |
-| Tag | 36–41 | Hard cut to the title card. | The card's low tone. |
+| 1 | 0–4 | Cover. An empty turntable ring in the pale studio. Title: [MAKER] · THE RANGE · CATALOGUE. Strip: ESTIMATED DELIVERY TO 100,000 KM. | A light catalogue bed starts: brushed drums, a bouncing bass. |
+| 2 | 4–9 | Page 1: the Casaba killer lowers onto the ring and turns. Table: WARHEAD 20–100 kt · STANDOFF 2–4 km · LENGTH UP TO ~20 m. Tracker ETA: 18 MIN. A stamp lands: CONTACTLESS DELIVERY, and a dotted route line stops short of a door icon. | A chime, then the stamp's soft thud. |
+| 3 | 9–13 | Page 2: the Teller killer, same turn. Table: FINS AND SENSORS ~1–3 km · HULL ~30–110 m · LENGTH UP TO ~20 m. ETA 18 MIN. | A chime. |
+| 4 | 13–17 | Page 3: the multi-pack turns. Table: 50 g · Δv 60 km/s. ETA 38 MIN. A box outline draws round it: IN THE BOX: ~4. | A chime. |
+| 5 | 17–21 | Page 4: the decoy turns. Table: BOOST 30 g (A KILLER'S) · 0.5–2 s OF LASER TIME. Banner: FREQUENTLY BOUGHT TOGETHER, three small turntable thumbnails joined by plus signs. | A chime. |
+| 6 | 21–25 | Page 5: the EW missile turns. Table: BREAKS LINKS · SPOOFS SENSORS. The tracker's ETA reads --:-- and a line appears: TRACKING UNAVAILABLE. | The bed stutters once. |
+| 7 | 25–29 | Page 6: the kill-cloud bird turns. Table: KINETIC · PELLET CLOUD · 50 g · Δv 60 km/s. ETA 38 MIN. A stamp: SOME ASSEMBLY REQUIRED. | A chime. |
+| 8 | 29–33 | Page 7: the precision missile turns. Table: 40 g · Δv 100 km/s · LENGTH 26 m. ETA 24 MIN. | A chime. |
+| 9 | 33–38 | The basket: the Casaba killer on the ring. The PLACE ORDER button presses itself and becomes ORDER PLACED. ETA 18:00. | The bed fades under one bright confirmation chime. |
+| 10 | 38–47 | A black plate with one faint needle plume far off, barely moving (FX-FAR). The ETA counts down in real seconds, 17:59 to 17:51. Nothing else happens. | Silence, apart from the clock's tick. |
+| 11 | 47–52 | **Tag.** Hard cut to the title card: OPERATION TIDEBREAK on the still stars, the counter rolling T−5 to T−4, the release date. | The card's low tone. |
 
-**Words.** 22 spoken (4 + 2 + 2 + 6 + 4 + 4). Numbers spoken: none.
+**Words.** 0 spoken. Numbers spoken: none.
 
-**Built from.** FX-NUKE (the flash, as a glow behind the clouds), FX-DAZZLE (the camera's white-out on the cloud edge), WORLD (night sky and moon preset) · additions: a tripod camera with a red record light, two folding chairs, a blanket, a lantern, a thermos with a steam particle (all simple boxes and cylinders) · environments: a night hillside of displaced terrain with sparse scrub; a volumetric cloud bank on the horizon; a crescent moon (a generic sphere). Not Maren, and the planet is never named.
+**Built from.** Film assets: MSL-V (both killers, the multi-pack, the decoy, the EW missile), MSL (the precision missile, and the kill-cloud bird with the same flat dispenser cap as in A), FX-FAR (the far plume). Additions: a turntable ring (one thin cylinder); the seamless studio (a cyclorama and one area light); the dispenser cap (one mesh swap). Overlays: product codes, tables, tracker, stamps, route line, thumbnails, wipes, countdown. Environment: the studio; the last plate is open black with a few stars.
 
-**Render.** Class D for the wides (shot 1: 288 frames, 1.2 h; shot 2: 168 frames, 0.7 h; shot 3's first 6 s: 144 frames, 0.6 h; shot 4: 168 frames, 0.7 h); class B for the 4 s of the flash lighting the cloud volume (96 frames, 2.0 h); tag 0.1 h. **~5.3 h** at 1080p. Risk: volumetric cloud lit from behind may need a heavier class; allow +3 h.
+**Specs shown.** Casaba page: 20–100 kt (LREF §14, A-24); standoff 2–4 km (LREF §3 range bands, §4.4); up to ~20 m (AR, MSL-V); ETA 18 min to 100,000 km (WN §3). Teller page: fins and sensors ~1–3 km and hull ~30–110 m (LREF §4.4; WN §7); length and ETA as the Casaba's. Multi-pack: 50 g, Δv 60 km/s and 38 min (WN §3); ~4 in the box (LREF §5, A-26). Decoy: 30 g (WN §3; AR, MSL-V); 0.5–2 s (LREF §5). EW is words only (LREF §7). Kill-cloud: 50 g, Δv 60 km/s and 38 min (WN §3). Precision: 40 g, Δv 100 km/s and 24 min (WN §3); 26 m (AR, MSL). The countdown runs from the killer's 18 min (WN §3). No other number appears.
 
----
+**Render.** At 1280×720 (0.44 of 1080p), turntables at 12 fps doubled: class A for the seven pages (29 s, 348 frames, 1.9 h); class D for the cover and the wait (13 s, 156 frames, 0.3 h); class E for overlays at 1080p (52 s, 0.7 h). The basket reuses page 1's render. **~2.9 h.**
 
 ## Recommendation
 
-C is the strongest for what the brief asks for: the least talk, nothing explained, and an ending that is a joke that turns into a chill. It shows the subject least, so if you want the missile on screen use A; it is the only one with the product in shot. B is the funniest, and its green wall of lights is the strongest single image. Decide whether the subject must be visible (A) or may be only a flash (C).
+Make **A**. It is the most direct answer to the ask: a real range advert with every missile shown off, one line each, and a tagline that carries the design (the decoy looks like the killer) without explaining it. **B** puts the most specs on screen and costs about 3 h less; **C** is the cheapest and the funniest but sells the least. The user decides three things. First, whether the card numbers become canon (LREF A-24 to A-26, the decoy's 30 g, and the 26 m precision missile, the only fixed size). Second, whether the seventh product, the ship-launched precision missile, stays in. Third, the timing: all three need the MSL-V designs, with the built MSL and nose swaps as the stand-in, and the plan's fallback is to swap Eps 6 and 7.

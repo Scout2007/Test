@@ -1,0 +1,2564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tidebreak Episode Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column with a section index; tables scroll inside their own frame. */
+:root{
+  --bg:#f3f4f7; --panel:#ffffff; --ink:#12161d; --muted:#5a6475; --line:#d8dde5;
+  --lref:#6232d4; --clock:#0e7c70; --heat:#c2510d; --code:#eef0f5;
+  --f-display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#07090c; --panel:#0e1218; --ink:#e4e8ee; --muted:#8a95a6; --line:#1f2631;
+  --lref:#a47bff; --clock:#6fd3c4; --heat:#ff9a4a; --code:#151b24; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#07090c; --panel:#0e1218; --ink:#e4e8ee; --muted:#8a95a6; --line:#1f2631;
+  --lref:#a47bff; --clock:#6fd3c4; --heat:#ff9a4a; --code:#151b24; color-scheme:dark}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--f-body); padding-inline:16px; padding-block:24px 64px}
+.wrap{max-width:68rem; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr); gap:24px}
+@media (min-width:980px){.wrap{grid-template-columns:13rem minmax(0,1fr)}}
+header.top{grid-column:1/-1; display:grid; gap:8px; padding-block:8px 16px; border-bottom:1px solid var(--line)}
+.eyebrow{font:600 12px/1.4 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--clock)}
+h1{font:700 clamp(2rem,5vw,3.2rem)/1.05 var(--f-display); letter-spacing:.01em; margin:0; text-wrap:balance}
+.lede{color:var(--muted); max-width:62ch; margin:0}
+nav.toc{font:500 13px/1.5 var(--f-mono); color:var(--muted); align-self:start; display:grid; gap:4px}
+@media (min-width:980px){nav.toc{position:sticky; top:calc(env(safe-area-inset-top, 0px) + 16px)}}
+nav.toc a{color:inherit; text-decoration:none; padding:2px 0; border-left:2px solid transparent; padding-left:8px}
+nav.toc a:hover, nav.toc a:focus-visible{color:var(--ink); border-left-color:var(--lref); outline:none}
+nav.toc .sub{padding-left:20px; font-size:12px}
+main{min-width:0; display:grid; gap:4px}
+main h2{font:700 1.9rem/1.15 var(--f-display); letter-spacing:.02em; margin:32px 0 4px; padding-top:12px; border-top:2px solid var(--ink); text-wrap:balance}
+main h3{font:700 1.35rem/1.2 var(--f-display); letter-spacing:.02em; margin:24px 0 2px; text-wrap:balance}
+main h3.ep{color:var(--lref)}
+main h4{font:600 12px/1.4 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:16px 0 0}
+main p, main li{max-width:68ch}
+main p{margin:6px 0}
+main ul, main ol{margin:6px 0; padding-left:1.4em; display:grid; gap:3px}
+main strong{font-weight:600}
+main code{font:13px var(--f-mono); background:var(--code); padding:1px 5px; border-radius:3px}
+main a{color:var(--lref)}
+.tbl{overflow-x:auto; margin:10px 0; border:1px solid var(--line); border-radius:6px; background:var(--panel)}
+.tbl table{border-collapse:collapse; width:100%; font-size:14px; line-height:1.45}
+.tbl th{font:600 11px/1.3 var(--f-mono); letter-spacing:.07em; text-transform:uppercase; color:var(--muted); text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); white-space:nowrap}
+.tbl td{padding:9px 12px; border-top:1px solid var(--line); vertical-align:top; font-variant-numeric:tabular-nums}
+.tbl tr:first-child td{border-top:0}
+main blockquote{margin:10px 0; padding:4px 14px; border-left:3px solid var(--heat); color:var(--muted)}
+footer{grid-column:1/-1; color:var(--muted); font:12px var(--f-mono); border-top:1px solid var(--line); padding-top:12px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+
+main h2.ep{color:var(--lref)}
+main h3.opt{border-left:3px solid var(--clock); padding-left:10px}
+main h5{font:600 12px/1.4 var(--f-mono); letter-spacing:.06em; color:var(--muted); margin:12px 0 0}
+main h6{font:600 12px/1.4 var(--f-mono); color:var(--muted); margin:10px 0 0}
+main hr{border:0; border-top:1px solid var(--line); margin:20px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="eyebrow">Operation Tidebreak · pre-release mini-series · style and storyboard options · round 2</div><h1>Three ways to make each episode</h1><p class="lede">The subjects are settled. Each option is a different event, told the way the people in it would really talk, and built from the film’s own 3D models. Pick one per episode, or mix parts. Generated from <code>miniseries/options/</code>.</p></header>
+<nav class="toc" aria-label="Sections"><a href="#at-a-glance">At a glance</a><a href="#decisions-that-come-with-some-options">Decisions that come with some options</a><a href="#how-to-pick">How to pick</a><a href="#ep-1-m-1c-twin-railcannon-t-9">Ep 1 · M-1C twin railcannon</a><a href="#option-a-run-4-locked-range-cameras-4-3-plain-60-s" class="sub">A · Run 4</a><a href="#option-b-jink-the-gun-crew-s-loop-heard-through-hull-cameras" class="sub">B · Jink</a><a href="#option-c-eight-milliseconds-a-high-speed-playback-no-words-5" class="sub">C · Eight Milliseconds</a><a href="#ep-2-laser-focusing-array-t-8">Ep 2 · Laser focusing array</a><a href="#option-a-unseen-brand-film-41-s" class="sub">A · Unseen</a><a href="#option-b-graveyard-shift-night-shift-cctv-46-s" class="sub">B · Graveyard Shift</a><a href="#option-c-tag-range-control-feed-46-s" class="sub">C · Tag</a><a href="#ep-3-point-defence-t-7">Ep 3 · Point defence</a><a href="#option-a-six-layers-vintage-training-film-3d-renders-under-f" class="sub">A · Six Layers</a><a href="#option-b-the-leaker-debrief-replay-tactical-playback-55-s" class="sub">B · The Leaker</a><a href="#option-c-seeker-a-missile-s-recorded-feed-42-s" class="sub">C · Seeker</a><a href="#ep-4-plasma-lance-t-6">Ep 4 · Plasma lance</a><a href="#option-a-field-reach-publication-plate-clay-and-line-45-s" class="sub">A · Field Reach</a><a href="#option-b-sinkex-range-observer-loop-60-s" class="sub">B · Sinkex</a><a href="#option-c-the-edge-one-chase-shot-43-s" class="sub">C · The Edge</a><a href="#ep-5-frigate-and-tender-t-5">Ep 5 · Frigate and tender</a><a href="#option-a-the-multitool-late-night-ad-50-s" class="sub">A · The Multitool</a><a href="#option-b-shift-change-the-tender-s-arm-camera-55-s" class="sub">B · Shift Change</a><a href="#option-c-sisters-a-shared-channel-55-s" class="sub">C · Sisters</a><a href="#ep-6-warheads-t-4">Ep 6 · Warheads</a><a href="#option-a-keep-your-distance-trade-show-video-wall-loop-45-s" class="sub">A · Keep Your Distance</a><a href="#option-b-that-s-the-lot-night-shift-site-camera-51-s" class="sub">B · That&#x27;s the Lot</a><a href="#option-c-second-sun-night-on-a-hillside-41-s" class="sub">C · Second Sun</a><a href="#ep-7-ecw-destroyer-t-3">Ep 7 · ECW destroyer</a><a href="#option-a-quiet-hours-hull-camera-observation-50-s" class="sub">A · Quiet Hours</a><a href="#option-b-who-s-transmitting-drill-footage-with-comm-subtitle" class="sub">B · Who&#x27;s Transmitting?</a><a href="#option-c-shepherd-a-long-day-on-the-boom-camera-70-s" class="sub">C · Shepherd</a><a href="#ep-8-heavy-cruiser-and-spinal-cannon-t-2">Ep 8 · Heavy cruiser and spinal cannon</a><a href="#option-a-the-turn-observational-documentary-no-narrator-62-s" class="sub">A · The Turn</a><a href="#option-b-pass-in-review-fleet-review-pool-feed-50-s" class="sub">B · Pass in Review</a><a href="#option-c-gunner-s-story-oral-history-over-archive-reels-58-s" class="sub">C · Gunner&#x27;s Story</a><a href="#ep-9-endeavor-the-departure-t-1">Ep 9 · Endeavor, the departure</a><a href="#option-a-undisclosed-evening-news-live-59-s" class="sub">A · Undisclosed</a><a href="#option-b-cleared-to-depart-traffic-control-loop-60-s" class="sub">B · Cleared to Depart</a><a href="#option-c-voice-note-a-message-home-55-s" class="sub">C · Voice Note</a></nav>
+<main>
+<p>Round 1 was rejected for three reasons: lore-dumping dialogue, three options that rehashed each other, and work beyond the film's 3D models. Round 2 follows a new brief (<code>BRIEF.md</code>):</p>
+<ul>
+<li><strong>Speech:</strong> only what a real person would say, with picture and sound carrying the idea.</li>
+<li><strong>Events:</strong> each option is a different event with one idea.</li>
+<li><strong>Production:</strong> every shot is a render of the film's assets plus small additions and environments.</li>
+</ul>
+<p>Every spoken line was checked by script: word counts, spoken numbers, and lines repeated between options.</p>
+<h2 id="at-a-glance">At a glance</h2>
+<p>Each cell gives the title, what happens, spoken words · runtime · render hours (raw, ±30 %).</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Ep</th>
+<th>Subject</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>Agent's pick</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>M-1C railcannon</td>
+<td><em>Run 4</em>: a factory shot at a plate 100 km out on locked range cameras; four seconds of nothing, then the hit · 26 w · 60 s · ~7.8 h</td>
+<td><em>Jink</em>: live fire at a drone that sidesteps until it's too close to dodge; the gun crew's loop · 30 w · 60 s · ~6.8 h</td>
+<td><em>Eight Milliseconds</em>: one shot in high-speed playback, the blue pulse crawling down the bore · 0 w · 50 s · ~6.4 h</td>
+<td><strong>A</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Laser array</td>
+<td><em>Unseen</em>: a luxury brand film; a far drone's radiator dims to black, no beam ever · 7 w · 41 s · ~6 h</td>
+<td><em>Graveyard Shift</em>: two night-shift techs ping a reflector satellite while arguing about a mug · 30 w · 46 s · ~4 h</td>
+<td><em>Tag</em>: two cruisers play laser tag among rocks; an umpire reads the hit lights · 32 w · 46 s · ~6 h</td>
+<td><strong>B</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Point defence</td>
+<td><em>Six Layers</em>: a vintage training film; each layer strikes a dot off a chalk counter; four dry narrator lines · 28 w · 65 s · ~8 h</td>
+<td><em>The Leaker</em>: a chief scrubs the replay of the one round that reached 8 km until someone owns up · 31 w · 55 s · ~6 h</td>
+<td><em>Seeker</em>: a target missile's own feed from lock to cut · 0 w · 42 s · ~3 h</td>
+<td><strong>B</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Plasma lance</td>
+<td><em>Field Reach</em>: a clay-and-line publication plate; the field sleeve builds and a point of light is released · 0 w · 45 s · ~4.9 h</td>
+<td><em>Sinkex</em>: a retired frigate hull is cut in two while a veteran remembers the coat he slept in aboard her · 49 w · 60 s · ~10 h</td>
+<td><em>The Edge</em>: one chase shot beside a single pulse until it frays and goes out; "Lost." · 1 w · 43 s · ~9.5 h</td>
+<td><strong>C</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Frigate and tender</td>
+<td><em>The Multitool</em>: a late-night infomercial; "in seconds!" over a caption reading ACTUAL TIME: 6 HOURS · 65 w · 50 s · ~7.2 h</td>
+<td><em>Shift Change</em>: a time-lapse module swap on the tender's arm camera, with a night crew heard in radio fragments · 13 w · 55 s · ~3.5 h</td>
+<td><em>Sisters</em>: three frigates with three modules tease each other, then part for three jobs · 34 w · 55 s · ~11.9 h</td>
+<td><strong>A</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Warheads</td>
+<td><em>Keep Your Distance</em>: a trade-show loop; the missile leaves and a far plate is cut in silence · 3 w · 45 s · ~4.3 h</td>
+<td><em>That's the Lot</em>: a night shift seats canisters into a hedgehog module until the last green light · 29 w · 51 s · ~5 h</td>
+<td><em>Second Sun</em>: two voices on a night hillside; a far flash silently lights the clouds · 22 w · 41 s · ~5.3 h</td>
+<td><strong>C</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>ECW destroyer</td>
+<td><em>Quiet Hours</em>: a go-dark drill; a search plume crawls past and the bridge whispers out of habit · 16 w · 50 s · ~2.2 h</td>
+<td><em>Who's Transmitting?</em>: the EW picture catches a frigate's galley radio playing the match · 18 w · 55 s · ~2.5 h</td>
+<td><em>Shepherd</em>: drones come home after a long sortie; the last one is talked in · 9 w · 70 s · ~5.1 h</td>
+<td><strong>B</strong></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Heavy cruiser, spinal</td>
+<td><em>The Turn</em>: the Astrid turns for two minutes, fires, then waits three for the hit while the bridge discusses a plastic plant · 41 w · 62 s · ~3.6 h</td>
+<td><em>Pass in Review</em>: the Astrid passes the review stand so slowly the band plays its march twice · 13 w · 50 s · ~3.1 h</td>
+<td><em>Gunner's Story</em>: a retired gunnery officer remembers a tin of lemon drops, over old-film reels · 60 w · 58 s · ~3.1 h</td>
+<td><strong>C</strong></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Endeavor (finale)</td>
+<td><em>Undisclosed</em>: a live news hit where the reporter has nothing to say, until the link dies · 57 w · 59 s · ~7 h</td>
+<td><em>Cleared to Depart</em>: a tired controller clears the ships out; only the Endeavor gets "Good luck." · 37 w · 60 s · ~7 h</td>
+<td><em>Voice Note</em>: a crew member's 14-word message home about tomatoes, then the tag · 14 w · 55 s · ~5 h</td>
+<td><strong>C</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Taking every agent's pick comes to 7:43 and ~50 h raw, against round 1's 9:30 and ~48 h.</p>
+<h2 id="decisions-that-come-with-some-options">Decisions that come with some options</h2>
+<ul>
+<li><strong>Ep 2 C:</strong> the duel needs two Endeavor hulls in different liveries.</li>
+<li><strong>Ep 4 C:</strong> whether the drone feed keeps its range counter.</li>
+<li><strong>Ep 8 A:</strong> shows a two-minute turn and a ~2 min 48 s flight to 10,000 km.</li>
+<li><strong>Ep 8 C:</strong> implies about half a minute of fin time per shot.</li>
+<li><strong>Ep 8, A and C:</strong> both make their numbers canon.</li>
+<li><strong>Ep 9:</strong> the film defines only the warp <em>arrival</em> flash, so the departure's look is yours to set. A and B show a bloom; C cuts to the tag before it.</li>
+<li><strong>Ep 7 A:</strong> needs the destroyer rig to pose its fins edge-on.</li>
+<li><strong>Placeholders:</strong> makers, callsigns and hull numbers stay in [brackets] until you name them.</li>
+</ul>
+<h2 id="how-to-pick">How to pick</h2>
+<p>Reply with a letter per episode, for example "1A 2B 3B 4C 5A 6C 7B 8C 9C". You can also mix parts of options, for example "Ep 2 C but with one Endeavor".</p>
+<h2 class="ep" id="ep-1-m-1c-twin-railcannon-t-9">Ep 1 · M-1C twin railcannon (T−9)</h2>
+<p>Three separate events with one idea each. <strong>A</strong> is a factory acceptance shot at a fixed plate, seen on locked range cameras: the idea is <em>the wait</em>. <strong>B</strong> is a live-fire exercise at a target drone that keeps sidestepping, heard on the gun crew's own loop: the idea is <em>a slug can't turn, so the gun waits for the range to shrink</em>. <strong>C</strong> is one shot on a high-speed camera at the muzzle, with no speech: the idea is <em>how little time the gun takes to do its work</em>. They differ in place (a rock range, open space, a lab playback window), in people (range control, a gun crew, nobody) and in what the picture is about (the pause after the shot, the miss, the inside of the bore).</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>Run 4</em></td>
+<td>A factory acceptance shot at a plate 100 km out, on locked range cameras</td>
+<td>Range control, the mount tech, the plate-camera tech</td>
+<td>Four seconds of nothing, then the hit</td>
+<td>26</td>
+<td>60 s</td>
+<td>~7.8 h</td>
+</tr>
+<tr>
+<td>B · <em>Jink</em></td>
+<td>Live fire at a target drone that jinks; two misses, then a hit</td>
+<td>Gunner and fire control</td>
+<td>A slug can't turn; the drone wins far out and loses close in</td>
+<td>30</td>
+<td>60 s</td>
+<td>~6.8 h</td>
+</tr>
+<tr>
+<td>C · <em>Eight Milliseconds</em></td>
+<td>One shot replayed from a muzzle high-speed camera</td>
+<td>Nobody</td>
+<td>The whole job is over in 8 ms</td>
+<td>0</td>
+<td>50 s</td>
+<td>~6.4 h</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 class="opt" id="option-a-run-4-locked-range-cameras-4-3-plain-60-s">Option A · <em>Run 4</em>: locked range cameras, 4:3, plain (60 s)</h3>
+<p><strong>Logline.</strong> On a bare rock shelf, a range crew fires the M-1C at a plate far down the line, and the camera on the plate watches nothing happen for four seconds.</p>
+<p><strong>The idea.</strong> Distance is time. The viewer sits through the pause and feels the gun's reach in it. The heat limit arrives as glowing fins and one sigh.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Cuts between locked cameras, each labelled by a corner ID and timecode (MOUNT-1, MOUNT-2, PLATE). No camera moves. Sunlit, hard shadows, a black sky, sensor noise, flat clipped contrast.</li>
+<li>The plate camera is a long lens on a rock outcrop beside the plate, 100 km down the line, so the plate is a few pixels wide.</li>
+<li>Sound: no music. Voices only on the range loop, plus a contact mic on the mount (thuds, servo whine, metal ticking). Nothing is heard from the plate's side. Vacuum is silent.</li>
+<li>The wait is a real four seconds in one locked frame, with no sound and no one speaking.</li>
+<li>Overlays: IDs, timecode, a red HOLD, END OF RUN. No spec block.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–4</td>
+<td>MOUNT-1, wide: the M-1C on its test stand, clamped, barrels flat, sun low left. Lower third: [MAKER] · FACTORY ACCEPTANCE · RUN 4.</td>
+<td>One low tone. No words.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4–14</td>
+<td>MOUNT-2, close on the mount: the stand's amber cells light one by one, the clamps swing off, the cradle lays the barrels on the line.</td>
+<td>Servo whine, clunks through the mount mic. RANGE: "Mount, range is hot." MOUNT: "Hot. Clamps are off."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14–19</td>
+<td>PLATE, locked: a small bright plate on a sled among rocks, dead still. Timecode ticks.</td>
+<td>Silence on the picture. RANGE: "Plate cam?" PLATE: "Green."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>19–25</td>
+<td>MOUNT-2, tight on the breech and barrels. Three countdown tones. At the third: one white frame, the stand slams back on its slide, gun A's fins burst out glowing on their radiator faces.</td>
+<td>RANGE: "Gun A, on the tone." Tones, then one hard thud through the mount.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>25–29</td>
+<td>PLATE, the same locked frame. Nothing moves. The timecode counts the seconds.</td>
+<td>Nothing. Not a word, not a tone. One faint intake of breath on the loop at about the third second.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>29–33</td>
+<td>PLATE: a pinprick of white on the plate; the sled tumbles slowly, a puff of fragments. The plate now has a hole through it.</td>
+<td>PLATE: "Impact." Then MOUNT: "Nice." RANGE: "Hold for temps."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>33–48</td>
+<td>MOUNT-2, locked on gun A's fins: the glow fades from white to orange. A red HOLD appears. The timecode jumps forward twice. The fins go dark.</td>
+<td>MOUNT sighs: "…Holding." Mount mic: metal ticking as it cools.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>48–55</td>
+<td>MOUNT-1 wide again. The stand is back at rest. HOLD becomes END OF RUN 4.</td>
+<td>RANGE: "Mount, you're safe." MOUNT: "Safe."</td>
+</tr>
+<tr>
+<td>9</td>
+<td>55–60</td>
+<td><strong>Tag.</strong> Hard cut to the title card: OPERATION TIDEBREAK on the still stars, the counter rolling T−10 to T−9, the release date, the card's low tone.</td>
+<td>The card's tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 26 spoken. Numbers spoken: none. (The tones are not words, and "gun A" is a letter.)</p>
+<p><strong>Built from.</strong> M1C (the rig, its cradle and fin controls), FX-SLUG (the impact flash and fragments) · additions: a test stand with clamps and amber cell lights (a few boxes and emissive strips); a plate on a sled (two flat boxes, one with a hole); a locked camera pylon (a box) · environment: a rock shelf and a distant rock field, generic rocks, black sky, a hard sun (WORLD).</p>
+<p><strong>Render.</strong> At 4:3 (0.75 of full frame): class D for the static wides, the wait, and the fin glow (840 frames, 3.5 h); class A for the stand and the shot (384 frames, 4.8 h); class B for the plate impact (96 frames, 2.0 h); class E for the tag. 10.4 h at full frame, <strong>~7.8 h</strong> at 4:3.</p>
+<hr/>
+<h3 class="opt" id="option-b-jink-the-gun-crew-s-loop-heard-through-hull-cameras">Option B · <em>Jink</em>: the gun crew's loop, heard through hull cameras (60 s)</h3>
+<p><strong>Logline.</strong> On a live-fire exercise, a gunner shoots twice at a target drone that sidesteps each time, then fires when it is too close to get out of the way.</p>
+<p><strong>The idea.</strong> A slug can't turn, so every shot is a bet made seconds ago. The drone wins when the shot is long and loses when it is short. The crew goes from annoyed to quietly pleased.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Two hull cameras bolted to the turret housing, both locked. HULL-1 looks along the barrels; HULL-2 looks across them at the barrel's edge. Each frame holds a corner of the gun, a black sky, a banded gas giant low in the frame (generic) and a tiny drone with a thin drive plume.</li>
+<li>The drone's sidestep is a plume flick: the plume jerks sideways and the dot slides. The slug is never seen. The only visible result of a shot is whether the drone is still there.</li>
+<li>A small HUD readout shows range and a MISS or HIT tag. Nobody reads it out except as the crew would.</li>
+<li>Sound: the camera hears the gun only through the hull (a dull knock each shot, a one-frame white flash on the barrel edge) and the crew's comm loop (a bit compressed, with breath and a chair creak). No music.</li>
+<li>The waits are real: each one is the slug's flight, shorter each time.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–5</td>
+<td>HULL-1: the barrels lead into black; the drone's plume is a faint dot, dead centre. HUD range tags it far.</td>
+<td>Loop hiss. FIRE CONTROL: "One-forty." GUNNER: "Firing."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5–15</td>
+<td>A one-frame white flash; the camera jolts. A long wait on the same frame; the dot is still. Then the plume flicks sideways. HUD: MISS.</td>
+<td>A dull knock through the hull. FIRE CONTROL: "Miss." GUNNER: "It moved." FIRE CONTROL: "It does that."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>15–25</td>
+<td>HULL-2, across the barrel edge: the drone is nearer, the plume clearer. Flash, a shorter wait, another sideways flick. MISS.</td>
+<td>FIRE CONTROL: "Ninety." GUNNER: "Firing." Knock. FIRE CONTROL: "Miss." GUNNER: "I led it." FIRE CONTROL: "It knows."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>25–33</td>
+<td>HULL-1: nothing fires. The drone's plume grows slowly as the range ticks down.</td>
+<td>FIRE CONTROL: "Let it come." GUNNER: "That's not a plan." A chair creaks.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>33–42</td>
+<td>The drone is now a shape, not a dot. Flash. A short wait. The plume begins its flick, and a white burst takes the drone before the flick finishes. HUD: HIT.</td>
+<td>FIRE CONTROL: "Forty." GUNNER: "Firing." Knock. FIRE CONTROL: "Hit."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>42–55</td>
+<td>HULL-1, locked on empty sky: a few pieces drift apart against the gas giant.</td>
+<td>GUNNER, quietly: "…There." FIRE CONTROL: "That's a plan." A soft knock on the housing, a palm, heard through the hull.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>55–60</td>
+<td><strong>Tag.</strong> The title card; the counter T−10 to T−9; the release date; the low tone.</td>
+<td>The card's tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 30 spoken. Numbers spoken: "one-forty", "ninety", "forty" (three, each a range call the gunner needs).</p>
+<p><strong>Built from.</strong> M1C (the turret, one barrel edge in each frame), DRN-L (the target drone, tiny), FX-FAR (its plume and the flick), FX-SLUG (the hit burst), HUD (the range readout) · additions: a plain girder deck under the turret, mostly out of frame (a few boxes); two hull camera mounts (boxes) · environment: a banded gas giant, generic, with a starfield (WORLD).</p>
+<p><strong>Render.</strong> Class D for the locked shots with a rendered plate and a moving plume (1,248 frames, 5.2 h); class B for the hit (72 frames, 1.5 h); class E for the tag. <strong>~6.8 h.</strong> If the barrel edge needs hero shading in every frame, add about 3 h.</p>
+<hr/>
+<h3 class="opt" id="option-c-eight-milliseconds-a-high-speed-playback-no-words-5">Option C · <em>Eight Milliseconds</em>: a high-speed playback, no words (50 s)</h3>
+<p><strong>Logline.</strong> In a lab's playback window, a high-speed camera beside the muzzle shows the one blue pulse running down the bore, slowed until it takes 24 seconds, and then real time snaps back.</p>
+<p><strong>The idea.</strong> The gun does its whole job in a moment too short to see. Slowed to a crawl it is still over before you are ready, and the real thing is only a crack.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>A playback window: the clip, a scrubber, a file label (HS-02 · MUZZLE · [SERIAL]), a speed readout and a timestamp. All of it is 2D overlay on the 3D render.</li>
+<li>The clip is monochrome and cold. The blue pulse is the only colour in the film, as the rules require.</li>
+<li>The camera sits beside the muzzle and looks back along the slotted barrel shroud. The pulse starts small and far away and comes toward the lens.</li>
+<li>Sound: the mount's contact mic. At real speed, a rising charge whine. In the slow section, the same sound stretched to a low groan with ticks as the rails flex. At snap-back, one hard crack and then silence. No words, no music.</li>
+<li>The slow section runs the real 8 ms bore transit at about 3,000× slower. (The seed's 100,000× would take over 13 minutes, so this is sharpened.)</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–5</td>
+<td>The playback window at ×1: the muzzle end of the barrels in monochrome, a rock edge in sun, the stand beyond. A scrubber sits at the start.</td>
+<td>A charge whine rises from the mount mic. No words.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5–9</td>
+<td>The whine reaches its top and holds, with half a second of nothing. One overexposed frame. The readout flips from ×1 to ×1/3000; the timestamp reads 0.000 ms.</td>
+<td>The whine drops to a long falling groan.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>9–33</td>
+<td>The crawl, in monochrome. Far down the shroud's slot, a small blue pulse starts. It comes toward the lens, lighting the slot segment by segment. The shroud plates flex a hair. A dark slug rides the head of the pulse. The timestamp climbs in tenths of a millisecond.</td>
+<td>The stretched groan, ticks as the metal moves. No words.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>33–37</td>
+<td>The pulse reaches the muzzle in frame and the blue floods the lens; the dark slug crosses and is gone. The timestamp stops at 8.000 ms.</td>
+<td>The groan drops out. A held silence.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>37–40</td>
+<td>The readout snaps to ×1. The camera jolts hard in real time. The muzzle is already empty.</td>
+<td>One hard crack through the mount.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>40–45</td>
+<td>The muzzle held in monochrome: the stand settling, nothing else. The scrubber reads END.</td>
+<td>A single metal tick, then silence.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>45–50</td>
+<td><strong>Tag.</strong> The title card; the counter T−10 to T−9; the release date; the low tone.</td>
+<td>The card's tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 0 spoken. Numbers spoken: none.</p>
+<p><strong>Built from.</strong> M1C (the muzzle end, its bore pulse rig driven at sub-frame steps), FX-SLUG (the slug and the flare at exit) · additions: a slotted viewing strip along the shroud, flagged as a test fitting (one extruded box and a cutaway strip); a camera boom beside the muzzle (a box) · environment: the same generic rock shelf and sun as the range, so only a hint of it is in frame; a monochrome grade with the blue left in.</p>
+<p><strong>Render.</strong> Class D for the real-time shots (408 frames, 1.7 h); class A for the crawl, rendered at 12 fps and interpolated (288 frames, 3.6 h); class B for the muzzle exit at 12 fps (48 frames, 1.0 h); class E for the tag. <strong>~6.4 h.</strong> The bore pulse must be sampled between the rig's 8 frames, so its progress needs to be a driven value, not keyed frames.</p>
+<hr/>
+<h3 id="recommendation">Recommendation</h3>
+<p>Pick <strong>A</strong> if you want the episode to feel like the film's real gun on a real afternoon, since it carries the idea with the least dialogue and the cheapest pause. Pick <strong>C</strong> if you'd rather have the one image no one has seen. Pick <strong>B</strong> only if you want the series to show people talking early. If you want two of these, A and C pair best and have no speakers in common. All three prices are raw, before the 30 % re-render allowance.</p>
+<h2 class="ep" id="ep-2-laser-focusing-array-t-8">Ep 2 · Laser focusing array (T−8)</h2>
+<p>Three separate events, all about the same invisible thing. <strong>A</strong> is a luxury brand film in which nothing is ever seen to happen. <strong>B</strong> is two technicians on the night shift, bored, aiming at a mirror. <strong>C</strong> is a friendly range game between two cruisers, with an umpire reading the scores. A has one spoken line, B is a two-hander over a comm loop, and C is a three-way chatter on a training net.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>Unseen</em></td>
+<td>A brand film for the array: macro beauty, a violet flush, a far drone going dark</td>
+<td>One brand voice, once</td>
+<td>The beam is never shown; only its effect</td>
+<td>7</td>
+<td>41 s</td>
+<td>~6 h</td>
+</tr>
+<tr>
+<td>B · <em>Graveyard Shift</em></td>
+<td>Two techs fire alignment pulses at a reflector satellite and talk about a mug</td>
+<td>Dee and Marek (comm loop)</td>
+<td>The extraordinary tool is daily work: pulse out, a long wait, a small blip</td>
+<td>30</td>
+<td>46 s</td>
+<td>~4 h</td>
+</tr>
+<tr>
+<td>C · <em>Tag</em></td>
+<td>Two cruisers duel at training power with hit lights; the umpire calls it</td>
+<td>An umpire, Tern's and Gull's helm</td>
+<td>You are hit before you know it, so the only defence is hiding the sensor</td>
+<td>32</td>
+<td>46 s</td>
+<td>~6 h</td>
+</tr>
+</tbody>
+</table></div>
+<p>Loglines, written first and kept apart. <strong>A:</strong> a luxury ad for a laser lens that blushes violet while a far drone's radiator quietly goes dark, with nothing in between. <strong>B:</strong> at night, two technicians fire pinpricks at a mirror in the dark and argue about a mug. <strong>C:</strong> two cruisers play laser tag in a rock field and learn they have been hit only when the umpire reads the lights.</p>
+<hr/>
+<h3 class="opt" id="option-a-unseen-brand-film-41-s">Option A · <em>Unseen</em>: brand film (41 s)</h3>
+<p><strong>Logline.</strong> A maker's luxury film for the array shows cloth, polished petals, a gear and a lens, and a far drone's radiator dims, with no beam at any point.</p>
+<p><strong>The idea.</strong> The viewer feels the power by what is missing between cause and effect. The ad is proud of the gap, and the one joke is that the product's best work goes unnoticed.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Locked 16:9 at 1080p, clean deep black, one hard sun key, shallow depth of field, a slow slide and rack focus. Grade like a watch ad. The violet is saturated but kept low in the glow so AgX does not turn it lavender.</li>
+<li>The array's own camera is a macro on a stage with the mount cut out of the Endeavor; the only far object is a drone, defocused.</li>
+<li>No music. The sound is a low hull hum, as if a hand were on the plate, and the yoke servo's tick, both heard through the hull the camera rides on. The voice is one close-miked, unhurried speaker.</li>
+<li>The lens is violet only while firing. There is never a beam, a flash or a ray.</li>
+<li>The maker's name is [MAKER], one thin, wide-tracked line on the logo card.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–5</td>
+<td>Macro slide over tufted beta cloth. The sun key sweeps and each fibre snaps from black to white.</td>
+<td>Hull hum only.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5–11</td>
+<td>Slide along the array's petals, bright facets. Rack focus from a cloth seam to the lens lip.</td>
+<td>Hum.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>11–17</td>
+<td>Macro on the gear sector. The yoke slews a few degrees toward something off-frame and stops.</td>
+<td>Tick. Tick. The cut lands on the second tick.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>17–22</td>
+<td>The lens, dead on, black glass. It flushes violet, holds, and fades. Nothing leaves it.</td>
+<td>The hum drops out for exactly as long as the glow.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>22–28</td>
+<td>Far behind the soft edge of the lens, a defocused drone. Its radiator panel is a dull red disc. The red dims to black and its tiny steering puffs stop.</td>
+<td>Silence, then one tick.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>28–33</td>
+<td>Pull back: the Endeavor, small on black, the sun on one edge.</td>
+<td>Voice, unhurried: "Some of our finest work goes unnoticed."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>33–36</td>
+<td>Logo card: [MAKER], one line.</td>
+<td>Silence.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>36–41</td>
+<td>Tag.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 7 spoken. Numbers spoken: none.</p>
+<p><strong>Built from.</strong> EN (the array mount and hull, with the Endeavor's <code>laser_power</code> and <code>laser_traverse</code> rigs) · DRN-L (the drone, with its radiator face glowing dull red). Additions: a one-mount macro stage cut from EN (small: the same mesh, isolated); a cloth displacement shader on the existing blanket material (a material, not a model); a thin-type logo card (2D). Environments: black, a sun.</p>
+<p><strong>Render.</strong> Macro stage 22 s at ~18 s/frame, 2.6 h; class A defocused drone shot 1.8 h; class A pull-back 1.5 h; E cards and tag 0.1 h: <strong>~6 h</strong>.</p>
+<hr/>
+<h3 class="opt" id="option-b-graveyard-shift-night-shift-cctv-46-s">Option B · <em>Graveyard Shift</em>: night-shift CCTV (46 s)</h3>
+<p><strong>Logline.</strong> On the night shift, two technicians fire alignment pulses at a mirror satellite and talk about a missing mug, and the one return blip is a small thing that arrives late.</p>
+<p><strong>The idea.</strong> Wonder is somebody's routine. The same tool that elsewhere takes a ship's eyes is, tonight, a pin pointed at a mirror, and the interesting event is the wait for the answer.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Berth CCTV at 720p: fixed cameras on gantry rails, soft, slightly green, a timestamp in the corner, a little compression. No camera moves except a slow lens drift on one.</li>
+<li>The scope is a 2D overlay: a trace sweeps left to right, a tick marks each pulse, and a bump is the return. The delay is shown as distance along the trace and is never explained.</li>
+<li>Sound is the comm loop only: hiss, a chair, a console chirp, two voices that overlap a little. No tick, no hull hum; everything outside the cabin is silent.</li>
+<li>The reflector satellite's own star-tracker camera is the only close view of the pulse: a violet pinprick far off in the dark.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–7</td>
+<td>CCTV wide: the Endeavor in a fitting-out berth at night, a few work lamps, a gantry. Nothing moves.</td>
+<td>Hiss. DEE: "Anything?" Long pause. MAREK: "Not yet."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7–16</td>
+<td>The reflector satellite's star-tracker view: stars drifting, a corner of its mirror tile catching the sun. At the end, five frames of a violet pinprick far down in the dark, then nothing.</td>
+<td>DEE: "Did you take my mug?" MAREK: "Which one's yours?" DEE: "The one that's mine."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>16–25</td>
+<td>The scope. A tick; the trace sweeps to the end, flat. A second tick; the trace runs, and about two-thirds along a small bump rises.</td>
+<td>MAREK: "Again." Then, after the bump: "...There."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>25–33</td>
+<td>CCTV close on the Endeavor's flank, the array slewed a few degrees and still. On the gantry module a window light comes on.</td>
+<td>DEE: "That's it?" MAREK: "That's it. Your mug's on your desk." DEE: "...Oh."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>33–41</td>
+<td>The first CCTV wide. The work lamps go out one by one; one stays on.</td>
+<td>MAREK: "Logged. Go home." Hiss, a click.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>41–46</td>
+<td>Tag.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 30 spoken (Dee 13, Marek 17). Numbers spoken: none.</p>
+<p><strong>Built from.</strong> EN (the array, hull, <code>laser_traverse</code>) · HUD (the scope's overlay style). Additions, each small: a reflector satellite (a flat mirror tile on a short spar, one mesh); a few gantry girders, work lamps and a lit-window box; a star-tracker "camera" (just a camera with a lens-hood prop). Environments: a bare berth against stars. The violet pinprick is the lens glow seen from far off.</p>
+<p><strong>Render.</strong> Class A at 720p, 23 s of berth shots, 3.1 h; class D star-field and scope plates at 720p, 18 s, 0.8 h; E timestamps, scope and tag 0.3 h: <strong>~4 h</strong>.</p>
+<hr/>
+<h3 class="opt" id="option-c-tag-range-control-feed-46-s">Option C · <em>Tag</em>: range-control feed (46 s)</h3>
+<p><strong>Logline.</strong> Two cruisers play laser tag at training power among rocks, and the umpire's hit lights go on before either crew knows it.</p>
+<p><strong>The idea.</strong> You are hit before you can know, so a ship's whole defence is turning its sensors away. The comedy is two proud crews rolling in circles.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>A spotter-buoy camera on a rock at 720p, long lens, a little soft; a plain scoreboard overlay: TERN 1 – 1 GULL and a clock. The score is shown, not said.</li>
+<li>The ships are two Endeavor-class hulls with different stripes in white and amber (never blue) and different [hull numbers]. Their lenses are never shown.</li>
+<li>Small hit pads on each hull are cold green and chime on the range net when they light. They are green, not amber, so they cannot be mistaken for fin heat.</li>
+<li>Sound is the range net only: the umpire, two bridges, scoring chimes, open mikes. Everything else is silent.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–7</td>
+<td>Spotter cam: two cruisers hang apart among rocks, each in a lazy roll. Scoreboard 0 – 0.</td>
+<td>UMPIRE: "Clock's running. Play nice."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7–13</td>
+<td>Long-lens close on Tern's flank. One green pad on its back blinks twice and the scoreboard ticks. Nothing else happens for two seconds.</td>
+<td>Chime. Silence. UMPIRE: "Tern, you're lit." TERN: "When?"</td>
+</tr>
+<tr>
+<td>3</td>
+<td>13–19</td>
+<td>Tern starts to roll, and its sensor-mast shutters snap shut on the exposed side in turn. Gull begins to roll as well.</td>
+<td>UMPIRE: "Just now. Dorsal, aft." TERN: "Rolling." GULL: "Match him."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>19–29</td>
+<td>Wide: both hulls turn together, slowly, like two people on one dance floor. A rock drifts through frame. Ten seconds is a long time.</td>
+<td>UMPIRE: "Gentlemen, you're both just spinning." TERN: "That's the plan."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>29–35</td>
+<td>Gull's roll lags a beat. Its underside comes round and a pad under its hull blinks. The scoreboard goes to 1 – 1.</td>
+<td>Chime. UMPIRE: "Gull's lit. Level." GULL: "...Where?" UMPIRE: "Underneath." TERN: "Nobody checks underneath."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>35–41</td>
+<td>Both ships stop rolling. One pad on each, blinking in step like indicators.</td>
+<td>UMPIRE: "Time." A long tone.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>41–46</td>
+<td>Tag.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 32 spoken (umpire 21, Tern 8, Gull 3). Numbers spoken: none.</p>
+<p><strong>Built from.</strong> EN twice (a second livery on the same rig, with sensor-mast shutters and per-fin control) · HUD (the scoreboard style). Additions, each small: ~10 emissive green hit pads per hull (a material and a light each); a spotter buoy prop on a rock (a stick and a lens); two stripe textures. Environments: a generic rock field (drifting rocks, a star sky). No hero models are new.</p>
+<p><strong>Render.</strong> Class A at 720p, 41 s, 5.5 h; E scoreboard and tag 0.3 h: <strong>~6 h</strong>.</p>
+<hr/>
+<h3 id="recommendation-x">Recommendation</h3>
+<p><strong>B</strong> is my pick: it is the cheapest, it is the most human of the three, it shows the wait on the page instead of saying it, and its last line is the kind a night shift would actually say. <strong>C</strong> is the funnier and the only one with a real third voice; choose it if the series wants a laugh in its second week. <strong>A</strong> is the most beautiful but it is the series' third advert (Eps 5 and 6 are also adverts), so pick it only if you accept that. Decisions for you: whether two Endeavor hulls in different liveries are acceptable for C, and whether A's no-music, hull-borne sound is what you want from a brand film.</p>
+<h2 class="ep" id="ep-3-point-defence-t-7">Ep 3 · Point defence (T−7)</h2>
+<p>Three separate events about one subject, each with its own idea. <strong>A</strong> is an old fleet training film that runs a six-round drill and strikes one dot off a chalk counter per layer; the idea is that no layer takes everything. <strong>B</strong> is a debrief in which a chief scrubs the replay of the one round that got through; the idea is that the gap was a person's. <strong>C</strong> is one missile's recorded seeker feed from lock to death; the idea is that it stays certain until the last frame. A has a sparse period narrator, B has three tired people, and C has no voice at all.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>Six Layers</em></td>
+<td>A training film's staged drill: six rounds, six layers, one dot struck per layer</td>
+<td>Narrator, four short lines</td>
+<td>Nothing takes all six; the last layer is overworked</td>
+<td>28</td>
+<td>65 s</td>
+<td>~8 h</td>
+</tr>
+<tr>
+<td>B · <em>The Leaker</em></td>
+<td>Replay review of the round that reached 8 km</td>
+<td>Chief, a gunner and a fire-control operator</td>
+<td>The one that got through is a slip, not a machine</td>
+<td>31</td>
+<td>55 s</td>
+<td>~6 h</td>
+</tr>
+<tr>
+<td>C · <em>Seeker</em></td>
+<td>One missile's own feed, lock to cut</td>
+<td>Nobody; tones and telemetry</td>
+<td>It is surest at the end</td>
+<td>0</td>
+<td>42 s</td>
+<td>~3 h</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 class="opt" id="option-a-six-layers-vintage-training-film-3d-renders-under-f">Option A · <em>Six Layers</em>: vintage training film, 3D renders under film stock (65 s)</h3>
+<p><strong>Logline.</strong> In a fleet training film, six practice rounds come at a ship and each countermeasure layer strikes one off the chalk counter, until the last layer has to do its job and the film jumps.</p>
+<p><strong>The idea.</strong> You leave counting dots. Every layer takes one and none takes all. The narrator knows the last layer should not be the plan, and says so dryly.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>1.37:1 pillarbox, black and white, heavy 16 mm grain, scratches and a hair in the gate. Locked tripod shots with slow zooms. Every shot is a held or moving 3D render. The leader and the intertitles are overlays on renders, so there are no 2D-only shots.</li>
+<li>Intertitles are hand-lettered type overlays (one line each). The six-ring diagram and the chalk-dot counter are simple line overlays. Nothing is drawn-animated beyond a ring lighting up.</li>
+<li>Mono optical sound with hiss and a library orchestra. Space shots carry only the orchestra. Layer VI is the one hull-camera shot and carries the CIWS whine.</li>
+<li>Narrator: warm, mid-century, a little tired of being right. He speaks four times.</li>
+<li>Look rules hold: beams are invisible, the lens is violet only while it fires (grain hides it), and heat shows only on the fin faces.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–3</td>
+<td>Leader. A countdown circle and numerals flicker over a dark held render of the Endeavor stern-on.</td>
+<td>A pop at the 2. Hiss.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3–8</td>
+<td>Title over a slow zoom on the same render: SIX LAYERS · A FLEET TRAINING FILM · REVISED EDITION · [FILM UNIT].</td>
+<td>Orchestra swell. NARRATOR: "Your ship has a great many ways of saying no."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>8–12</td>
+<td>Locked wide. The Endeavor sits right of centre. Six missiles drift in from the left as specks on parallel tracks. Six rings draw round the ship. Six chalk dots appear in the corner.</td>
+<td>Orchestra, a hopeful march.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>12–18</td>
+<td>Intertitle I. JAM IT. The EW snow shimmers over the far end of the tracks. One speck wobbles, its drive glow cuts out, and it tumbles off. One dot is struck.</td>
+<td>March continues. No words.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>18–24</td>
+<td>II. FOOL IT. Flares bloom off the hull. One speck veers to a flare and goes out with it. Dot struck.</td>
+<td>NARRATOR: "That one's easily led."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>24–30</td>
+<td>III. BURN IT. The ship's lens blinks violet once. Nothing crosses the gap. One speck simply loses its glow and its trail ends. Dot struck.</td>
+<td>A held string note. No words.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>30–36</td>
+<td>IV. SCREEN IT. Smoke blooms across the ring. One speck flies in, out the far side, and drifts harmlessly past. Dot struck.</td>
+<td>March, a bar late.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>36–42</td>
+<td>V. CROWD IT. Chaff glitters in a loose cloud. One speck tumbles through and wanders away. Dot struck.</td>
+<td>NARRATOR: "Untidy. Nobody complains."</td>
+</tr>
+<tr>
+<td>9</td>
+<td>42–48</td>
+<td>VI. SHRED IT. A hull camera locked on a CIWS mount, side-on. The barrels blur. The last speck crosses the sky behind them and meets a sparkle cloud. The last dot is struck. A frame slips and a splice flash fires.</td>
+<td>The CIWS whine under the orchestra. The orchestra stops mid-bar.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>48–60</td>
+<td>THE END over a held render. The orchestra's last chord sags, as if the projector were running down.</td>
+<td>NARRATOR: "Please don't rely on layer six. It has enough to do."</td>
+</tr>
+<tr>
+<td>11</td>
+<td>60–65</td>
+<td>Tag: hard cut to the title card, T−8 to T−7, the release date, the low tone.</td>
+<td>The card's tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 28 spoken (10 + 4 + 3 + 11). Numbers spoken: "six" once.</p>
+<p><strong>Built from.</strong></p>
+<ul>
+<li>Film assets: EN (CIWS mount, PD lens, chaff and flare rigs, smoke), MSL (six instances, specks from afar), FX-EW, FX-SMOKE, FX-PD, WORLD.</li>
+<li>Additions: none beyond overlays (the leader, intertitles, ring graphic and chalk dots). All are flat type or line work over a render.</li>
+<li>Environments: the starfield and sun preset.</li>
+</ul>
+<p><strong>Render.</strong> Class D for layers I, II, III, V and the setup (each 6 s, 15 s/frame, ≈0.6 h at 1.37:1), class A2 for IV (~3.2 h), class A for VI (~1.6 h), and class E for overlays and grain (~0.7 h). The total is <strong>~8 h</strong>, excluding the tag.</p>
+<hr/>
+<h3 class="opt" id="option-b-the-leaker-debrief-replay-tactical-playback-55-s">Option B · <em>The Leaker</em>: debrief replay, tactical playback (55 s)</h3>
+<p><strong>Logline.</strong> A chief makes a CIWS crew watch the one round that reached 8 km, over and over, until someone admits what happened at mount four.</p>
+<p><strong>The idea.</strong> A machine did not fail. A person waited for something to clear. The chief's temper is care, and the missile is a frozen speck while four people stay quiet.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>The whole picture is the debrief screen: a 3D reconstruction in a flat-shaded override render with a playback overlay (scrubber, timecode, speed, DRILL REPLAY tag). The room is never seen, only heard.</li>
+<li>Replay audio is the hull microphone track: CIWS whine, with wow and flutter when scrubbed and a pitch drop in slow motion. The room is a ventilation hum, a chair and a cup set down once.</li>
+<li>Cool, flat grade; a green HUD with an amber warning only on mount four.</li>
+<li>Silence is a choice: the long beat after "Cycling." has only the hum and the slowed whine.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–5</td>
+<td>Frozen replay: the Endeavor in a virtual chase camera, one speck close in on the track, HUD range 8.0 km. The scrubber sits near the right end. It rewinds and the speck slides back.</td>
+<td>Hum. CHIEF: "Back." Rewind chirp.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5–13</td>
+<td>Forward at normal speed: tracers bloom from the mounts. The cloud is thin. The speck passes through.</td>
+<td>The whine rises. CHIEF: "Again." GUNNER: "Chief, we've seen it." CHIEF: "I haven't."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>13–22</td>
+<td>Slow motion at one eighth: the cloud, with a bare sector facing the track. The speck crosses it.</td>
+<td>The whine drops in pitch. No words.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>22–31</td>
+<td>The camera on mount four: its barrels turn slowly while its neighbour at the frame edge throws tracers. A small amber lamp is lit on the mount.</td>
+<td>CHIEF: "What's four doing?" GUNNER: "…Cycling." CHIEF: "Cycling."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>31–45</td>
+<td>Back to the wide frozen frame, range 8.0 km. Nothing moves.</td>
+<td>The hum, the slowed whine under it, a cup set down. CHIEF: "Who had the call?" … FC OPERATOR: "Me, chief. I thought it'd clear." CHIEF: "Mm." … "Next time, shout."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>45–50</td>
+<td>The playhead is dragged to the start. The frame jumps back to the first image, the ship and a speck far out.</td>
+<td>CHIEF: "Again, from the top."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>50–55</td>
+<td>Tag: hard cut to the title card, T−8 to T−7.</td>
+<td>The card's tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 31 spoken. Numbers spoken: "four" (the crew's own mount name). The HUD range is shown, not said.</p>
+<p><strong>Built from.</strong></p>
+<ul>
+<li>Film assets: EN (mounts, CIWS), MSL (one round), FX-PD (tracer cloud), HUD (range readout), WORLD.</li>
+<li>Additions: one small amber status lamp on mount four (one emissive disc), a playback scrubber overlay (a flat 2D bar), and a virtual camera on mount four (a render camera, not a model).</li>
+<li>Environments: none. The debrief room is sound only.</li>
+</ul>
+<p><strong>Render.</strong> Class D with a flat-shaded override for shots 1, 2, 3, 5 and 6 (about 26 s of moving frames, ≈2.6 h), class A for the mount four shot (216 frames at 45 s/frame, ≈2.7 h), and class E for overlays (≈0.5 h). The total is <strong>~6 h</strong>, excluding the tag.</p>
+<hr/>
+<h3 class="opt" id="option-c-seeker-a-missile-s-recorded-feed-42-s">Option C · <em>Seeker</em>: a missile's recorded feed (42 s)</h3>
+<p><strong>Logline.</strong> A target missile's own seeker feed runs from lock to the instant it ends, with the ship growing in the frame and the tones going wrong one by one, and then the picture cuts.</p>
+<p><strong>The idea.</strong> A missile has no doubts. Each trick dents its certainty only for a moment, and it is surest in the last frame. Nobody says what happened.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>A 4:3 window rendered at 640×480 as a seeker sensor, upscaled and graded in false colour. It sits in a pillarbox of telemetry columns (overlay). Brackets, a range counter at the missile's real closing speed, and a CONF readout.</li>
+<li>The ship appears as a dim silhouette with fin faces glowing. Heat shows only there, so the target is two or three amber panels in the dark.</li>
+<li>Sound is the seeker's own tones only: lock tone, stutter on jamming, a hunting warble, a flat carrier, a rising tone. No hull sound, no voice.</li>
+<li>No beam is drawn, and the missile's own body is never seen.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–4</td>
+<td>Black. The window draws. Brackets close round a distant ship, fins glowing. LOCK. RNG 612 KM, CONF 97.</td>
+<td>A warm-up chirp, then a steady lock tone.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4–12</td>
+<td>The ship grows. The EW overlay snows the window and the brackets jump. The picture tears and re-forms.</td>
+<td>The tone stutters and snaps back.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12–19</td>
+<td>Flares bloom between the missile and the ship. The brackets hop to one, then another. The list fills: TGT 02, 03, 04. CONF stays at 96. The flares fade and the brackets return to the ship.</td>
+<td>The tone changes pitch with each hop.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>19–28</td>
+<td>Smoke swallows the ship. The brackets breathe and search. LOCK LOST, then COAST. CONF falls. The range counter keeps running.</td>
+<td>A hunting warble, then a flat carrier.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>28–36</td>
+<td>A thin edge of the ship shows through. LOCK. CONF 99. A dark fan of sparks opens from the ship toward the camera, growing to fill the window. The range counter reads kilometres, then hundreds of metres.</td>
+<td>The rising tone, faster and faster.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>36–37</td>
+<td>Hard cut to black.</td>
+<td>Silence.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>37–42</td>
+<td>Tag: hard cut to the title card, T−8 to T−7.</td>
+<td>The card's tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 0 spoken. Numbers spoken: none. The telemetry numbers are overlay text.</p>
+<p><strong>Built from.</strong></p>
+<ul>
+<li>Film assets: MSL (the camera rides its nose, so the missile is never seen), EN (CIWS, countermeasure rigs, fins), FX-EW, FX-SMOKE, FX-PD, WORLD.</li>
+<li>Additions: seeker brackets and telemetry columns, as overlays.</li>
+<li>Environments: starfield and sun preset.</li>
+</ul>
+<p><strong>Render.</strong> The feed is rendered at 640×480 (about 0.15 of a 1080p frame): class D for shots 1–2 (≈0.15 h), class B for the flares (≈0.4 h), class A2 for the smoke (≈0.7 h), class C for the final fan (≈1.2 h), and class E for overlays (≈0.3 h). The total is <strong>~3 h</strong>, excluding the tag.</p>
+<hr/>
+<h3 id="recommendation-x-x">Recommendation</h3>
+<p>I would pick <strong>B</strong>: it is the only option where the drama is a person's small mistake, the dialogue is the kind a tired crew would say, and it costs about 6 h. C is the cheapest alternate and carries no spoken words, which suits a set that needs a silent option. A is the safest period pastiche but spends the most render hours, and it overlaps C in the effects it shows. Decision for the user: whether the narrator's closing joke in A is worth about 5 extra render hours over C.</p>
+<h2 class="ep" id="ep-4-plasma-lance-t-6">Ep 4 · Plasma lance (T−6)</h2>
+<p>Three separate events, one idea each. <em>Field Reach</em> is a silent publication plate: the lance's barrel is a field that has to be built first, and then the pulse goes down it. <em>Sinkex</em> is a range exercise heard on an observer loop: a retired crew member watches the Endeavor cut her old ship in two and talks about a coat. <em>The Edge</em> is one chase shot beside a single pulse, ending when it comes apart. They share no speaker, line, gag or shot idea. The lance's reach appears only in C.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>Field Reach</em></td>
+<td>A page of a [PUBLISHER] manual plays as a 3D sequence on the Endeavor's nose</td>
+<td>Nobody</td>
+<td>The barrel is made of nothing, and made first</td>
+<td>0 spoken; 4 caption labels</td>
+<td>45 s</td>
+<td>~4.9 h</td>
+</tr>
+<tr>
+<td>B · <em>Sinkex</em></td>
+<td>A retired hull is cut in two in a range exercise; a former crewman watches</td>
+<td>Range officer, veteran, Endeavor weapons officer</td>
+<td>A ship's end is personal, and the weapon is only the way it happens</td>
+<td>49</td>
+<td>60 s</td>
+<td>~10.0 h</td>
+</tr>
+<tr>
+<td>C · <em>The Edge</em></td>
+<td>A camera drone paces one pulse from the nose until it frays and goes out</td>
+<td>A drone operator (breath, one word)</td>
+<td>The lance's range is a place the pulse comes apart</td>
+<td>1</td>
+<td>43 s</td>
+<td>~9.5 h</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 class="opt" id="option-a-field-reach-publication-plate-clay-and-line-45-s">Option A · <em>Field Reach</em>: publication plate, clay and line (45 s)</h3>
+<p><strong>Logline.</strong> A maintenance publication's plate for the Endeavor's nose plays as a short 3D sequence: four rings are drawn, a sleeve grows out of them, a point of light is gathered and let go, and the sleeve rings once and fades.</p>
+<p><strong>The idea.</strong> A thrown thing needs a barrel, and here the barrel is built first out of nothing. The viewer should come away feeling that this is a fixed, orderly procedure that is done the same way every time. It never says why.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>White paper, black Freestyle line, white clay material override on the real nose, and one violet-white accent used only for the sleeve lines and the point of light.</li>
+<li>Orthographic and slow three-quarter views. The camera never moves faster than a page turning.</li>
+<li>Captions are single labels: FIG. 4-1 BOW, 1 FIELD, 2 CHARGE, 3 RELEASE. Footer: [PUBLISHER] · [PUB. No.]. No numbers beyond the step and figure marks, and no sentences.</li>
+<li>Sound is a soft click for each ring and each step, a low rising hum under the sleeve, one flat knock at the release, then a page-turn rustle. No music and no voice.</li>
+<li>The lenses are never shown firing. The release is shown only by the point vanishing and the sleeve flickering.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–4</td>
+<td>Paper white. FIG. 4-1 BOW. The clay Endeavor bow turns slowly in three-quarter view, its four lance ports ringed in black line.</td>
+<td>One click. Nothing else.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4–9</td>
+<td>Push to the nose face. Four ring outlines draw themselves around the ports, one after another.</td>
+<td>Four clicks, a beat apart.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>9–16</td>
+<td>1 FIELD. From each ring a violet-white line grows forward and the four merge into one hollow sleeve of fine line, running past the edge of the frame.</td>
+<td>A hum rises as the sleeve grows. One click when it closes.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>16–23</td>
+<td>2 CHARGE. The nose shell goes glassy. Behind the face, on the axis, a point of light appears and swells slowly. The sleeve stays still.</td>
+<td>Hum steady. A click as the point stops growing.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>23–27</td>
+<td>3 RELEASE. The point tightens to a hard dot and holds, one full second of stillness.</td>
+<td>Hum cuts. Silence.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>27–31</td>
+<td>The dot is gone in one frame. The sleeve flickers once from the nose outward, like a struck wire.</td>
+<td>One flat knock.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>31–35</td>
+<td>The sleeve lines fade from the nose outwards. The bow is plain clay again.</td>
+<td>Hum falls away. A page-turn rustle.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>35–40</td>
+<td>FIG. 4-1 BOW again, rings erased. Held.</td>
+<td>Quiet paper room tone.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>40–45</td>
+<td><strong>Tag.</strong> Hard cut to the title card, OPERATION TIDEBREAK, the counter rolling T−6 to T−5, the release date.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 0 spoken. Numbers spoken: none. Captions: four labels (BOW, FIELD, CHARGE, RELEASE).</p>
+<p><strong>Built from.</strong> EN (the nose and its four lance ports, <code>lance_power</code>) · FX-LANCE is not used; the point of light and the sleeve are additions · additions: sleeve and ring line objects, one emissive dot, a glass material on the nose shell (all a few curves and a material override, so small) · environment: a white paper plane.</p>
+<p><strong>Render.</strong> Class D for shots 1–5 and 7–8 (864 frames, 3.6 h); class A for the release (96 frames, 1.2 h); class E for the tag (0.07 h). <strong>~4.9 h.</strong></p>
+<hr/>
+<h3 class="opt" id="option-b-sinkex-range-observer-loop-60-s">Option B · <em>Sinkex</em>: range observer loop (60 s)</h3>
+<p><strong>Logline.</strong> A stripped, retired frigate is cut in two by the Endeavor while a retired crewman on the observer loop watches and talks about the coat they never got back.</p>
+<p><strong>The idea.</strong> A ship's end is a personal thing for someone. The weapon is only how it happens, so it is a few single frames and then silence. The viewer should feel the old person's dry restraint.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>The camera is fixed on the tender's observation mast: long lens, flat sun, cold digital video grade, a small corner overlay (SINKEX · OBS-2 · [RANGE No.] · [HULL No.]). It looks over a pale, generic grey world.</li>
+<li>Vacuum is silent. The only sound is what the tender carries: its low hull hum, and the observer loop (hiss, squelch, voices). The loop is dead for the moments of the cut.</li>
+<li>Three voices: RANGE (a young officer, procedural), VETERAN (retired, dry, older) and WEAPONS on the Endeavor.</li>
+<li>The lance is seen from far away as one-frame streaks with nothing visible between ship and hull. The hit and the parting are the picture.</li>
+<li>No lens flash and no jet shown, as the lance's own look belongs to the other options.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–6</td>
+<td>The target hangs against the grey world: a Garibaldi-Ivanova hull with its module bay empty, a dark notch of bare struts. Orange and white range stripes, four small beacons blinking.</td>
+<td>Tender hum. At 4 s the loop opens with a squelch.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>6–12</td>
+<td>Slow zoom on the bow. One bow panel is a slightly different grey.</td>
+<td>RANGE: "Observers, you're on the loop. Endeavor's on station." VETERAN: "Someone's painted her bow the wrong grey."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12–15</td>
+<td>Hold on the bow.</td>
+<td>RANGE: "Was she yours, sir?"</td>
+</tr>
+<tr>
+<td>4</td>
+<td>15–27</td>
+<td>Second camera, wide. Far left, the Endeavor, one sunlit edge, a faint drive dot that grows, then stops. The hull hangs small at right.</td>
+<td>VETERAN: "Aft berths. Coldest racks in the fleet. I slept in my coat the whole tour." Then three seconds of hiss.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>27–30</td>
+<td>Back to the long lens on the hull.</td>
+<td>WEAPONS: "Ready." RANGE: "Weapons free."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>30–36</td>
+<td>Four hairline streaks, one frame each, a beat apart, from the far left into the hull's waist. Each leaves a white spot and a puff of spall. The spots join into a glowing seam.</td>
+<td>Nothing. The loop goes dead.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>36–44</td>
+<td>The seam cools orange to dull red. The aft half slides free, slowly turning; the empty bay swings into view. Debris glitters. A beacon goes out.</td>
+<td>At 41 s the loop returns. VETERAN: "…Never did get that coat back."</td>
+</tr>
+<tr>
+<td>8</td>
+<td>44–52</td>
+<td>Two halves drift apart toward the planet's limb. The bow half turns into the sun; the wrong grey catches the light.</td>
+<td>After a pause: RANGE: "Endeavor, safe your weapons. Exercise complete."</td>
+</tr>
+<tr>
+<td>9</td>
+<td>52–55</td>
+<td>The Endeavor's drive dot lights and recedes. The halves are specks.</td>
+<td>Tender hum, then the loop's squelch closing.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>55–60</td>
+<td><strong>Tag.</strong> Hard cut to the title card, the counter rolling T−6 to T−5, the release date.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 49 spoken (RANGE 8 + 4 + 6 = 18, VETERAN 7 + 15 + 6 = 28, WEAPONS 1, RANGE "Weapons free" 2; total 49). Numbers spoken: none. Every line checked against §1: RANGE is doing her job; the veteran is answering a question and complaining about paint, as a person would; nobody names the weapon or its range.</p>
+<p><strong>Built from.</strong> GI (hull, no module) · EN · TND (the observer platform) · FX-LANCE (as streaks only) · FX-BREAK · FX-FAR · HUD overlay · additions: four blinking range beacons (small emissive cubes), a range-stripe decal on the hull, one re-coloured bow panel (a material change), a corner overlay · environment: a pale grey generic world from WORLD, with no relation to Maren.</p>
+<p><strong>Render.</strong> Class D for the held shots, 0–30 s and 44–55 s (984 frames, 4.1 h); class A for the streaks (144 frames, 1.8 h); class B for the parting, with FX-BREAK (192 frames, 4.0 h); class E for the tag (0.07 h). <strong>~10.0 h.</strong></p>
+<hr/>
+<h3 class="opt" id="option-c-the-edge-one-chase-shot-43-s">Option C · <em>The Edge</em>: one chase shot (43 s)</h3>
+<p><strong>Logline.</strong> One camera drone rides beside a single pulse out from the Endeavor's nose, and the operator following it breathes through it until the pulse frays and goes out, far from the ship.</p>
+<p><strong>The idea.</strong> The lance is a thing that ends. There is no impact and no target: the picture is a long, held run along a thread, and the feeling is the quiet when it stops. Nobody says how far it was.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Unbroken: one camera path, no cuts. It starts a metre off the four lenses and slides out beside the pulse, then turns to look back at the end.</li>
+<li>Raw instrument feed: faint noise, slight vignetting, a small drone-feed frame (DRN-L [No.] · FWD · TRK) with a range counter whose digits blur and then freeze. This is the only place a number appears, and it can be dropped.</li>
+<li>Sound is the control loop: hiss, the lock tone, the drone's faint servo, and the operator's breathing. Calm at the start, held while the pulse runs, then let out. The one word is spoken after the pulse dies.</li>
+<li>The lock tone is the ruler: steady while the pulse is whole, wavering as it frays, a flat low note and then silence when it is gone.</li>
+<li>The lens flash is shown here, close, and nowhere else in the episode.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–4</td>
+<td>Black, then the Endeavor's nose, very close: four dark lenses, a sunlit hull edge. The drone-feed frame.</td>
+<td>Hiss, the lock tone, slow even breathing.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4–8</td>
+<td>The lenses turn violet. The camera is already sliding forward off the nose. A white-violet slug of light is just ahead and to one side, with a faint wake behind it. The range digits blur.</td>
+<td>A short intake of breath, held.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>8–26</td>
+<td>The hull falls away behind us. Stars stay put. The slug runs on, even, edge sharp, hairline wake. Nothing else in the frame.</td>
+<td>The lock tone steady, the servo whirr, no breathing.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>26–31</td>
+<td>The slug lengthens and loses its edge. A soft halo, then loose filaments. The TRK lamp flickers.</td>
+<td>The tone wavers. The breath starts to let go.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>31–36</td>
+<td>The strands peel off as sparks and scatter. The core dims, shortens, and is gone. The sparks fade. The range digits freeze.</td>
+<td>The tone drops to a flat low note and cuts. OPERATOR: "Lost."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>36–38</td>
+<td>The camera drifts on, then rolls slowly to look back along the line: far off, a tiny sunlit ship, and nothing between us and it.</td>
+<td>Hiss. Breathing, slow again.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>38–43</td>
+<td><strong>Tag.</strong> Hard cut to the title card, the counter rolling T−6 to T−5, the release date.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 1 spoken ("Lost."). Numbers spoken: none. The line is the call a drone operator makes to the range when the track drops.</p>
+<p><strong>Built from.</strong> EN (nose and lenses) · DRN-L (only as the unseen camera platform) · FX-LANCE (the slug and its fray, a new state of the effect) · HUD (the feed frame) · additions: a chase camera path and a drone-feed overlay (small) · environment: the film's star plate with a low sun.</p>
+<p><strong>Render.</strong> Class A for the nose and the run-out (192 frames, 2.4 h); class D for the long run (432 frames, 1.8 h); class B for the fray (240 frames, 5.0 h); class D for the look back (48 frames, 0.2 h); class E for the tag (0.07 h). <strong>~9.5 h.</strong></p>
+<hr/>
+<h3 id="recommendation-x-x-x">Recommendation</h3>
+<p>Pick C: it is the one image nobody has seen, it fits the series' silent slot for this episode, and it has the least dialogue to defend. Take B only if you want a human voice this early; take A for the cheapest, but it is the closest to the rejected manual idea. Decide whether C keeps its drone-feed range counter, and whether the operator's one word stays.</p>
+<h2 class="ep" id="ep-5-frigate-and-tender-t-5">Ep 5 · Frigate and tender (T−5)</h2>
+<p>Three separate events about one hull. <strong>A</strong> is a late-night ad that sells the frigate's range of jobs while its fine print says the opposite. <strong>B</strong> is a night shift at the tender, seen through the loader arm's camera, in which a module swap goes unfinished at shift change. <strong>C</strong> is three sister frigates leaving formation on an open channel, teasing each other before they go to three jobs. A is a joke told to the audience, B is a wait watched in silence, and C is a family scene heard on a radio.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>The Multitool</em></td>
+<td>A shopping-channel ad for the frigate</td>
+<td>Pitchman, co-host</td>
+<td>One hull, every job: but one at a time, and slowly</td>
+<td>64</td>
+<td>50 s</td>
+<td>~7.2 h</td>
+</tr>
+<tr>
+<td>B · <em>Shift Change</em></td>
+<td>The tender's night crew swap a module and hand the job on</td>
+<td>Three dock crew, as radio fragments</td>
+<td>Behind every ship that sails is dull, patient work</td>
+<td>13</td>
+<td>55 s</td>
+<td>~3.5 h</td>
+</tr>
+<tr>
+<td>C · <em>Sisters</em></td>
+<td>Three frigates with three modules break formation</td>
+<td>Three captains</td>
+<td>Same hull, different jobs: a family</td>
+<td>34</td>
+<td>55 s</td>
+<td>~11.9 h</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 class="opt" id="option-a-the-multitool-late-night-ad-50-s">Option A · <em>The Multitool</em>: late-night ad (50 s)</h3>
+<p><strong>Logline.</strong> A pitchman sells the Garibaldi-Ivanova frigate as the warship that does every job, and the small print quietly corrects him.</p>
+<p><strong>The idea.</strong> The frigate can be anything, but only one thing at a time, and changing takes a while. The viewer learns it from a caption the pitchman never reads out.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Shopping-channel video, 4:3 at 960×720: soft, saturated, with chroma bleed and loud floodlit colours. Star wipes, one chrome title, an offer bar. One before-and-after split.</li>
+<li>The pitchman is loud and warm. The co-host is a real person who would rather be somewhere else.</li>
+<li>A cheesy synth bed, studio-audience "ooh" and clapping, and a BUT WAIT stinger. The demos play silent under the music, because the cameras are in vacuum.</li>
+<li>Captions carry the fine print. The pitchman never reads them.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–6</td>
+<td>"Before": the bare frigate hull turns in a flat grey grade. A lone drone drifts past, bored. Chrome title: TIRED OF ONE-TRICK WARSHIPS?</td>
+<td>Sad synth. PITCH: "Is your warship stuck doing the same old job?" CO-HOST: "Every single day."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>6–14</td>
+<td>Star wipe to full colour. Whip zoom onto the frigate with the missile module, floodlit, on a slow turn. Starburst: [SHIPYARD].</td>
+<td>Audience "ooh". PITCH: "Meet the frigate. Every job, one hull!"</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14–24</td>
+<td>Three quick demos. The missile module's pod doors ripple open. The gun module's four batteries slew at a target plate. The point-defence module throws a cloud at a practice drone. Silent.</td>
+<td>Synth only. PITCH: "Missiles? Got 'em. Guns? Got 'em. Something coming at you? Got that too."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>24–30</td>
+<td>Before-and-after split. The hull stays locked while the missile, gun and point-defence modules dissolve one into the next. Starburst: SWITCH JOBS IN SECONDS! Small caption: *ACTUAL TIME: 6 HOURS.</td>
+<td>PITCH: "Switch jobs in seconds!" CO-HOST (impressed): "Seconds!" Audience applause.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>30–38</td>
+<td>BUT WAIT stinger. The hull turns with the missile module. A crawl runs under it: *ONE MODULE AT A TIME. MISSILES SOLD SEPARATELY.</td>
+<td>PITCH: "And it does every job—" CO-HOST: "At once?" PITCH: "One at a time. Which is how you do jobs!"</td>
+</tr>
+<tr>
+<td>6</td>
+<td>38–45</td>
+<td>Offer bar: CALL NOW [PHONE]. The frigate turns behind it in a hot pink wash.</td>
+<td>PITCH: "Call now, operators are standing by!" CO-HOST: "Which operators?" PITCH: "Call now!"</td>
+</tr>
+<tr>
+<td>7</td>
+<td>45–50</td>
+<td>Hard cut: the title card.</td>
+<td>Tag: the card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 64 spoken. Numbers spoken: "one", twice, as sales phrases ("one hull", "one at a time"). The real swap time appears only as a caption.</p>
+<p><strong>Built from.</strong> Assets: GI, GI-MAV, GI-GUN, GI-PD, DRN-L (as the bored drone and the practice target), FX-PD, FX-SLUG. Additions: a grey target plate on a post (one box); the floodlit set (a coloured cyclorama behind the hull: planes and lights). Overlays: chrome title, starbursts, star wipes, offer bar, crawl, captions, chroma bleed. No tender, no people.</p>
+<p><strong>Render.</strong> B at 960×720 for 27 s (4.5 h), C for the 5 s FX-PD demo (2.2 h), D for the flat shots and offer card, 13 s (0.4 h), E for the tag (0.1 h). <strong>~7.2 h.</strong></p>
+<hr/>
+<h3 class="opt" id="option-b-shift-change-the-tender-s-arm-camera-55-s">Option B · <em>Shift Change</em>: the tender's arm camera (55 s)</h3>
+<p><strong>Logline.</strong> On the night shift at the tender, a frigate's module is swapped by a crew we only hear, and at dawn the job is handed on with the old module still hanging on the arm.</p>
+<p><strong>The idea.</strong> Behind every ship that sails is slow, dull, shared work. Nobody here is hurrying, and nothing about it is heroic.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>One fixed camera on the loader arm, in 16:9 at 1280×720: a dim, work-lit grade, soft vignette, a plain clock overlay in the corner.</li>
+<li>Most of the film is a time-lapse on twos, with lamp light and sun racing across the hull. A few moments return to real time.</li>
+<li>The camera hears only through the arm: servo hum, grip clunks, the ticking of cooling metal. The crew are a radio loop that surfaces from the blur and drops back.</li>
+<li>Nobody explains the job. The lines are the kind two tired people say at four in the morning.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–4</td>
+<td>Real time. The arm camera looks into the frigate's open module bay under work lamps. The gantry frame is behind it. Clock: 22:10.</td>
+<td>Servo hum, one clunk. No speech.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4–14</td>
+<td>Time-lapse. The arm draws the old missile module out of the bay while the sun and lamps sweep shadows across the hull. A tethered drink bulb drifts past the lens. Clock to 00:30.</td>
+<td>The hum speeds up into a whine. A radio fragment surfaces. TECH 1: "Two's stuck." A hard clunk. TECH 1: "There."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14–26</td>
+<td>The arm swings the old module across the lens and over to a rack. A second module, the gun one, rolls in on the gantry. Clock to 04:00.</td>
+<td>The whine drops back to hum. TECH 2: "Is it lunch?" TECH 1: "It's four." TECH 2: "Then it's lunch."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>26–38</td>
+<td>The gun module seats. Hull-mounted latch lights go from red to green, one at a time. Lamps flick off in sequence. Clock to 05:55.</td>
+<td>Latch clunks, each softer than the last. No speech.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>38–50</td>
+<td>Real time. The arm has stopped. The old module is still in its grip in front of the lens and turns very slowly. Clock: 06:00. Dawn light crosses the hull.</td>
+<td>Hum dies away. NIGHT LEAD: "Leave it." The last lamp goes out. The arm ticks as it cools.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>50–55</td>
+<td>Hard cut: the title card.</td>
+<td>Tag: the card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 13 spoken. Numbers spoken: "two", "four" (a latch number and a time of night, both for the speakers' own use).</p>
+<p><strong>Built from.</strong> Assets: TND, GI, GI-GUN, GI-MAV (the old module), WORLD (sun and lamp sweep). Additions: a loader arm with grip (a few cylinders and a camera mount); a girder gantry round the bay (set dressing); work lamps; latch lights on the hull (small emissive spots); a rack for the old module (box frame); a tethered drink bulb (one sphere and a tether). Overlays: the clock and a thin scrubber bar. Environment: the tender's dock bay.</p>
+<p><strong>Render.</strong> B for the 12 s of real time at 720p (2.7 h). D for 34 s of time-lapse rendered on twos (0.8 h). E for the tag (0.1 h). <strong>~3.5 h.</strong></p>
+<hr/>
+<h3 class="opt" id="option-c-sisters-a-shared-channel-55-s">Option C · <em>Sisters</em>: a shared channel (55 s)</h3>
+<p><strong>Logline.</strong> Three frigates of one hull and three different modules hold formation until the clock runs out, tease each other on an open channel, and part for three jobs.</p>
+<p><strong>The idea.</strong> One hull, three characters. What each sister carries has made her who she is, and the one who stays behind says the kindest thing.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Scope 2.39:1 at 1920×800, clean and cool. A banded gas giant fills the lower frame. The sun comes from the left.</li>
+<li>Heard on a comm loop: carrier hiss, squelch clicks, the odd breath. Never from outside a hull.</li>
+<li>Subtitles in the film's comm style, with callsign tags: GUNNY, HEDGEHOG, PICKET.</li>
+<li>Slow, locked-off cameras that settle on one hull at a time. The plumes are quiet.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–10</td>
+<td>The three frigates fly abreast over the gas giant: one with the missile module, one with the gun module, one with the point-defence module. A tiny tender catches the sun far behind them. HUD: three [HULL-NO.] tags and a mission clock.</td>
+<td>Hiss. GUNNY: "Morning, Hedgehog. You look heavy." HEDGEHOG: "It's called capacity, Gunny. Nice little guns, though."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10–20</td>
+<td>Close on the gun frigate's flank as the sun creeps along it. Cut to the point-defence frigate, which has said nothing yet.</td>
+<td>GUNNY: "They hit what they point at." Pause. PICKET: "Children."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>20–30</td>
+<td>Three shots, one for each hull, as the clock on the HUD runs down. The hulls hold their spacing as the numbers fall.</td>
+<td>HEDGEHOG: "Race you." GUNNY: "You'll lose." A squelch click.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>30–50</td>
+<td>The three part: the missile frigate climbs left, the gun frigate drops right, and the point-defence frigate rolls and returns toward the tender. The two plumes shrink to points. Picket's plume dies to a glow, and she hangs against the gas giant.</td>
+<td>PICKET: "Somebody has to be home when you two get back." The loop's hiss drops out.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>50–55</td>
+<td>Hard cut: the title card.</td>
+<td>Tag: the card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 34 spoken. Numbers spoken: "two", once, in "you two".</p>
+<p><strong>Built from.</strong> Assets: GI, GI-MAV, GI-GUN, GI-PD, TND (as a distant speck), FX-FAR (the three plumes), WORLD (the sun), HUD, SUB. Additions: none beyond the callsign tags. Environment: a generic banded gas giant (a sphere with a texture, not Maren).</p>
+<p><strong>Render.</strong> A for 30 s of formation at scope (6.7 h), A2 for 10 s with all three hulls in frame (4.4 h), D for 10 s of HUD and plume shots (0.7 h), E for the tag (0.1 h). <strong>~11.9 h.</strong></p>
+<hr/>
+<h3 id="recommendation-x-x-x-x">Recommendation</h3>
+<p>Make <strong>A</strong>. It is the series' comic slot, it uses only the three module renders, and its joke lives in a caption, so nothing is explained. If the user wants the ep to carry the tender and hold a quiet beat, swap in <strong>B</strong>, which is the cheapest and has the fewest words. <strong>C</strong> is the most work and the least needed. The user decides whether the series wants a laugh here or a quiet shift, and whether an ad belongs in a grim film's pre-show.</p>
+<h2 class="ep" id="ep-6-warheads-t-4">Ep 6 · Warheads (T−4)</h2>
+<p>Three separate events, three separate ideas. <strong>A</strong> is a trade-show loop whose whole pitch is how far away you can be. <strong>B</strong> is a night shift loading a hedgehog module, as a count that climbs, with tired people at the end of it. <strong>C</strong> is two people on a hillside on a quiet planet who see something far off light the clouds. The weapon is a product in A, a chore in B and a sight in C. No line, gag, shot idea or speaker is shared.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>Keep Your Distance</em></td>
+<td>A video-wall loop on a maker's stand: a missile, a plate cut from far away</td>
+<td>One warm brand voice, once</td>
+<td>The product being sold is distance</td>
+<td>3</td>
+<td>45 s</td>
+<td>~4.3 h</td>
+</tr>
+<tr>
+<td>B · <em>That's the Lot</em></td>
+<td>A night shift loads a hedgehog module, pod by pod, to a count</td>
+<td>Arm operator and checker on their work loop</td>
+<td>It is loaded like groceries</td>
+<td>29</td>
+<td>51 s</td>
+<td>~5 h</td>
+</tr>
+<tr>
+<td>C · <em>Second Sun</em></td>
+<td>Two people on a hillside at night; a far flash lights the clouds, silently</td>
+<td>Two voices, never seen</td>
+<td>Something huge happened and they just watched</td>
+<td>22</td>
+<td>41 s</td>
+<td>~5.3 h</td>
+</tr>
+</tbody>
+</table></div>
+<p>Changes to the seeds. <strong>A</strong> drops the exploded view, the on-screen specification stack and the pod-loading shot. The loading shot would repeat B. <strong>B</strong> drops the time-lapse. Ep 5 <em>Six Hours</em> owns the time-lapse and the tender's arm camera, so B uses a locked gantry camera with cuts between hours. <strong>C</strong> is as seeded.</p>
+<hr/>
+<h3 class="opt" id="option-a-keep-your-distance-trade-show-video-wall-loop-45-s">Option A · <em>Keep Your Distance</em>: trade-show video-wall loop (45 s)</h3>
+<p><strong>Logline.</strong> A missile turns out of the dark and leaves; far away a plate is cut through without a sound; a cyan line is drawn across the gap and a warm voice says three words.</p>
+<p><strong>The idea.</strong> Standing far away is the feature. Every shot is wider than the one before. The viewer comes away feeling that a brochure just sold them a comfortable distance from something terrible, and nobody said "nuclear".</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>16:9 for the wall, with type kept in the centre-safe area. Clean navy-and-cyan CG; the missile photoreal against black.</li>
+<li>Camera: slow orbit, then a locked wide, then one long dolly back. No smash zooms.</li>
+<li>Music-led: warm, major-key, electronic, with an even pulse. It cuts to full silence for the jet (vacuum is silent), then a single low tone returns on the cooling plate.</li>
+<li>Overlays only: the [MAKER] wordmark, the [PRODUCT NAME], a [TEST DATE] caption, a drawn distance line, and [STAND NUMBER] at the end. No specifications.</li>
+<li>The loop point is the black of shot 1, so the wall restarts on the nose turning out of the dark.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–4</td>
+<td>Black. The ablative nose turns slowly into a cyan rim light. The [MAKER] wordmark fades in below.</td>
+<td>A single low pulse. Music starts under it.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4–11</td>
+<td>Close slow orbit along the body, with the seeker shutter closed. [PRODUCT NAME] slides on in plain bold type.</td>
+<td>Music builds, warm and even.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>11–18</td>
+<td>Locked wide: the missile hangs in black. Its motor lights and it leaves, shrinking to a point. The type stays where it was.</td>
+<td>Rising swell, then a held chord.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>18–26</td>
+<td>Test coupon on a sled, hard-lit from the side. A [TEST DATE] caption. At the far left of the frame a spark: the missile has arrived, very far away. A thin white jet joins the spark to the coupon. The coupon's near face brightens; a spray of molten metal leaves its far face.</td>
+<td>The music cuts out entirely. Nothing.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>26–31</td>
+<td>Push in to a neat round hole with a molten rim that goes orange, then red, then dark.</td>
+<td>One low tone returns.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>31–40</td>
+<td>A long dolly back from the hole. The coupon shrinks to a speck. A cyan dimension line draws itself across the dark to the spark's position. The wordmark and [STAND NUMBER] come up.</td>
+<td>Music returns on a major chord. Voice: "Keep your distance." Three-note sting.</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td>40–45</td>
+<td>Hard cut to the film's title card.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 3 spoken. Numbers spoken: none.</p>
+<p><strong>Built from.</strong> MSL-V (the Casaba killer), FX-CASABA, FX-NUKE (the spark), FX-FAR (the motor plume) · additions: a layered armour coupon on a sled (a slab and a frame), the wordmark and type (overlay) · environments: black studio cyc for 1–2; empty space with one WORLD sun for 3–6. The jet is the only effect of any size.</p>
+<p><strong>Render.</strong> Shots 1–3 (18 s, 432 frames) on a one-object missile stage at ~9 s/frame, 1.1 h. Shot 4: 6 s class D (144 frames, 0.6 h) plus 2 s class B for the jet (48 frames, 1.0 h). Shot 5: class D, 120 frames, 0.5 h. Shot 6: class D, 216 frames, 0.9 h. Overlays and tag, class E, 0.2 h. <strong>~4.3 h</strong> at 1080p.</p>
+<hr/>
+<h3 class="opt" id="option-b-that-s-the-lot-night-shift-site-camera-51-s">Option B · <em>That's the Lot</em>: night-shift site camera (51 s)</h3>
+<p><strong>Logline.</strong> A fixed gantry camera watches a two-person crew seat canisters into a hedgehog module cell by cell, hour after hour, until the last green light comes on and they go for coffee.</p>
+<p><strong>The idea.</strong> The most destructive load in the film is moved like freight at the end of a long shift. The count and the wall of lights carry it. The crew are bored, tired and fond of each other.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Locked site-camera frame at the same angle for every shot: a CCTV grade, slightly soft, amber work lamps against cold LED strips, with an on-screen shift clock and a pod counter. Cuts jump forward in hours.</li>
+<li>Sound is hull-borne through the camera's gantry mount: a dull thump each time a canister seats, the servo whine of the arm, the lamp buzz.</li>
+<li>The voices are the crew's work loop: close, a little compressed, with breath and a yawn.</li>
+<li>Nobody is seen. Vacuum dock, so nothing drifts or echoes.</li>
+<li>Every shot keeps the same frame. The only things that change are the count, the lamps and how many cells are lit.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–8</td>
+<td>Gantry frame. The module's cell face in rows, nearly all dark. The loader arm swings a grey canister from a rack at the left to the first empty cell and pushes it home. One green marker lights. Counter POD 001 / 360. Clock 19:02.</td>
+<td>Thump. Operator: "Going in." Checker: "Seated. Next."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8–16</td>
+<td>Same frame. Clock 22:40, counter POD 060. A block of rows is green. The arm seats another; the lamp has been moved.</td>
+<td>Thump. A yawn on the loop. Checker: "Sorry." A second yawn. Operator: "Don't."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>16–26</td>
+<td>Same frame. Clock 01:15, counter POD 211. More than half the face is green.</td>
+<td>Operator: "What are we on?" Checker: "Two-eleven." Operator: "Thought it was more."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>26–36</td>
+<td>Same frame. Clock 03:05, counter POD 298. The arm stops with a canister held at the cell. A close insert on a long pale scrape down the canister's side. Back to the frame. The arm resumes.</td>
+<td>Servo stops. Checker: "Scuffed." Operator: "Send it back?" Checker: "…Nah. Next." Thump.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>36–46</td>
+<td>Same frame. Clock 04:40. The arm carries the last canister. Counter 359, then the seat, then 360 / 360: the whole face is a grid of green. The arm retracts. A cell cover slides across and the lamps go out one by one.</td>
+<td>Operator: "Last one." Checker: "Seated." A pause. Checker: "That's the lot." Operator: "Coffee?" Checker: "Please." The lamp buzz stops.</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td>46–51</td>
+<td>Hard cut to the title card.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 29 spoken (4 + 2 + 9 + 6 + 8). Numbers spoken: "two-eleven" (one). The checker answers a count the operator asked for.</p>
+<p><strong>Built from.</strong> GI hull with GI-MAV (the module's cell face) · additions: a loader arm (four cylinders and a gripper), a canister rack and plain grey canisters (cylinders sized to the MSL), a gantry frame with work lamps, green marker lights on the cells (emissive dots), a scuff mask on one canister, shift clock and counter (overlay) · environment: a generic berth gantry in empty space; no ring station, no tender.</p>
+<p><strong>Render.</strong> Class D, fixed camera, 42 s of wides (1,008 frames, 4.2 h); one class A insert for the scuff at 720p (4 s, 96 frames, 0.5 h); overlays and tag 0.2 h. <strong>~5 h</strong> at 1080p. The lamp changes are the only lighting work.</p>
+<hr/>
+<h3 class="opt" id="option-c-second-sun-night-on-a-hillside-41-s">Option C · <em>Second Sun</em>: night on a hillside (41 s)</h3>
+<p><strong>Logline.</strong> Two people wait out a dull night on a hillside with a camera, and a far-off flash lights the whole cloud bank for a second without a sound.</p>
+<p><strong>The idea.</strong> The extraordinary thing is silent and far off, and what we get is two people's reaction. They mostly talk about whether the camera is on. The flash makes the dull night into something else. They hold on to the dull talk.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Locked low frame at the camp, facing the horizon. Nothing else moves except the lantern, the thermos steam and the clouds. Fine film grain, a cool night grade.</li>
+<li>Voices only. The people are never seen: two folding chairs with a blanket thrown over one, a thermos, a lantern, and a camera on a tripod with a blinking red record light.</li>
+<li>Sound: the wind in the scrub and crickets (insect-like chirps; this is an unnamed quiet planet). At the flash everything stops, and the flash itself makes no sound. The crickets come back one at a time.</li>
+<li>The flash is warm white, never blue. It lights the underside of the cloud bank first, then the whole hill: the chairs' shadows swing across the grass and settle back.</li>
+<li>The older voice is dry and tired; the younger voice is keen and a little nervous.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–12</td>
+<td>Locked wide. A black hillside. A low cloud bank on the horizon. Stars and a thin crescent moon. The lantern, the two chairs, and the camera's red light blinking.</td>
+<td>Wind and crickets. Older: "Is it still recording?" Younger: "Since sundown." Older: "Of nothing."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>12–19</td>
+<td>Close on the camera's red light, then the thermos with steam drifting. No words.</td>
+<td>Wind. Crickets.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>19–29</td>
+<td>Back to the wide, same frame. The cloud bank glows from inside, then goes white-gold; the hillside is hard-lit; the chairs' shadows swing across the grass. It holds for about a second, then fades to dull orange, then dark. The crickets stop.</td>
+<td>At the flash: nothing. After it, a pause of three seconds. Younger: "Tell me that's on the camera." Older: "It's on the camera."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>29–36</td>
+<td>Same frame. The red light still blinks. The steam rises straight up. The cloud bank drifts. A long hold.</td>
+<td>Silence, then older: "Well. It wasn't nothing." One cricket, then another.</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td>36–41</td>
+<td>Hard cut to the title card.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 22 spoken (4 + 2 + 2 + 6 + 4 + 4). Numbers spoken: none.</p>
+<p><strong>Built from.</strong> FX-NUKE (the flash, as a glow behind the clouds), FX-DAZZLE (the camera's white-out on the cloud edge), WORLD (night sky and moon preset) · additions: a tripod camera with a red record light, two folding chairs, a blanket, a lantern, a thermos with a steam particle (all simple boxes and cylinders) · environments: a night hillside of displaced terrain with sparse scrub; a volumetric cloud bank on the horizon; a crescent moon (a generic sphere). Not Maren, and the planet is never named.</p>
+<p><strong>Render.</strong> Class D for the wides (shot 1: 288 frames, 1.2 h; shot 2: 168 frames, 0.7 h; shot 3's first 6 s: 144 frames, 0.6 h; shot 4: 168 frames, 0.7 h); class B for the 4 s of the flash lighting the cloud volume (96 frames, 2.0 h); tag 0.1 h. <strong>~5.3 h</strong> at 1080p. Risk: volumetric cloud lit from behind may need a heavier class; allow +3 h.</p>
+<hr/>
+<h3 id="recommendation-x-x-x-x-x">Recommendation</h3>
+<p>C is the strongest for what the brief asks for: the least talk, nothing explained, and an ending that is a joke that turns into a chill. It shows the subject least, so if you want the missile on screen use A; it is the only one with the product in shot. B is the funniest, and its green wall of lights is the strongest single image. Decide whether the subject must be visible (A) or may be only a flash (C).</p>
+<h2 class="ep" id="ep-7-ecw-destroyer-t-3">Ep 7 · ECW destroyer (T−3)</h2>
+<p>Three separate events on the same unnamed ship ([hull no.]), each about one thing. <em>Quiet Hours</em> is a bridge watch hiding in a rock field while a search line passes: the idea is the hush as a thing a crew does with their bodies. <em>Who's Transmitting?</em> is a daytime fleet drill in which the destroyer's EW picture catches a friendly frigate's galley radio: the idea is that nothing leaks past the destroyer. <em>Shepherd</em> is the slow retrieval of the drones after a long sortie, ending on one that has to be talked home: the idea is patience and duration. The speakers, places, times of day and endings are all different. None of them uses the Endeavor, the Astrid or the Canterbury.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>Quiet Hours</em></td>
+<td>Go-dark drill; a search plume sweeps past a hiding destroyer</td>
+<td>Officer of the watch, helm, sensor (whispers)</td>
+<td>Silence is a habit</td>
+<td>16</td>
+<td>50 s</td>
+<td>~2.2 h</td>
+</tr>
+<tr>
+<td>B · <em>Who's Transmitting?</em></td>
+<td>Fleet drill; the EW picture catches a frigate's galley radio</td>
+<td>EW officer, frigate watch officer</td>
+<td>The destroyer hears everything</td>
+<td>18</td>
+<td>55 s</td>
+<td>~2.5 h</td>
+</tr>
+<tr>
+<td>C · <em>Shepherd</em></td>
+<td>Drones come home after hours; the last one is coaxed in</td>
+<td>Drone operator, bay hand</td>
+<td>Patience</td>
+<td>9</td>
+<td>70 s</td>
+<td>~5.1 h</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 class="opt" id="option-a-quiet-hours-hull-camera-observation-50-s">Option A · <em>Quiet Hours</em>: hull-camera observation (50 s)</h3>
+<p><strong>Logline.</strong> In a drill, a destroyer shuts down every emitter and sits in a rock field while an aggressor's search plume crawls past; the bridge whispers, and someone asks why.</p>
+<p><strong>The idea.</strong> The crew keep quiet with their whole bodies, long after a whisper could matter. Shown by the whispering and the long wait, never explained.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>One locked camera on a dorsal mast of the destroyer, looking down the hull. It never cuts away. Slow 6 s push-in in the middle.</li>
+<li>Hard raking sun, deep shadow, rocks drifting slowly behind. The fins sit edge-on and cold: no heat on any radiator face.</li>
+<li>Sound is the internal loop picked up through the hull: air handling, a chair, breathing, whispers. Nothing from outside. Silence between lines is the point.</li>
+<li>Lines are whispered and close-miked. Only a lower-third caption (EXERCISE · GO DARK) and the mission clock are on screen.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–5</td>
+<td>Black. The camera comes on: the hull runs away from us, sunlit on one edge, rocks behind.</td>
+<td>Air handling hum. A click.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5–12</td>
+<td>HUD strip at the lower left: EMIT lights go amber, then out, one at a time. Clock runs.</td>
+<td>OOW (whisper): "Emitters off." HELM (whisper): "Off."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12–24</td>
+<td>Hold. Four tiny violet pin-blinks on the truss heads, slow and uneven. Far off, a pale drive plume (FX-FAR) creeps across the stars.</td>
+<td>A chair creaks. SENSOR (whisper): "Still sweeping."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>24–34</td>
+<td>Slow push-in. The plume is nearest now and still a pin. The dish sits black and still.</td>
+<td>HELM (whisper): "Why are we whispering?" OOW (whisper): "Habit." HELM (whisper): "Right."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>34–42</td>
+<td>The plume slides behind a rock and is gone. Nothing changes on the hull.</td>
+<td>A long breath out. SENSOR (whisper): "It's past." OOW (whisper): "Carry on. Quietly."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>42–45</td>
+<td>The EMIT lights stay out. The four heads blink once together, then go on blinking raggedly.</td>
+<td>Hum.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>45–50</td>
+<td>Hard cut: the title card tag.</td>
+<td>Card tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 16 spoken. Numbers spoken: none.</p>
+<p><strong>Built from.</strong> DD (hull, dish, truss, fins edge-on) · FX-FAR · HUD · WORLD sun. Additions: four emissive pin-lights where the comm heads sit, if the DD model lacks them (four small spheres); a HUD strip (overlay). Environment: a generic rock field of eight or so instanced rocks. Check on build: that the DD rig can pose its fins edge-on (a rotation of the fin group is enough).</p>
+<p><strong>Render.</strong> Class A at 720p (~20 s/frame): about 360 unique frames (the animated shots at 12 fps, doubled) plus held stills: <strong>~2.2 h</strong>.</p>
+<hr/>
+<h3 class="opt" id="option-b-who-s-transmitting-drill-footage-with-comm-subtitle">Option B · <em>Who's Transmitting?</em>: drill footage with comm subtitles (55 s)</h3>
+<p><strong>Logline.</strong> In a fleet drill, the destroyer's EW picture lights up a friendly frigate: someone in its galley has the football on.</p>
+<p><strong>The idea.</strong> Nothing a ship leaks gets past the destroyer, not even a match. Shown as a ring growing on an overlay and a very dry officer.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Shot from the destroyer's truss, with the dish at the edge of frame. Clean daylight and a hard sun. The only movement is slow.</li>
+<li>The EW overlay (FX-EW) draws a thin ring that spreads from the frigate. It is a graphic over a 3D render.</li>
+<li>Hull-borne sound: a mug set down, a keyboard. The leaked broadcast comes through an instrument channel: tinny, murky, a crowd and a commentator you cannot quite make out.</li>
+<li>The destroyer answers by laser: a violet pin-blink from the truss, a violet pin-blink back. Both lines are shown in comm subtitles (SUB) with their callsigns.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–8</td>
+<td>Wide: the frigate [hull no.] drifts in formation. Lower third: EXERCISE · EMISSIONS DRILL. Clock runs.</td>
+<td>Hull hum. A mug is set down.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8–17</td>
+<td>EW overlay: a ring blooms around the frigate and spreads toward us. Bearing ticks swing onto it.</td>
+<td>Faint crowd noise comes up through the instrument channel. EW: "[callsign], your galley's got the match on."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>17–23</td>
+<td>The frigate. A violet pin-blink from the destroyer's truss; a pause; one back from the frigate's side.</td>
+<td>FRIG: "…Say again?"</td>
+</tr>
+<tr>
+<td>4</td>
+<td>23–31</td>
+<td>The ring keeps spreading. The crowd swells.</td>
+<td>EW: "You're two down."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>31–40</td>
+<td>The frigate again, small and plain.</td>
+<td>FRIG: "Cutting it." EW: "Hold on." The ring stays. A crowd groan.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>40–50</td>
+<td>The ring shrinks to a point and snaps off. Four seconds of just the hull.</td>
+<td>EW: "Three. Okay."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>50–55</td>
+<td>Hard cut: the title card tag.</td>
+<td>Card tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 18 spoken. Numbers spoken: two (a score, both times).</p>
+<p><strong>Built from.</strong> GI (bare hull, no module) · DD (truss and dish in foreground) · FX-EW · HUD · SUB · WORLD sun. Additions: one pin-light comm lens on the frigate hull (a small sphere); the ring graphic (overlay). Environment: open space with the sun preset.</p>
+<p><strong>Render.</strong> Class A at 720p, about 14 s animated at 24 fps (~340 frames, ~1.9 h) plus overlay-heavy shots at class E (~0.2 h) and held plates: <strong>~2.5 h</strong>.</p>
+<hr/>
+<h3 class="opt" id="option-c-shepherd-a-long-day-on-the-boom-camera-70-s">Option C · <em>Shepherd</em>: a long day on the boom camera (70 s)</h3>
+<p><strong>Logline.</strong> The destroyer's drones come home at the end of a long sortie, all but one on time, and the last is talked in by hand.</p>
+<p><strong>The idea.</strong> Looking after a fleet is mostly waiting. Shown by a clock running for hours, and a quiet voice for the one that is hard.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Camera on the end of a boom, looking back at the hull. The clock overlay runs the day (06:02 to 11:40).</li>
+<li>The sun sweeps slowly through the long shot (WORLD sun preset) and the shadows swing across the hull.</li>
+<li>Sound is only what the boom feels: thunks, servo whine, hum. Vacuum otherwise.</li>
+<li>The operator speaks softly and the bay hand answers once, tired.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–8</td>
+<td>The booms run out. The bay opens and nine small drones (DRN-L) fan out in silence. Clock 06:02.</td>
+<td>Servo whine. A lock thunk. No words.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8–20</td>
+<td>Time-lapse: the sun sweeps over the hull, the booms stay out like whiskers, the drones thin to specks. The clock runs on.</td>
+<td>Hum, with long gaps.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>20–32</td>
+<td>Four quick cuts: a drone arrives at a boom tip, is taken, and is drawn into the bay. Each is the same, a little faster.</td>
+<td>Thunk. Thunk. Thunk. Thunk.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>32–52</td>
+<td>The last drone comes in with a lazy roll. The boom tip reaches and misses. It drifts past. The tip reaches again.</td>
+<td>Operator (low): "Easy." Then: "Easy… come on."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>52–64</td>
+<td>The roll settles. The tip meets it. The boom draws it in and the bay shuts. Clock 11:40.</td>
+<td>A thunk. Operator: "There you are." BAY HAND: "Kettle's on."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>64–70</td>
+<td>Hard cut: the title card tag.</td>
+<td>Card tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 9 spoken. Numbers spoken: none.</p>
+<p><strong>Built from.</strong> DD (booms_deploy, drone_bay) · DRN-L (nine instances) · HUD clock · WORLD sun. Additions: a small collar on each boom tip, a torus and two prisms, if the rig lacks one. Environment: open space with the sun preset; no scenery.</p>
+<p><strong>Render.</strong> Class A at 720p: time-lapse 12 s (~1.6 h), recovery montage 12 s (~1.6 h), final approach 28 s at 12 fps doubled (~1.9 h): <strong>~5.1 h</strong>. Cheapest cut: render the time-lapse at 12 fps (saves ~0.8 h).</p>
+<hr/>
+<h3 id="recommendation-x-x-x-x-x-x">Recommendation</h3>
+<p>B. It is the most surprising and the funniest, and its overlay keeps the destroyer's one real trick on screen. A is the cheapest and the safest and is a good opener if the series wants quiet. C is the most expensive. If the budget is tight, drop C.</p>
+<p>The user must decide whether the drill is allowed to be this light (a football match), and whether the DD rig really has per-fin posing for A.</p>
+<h2 class="ep" id="ep-8-heavy-cruiser-and-spinal-cannon-t-2">Ep 8 · Heavy cruiser and spinal cannon (T−2)</h2>
+<p>Three separate events around the Astrid, each showing one idea and none explaining it. In <em>The Turn</em> a bridge crew points the ship at a rock and waits for the answer, talking about a plastic plant: the idea is that the gun is slow. In <em>Pass in Review</em> the Astrid takes so long to pass a review stand that the band plays its march twice: the idea is length. In <em>Gunner's Story</em> an old gunnery officer remembers the first trial and a tin of lemon drops: the idea is that every shot has to be paid for in waiting. The gun is shown firing only in A, and then as nothing visible. No option shows the bloom down the barrel, a 135 mm profile or a 200 mm end-on.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>The Turn</em></td>
+<td>A live trial: the Astrid turns on thrusters to point at a survey rock, fires once, and waits for the hit</td>
+<td>The captain, the helm, the watch officer, on the bridge loop</td>
+<td>She is slow: to aim she must turn, then the answer takes minutes to arrive</td>
+<td>41</td>
+<td>62 s</td>
+<td>~3.6 h</td>
+</tr>
+<tr>
+<td>B · <em>Pass in Review</em></td>
+<td>A fleet-review pool feed: the Astrid passes the stand, and the pass outlasts the band</td>
+<td>One hushed commentator</td>
+<td>She is long</td>
+<td>13</td>
+<td>50 s</td>
+<td>~3.1 h</td>
+</tr>
+<tr>
+<td>C · <em>Gunner's Story</em></td>
+<td>A retired gunnery officer recalls the first trial over archive reels</td>
+<td>The retired officer, alone</td>
+<td>Every shot costs waiting, and people fill it</td>
+<td>60</td>
+<td>58 s</td>
+<td>~3.1 h</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 class="opt" id="option-a-the-turn-observational-documentary-no-narrator-62-s">Option A · <em>The Turn</em>: observational documentary, no narrator (62 s)</h3>
+<p><strong>Logline.</strong> The Astrid spends two minutes turning to aim at a rock and nearly three more waiting for her shot to arrive, while her bridge talks about a plastic plant.</p>
+<p><strong>The idea.</strong> Nothing about the gun is fast. A viewer comes away feeling the slowness: the pivot, the empty minutes, a hit that arrives long after everyone has stopped looking. The bridge is bored and fond of each other, and the weapon is the least interesting thing on their loop.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Camera A is a range buoy 4 km off, 30° above her dorsal plane and 40° forward of the beam: a wide 24 mm, locked off, seeing her three-quarter from the bow as she pivots. Camera B is the target buoy beside the rock, 35 mm, locked.</li>
+<li>Neutral documentary grade with a little grain. HUD clock and an IMPACT countdown run in the corner, time-lapsed at stated speeds. Comm subtitles in the film's style.</li>
+<li>Vacuum is silent. The only sound is the bridge loop relayed through the buoy (hiss, voices) and the buoy's own instrument ticks: a soft ping for each beacon blink, a confirm tone at the shot, carrier-loss static at the impact.</li>
+<li>The shot itself shows nothing. The strobe, the stars and the hull stay unchanged, and the fins stay stowed (the single shot is cold).</li>
+<li>Impact is the only bright thing in the piece: a silent whiteout on camera B that recovers to a dim scar on the rock.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–6</td>
+<td>Camera A: the Astrid hangs against stars with her bow turned away from the rock. Lower third: ASTRID · TURN TO BEARING · LIVE TRIAL. HUD clock 00:00.</td>
+<td>Loop hiss. WATCH: "Rock's still there." (checking the beacon on the board) CAPTAIN: "It generally is."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>6–14</td>
+<td>Camera A, time-lapse ×10: bow and stern thrusters puff; the hull swings a few degrees. Clock rolls.</td>
+<td>CONN: "Coming round." (a helm call)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14–24</td>
+<td>Dissolve to the same camera, hull at about 45°, stars drifted. Clock 01:10.</td>
+<td>CAPTAIN: "Has anyone watered Gerald?" CONN: "He's plastic, sir." CAPTAIN: "He still looks thirsty."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>24–31</td>
+<td>Camera B: the survey rock turns slowly, a small sled with a beacon strobe on its dark face. The strobe blinks.</td>
+<td>Ping per blink. Silence otherwise.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>31–38</td>
+<td>Camera A: she settles on bearing; the thrusters stop. Clock 02:09.</td>
+<td>CONN: "On bearing." CAPTAIN: "Go on, then." WATCH: "Firing." Confirm tone.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>38–48</td>
+<td>Camera A, locked, countdown IMPACT 02:48 rolling at ×16. Nothing changes but the countdown and the HUD's SHOT stamp.</td>
+<td>Ticks. CAPTAIN: "How's your sister?" CONN: "Better. Hates the food." WATCH: "Ten seconds." CAPTAIN: "Thank you."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>48–52</td>
+<td>Camera B: the strobe blinks twice, then a silent whiteout.</td>
+<td>Pings, then carrier-loss static.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>52–57</td>
+<td>Camera B recovers: dust drifting, a dim scar, the sled gone, the rock still turning.</td>
+<td>Static settles to hiss. CONN: "Well." CAPTAIN: "Round we go, then."</td>
+</tr>
+<tr>
+<td>9</td>
+<td>57–62</td>
+<td>Tag: hard cut to the title card, counter T−3 to T−2, release date.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 41 spoken; numbers spoken: one ("ten seconds", a watch officer's countdown call). Every line is a call, an order or small talk between people who know the answer; none states a fact the listener has.</p>
+<p><strong>Built from.</strong> AST with its thruster rig · FX-SLUG (impact) · FX-DAZZLE (whiteout) · WORLD (sun) · HUD · SUB · additions: two range buoys (a sphere, a lens, a strobe), a beacon sled (a box and a light); each is a few primitives · environment: a rock range, one generic asteroid among a few others, which are generic rocks · I replaced the seed's hulk with a rock because a stripped hull sunk in an exercise belongs to Ep 4.</p>
+<p><strong>Render.</strong> Class A at 1080p (22.5 s/frame), time-lapse at 12 unique frames per second on shots 2, 3 and 5 (~315 frames, 2.0 h); class D for the rock (336 frames, 0.7 h); class B for the impact (72 frames, 0.75 h); tag and overlays 0.2 h. <strong>~3.6 h.</strong></p>
+<hr/>
+<h3 class="opt" id="option-b-pass-in-review-fleet-review-pool-feed-50-s">Option B · <em>Pass in Review</em>: fleet-review pool feed (50 s)</h3>
+<p><strong>Logline.</strong> At a fleet review the Astrid takes so long to pass the stand that the band plays its march twice and the commentator runs out of things to say.</p>
+<p><strong>The idea.</strong> Length. Nothing is said about size. The camera sits so close that she is a wall, the clock climbs, and a ceremony that was built for something short is outlasted. It should feel like affection and a little embarrassment, with the gun never fired.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>Cameras sit on the review stand's rail, 300 m from the lane: a locked 50 mm and a locked 35 mm, low and level. She is never seen whole: she is bow, wall, wall, stern.</li>
+<li>Broadcast look: slightly warm, steady, a small pool-feed bug, an ELAPSED clock, a lower third. No anchor, no studio.</li>
+<li>The sound is the stand's pool microphone: a brass band playing a march (a hall feed, not a vacuum sound), and the commentator hushed, as people are at ceremonies.</li>
+<li>The ship makes no sound. The lane is dark and the sun is low, so the hull is warm on one side.</li>
+<li>Her fins are stowed and cool. Nothing glows.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–5</td>
+<td>Stand camera, 50 mm: bunting in the foreground and an empty lane of lit buoys running to the left. ELAPSED 00:00.</td>
+<td>The march starts, thin and bright. COMMENTATOR (hushed): "Here she comes."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5–14</td>
+<td>The bow slides in from the left and within seconds the frame is hull plating, with a seam and a painted hull number [HULL NO.]. ELAPSED 00:40.</td>
+<td>The march. No words.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14–22</td>
+<td>The same wall, held. A hatch glides by. Dissolve; ELAPSED 02:05.</td>
+<td>The march ends and starts again from the top. COMMENTATOR: "…Still coming."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>22–31</td>
+<td>The other camera, 35 mm: more plating, a row of small hatches, a lane buoy lit in the distance. ELAPSED 03:50.</td>
+<td>The march. A long pause. COMMENTATOR: "Lovely."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>31–39</td>
+<td>The engine bells slide past, cool and dark; the lane is empty again. ELAPSED 05:31.</td>
+<td>COMMENTATOR: "And that's her."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>39–45</td>
+<td>Shot 1 again, the sun a little lower.</td>
+<td>The march stops mid-phrase. COMMENTATOR: "Back to the studio."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>45–50</td>
+<td>Tag: hard cut to the title card, counter T−3 to T−2, release date.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 13 spoken; numbers spoken: none. Each line is a commentator filling air, then a real sign-off. The ELAPSED figures are on screen only.</p>
+<p><strong>Built from.</strong> AST (fins stowed) · WORLD (low sun) · HUD (the ELAPSED bug) · additions: the review stand (a deck, a rail, bunting and flag poles, about 20 primitives), lane buoys (one buoy instanced), a hull number decal on the Astrid · environment: the lane and sunlit dark. The 50 mm and 35 mm lenses and the close wall are meant to differ from the film's 135 mm profile.</p>
+<p><strong>Render.</strong> Shot 1 class D at 1080p (120 frames, 0.25 h); shots 2 to 6 class A at 22.5 s/frame on twos (about 420 frames, 2.6 h); overlays and tag 0.25 h. <strong>~3.1 h.</strong></p>
+<hr/>
+<h3 class="opt" id="option-c-gunner-s-story-oral-history-over-archive-reels-58-s">Option C · <em>Gunner's Story</em>: oral history over archive reels (58 s)</h3>
+<p><strong>Logline.</strong> A retired gunnery officer remembers the first trial, when the crew sat and waited for the ship to cool after each shot while the lieutenant passed round a tin of lemon drops.</p>
+<p><strong>The idea.</strong> Each shot has to be paid for in waiting, and people fill that time with small rituals. The viewer should feel the cost without hearing the word heat, and end on the empty tin.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>A 4:3 window of old trials film inside the 16:9 frame: a faded colour drift, gate weave, dust, scratches, 12 unique frames per second. The film is the Astrid model with an old-film grade, not an old asset.</li>
+<li>Cameras: a hull-boom view from the dorsal spine looking aft along the fins (18 mm, never in frame as a prop), a low chase view beside the hull (50 mm), a distant locked view for the last shot.</li>
+<li>Sound: an old voice, close, in a quiet room with a faint kettle tick in the room tone, over the clatter of a projector. The reel is silent. The only other sound is a tin lid at the very end.</li>
+<li>The shot appears as an overexposed flare frame (FX-DAZZLE), never as a bloom at the muzzle. The fins' radiator faces go white, then orange, then dark.</li>
+<li>Slates in the corner give the trial and shot numbers. Nothing is explained.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–5</td>
+<td>Projector start: flutter and leader over the Astrid at rest in cold light. Slate: CLASS TRIALS · REEL 2 · TRIAL 1 · [DATE].</td>
+<td>Projector clatter. Room tone. RETIRED OFFICER: "Lemon drops."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5–14</td>
+<td>Hull-boom view aft along the dorsal: eight fins run out, slowly.</td>
+<td>OFFICER: "That's what I remember about the first trial. Dev kept a tin on the console."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14–20</td>
+<td>Low chase beside the hull, moving forward at walking pace.</td>
+<td>OFFICER: "Every shot, he'd hand it round."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>20–24</td>
+<td>Four frames of flare, whiting out the reel. The hull returns, fins white.</td>
+<td>Projector only. A silent breath of 3 s.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>24–40</td>
+<td>Hull-boom view aft: the fins go white, orange, dull red, dark, over 16 s.</td>
+<td>OFFICER: "After every shot she needs her minute, and you don't say 'again'." Then: "So we'd sit there sucking lemon drops, watching the orange go out of her."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>40–47</td>
+<td>Distant locked view, slate: TRIAL 1 · SHOT 5. A last flare; the fins light and fall again.</td>
+<td>OFFICER: "Last shot, the tin was empty."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>47–53</td>
+<td>The hull dark, held. A burn creeps in from the frame edge; the reel runs out to white, then black.</td>
+<td>OFFICER: "He passed it round anyway." A tin lid, close.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>53–58</td>
+<td>Tag: hard cut to the title card, counter T−3 to T−2, release date.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 60 spoken; numbers spoken: none ("again" is a word, not a count). The speaker is telling a memory to someone who wasn't there, in a gunner's idiom ("she needs her minute"), with a human detail that matters more to her than the gun.</p>
+<p><strong>Built from.</strong> AST (<code>fins_deploy</code>, fin glow on the radiator faces) · FX-DAZZLE (the flare frames) · WORLD · additions: a slate overlay, film grade, leader, scratches and an end-of-reel burn, all comp work; the boom camera is a virtual camera, so no new model · environment: stars and a plain sun preset only.</p>
+<p><strong>Render.</strong> Class A at the 4:3 window (about 0.75 of 1080p, 17 s/frame) at 12 unique frames per second for 50 s (600 frames, 2.8 h); grade and slates 0.2 h; tag 0.1 h. <strong>~3.1 h.</strong></p>
+<hr/>
+<h3 id="recommendation-x-x-x-x-x-x-x">Recommendation</h3>
+<p>C is my pick: it is the only option with a human memory in it, and the empty tin carries the idea without a spec. B is the cheap, nearly silent alternative (13 words) and the funniest in a run of nine. A needs your decision: it shows a 10,000 km shot with a flight of about 2 min 48 s and a two-minute turn, and C implies each shot costs about half a minute of fin time; both become canon if used.</p>
+<h2 class="ep" id="ep-9-endeavor-the-departure-t-1">Ep 9 · Endeavor, the departure (T−1)</h2>
+<p>Three separate evenings of the same night. <strong>A</strong> is the public's: a news crew with nothing to report watches a ship leave on a long lens. <strong>B</strong> is the working staff's: a tired traffic controller clears a queue of ships out, one by one. <strong>C</strong> is one crew member's: a goodbye she can't get through, over the ship's last hours. Nobody names the destination. All three use one new generic departure station (a straight lattice spine, not a ring), seen differently each time.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The event</th>
+<th>Who speaks</th>
+<th>The one idea</th>
+<th>Words</th>
+<th>Runtime</th>
+<th>Render</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · <em>Undisclosed</em></td>
+<td>A live news hit from the station: no facts, then a ship leaves</td>
+<td>Anchor, reporter</td>
+<td>The public is shown everything and told nothing</td>
+<td>56</td>
+<td>59 s</td>
+<td>~7 h</td>
+</tr>
+<tr>
+<td>B · <em>Cleared to Depart</em></td>
+<td>The control-room radio loop clears five ships out</td>
+<td>Controller, five ship pilots</td>
+<td>To the people who do it daily, it is a shift: the phrases wear down, and only the last ship gets a human word</td>
+<td>37</td>
+<td>60 s</td>
+<td>~7 h</td>
+</tr>
+<tr>
+<td>C · <em>Voice Note</em></td>
+<td>A message to her mother, three takes, recorded across the ship's last hours</td>
+<td>One crew member</td>
+<td>A goodbye said as small domestic things</td>
+<td>14</td>
+<td>55 s</td>
+<td>~5 h</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="opt" id="option-a-undisclosed-evening-news-live-59-s">Option A · <em>Undisclosed</em>: evening news, live (59 s)</h3>
+<p><strong>Logline.</strong> The evening news cuts live to the station, where a reporter with nothing to say watches the Endeavor leave, and the picture outlives her voice.</p>
+<p><strong>The idea.</strong> Dead air. The viewer is handed a spectacle and no information, the same position as the public. The reporter fills the wait, the ticker talks about other things, and the ship is gone before anyone has explained it.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>720p 16:9 broadcast: network bug, red LIVE tag, a lower-third and a ticker of unrelated news ("FARES FROZEN THROUGH WINTER · HARBOUR 2 RIDGE 1").</li>
+<li>A station camera on a long lens: exposure pumps, autofocus hunts, a slight digital zoom creep. The Endeavor fills under a third of the frame.</li>
+<li>Sharpened, compressed-video grade. No heat shimmer.</li>
+<li>Sound: studio voices and the live link's room tone over silent pictures. The bloom is silent. The link drops one word late.</li>
+<li>No numbers in the voices.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–7</td>
+<td>FILE tag. The Endeavor in its cradle, sun raking the hull, fins stowed, shield at the bow. Slow push. Lower third: TASK GROUP DEPARTS.</td>
+<td>ANCHOR: "Tonight an LREF task group is leaving the station. Where to, the service won't say. We go live."</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7–9</td>
+<td>Cut to LIVE. The long lens finds the ship small in frame; focus hunts. Lower third: L.R.E.F.S. ENDEAVOR · CRUISER.</td>
+<td>Link hiss. A throat cleared.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>9–15</td>
+<td>The same frame. Far to one side, a few running lights strung in a row. The rings begin to turn.</td>
+<td>REPORTER: "That's the Endeavor, right behind me. Honestly, that's all I've got."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>15–17</td>
+<td>Hold. The ticker scrolls.</td>
+<td>ANCHOR: "Have they said anything?"</td>
+</tr>
+<tr>
+<td>5</td>
+<td>17–25</td>
+<td>Slow reframe onto a gantry hatch with a green light.</td>
+<td>REPORTER: "A spokesperson said the service doesn't comment on movements. Then he went back inside." The hatch light goes red.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>25–41</td>
+<td>The wait. Nothing happens but the rings, which creep brighter, and the ticker.</td>
+<td>Hiss only, and the small sounds of someone off-camera shifting her weight.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>41–44</td>
+<td>The rings brighten sharply.</td>
+<td>REPORTER: "Here we go —"</td>
+</tr>
+<tr>
+<td>8</td>
+<td>44–50</td>
+<td>A whiteout. Exposure slams down and recovers on empty stars and the hatch light. LIVE flickers.</td>
+<td>The link dies mid-breath.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>50–54</td>
+<td>Empty stars, the ticker still running.</td>
+<td>ANCHOR: "We seem to have lost her."</td>
+</tr>
+<tr>
+<td>10</td>
+<td>54–59</td>
+<td><strong>Tag.</strong> Hard cut to the title card: OPERATION TIDEBREAK on the still stars. Counter rolls T−1 to T−0, then COLLATED FROM THE AFTER ACTION REPORT replaces it.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 56 spoken (anchor 28, reporter 28); numbers spoken: none.</p>
+<p><strong>Built from.</strong> EN, FX-WARP, FX-FAR (far running lights), HUD (bug and tag as overlays), WORLD (sun) · additions: a gantry hatch with a light, a row of far lights (a light-point array, each a dot) · environment: the new departure station (spine and cradle: one lattice build with a simple repeat).</p>
+<p><strong>Render.</strong> Class A at 720p, about 1,300 frames; about 7 h plus the 5 s tag (class E, 0.1 h).</p>
+<h3 class="opt" id="option-b-cleared-to-depart-traffic-control-loop-60-s">Option B · <em>Cleared to Depart</em>: traffic-control loop (60 s)</h3>
+<p><strong>Logline.</strong> From a dim control room, a controller clears five ships out of the station in turn, tiring as he goes, and gives the last one the only unscripted words of the night.</p>
+<p><strong>The idea.</strong> Routine. For the people doing it every day, a historic departure is a queue. The clearances shrink from a full sentence to a single word, and then the last ship gets a human line.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>The one fixed shot is through the control-room window, with the console and a dim scope in the foreground. The scope is a 2D overlay of ring and blips; each blip vanishes when its ship goes.</li>
+<li>Exterior in silence. The room has the radio loop, key clicks and a console tone.</li>
+<li>Each ship leaves along a lane of lit buoys, at a walk, then blooms. Each bloom throws light across the window frame and console, a little bigger each time. The last is big.</li>
+<li>Grade: dim, warm console light against cold, hard exterior.</li>
+<li>Phraseology is real: callsign, "Departure", clearance, lane, readback.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–4</td>
+<td>The window at night: the lane of buoys, running lights queued beyond. Mug on the console.</td>
+<td>The loop's hiss. A key click.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4–12</td>
+<td>The Astrid slides past the window along the lane, long and slow. A bloom, far off. The scope blip goes.</td>
+<td>CONTROLLER: "Astrid, Departure. Cleared to depart, north lane." ASTRID: "Cleared to depart, Astrid."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12–19</td>
+<td>A frigate hull creeps out. A smaller bloom.</td>
+<td>CONTROLLER: "Alpha, cleared, north lane." ALPHA: "Alpha."</td>
+</tr>
+<tr>
+<td>4</td>
+<td>19–25</td>
+<td>A destroyer. A bloom.</td>
+<td>CONTROLLER: "Bravo, cleared." BRAVO: "Bravo."</td>
+</tr>
+<tr>
+<td>5</td>
+<td>25–30</td>
+<td>The tender, slow and wide. A bloom.</td>
+<td>CONTROLLER: "Charlie, go." CHARLIE: "Going."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>30–46</td>
+<td>The Endeavor comes along the lane, much nearer than the others; the window glass gives back her ring glow. The longest wait.</td>
+<td>CONTROLLER: "Endeavor, Departure. Cleared to depart, north lane." ENDEAVOR: "Cleared to depart, Endeavor." (a pause, a key click) CONTROLLER: "Good luck." ENDEAVOR: "Thanks, Departure."</td>
+</tr>
+<tr>
+<td>7</td>
+<td>46–50</td>
+<td>Her bloom fills the window and floods the room; the scope's last blip goes.</td>
+<td>Silence.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>50–55</td>
+<td>The room's lights fall to standby. The mug. The lane buoys go dark one at a time.</td>
+<td>The loop's hiss, then a final key click.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>55–60</td>
+<td><strong>Tag.</strong> Hard cut to the title card; T−1 rolls to T−0, then COLLATED FROM THE AFTER ACTION REPORT.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 37 spoken; numbers spoken: none.</p>
+<p><strong>Built from.</strong> AST, GI, DD, TND, EN, FX-WARP, HUD (scope overlay) · additions: the lane of buoys (small emissive dots), a window frame, a console and a mug (a handful of boxes) · environment: the departure station, plus the control room as one small interior set with no seating or people.</p>
+<p><strong>Render.</strong> Class A at 720p, about 1,300 frames; about 7 h plus the tag.</p>
+<h3 class="opt" id="option-c-voice-note-a-message-home-55-s">Option C · <em>Voice Note</em>: a message home (55 s)</h3>
+<p><strong>Logline.</strong> A crew member tries three times to record a message to her mother while the ship around her is made ready, and sends the shortest take.</p>
+<p><strong>The idea.</strong> A goodbye said as small domestic things. We never learn where she is going. What she can't say shows in the two takes she deletes, and in the "Mum is typing…" that arrives too late for the picture.</p>
+<p><strong>Look and sound.</strong></p>
+<ul>
+<li>The ship's last hours as three time-lapses, rendered on twos at about 12 fps, under floodlight on the station's night side. The camera is a slow, locked-off long lens.</li>
+<li>A voice-note app is a 2D overlay at the bottom: record dot, waveform, a timestamp. Nothing is on screen until she taps record.</li>
+<li>Sound: her room, heard close on the phone's mic, with the hull's hum under everything. The hum rises as the rings spin up and nothing else is heard.</li>
+<li>No bloom. The piece cuts to the tag before the ship goes.</li>
+</ul>
+<p><strong>Storyboard.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>s</th>
+<th>Picture</th>
+<th>Sound and words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0–8</td>
+<td>The Endeavor in its cradle, dusk under floodlights, a loader arm drifting past. The overlay: record dot, 0:00.</td>
+<td>A breath in. Five seconds of hum. A swipe, a deletion tone.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8–18</td>
+<td>Time-lapse: a loader arm walks the gold shield to the bow and seats it. Recording again, a short blip.</td>
+<td>A small laugh at herself. A deletion tone.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>18–28</td>
+<td>Time-lapse: the fins stow one by one, then the floodlights on the station go out in rows.</td>
+<td>The hum deepens. No voice.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>28–45</td>
+<td>The Endeavor in the lane, rings turning, faster and brighter. Third take, the waveform moving.</td>
+<td>HER: "Hi Mum. Did the tomatoes come up? Tell Dad he was right. Love you." Then the hum swells and her thumb taps.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>45–50</td>
+<td>Rings at full glow. The overlay: Sent, then Delivered. Last, a new bubble: "Mum is typing…".</td>
+<td>The hum climbs to a held note.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>50–55</td>
+<td><strong>Tag.</strong> Hard cut to the title card on the held note's last beat; T−1 rolls to T−0, then COLLATED FROM THE AFTER ACTION REPORT.</td>
+<td>The card's low tone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Words.</strong> 14 spoken; numbers spoken: none.</p>
+<p><strong>Built from.</strong> EN (fin stow, <code>ring_rpm</code>, <code>warp_charge</code>), SHD (the shield), HUD (overlay) · additions: a loader arm and floodlight poles (small, one reusable arm), a voice-app overlay (2D) · environment: the departure station's night side.</p>
+<p><strong>Render.</strong> Class A at 720p, about 960 unique frames (the time-lapses on twos); about 5 h plus the tag.</p>
+<h3 id="recommendation-x-x-x-x-x-x-x-x">Recommendation</h3>
+<p>C: it is the only piece with nothing to explain, it has the fewest words, and its cut to the tag lands on the moment the ship goes. If you'd rather the series' last picture be a warp bloom, take B. The film defines only the arrival flash (A-04), so you decide the departure's look; A and B show a bloom, and C avoids needing one.</p>
+</main>
+<footer>Generated by miniseries/build_options_page.py from miniseries/options/.</footer>
+</div>
+</body>
+</html>

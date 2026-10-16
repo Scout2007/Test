@@ -7,7 +7,7 @@ This package makes a trailer for *Operation Tidebreak*, **in its own style**, in
 **Run this locally,** in Claude Code on your own machine. Cloud sessions can't reach YouTube, and the overseer needs to download the references and extract their frames.
 
 1. Get the repo: clone the `claude/confident-ramanujan-b53a9q` branch of `Scout2007/Test`, or unzip the handoff zip.
-2. Install Python 3.9 or newer, then run `python -m pip install yt-dlp imageio-ffmpeg` to get the downloader and a bundled ffmpeg. A system ffmpeg works too.
+2. Install Python 3.9 or newer, then run `python -m pip install yt-dlp imageio-ffmpeg numpy pillow librosa`. That gives the downloader, a bundled ffmpeg, the cut-motion analysis and beat detection; librosa is optional. For the preview passes you also need Blender 5.2 and the project's `.blend` files.
 3. Open Claude Code in the repo folder.
 
 To test the reference prep on its own:
@@ -30,30 +30,35 @@ Then look in `trailer/refs/ref_01/`. Downloaded videos stay local (they're git-i
 ## Pipeline
 
 ```
-Phase 0  questionnaire + references  ──▶ you answer
-Phase 1  one deep analyst per reference ─▶ research audit (redo loop) ─▶ synthesis
-         ──▶ CHECKPOINT: round-2 questions, format profile, angles to rank ─▶ world digest
-Phase 2  style bible ─▶ review (L1 L2 L4 L8) ─▶ tally ─▶ fix, until clean
-Phase 3  treatment variants (default 4) ─▶ round-robin review (6 lenses, rotated) ─▶ tally
-         ─▶ revise ─▶ round-robin review 2 ─▶ CHECKPOINT: choose a spine and parts
-         ─▶ synthesizer takes the best parts ─▶ review, until clean
-Phase 4  beat sheet ─▶ review (L1 L3 L5 L7), until clean
-Phase 5  storyboard, shot by shot (framing, lens, composition, movement, transitions)
-         ─▶ review (L1 L3 L4 L5 L6 L7 L8), until clean ─▶ CHECKPOINT
-Phase 6  motion and timing (camera keyframes, easing, the animatic timing sheet)
-         ─▶ review (L1 L6 L7 L8), until clean
+Phase 0  questionnaire + references; the overseer downloads and prepares each one
+         (cuts, frames, ±0.5 s native-rate transition strips, motion across cuts, beats, loudness)
+Phase 1  one deep analyst per reference ─▶ audit (redo loop) ─▶ synthesis ─▶ CHECKPOINT (round-2 questions)
+Phase 2  style bible ─▶ review ─▶ P1 STYLE FRAMES (stills) ─▶ review ─▶ lock
+Phase 3  treatments ─▶ round-robin reviews ─▶ revise ─▶ CHECKPOINT ─▶ best-parts synthesizer
+         ─▶ review ─▶ P2 KEY IMAGES (stills) ─▶ review ─▶ lock
+Phase 4  beat sheet (with the transition intent) ─▶ review
+Phase 5  storyboard (framing, lens, movement, transition-out fields) ─▶ review (8 lenses incl. L9 transitions)
+         ─▶ P3 BOARDS + TRANSITION PAIRS (stills) ─▶ review
+         ─▶ P4 ANIMATIC (light animation, real transitions, temp track) ─▶ review ─▶ CHECKPOINT ─▶ lock
+Phase 6  motion & timing (keyframes, 12-frame transition windows) ─▶ review
+         ─▶ P5 BLOCK-OUT (Workbench renders; transition windows at full 24 fps) ─▶ review ─▶ CHECKPOINT
 Phase 7  final check ─▶ TRAILER.md ─▶ FINAL CHECKPOINT
 ```
 
-The eight review lenses (`RUBRIC.md`) are:
-- **L1:** reference fidelity
-- **L2:** distinctness
-- **L3:** story and hook
-- **L4:** lore and spoilers
-- **L5:** speech and text
-- **L6:** cinematography
-- **L7:** movement and editing
-- **L8:** production
+**Every agent checks its own capability first.** It answers `CAPABLE`, or `ESCALATE` to a stronger model, the user or a tool (`agents/00_common.md`). Film-craft roles start on the stronger model.
+
+**Nine review lenses** (`RUBRIC.md`):
+- L1: reference fidelity
+- L2: distinctness
+- L3: story
+- L4: lore and spoilers
+- L5: speech and text
+- L6: cinematography
+- L7: movement and editing
+- L8: production
+- **L9: transitions**
+
+Lean mode trims the run to 3 treatments, second rounds only where needed, and previews P1, P3 and P4.
 
 ## Files
 
@@ -64,7 +69,9 @@ The eight review lenses (`RUBRIC.md`) are:
 | `TRAILER_BRIEF.md` | What the trailer is, its defaults, and each stage's deliverable |
 | `RUBRIC.md` | The eight lenses, which run at each stage, the findings format and the stopping rule |
 | `STATE.md` | The orchestrator's log and the user's answers, verbatim; it lets a session resume |
-| `agents/01–14_*.md` | The agent templates: reference analyst, research auditor, research synthesis, world digest, style bible, treatment writer, reviewer, tally, synthesizer, beat sheet, storyboard artist, motion and timing, fixer, final check |
+| `agents/00_common.md` | The preamble in every brief: the capability check and escalation, the shared rules |
+| `agents/01–15_*.md` | The agent templates, ending with 15, previz: reference analyst, research auditor, research synthesis, world digest, style bible, treatment writer, reviewer, tally, synthesizer, beat sheet, storyboard artist, motion and timing, fixer, final check |
+| `tools/animatic.py` | Builds the P4 animatic and the P5 block-out from stills or clips and a timing sheet (cuts, dissolves, flashes, whips, light 2D moves) |
 | `tools/prep_reference.py` | Downloads a reference and extracts its cuts, frames, contact sheets, transcript and loudness map for the agents |
 | `refs/` | Your references (`REFERENCES.md`, plus one prepared folder per reference) |
 | `work/` | All agent outputs: `research/`, `treatments/`, `reviews/`, the style bible, beat sheet, storyboard and motion sheet |
@@ -72,13 +79,21 @@ The eight review lenses (`RUBRIC.md`) are:
 
 ## Cost and pace
 
-The pipeline is long by design, roughly 60–90 agent runs. With 3 references, 4 treatments and two review rounds per stage, it comes to:
-- research: about 6–10 runs;
-- style: about 6–10;
-- treatments: about 25;
-- beats: about 6;
-- storyboard: about 10–20;
-- motion: about 6–10;
-- final: 1.
+- **Full run:** about 80–110 agent runs, including the previews' render time.
+- **Lean run:** about 45–60.
+- **Time:** expect 2–5 days of wall time with your checkpoints and usage limits.
 
-Every run is linear, so a usage limit pauses one agent, and STATE.md lets the orchestrator resume. Agents run on a cheaper model, except the synthesizer.
+The run is linear, and STATE.md's phase summaries let it resume, or start a fresh session at any phase end.
+
+## How the known risks are handled
+
+| Risk | Answer |
+|---|---|
+| Agents see frames, not motion | Every frame at native rate for ±0.5 s around each cut, as strips; motion measured across each cut (`transitions.csv`); P4 and P5 previews of our own trailer, analysed the same way |
+| No tempo or beat data | `beats.csv` and each cut's offset from the nearest beat (librosa, or an onset estimate) |
+| Scene detection errors | Hard and soft thresholds, flash candidates, and the analysts confirming them by eye against the strips |
+| One model's blind spots | Capability checks with escalation; film-craft roles and the L6, L7 and L9 reviewers on the stronger model; your checkpoints |
+| Text-only storyboards | P1–P5 previews, from stills to block-outs |
+| Long runs and the overseer's context | Phase summaries, fresh sessions at phase ends, linear runs, lean mode |
+| Fix loops that ping-pong | Locked decisions, and loops that flip twice go to you |
+| Copying references | Technique, not content; local-only downloads; the L2 distinctness lens |

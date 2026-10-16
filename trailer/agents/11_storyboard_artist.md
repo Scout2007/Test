@@ -23,11 +23,12 @@
 | Light and colour | Key source and direction, emissives, and the colour-script swatch |
 | Sound and words | Diegetic sound, music section and sync point, words in full |
 | Text | Card text, position and animation, if any |
-| Transition | Cut, match cut, smash, dissolve, flash or J/L-cut, with the sync point |
+| Transition out | Type (cut, match cut, smash, dissolve, flash, whip or J/L-cut), its length in frames, and its sync point. Then the **out-frame**: the subject's screen position (as a % of width and height), its motion vector (direction, and px/frame at 1920 wide), the brightness level (0–100) and the dominant colour. Then the **in-frame** of the next shot, in the same terms. Finally the **intended relation**: matched (position, shape or motion carries) or a deliberate clash (and why), plus the sound bridge |
 | Assets | 3D asset codes, additions and environment |
 | Render | Class and hours |
 
 Close with:
+- the **transition table**: every cut in one table (out-frame, in-frame, relation, sound bridge), so L9 can read the whole chain at a glance;
 - the **continuity check**: a screen-direction map and the axis across shots;
 - a **shot-length table** against the profile's targets;
 - the total runtime and render.

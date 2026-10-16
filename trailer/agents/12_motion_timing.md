@@ -18,7 +18,8 @@
    - Flag any move whose speed or path is physically impossible for its camera body.
 2. **Subject-motion specs.** Ship moves, effects timing and the light changes that cuts depend on.
 3. **Animatic timing sheet.** One row per shot: frame in, frame out, duration, the cut's sync to the music map (beat or bar), and the cards.
-4. **Rhythm check.** Shot lengths per act against the profile targets, and the cut density curve against the reference's.
-5. **Mismatches** with the storyboard, and proposed fixes. Don't silently change the storyboard.
+4. **Transition windows.** For each cut, specify the last 12 frames of the outgoing shot and the first 12 of the incoming shot, keyframe by keyframe where they move: the motion vectors at the cut, any speed ramp, a flash or bloom frame, the sound hit. The block-out (P5) renders exactly these windows at full rate.
+5. **Rhythm check.** Shot lengths per act against the profile targets, and the cut density curve against the reference's.
+6. **Mismatches** with the storyboard, and proposed fixes. Don't silently change the storyboard.
 
 **Reply** in at most 5 lines: the moves specified, any physics flags, and the rhythm deviation per act.

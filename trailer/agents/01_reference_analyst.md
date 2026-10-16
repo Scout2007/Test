@@ -26,7 +26,9 @@ The orchestrator has already prepared `trailer/refs/ref_NN/` with `trailer/tools
 - Look at every contact sheet and every cut frame.
 - Look at all the range frames.
 - Use `cuts.csv` for timings. Confirm each cut against the frames, because scene detection misses dissolves and splits flashes into extra cuts.
-- Use `loudness.csv` for the music map.
+- Use `loudness.csv` for the music map, and `beats.csv` and the cuts' beat offsets for sync.
+- **Transitions.** Study every `transitions/cut_NNN.jpg` strip. Each one holds every native frame for ±0.5 s around the cut: the top row is the outgoing shot, the bottom row the incoming one. Read it alongside `transitions.csv`, which gives the measured motion out of and into each cut, the brightness and colour jump, and whether motion carries across. For each cut, name the device: a match on motion, shape or position; a smash; a flash; a whip; a dissolve; a J- or L-cut. Say what makes it work.
+- Confirm `kind = soft` and `flash?` rows by eye; they may be dissolves, flashes or false alarms.
 
 When you need a closer look, extract more frames from the local video with ffmpeg: around a fast sequence, or at a specific timestamp.
 
@@ -65,21 +67,22 @@ Write it to `ref_NN.md`. Cite evidence for every claim: a timestamp, a frame fil
    - camera movement: type, direction, speed, easing, motivation;
    - lighting and colour;
    - transition into the next shot.
-4. **Rhythm.**
+4. **Transitions.** A table of every cut (or of the user's ranges): timecode, the device, the out- and in-frame relation (position, motion with the measured dx and dy, brightness, colour), the sound bridge, and the beat offset. Then the patterns: which devices recur, where, and why they land.
+5. **Rhythm.**
    - the average and median shot length per section;
    - a chart of cut timings (a table is enough);
    - how the rhythm accelerates, and where it holds.
-5. **Sound.**
+6. **Sound.**
    - the music's structure (intro, build, drop, silence), mapped to timecodes;
    - sound design, voice, and how sound and cuts sync (cuts on beats or off them);
    - J-cuts and L-cuts.
-6. **Text and type.**
+7. **Text and type.**
    - every card: its words, typeface feel, size and placement, timing and animation;
    - the copy's voice.
-7. **Signature devices.** What makes this reference itself, the things a viewer would remember.
-8. **What transfers.** What we can use in our trailer, translated into our world and our 3D-only means. Mark each as a technique to borrow, never content to copy.
-9. **What doesn't transfer, and why:** live action, actors, budget, and so on.
-10. **Open questions for the user** that this reference raises.
+8. **Signature devices.** What makes this reference itself, the things a viewer would remember.
+9. **What transfers.** What we can use in our trailer, translated into our world and our 3D-only means. Mark each as a technique to borrow, never content to copy.
+10. **What doesn't transfer, and why:** live action, actors, budget, and so on.
+11. **Open questions for the user** that this reference raises.
 
 **Depth bar.**
 - A video reference gets a shot list covering all of it, or at least the user's ranges, with every column filled.

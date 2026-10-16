@@ -35,3 +35,14 @@ The orchestrator asks these questions in one message, grouped as below, and reco
 ## F. Process
 21. Which checkpoints do you want to approve personally? The default is after these questionnaires, after the treatments, after the storyboard, and the final.
 22. How many treatment variants: 3, 4 or 5?
+23. **Full or lean run?**
+    - **Full:** 4 treatments, two review rounds everywhere, every preview pass, about 80–110 agent runs.
+    - **Lean:** 3 treatments, a second round only where the first found majors, P1, P3 and P4 only, about 45–60 runs.
+24. **Blender.** Is Blender 5.2 installed, with the project's `.blend` files on this machine? Where? Is a GPU available? (Needed for the preview passes.)
+25. **Temp music.** Do you have a temp track to cut the animatic against, as a file you own or one used only for timing? If not, a click track at the planned tempo is used.
+26. **Previews.** Which preview passes do you want to see yourself?
+    - P1 style frames
+    - P2 key images
+    - P3 boards and transition pairs
+    - P4 animatic
+    - P5 block-out

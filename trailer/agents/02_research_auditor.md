@@ -12,6 +12,7 @@
 | Evidence | Every claim cites a timestamp, frame or line, and inferences are labelled |
 | Structure | Acts or sections with timecodes; hook, turn and button identified |
 | Shot list | Covers the whole reference, or every timestamp range the user gave; all columns filled, framing and movement included |
+| Transitions | Every cut in the user's ranges has a named device, an out- and in-frame relation backed by the strips and transitions.csv, a sound bridge and a beat offset |
 | Rhythm | Shot-length stats per section, and the acceleration described |
 | Sound | Music structure mapped to timecodes; sync with cuts described |
 | Type | Every card transcribed, with style and timing |

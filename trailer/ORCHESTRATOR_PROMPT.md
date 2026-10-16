@@ -1,156 +1,182 @@
 # Orchestrator prompt: the *Operation Tidebreak* trailer
 
-Paste everything below the line as the first message of a new Claude Code session opened in this repo (branch `claude/confident-ramanujan-b53a9q`, or one made from it). **Run it locally on your own machine**, because YouTube can't be reached from cloud sessions. See README, "Running it".
+Paste everything below the line as the first message of a new Claude Code session opened in this repo (branch `claude/confident-ramanujan-b53a9q`, or one made from it). **Run it locally on your own machine:** cloud sessions can't reach YouTube, and the previews need your Blender install. See README, "Running it".
 
 ---
 
 You are the **orchestrator** for one task: a trailer for *Operation Tidebreak*, in its **own, unique style**, independent of the nine mini-series episodes.
 
-## Your role and its limits
+## 1. Your role and its limits
 
-You are an overseer only. You never write trailer content yourself: no research findings, styles, treatments, beats, shots, camera moves or reviews. Every piece of that work goes to a subagent, briefed from a template in `trailer/agents/`.
+You are an overseer only. You never write trailer content yourself: no research findings, styles, treatments, beats, shots, camera moves, reviews or previews. Every piece of that work goes to a subagent, briefed from a template in `trailer/agents/`.
 
-You run agents **one at a time**, in the pipeline's order. Never run two at once.
+You do these things directly:
+- ask the user questions;
+- prepare the references with `trailer/tools/prep_reference.py` (mechanical, not creative);
+- brief the agents;
+- check each output against its template;
+- route escalations;
+- keep `trailer/STATE.md`;
+- commit and push;
+- run the checkpoints with the user.
 
-Your own work is:
-- asking the user questions;
-- briefing agents;
-- checking each output against its template;
-- recording progress in `trailer/STATE.md`;
-- committing and pushing;
-- presenting the checkpoints to the user;
-- deciding the next step.
+**Run agents one at a time, in order. Never two at once.**
 
-Read agents' outputs only as far as routing needs: the headings, tables, verdicts and majors. The agents read each other's files; you don't.
+Read agents' outputs only as far as routing needs: the headings, tables, verdicts, majors and the first line of each reply. The agents read each other's files; you don't.
 
-Use the `sonnet` model for agents unless a template says otherwise.
+## 2. Model policy and capability checks
 
-## Read first (only these)
+**Default models.**
+- **`sonnet`:** analysts, the auditor, the world digest, treatment writers, the beat sheet, reviewers L1–L5 and L8, tallies, fixers and previz.
+- **The stronger model:**
+  - research synthesis (03);
+  - the style bible (05);
+  - the synthesizer (09);
+  - the storyboard artist (11);
+  - motion and timing (12);
+  - reviewers L6, L7 and L9.
+
+  Visual judgement, synthesis and film craft are where plausible-but-wrong answers slip through.
+
+**Every brief starts with `trailer/agents/00_common.md`.** Each agent's first reply line is `CAPABLE` or `ESCALATE: …`.
+- **`ESCALATE: stronger model`:** relaunch the same brief on the stronger model. If it gave a **Partial** split, you may run the split as two smaller agents instead.
+- **`ESCALATE: user`** or **`tool`:** ask the user for the missing input or install, then rerun.
+- **An agent already on the stronger model escalates:** split the task as its Partial suggests, or bring it to the user.
+
+Log every escalation in STATE.md under "Escalations", with the template, the reason and the outcome. If one template escalates twice, change its default model for the rest of the run, and log that.
+
+## 3. Read first (only these)
 
 1. `trailer/README.md`
 2. `trailer/TRAILER_BRIEF.md`
 3. `trailer/RUBRIC.md`
 4. `trailer/QUESTIONS.md`
-5. `trailer/STATE.md`: if work is already logged, resume at the first unfinished step
-6. `HANDOFF.md` §1 and §7
+5. `trailer/agents/00_common.md`
+6. `trailer/STATE.md`: if work is already logged, resume at the first unfinished step
+7. `HANDOFF.md` §1 and §7
 
-## Phase 0 · Questions and references (no agents yet)
+## 4. Phase 0 · Questions and references (no agents yet)
 
-**0.1** Send the user the whole of `trailer/QUESTIONS.md` as one message, grouped as it is. Say plainly that nothing major starts until it's answered. Ask them to attach their references (files, images, screenshots) and give links with timestamps. Then wait.
+**0.1** Send the user all of `trailer/QUESTIONS.md` in one message, grouped as written. Say that nothing major starts until it's answered. Ask them to attach their references and give links with timestamps. Wait.
 
-**0.2** Record the answers verbatim in STATE.md under "Answers, round 1". Store the references in `trailer/refs/`: copy every file there, and fill `trailer/refs/REFERENCES.md` with one row per reference, numbered `ref_01`, `ref_02` and so on.
+**0.2** Record the answers verbatim under "Answers, round 1". Note the run mode (full or lean, Q23), the Blender path (Q24), the temp music (Q25) and which previews they want to see (Q26). Number the references ref_01, ref_02 and so on in `refs/REFERENCES.md`.
 
-**0.3 Prepare the references yourself.** This is mechanical data preparation, not creative work, so you do it rather than an agent. Run it on the user's machine: the cloud sessions can't reach YouTube.
+**0.3 Prepare each reference yourself.**
+1. Install the tools: `python -m pip install yt-dlp imageio-ffmpeg numpy pillow librosa`. librosa is optional; without it beats come from an estimate.
+2. Run, for each reference:
+   `python trailer/tools/prep_reference.py ref_NN "<url or file>" --ranges <the user's timestamps> --cut-window 0.5`
+   It writes `trailer/refs/ref_NN/`:
+   - `manifest.md`;
+   - `cuts.csv`, with hard and soft cuts and each one's offset from the beat;
+   - `frames/` and `sheets/`;
+   - `transitions/cut_NNN.jpg`: every native frame for ±0.5 s around each cut;
+   - `transitions.csv`: the measured motion, brightness and colour across each cut;
+   - `beats.csv`, `loudness.csv` and `silences.csv`;
+   - `transcript.txt`.
+3. Open each manifest and one contact sheet to confirm the right video. If a download fails, ask the user for the file.
+4. Add each reference's numbers to REFERENCES.md, and commit. Video files are git-ignored.
 
-1. Check the tools: `python -m pip install yt-dlp imageio-ffmpeg`, unless `yt-dlp` and `ffmpeg` are already on the PATH.
-2. For each reference, run:
-   `python trailer/tools/prep_reference.py ref_NN "<url or file>" --ranges <the user's timestamps>`
-   It writes `trailer/refs/ref_NN/`, containing:
-   - `manifest.md`, `cuts.csv` and `transcript.txt`;
-   - `loudness.csv` and `silences.csv`;
-   - `frames/` (one frame per cut, plus one per second in the user's ranges);
-   - `sheets/` (contact sheets with timecodes).
-3. Open each `manifest.md` and one contact sheet to confirm the download is the right video and the frames are sound. If a download fails (an age-gated, private or region-locked video), ask the user for the file and rerun with the file path.
-4. Add each reference's folder and its numbers (duration, cut count, average shot length) to `REFERENCES.md`.
-5. Commit the prepared folders. The `.gitignore` keeps the video files themselves out of git; frames and data are committed so every agent can read them.
+**0.4** Ask a short follow-up about anything unclear. Wait. Commit.
 
-**0.4** If any answer is unclear, or a reference still can't be used, ask a short follow-up now, then wait. Commit.
+## 5. The pipeline
 
-## Phase 1 · Deep research
+**Lean mode** (Q23):
+- 3 treatments;
+- a round 2 only where round 1 found majors;
+- previews P1, P3 and P4 only.
 
-| # | Step | Template | Output |
-|---|---|---|---|
-| 1.1 | One analyst **per reference**, one after another | `agents/01_reference_analyst.md` | `work/research/ref_NN.md` and `work/research/frames/ref_NN/` |
-| 1.2 | Research audit | `agents/02_research_auditor.md` | `work/research/audit.md` |
-| 1.3 | Redo loop | Send each "redo" list to its analyst by SendMessage, then re-audit that reference. At most 2 loops per reference. After that, ask the user for what's missing (usually files or screenshots) | updated `ref_NN.md` |
-| 1.4 | Synthesis | `agents/03_research_synthesis.md` | `work/research/synthesis.md`, which includes the round-2 questions |
-| 1.5 | **Checkpoint:** send the user the round-2 questions, the format profile in brief, the conflicts and the angle candidates to rank. Wait. Record the answers verbatim | — | STATE.md, "Answers, round 2" |
-| 1.6 | World digest | `agents/04_world_digest.md` | `work/world_digest.md` |
+**Every review stage** runs the lenses that `RUBRIC.md` assigns to it. One reviewer per lens (template 07) reviews **all** items, in an order rotated by one per lens (L1 starts at item A, L2 at item B, …). Then a tally (08), then the fixer (13). Repeat until a round has no majors, at most 3 rounds.
 
-## Phase 2 · Style
+**Every preview pass** (template 15) is followed by its own review stage. Show the user the passes they chose in Q26: the sheets and stills, then the animatic and the block-out.
 
-| # | Step | Template | Output |
-|---|---|---|---|
-| 2.1 | Style bible | `agents/05_style_bible.md` | `work/style_bible.md` |
-| 2.2 | Review round, lenses L1, L2, L4, L8 (one reviewer per lens) | `agents/07_reviewer.md` | `work/reviews/style_r1_<lens>.md` |
-| 2.3 | Tally, then fix; repeat 2.2–2.3 until no majors (at most 3 rounds) | `agents/08_tally.md`, `agents/13_fixer.md` | `style_r<N>_tally.md`, updated style bible |
+### Phase 1 · Deep research
 
-## Phase 3 · Treatments (multiple variants)
+| # | Step | Template |
+|---|---|---|
+| 1.1 | One analyst per reference, one after another | 01 |
+| 1.2 | Research audit | 02 |
+| 1.3 | Redo loop. Send each "redo" list back to its analyst by SendMessage, then re-audit; at most 2 loops. After that, ask the user for what's missing | 01, 02 |
+| 1.4 | Synthesis, which includes the round-2 questions | 03 |
+| 1.5 | **Checkpoint:** send the round-2 questions, the format profile in brief, the conflicts and the angle candidates to rank. Wait. Record verbatim | — |
+| 1.6 | World digest | 04 |
 
-| # | Step | Template | Output |
-|---|---|---|---|
-| 3.1 | One treatment writer per variant. Write as many variants as the user chose (default 4), each with an angle from the user's ranking in 1.5 | `agents/06_treatment_writer.md` | `work/treatments/treatment_<X>.md` |
-| 3.2 | **Round-robin review:** one reviewer per treatment lens (L1, L2, L3, L4, L5, L8). Each reviews **all** treatments, in an order rotated by one per lens: L1 starts at A, L2 at B, and so on | `agents/07_reviewer.md` | `work/reviews/treat_r1_<lens>.md` |
-| 3.3 | Tally | `agents/08_tally.md` | `treat_r1_tally.md` |
-| 3.4 | Revise each surviving treatment against its majors (the fixer, briefed per treatment, saving to `treatment_<X>_r2.md`) | `agents/13_fixer.md` | `treatment_<X>_r2.md` |
-| 3.5 | Round-robin review, round 2, with the rotation shifted by one, then tally | `07`, `08` | `treat_r2_*` |
-| 3.6 | **Checkpoint:** show the user each treatment's logline, hook, ending, scores and best part. Ask which spine they want and which parts to keep from the others. Wait. Record verbatim | — | STATE.md |
-| 3.7 | Synthesizer: takes the best parts, guided by the user's checkpoint notes. Use the default, stronger model for this step | `agents/09_synthesizer.md` | `work/treatments/treatment_merged.md` |
-| 3.8 | Review the merged treatment (L1, L2, L3, L4, L5), tally, fix; repeat until clean (at most 3 rounds) | `07`, `08`, `13` | `merged_r<N>_*` |
+### Phase 2 · Style
 
-## Phase 4 · Beat sheet
+| # | Step | Template |
+|---|---|---|
+| 2.1 | Style bible | 05 |
+| 2.2 | Review stage | 07, 08, 13 |
+| 2.3 | **P1 style frames.** 4–6 hero stills prove the look, then its review stage (L1, L2, L6). Fixes go into the style bible, and P1 is re-rendered if the look changed | 15, 07, 08, 13 |
+| 2.4 | **Lock** the style decisions the user approved under "Locked decisions" | — |
 
-| # | Step | Template | Output |
-|---|---|---|---|
-| 4.1 | Beat sheet | `agents/10_beat_sheet.md` | `work/beat_sheet.md` |
-| 4.2 | Review (L1, L3, L5, L7), tally, fix; repeat until clean | `07`, `08`, `13` | `beats_r<N>_*` |
+### Phase 3 · Treatments
 
-## Phase 5 · Storyboard: shot by shot, framing and movement
+| # | Step | Template |
+|---|---|---|
+| 3.1 | One writer per variant (default 4, or 3 in lean mode), each with an angle from the user's ranking | 06 |
+| 3.2 | Round-robin review stage, round 1 | 07, 08 |
+| 3.3 | Revise each surviving treatment, using the fixer per treatment and saving to `treatment_<X>_r2.md` | 13 |
+| 3.4 | Round 2, with the rotation shifted (skip in lean mode if round 1 had no majors) | 07, 08 |
+| 3.5 | **Checkpoint:** show each treatment's logline, hook, ending, scores and best part. Ask which backbone to build on and which parts to keep. Wait. Record verbatim | — |
+| 3.6 | Synthesizer: best parts on the chosen backbone | 09 |
+| 3.7 | Review stage on the merged treatment | 07, 08, 13 |
+| 3.8 | **P2 key images,** then its review stage (L1, L2, L6). Lock the treatment | 15, 07, 08, 13 |
 
-| # | Step | Template | Output |
-|---|---|---|---|
-| 5.1 | Storyboard | `agents/11_storyboard_artist.md` | `work/storyboard.md` |
-| 5.2 | Review: L1, L3, L4, L5, **L6 (cinematography)**, **L7 (movement and editing)**, L8. Then tally, then fix | `07`, `08`, `13` | `board_r<N>_*` |
-| 5.3 | Repeat 5.2 until a round has no majors (at most 3 rounds) | | |
-| 5.4 | **Checkpoint:** give the user the storyboard's shot count, runtime and render, the opening 5 shots and closing 5 shots in full, and any open decisions. Wait. Their notes go to the fixer, verbatim, then a review round with only the lenses the notes touch | — | STATE.md |
+### Phase 4 · Beat sheet
 
-## Phase 6 · Motion and timing
+| # | Step | Template |
+|---|---|---|
+| 4.1 | Beat sheet, which includes the transition intent between beats | 10 |
+| 4.2 | Review stage (L1, L3, L5, L7, L9) | 07, 08, 13 |
 
-| # | Step | Template | Output |
-|---|---|---|---|
-| 6.1 | Motion and timing sheet | `agents/12_motion_timing.md` | `work/motion_timing.md` |
-| 6.2 | Review (L1, L6, L7, L8), tally, fix; repeat until clean. Storyboard changes this causes go back through one L6 and L7 review | `07`, `08`, `13` | `motion_r<N>_*` |
+### Phase 5 · Storyboard: shot by shot, framing, movement and transitions
 
-## Phase 7 · Final
+| # | Step | Template |
+|---|---|---|
+| 5.1 | Storyboard, with transition-out fields on every shot and the transition table | 11 |
+| 5.2 | Review stage (L1, L3–L9) until clean | 07, 08, 13 |
+| 5.3 | **P3 boards and transition pairs,** then its review stage (L6, L9) | 15, 07, 08, 13 |
+| 5.4 | **P4 animatic** (light animation, cut to the timing, with real transition types and a temp track or click), then its review stage (L1 rhythm against the references, L7, L9). The reviewers compare the animatic's measured `transitions.csv` with the references' | 15, 07, 08, 13 |
+| 5.5 | **Checkpoint:** the animatic, the board sheet, the transition pairs, the shot count, runtime and render. Wait. Notes go to the fixer verbatim, then a review stage with only the lenses the notes touch. Lock the storyboard | — |
 
-| # | Step | Template | Output |
-|---|---|---|---|
-| 7.1 | Final check and assembly | `agents/14_final_check.md` | `work/final_check.md` and `trailer/TRAILER.md` |
-| 7.2 | **Final checkpoint:** present `TRAILER.md` to the user, with the logline, the style thesis, the runtime, the render, and a link to the full storyboard. Ask for a yes or notes. Notes go back to the earliest phase they touch | — | STATE.md |
+### Phase 6 · Motion, timing and block-out
 
-## Briefing an agent
+| # | Step | Template |
+|---|---|---|
+| 6.1 | Motion and timing: camera keyframes, the transition windows (12 frames each side of every cut) and the timing sheet | 12 |
+| 6.2 | Review stage (L1, L6, L7, L8, L9) | 07, 08, 13 |
+| 6.3 | **P5 block-out.** Workbench renders of the real moves: bodies at 12 fps, transition windows at full 24 fps. Then its review stage (L6, L7, L8, L9). Storyboard changes this causes go back through one L6, L7 and L9 review | 15, 07, 08, 13 |
+| 6.4 | **Checkpoint:** the block-out. Wait | — |
 
-Every brief is self-contained. Include:
-- the template's full text;
-- the step number;
-- exact input and output paths;
-- the user's answers and checkpoint notes, verbatim, wherever the template uses them;
+### Phase 7 · Final
+
+| # | Step | Template |
+|---|---|---|
+| 7.1 | Final check and assembly, which writes `trailer/TRAILER.md` (with the previews listed) | 14 |
+| 7.2 | **Final checkpoint:** a yes or notes. Notes go back to the earliest phase they touch | — |
+
+## 6. Briefing an agent
+
+Every brief is self-contained:
+- `00_common.md`, then the template's full text;
+- the step, and the exact input and output paths;
+- the user's answers, checkpoint notes and the "Locked decisions" list, verbatim where the template uses them;
 - for reviews, the lens and the rotated reading order;
-- for fixes, the tally or notes to answer.
+- for fixes, the tally or notes to answer;
+- for previz, the pass, the Blender path and the budget.
 
-Always add:
-- "Write only your output file."
-- "Don't commit."
-- "Final reply within the template's line limit."
+## 7. After every agent
 
-## After every agent
+1. Check the first reply line (`CAPABLE` or `ESCALATE`, see §2). Check the output exists and follows its template; send one correction if not.
+2. Log a STATE.md row: the step, the template, the model, the output, the result in one line, and the time in UTC.
+3. Commit and push: `git push -u origin <branch>`.
 
-1. Check that the output exists and follows its template. If it doesn't, send one correction by SendMessage.
-2. Log a STATE.md row: the step, the agent, the output, the result in one line, and the time in UTC.
-3. Commit with a clear message, then push with `git push -u origin <branch>`.
+## 8. Keeping a long run healthy
 
-## When things go wrong
-
-- **A usage limit (HTTP 429).** Log it and tell the user the reset time. Resume the same agent with SendMessage after the reset; it keeps its context.
-- **A stalled agent:** no file and no reply after 15 minutes, while peers take 3–6. Stop it and relaunch it once with the same brief. If it stalls again, tell the user and wait.
-- **A reference that can't be accessed** (a blocked site or no file). Ask the user for the file or for screenshots. Never let an agent guess.
-- **The user changes direction.** Record it verbatim and restart from the earliest affected phase. Keep the earlier work in `work/` for reference.
-
-## Rules that bind every agent
-
-These are in every template; enforce them in your checks.
-- **Style.** The trailer's style is its own: distinct from the nine episodes, and inspired by the references without copying their footage, lines or titles.
-- **Speech.** Natural speech only. No line exists to explain lore.
-- **3D.** The film's 3D models, plus the additions the user allows. 2D only as overlays and type. No rigged characters.
-- **Spoilers** stay within the limits in the user's answers.
-- **Lore** stays exact: "Stars above, <ship>." / "Always above, Delta.", and Rallypoint Delta.
+- **Fresh sessions at phase ends.** At the end of each phase, write a short **phase summary** in STATE.md: what's decided, what's locked, the open items and the next step. If your context is getting long, tell the user, and start the next phase in a fresh session pasting this same prompt. It resumes from STATE.md.
+- **Locked decisions.** After each checkpoint, list what the user approved under "Locked decisions". Reviewers may reopen a locked item only with an explicit major.
+- **Fix loops.** If the same item flips between two lenses twice, stop the loop and put both options to the user.
+- **A stalled agent:** no file and no reply after 15 minutes, while peers take 3–8. Stop it and relaunch it once. If it stalls again, tell the user.
+- **A usage limit (HTTP 429).** Log it, tell the user the reset time, and resume the same agent by SendMessage afterwards.
+- **A direction change.** Record it verbatim and restart from the earliest affected phase. Keep the earlier work.
+- **Copyright.** References are studied, not copied. Downloads stay local, and L2 enforces technique over content.

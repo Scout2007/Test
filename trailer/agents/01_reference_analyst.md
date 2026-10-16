@@ -8,7 +8,29 @@
 - the user's verbatim notes on it;
 - the output path `trailer/work/research/ref_NN.md`.
 
-## Getting at the material (do all that apply)
+## Getting at the material
+
+The orchestrator has already prepared `trailer/refs/ref_NN/` with `trailer/tools/prep_reference.py`:
+- `manifest.md`;
+- `cuts.csv`, the detected cuts;
+- `frames/cut_*.jpg`, the first frame of each shot;
+- `frames/ts_*.jpg`, one frame per second in the user's ranges;
+- `sheets/sheet_*.jpg`, a frame every 2 s with timecodes;
+- `loudness.csv` and `silences.csv`;
+- `transcript.txt`, when captions exist;
+- `info.json`;
+- the video itself, local only.
+
+**Start there.**
+- Read the manifest.
+- Look at every contact sheet and every cut frame.
+- Look at all the range frames.
+- Use `cuts.csv` for timings. Confirm each cut against the frames, because scene detection misses dissolves and splits flashes into extra cuts.
+- Use `loudness.csv` for the music map.
+
+When you need a closer look, extract more frames from the local video with ffmpeg: around a fast sequence, or at a specific timestamp.
+
+If the folder is missing anything, use the fallbacks below:
 
 - **A video file:**
   1. Check for `ffmpeg` and `ffprobe`. If they're missing, try `pip install imageio-ffmpeg` and use its binary. Run downloaded media tools in their own folder, and pass paths as arguments.

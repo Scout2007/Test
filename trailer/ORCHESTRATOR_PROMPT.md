@@ -1,6 +1,6 @@
 # Orchestrator prompt: the *Operation Tidebreak* trailer
 
-Paste everything below the line as the first message of a new Claude Code session opened in this repo (branch `claude/confident-ramanujan-b53a9q`, or one made from it).
+Paste everything below the line as the first message of a new Claude Code session opened in this repo (branch `claude/confident-ramanujan-b53a9q`, or one made from it). **Run it locally on your own machine**, because YouTube can't be reached from cloud sessions. See README, "Running it".
 
 ---
 
@@ -40,7 +40,21 @@ Use the `sonnet` model for agents unless a template says otherwise.
 
 **0.2** Record the answers verbatim in STATE.md under "Answers, round 1". Store the references in `trailer/refs/`: copy every file there, and fill `trailer/refs/REFERENCES.md` with one row per reference, numbered `ref_01`, `ref_02` and so on.
 
-**0.3** If any answer is unclear, or any reference can't be used (a private link, a video with no file or screenshots), ask a short follow-up now, then wait. Commit.
+**0.3 Prepare the references yourself.** This is mechanical data preparation, not creative work, so you do it rather than an agent. Run it on the user's machine: the cloud sessions can't reach YouTube.
+
+1. Check the tools: `python -m pip install yt-dlp imageio-ffmpeg`, unless `yt-dlp` and `ffmpeg` are already on the PATH.
+2. For each reference, run:
+   `python trailer/tools/prep_reference.py ref_NN "<url or file>" --ranges <the user's timestamps>`
+   It writes `trailer/refs/ref_NN/`, containing:
+   - `manifest.md`, `cuts.csv` and `transcript.txt`;
+   - `loudness.csv` and `silences.csv`;
+   - `frames/` (one frame per cut, plus one per second in the user's ranges);
+   - `sheets/` (contact sheets with timecodes).
+3. Open each `manifest.md` and one contact sheet to confirm the download is the right video and the frames are sound. If a download fails (an age-gated, private or region-locked video), ask the user for the file and rerun with the file path.
+4. Add each reference's folder and its numbers (duration, cut count, average shot length) to `REFERENCES.md`.
+5. Commit the prepared folders. The `.gitignore` keeps the video files themselves out of git; frames and data are committed so every agent can read them.
+
+**0.4** If any answer is unclear, or a reference still can't be used, ask a short follow-up now, then wait. Commit.
 
 ## Phase 1 · Deep research
 

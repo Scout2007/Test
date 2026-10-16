@@ -2,6 +2,22 @@
 
 This package makes a trailer for *Operation Tidebreak*, **in its own style**, independent of the mini-series episodes. One orchestrator session oversees the work: it asks the questions, delegates every task to agents one at a time, and stops at checkpoints for the user.
 
+## Running it
+
+**Run this locally,** in Claude Code on your own machine. Cloud sessions can't reach YouTube, and the overseer needs to download the references and extract their frames.
+
+1. Get the repo: clone the `claude/confident-ramanujan-b53a9q` branch of `Scout2007/Test`, or unzip the handoff zip.
+2. Install Python 3.9 or newer, then run `python -m pip install yt-dlp imageio-ffmpeg` to get the downloader and a bundled ffmpeg. A system ffmpeg works too.
+3. Open Claude Code in the repo folder.
+
+To test the reference prep on its own:
+
+```
+python trailer/tools/prep_reference.py ref_01 "https://www.youtube.com/watch?v=..." --ranges 0:10-0:45
+```
+
+Then look in `trailer/refs/ref_01/`. Downloaded videos stay local (they're git-ignored); they're for personal study only.
+
 ## How to start
 
 1. Open a new Claude Code session in this repo.
@@ -49,7 +65,8 @@ The eight review lenses (`RUBRIC.md`) are:
 | `RUBRIC.md` | The eight lenses, which run at each stage, the findings format and the stopping rule |
 | `STATE.md` | The orchestrator's log and the user's answers, verbatim; it lets a session resume |
 | `agents/01–14_*.md` | The agent templates: reference analyst, research auditor, research synthesis, world digest, style bible, treatment writer, reviewer, tally, synthesizer, beat sheet, storyboard artist, motion and timing, fixer, final check |
-| `refs/` | Your references (`REFERENCES.md`, plus files) |
+| `tools/prep_reference.py` | Downloads a reference and extracts its cuts, frames, contact sheets, transcript and loudness map for the agents |
+| `refs/` | Your references (`REFERENCES.md`, plus one prepared folder per reference) |
 | `work/` | All agent outputs: `research/`, `treatments/`, `reviews/`, the style bible, beat sheet, storyboard and motion sheet |
 | `TRAILER.md` | The finished trailer package (written at phase 7) |
 

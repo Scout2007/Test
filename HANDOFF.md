@@ -151,3 +151,7 @@ The rewrite brief was drafted, but the user stopped the session before it was ap
   - Artifact watch subscriptions always fail with `mint_failed`.
   - Google Fonts don't load in local headless Chromium.
 - **Blocked site.** `riskofrain2.wiki.gg` is blocked by the network proxy.
+
+## 10. The series trailer (package ready, not started)
+
+A trailer to open the series is set up as an orchestrated pipeline in `trailer/`. Paste `trailer/ORCHESTRATOR_PROMPT.md` into a new session. It begins by asking the user for format references, then delegates linearly: variants, round-robin reviews, a synthesizer that takes the best parts, review and fix rounds, and a final check.

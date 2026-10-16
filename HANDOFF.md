@@ -154,12 +154,24 @@ The rewrite brief was drafted, but the user stopped the session before it was ap
 
 ## 10. The trailer (package ready, not started)
 
-A trailer for *Operation Tidebreak*, in its own style and independent of the mini-series, is set up as an orchestrated pipeline in `trailer/`. Paste `trailer/ORCHESTRATOR_PROMPT.md` into a new session. It starts with a questionnaire and the user's references, then runs these steps one agent at a time:
-1. deep per-reference research, with an audit;
-2. a style bible;
-3. treatment variants, reviewed round-robin, then merged from their best parts;
-4. a beat sheet;
-5. a shot-by-shot storyboard covering framing and movement;
-6. a motion and timing sheet.
+A trailer for *Operation Tidebreak*, in its own style and independent of the mini-series, is set up as an orchestrated pipeline in `trailer/`. Start with `trailer/README.md`.
 
-Every stage has review rounds and the user approves at checkpoints.
+**Run it locally,** in Claude Code on your own machine:
+- Cloud sessions can't reach YouTube.
+- The previews need your Blender 5.2 install and the project's `.blend` files.
+- Install the tools: `python -m pip install yt-dlp imageio-ffmpeg numpy pillow librosa`.
+- Then paste the part of `trailer/ORCHESTRATOR_PROMPT.md` below its line into a new session in the repo.
+
+**How it runs.** The orchestrator only oversees: it runs one agent at a time, and every agent first declares itself capable or escalates. The phases are:
+1. **Questions:** 12 must-answer questions, and the rest with defaults.
+2. **Reference prep:** the orchestrator does this itself with `trailer/tools/prep_reference.py`. It extracts cuts, native-rate frames around every cut, pan, zoom and rotation, beats and music sections.
+3. **Deep research:** one analyst per reference, then a depth and accuracy audit.
+4. **Blender preflight:** `trailer/tools/blender_preview.py`.
+5. **Style bible:** with P1, the style frames.
+6. **Treatments:** variants with round-robin reviews, then a best-parts synthesizer, then P2, the key images.
+7. **Beat sheet.**
+8. **Storyboard:** framing, movement, and transition-out fields for every shot. Then P3 boards, the P4 animatic (via `trailer/tools/animatic.py`) and P4b, the key moves in 3D.
+9. **Motion and timing:** then P5, the block-out.
+10. **Final check.**
+
+Every stage is reviewed through the nine lenses in `trailer/RUBRIC.md` (L9 is transitions), and the user approves at checkpoints. Progress and the user's answers live in `trailer/STATE.md`.

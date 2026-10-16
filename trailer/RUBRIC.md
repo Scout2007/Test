@@ -1,27 +1,42 @@
 # Review rubric
 
-Five lenses. Each reviewer scores every variant 1–5 on its own lens's criteria, then lists findings.
+Reviews come in rounds. Each round runs a set of lenses, and each lens is a separate reviewer agent who reviews **every** item under review, in a rotated order. Each criterion is scored 1–5, then the reviewer lists majors, minors and the best part.
 
-| Lens | Scores (1–5 each) | A major is… |
-|---|---|---|
-| **1. Format fidelity** | Matches the references' length, structure, cut rhythm, text-card style and sound | It ignores a reference the user marked as essential, or misses the length by more than 20 % |
-| **2. Story and hook** | Spine, hook in the first 5 s, build, payoff into the tag, rewatch value | No spine (a plain montage), or no hook in the first 5 s |
-| **3. Lore, spoilers and continuity** | Faithful to the episodes and the film, with no spoilers | Any spoiler (TRAILER_BRIEF §3), a misquoted episode line, or a lore contradiction |
-| **4. Speech and text** | Natural speech, no exposition, card copy fit for a trailer | A line that exists to explain lore, or speech no real person in that medium would say |
-| **5. Production** | Built from the film's and episodes' assets; render hours; feasibility | A shot needing a new hero model or rigged character, or new renders above the budget |
+## Lenses
+
+| # | Lens | Criteria (score each 1–5) | A major is… |
+|---|---|---|---|
+| L1 | Reference fidelity | Length, structure, rhythm, devices and sound match what the research found and what the user marked essential | It ignores an essential reference or a user answer |
+| L2 | Distinctness | Its own style, distinct from all nine episodes and from the references themselves (inspired by them, never copied) | It reads as one of the episodes' styles, or copies a reference's shots, lines or titles |
+| L3 | Story and hook | Spine, a hook in the first 5 s, the build, the turn, the payoff, rewatch value | A plain montage with no spine, or no hook |
+| L4 | Lore and spoilers | Faithful to the world, its physics and look rules, and the user's spoiler answers | A spoiler beyond the user's limit, or a breach of physics or lore |
+| L5 | Speech and text | Natural lines, real trailer copy, no exposition, type that works at speed | A line that exists to explain lore |
+| L6 | Cinematography | Each shot's size, lens, angle, composition and lighting serve its beat; variety; scale; screen direction | A shot that can't read (scale, axis or exposure), or a broken screen direction or axis |
+| L7 | Movement and editing | Camera moves are motivated and physically plausible for their camera (hull-mounted, drone, long lens), with eases, speeds and holds; cuts land on rhythm; transitions | A move with no motivation or with impossible physics, or cut rhythm far from the format profile |
+| L8 | Production | Built from the film's assets plus allowed additions; render hours within budget; feasible in Blender | It needs a new hero model or rigged character, or goes over budget |
+
+## Which lenses run at each stage
+
+| Stage | Lenses |
+|---|---|
+| Research audit | (agent 02's checklist, not lenses) |
+| Style bible | L1, L2, L4, L8 |
+| Treatments (rounds 1 and 2) | L1, L2, L3, L4, L5, L8 |
+| Merged treatment | L1, L2, L3, L4, L5 |
+| Beat sheet | L1, L3, L5, L7 |
+| Storyboard (rounds until clean) | L1, L3, L4, L5, L6, L7, L8 |
+| Motion and timing | L1, L6, L7, L8 |
 
 ## Findings format
 
 ```
-## Variant X
+## <Item>
 | Criterion | Score | Why (one line) |
-**Majors.** Numbered; each with shot #, the problem and a concrete fix.
+**Majors.** Numbered; each with its location (shot or beat #), the problem and a concrete fix.
 **Minors.** The same, briefer.
-**Best part.** The single thing in this variant most worth keeping, and why.
+**Best part.** The single thing most worth keeping, and why.
 ```
 
-## Totals and stopping
+## Stopping rule
 
-- **Tally.** The tally agent sums the scores per variant across the lenses (5 lenses × each lens's criteria) and ranks the variants.
-- **Majors.** Any major blocks a variant from being picked until it is answered.
-- **Stopping rule for the merged trailer.** A review round with no majors from any lens, or 3 rounds; after 3, report what's left to the user.
+A stage is done when a review round finds no majors in any lens, or after 3 rounds. After 3 rounds, report what's left to the user, who decides.

@@ -2,10 +2,18 @@
 
 The orchestrator updates this file after every step: one row per agent run.
 
-| # | Step | Agent | Output | Result | Time (UTC) |
+| Phase.step | Step | Agent | Output | Result | Time (UTC) |
 |---|---|---|---|---|---|
-| 0 | References from the user | (orchestrator) | refs/REFERENCES.md | not started | |
+| 0.1 | Questionnaire and references | (orchestrator) | refs/REFERENCES.md | not started | |
 
-## Decisions and user notes
+## Answers, round 1
 
-(The orchestrator records the user's answers and notes here, verbatim.)
+(Verbatim.)
+
+## Answers, round 2
+
+(Verbatim.)
+
+## Checkpoint notes
+
+(Treatment checkpoint, storyboard checkpoint, final: verbatim.)

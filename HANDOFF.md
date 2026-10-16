@@ -152,6 +152,14 @@ The rewrite brief was drafted, but the user stopped the session before it was ap
   - Google Fonts don't load in local headless Chromium.
 - **Blocked site.** `riskofrain2.wiki.gg` is blocked by the network proxy.
 
-## 10. The series trailer (package ready, not started)
+## 10. The trailer (package ready, not started)
 
-A trailer to open the series is set up as an orchestrated pipeline in `trailer/`. Paste `trailer/ORCHESTRATOR_PROMPT.md` into a new session. It begins by asking the user for format references, then delegates linearly: variants, round-robin reviews, a synthesizer that takes the best parts, review and fix rounds, and a final check.
+A trailer for *Operation Tidebreak*, in its own style and independent of the mini-series, is set up as an orchestrated pipeline in `trailer/`. Paste `trailer/ORCHESTRATOR_PROMPT.md` into a new session. It starts with a questionnaire and the user's references, then runs these steps one agent at a time:
+1. deep per-reference research, with an audit;
+2. a style bible;
+3. treatment variants, reviewed round-robin, then merged from their best parts;
+4. a beat sheet;
+5. a shot-by-shot storyboard covering framing and movement;
+6. a motion and timing sheet.
+
+Every stage has review rounds and the user approves at checkpoints.

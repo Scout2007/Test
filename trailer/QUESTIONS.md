@@ -1,48 +1,41 @@
 # Intake questionnaire (round 1: before any research)
 
-The orchestrator asks these questions in one message, grouped as below, and records the answers verbatim in `STATE.md` under "Answers, round 1". Skipped questions are fine; mark them "no answer". Nothing past research starts until this round is answered.
+The orchestrator sends **Part 1** and **Part 2** together, in one message. Part 1 must be answered before research starts. Part 2 shows each question's **default**: a skipped Part 2 question takes its default, and the default is logged as the answer. Record everything verbatim in `STATE.md` under "Answers, round 1".
 
-## A. Purpose and audience
-1. Where will the trailer run? (YouTube, socials, a festival, the series' channel.) Is a vertical cut needed too?
-2. Who is it for: lore fans of JCB's story, sci-fi fans who know nothing of it, or both?
-3. What should a viewer feel at the end, in one word or line?
-4. Does it open the mini-series, or stand alone as a trailer for the film itself? Should it mention the series at all?
+## Part 1 · Must answer (12)
 
-## B. Relationship to the series and the film
-5. The trailer has its own style, separate from the nine episodes. How far from them? Should it share anything at all (the title card, the countdown, the farewell formula, the font)?
-6. Can it show the film's battle (any spoiler level), or only the build-up? What is strictly off-limits?
-7. Should it use lines from the film or the episodes, all-new lines, or none?
+1. **Purpose.** What is the trailer for: the film itself, the series launch, or both? Where will it run (YouTube, socials, a festival)?
+2. **The feeling.** What should a viewer feel at the end, in a word or a line?
+3. **Spoiler limit.** How much of the film may it show? For example: "only the build-up", "the fleet's arrival", "some battle with no outcome", "anything except the ending".
+4. **Length.** The target length, and any hard limit.
+5. **Voice.** None, in-world radio or found audio, a narrator, or title cards only?
+6. **References.** For each one:
+   - the link or file;
+   - the **timestamps** you mean;
+   - what to take from it;
+   - whether it is **essential** or **nice to have**.
+7. **Anything in the references you specifically don't want?**
+8. **Music.** Will a temp or final track exist before the animatic (about halfway)? If yes, can you supply it as a file? If not, a click track at the planned tempo stands in until then.
+9. **Blender.** Is Blender installed on this machine with the project's `.blend` files? Where are they? Is there a GPU?
+10. **New 3D work.** How much is allowed beyond the film's models: none; small props and sets; or a new environment?
+11. **Run mode.**
+    - **Lean:** 3 treatments, second review rounds only where needed, previews P1, P3, P4 and P4b, about 50–65 agent runs.
+    - **Full:** 4 treatments, every round and every preview, about 85–115 runs.
+12. **Shots you already imagine.** Describe any, even roughly. "None" is a fine answer.
 
-## C. Format (to be checked against your references)
-8. Target length, and any hard limit.
-9. Voice: none, a narrator, in-world radio or found audio, title cards only?
-10. Music: a score, silence, diegetic sound, a specific feel (a drone, a choir, percussion)? Are there tracks you have in mind as reference only?
-11. Text on screen: title cards, quotes, credits, dates? Any wording you already want?
-12. Pace: slow burn, escalating montage, a single long take, something else?
-13. An ending: the title card, a release date, a final line, a sting after the title?
+## Part 2 · Optional (the default applies if skipped)
 
-## D. References
-14. For each reference: the link, file or image; the timestamps you mean; what to take from it; and whether it is **essential** or **nice to have**.
-15. Anything in the references you specifically don't want?
-16. Can you supply the video files themselves, or screenshots every few seconds of the parts you like? Agents can't watch a link, but they can analyse frames.
-
-## E. Production
-17. Render budget for the trailer, in hours or a share of the film's.
-18. Any shots you already imagine? Describe them, even roughly.
-19. New 3D work allowed beyond the film's models (sets, props, a new environment)? How much?
-20. Aspect ratio and frame rate (the film is 24 fps), and whether letterboxing is wanted.
-
-## F. Process
-21. Which checkpoints do you want to approve personally? The default is after these questionnaires, after the treatments, after the storyboard, and the final.
-22. How many treatment variants: 3, 4 or 5?
-23. **Full or lean run?**
-    - **Full:** 4 treatments, two review rounds everywhere, every preview pass, about 80–110 agent runs.
-    - **Lean:** 3 treatments, a second round only where the first found majors, P1, P3 and P4 only, about 45–60 runs.
-24. **Blender.** Is Blender 5.2 installed, with the project's `.blend` files on this machine? Where? Is a GPU available? (Needed for the preview passes.)
-25. **Temp music.** Do you have a temp track to cut the animatic against, as a file you own or one used only for timing? If not, a click track at the planned tempo is used.
-26. **Previews.** Which preview passes do you want to see yourself?
-    - P1 style frames
-    - P2 key images
-    - P3 boards and transition pairs
-    - P4 animatic
-    - P5 block-out
+| # | Question | Default |
+|---|---|---|
+| 13 | Audience: lore fans, newcomers, or both? | Both: readable cold, rewarding for fans |
+| 14 | How far from the mini-series' styles? Share anything (title card, countdown, the farewell, the font)? | Fully distinct; only the title-card lettering may echo the film's |
+| 15 | Lines from the film or the episodes, all-new lines, or none? | All new, in-world, sparse |
+| 16 | Text on screen: title cards, a date, quotes, credits? | Title cards only, plus the film's title and "coming" line at the end |
+| 17 | Pace: slow burn, escalating montage, one long take, other? | Whatever the essential references show |
+| 18 | The ending: title card, date, final line, a sting after the title? | Title card, then a 2–4 s sting |
+| 19 | Render budget for the trailer | Up to 25 % of the film's render time for final renders; previews within the limits in agent 15 |
+| 20 | Aspect ratio, frame rate, letterboxing | 2.39:1 at 24 fps, matching the film |
+| 21 | A vertical (9:16) cut too? | No, unless asked later |
+| 22 | Which checkpoints do you approve personally? | All of them: questions round 2, treatments, storyboard and animatic, block-out, final |
+| 23 | Number of treatment variants | 3 in lean mode, 4 in full |
+| 24 | Which previews do you want to see? | P1 style frames, P4 animatic, P4b key moves, P5 block-out |

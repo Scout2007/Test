@@ -26,7 +26,8 @@ The orchestrator has already prepared `trailer/refs/ref_NN/` with `trailer/tools
 - Look at every contact sheet and every cut frame.
 - Look at all the range frames.
 - Use `cuts.csv` for timings. Confirm each cut against the frames, because scene detection misses dissolves and splits flashes into extra cuts.
-- Use `loudness.csv` for the music map, and `beats.csv` and the cuts' beat offsets for sync.
+- Use `music_sections.csv` (silence, quiet, build, hit, sustain markers) and `loudness.csv` for the music map, and `beats.csv` and the cuts' beat offsets for sync. The sections are markers, not truth: confirm them against the frames and the user's notes.
+- `transitions.csv` also gives zoom (above 1 is a push-in) and rotation per frame. Ignore its motion numbers where `low_texture = yes` (black space, starfields) and judge those cuts by eye.
 - **Transitions.** Study every `transitions/cut_NNN.jpg` strip. Each one holds every native frame for ±0.5 s around the cut: the top row is the outgoing shot, the bottom row the incoming one. Read it alongside `transitions.csv`, which gives the measured motion out of and into each cut, the brightness and colour jump, and whether motion carries across. For each cut, name the device: a match on motion, shape or position; a smash; a flash; a whip; a dissolve; a J- or L-cut. Say what makes it work.
 - Confirm `kind = soft` and `flash?` rows by eye; they may be dissolves, flashes or false alarms.
 

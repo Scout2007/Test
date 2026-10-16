@@ -27,7 +27,7 @@ Read agents' outputs only as far as routing needs: the headings, tables, verdict
 ## 2. Model policy and capability checks
 
 **Default models.**
-- **`sonnet`:** analysts, the auditor, the world digest, treatment writers, the beat sheet, reviewers L1–L5 and L8, tallies, fixers and previz.
+- **`sonnet`:** analysts, the auditor, the world digest, treatment writers, the beat sheet, reviewers L1–L5 and L8, tallies, fixers, previz and the Blender preflight.
 - **The stronger model:**
   - research synthesis (03);
   - the style bible (05);
@@ -57,9 +57,9 @@ Log every escalation in STATE.md under "Escalations", with the template, the rea
 
 ## 4. Phase 0 · Questions and references (no agents yet)
 
-**0.1** Send the user all of `trailer/QUESTIONS.md` in one message, grouped as written. Say that nothing major starts until it's answered. Ask them to attach their references and give links with timestamps. Wait.
+**0.1** Send the user `trailer/QUESTIONS.md`: Part 1 (12 must-answer questions) and Part 2 (optional, each with its default), in one message. Say that research starts once Part 1 is answered. Ask them to attach their references and give links with timestamps. Wait.
 
-**0.2** Record the answers verbatim under "Answers, round 1". Note the run mode (full or lean, Q23), the Blender path (Q24), the temp music (Q25) and which previews they want to see (Q26). Number the references ref_01, ref_02 and so on in `refs/REFERENCES.md`.
+**0.2** Record the answers verbatim under "Answers, round 1". Log each skipped Part 2 question as "default: …". Note the run mode (Q11), the Blender path and GPU (Q9), the music plan (Q8) and the previews they want (Q24). Number the references ref_01, ref_02 and so on in `refs/REFERENCES.md`.
 
 **0.3 Prepare each reference yourself.**
 1. Install the tools: `python -m pip install yt-dlp imageio-ffmpeg numpy pillow librosa`. librosa is optional; without it beats come from an estimate.
@@ -71,10 +71,13 @@ Log every escalation in STATE.md under "Escalations", with the template, the rea
    - `frames/` and `sheets/`;
    - `transitions/cut_NNN.jpg`: every native frame for ±0.5 s around each cut;
    - `transitions.csv`: the measured motion, brightness and colour across each cut;
-   - `beats.csv`, `loudness.csv` and `silences.csv`;
+   - `beats.csv`, `loudness.csv`, `silences.csv` and `music_sections.csv` (silence, quiet, build, hit and sustain markers);
+   - in `transitions.csv`, zoom and rotation as well as pan, with a `low_texture` flag where black space makes the motion numbers unreliable;
    - `transcript.txt`.
 3. Open each manifest and one contact sheet to confirm the right video. If a download fails, ask the user for the file.
 4. Add each reference's numbers to REFERENCES.md, and commit. Video files are git-ignored.
+
+**Music (Q8).** If a track will exist before P4, ask for it when Phase 4 starts. Run `prep_reference.py` on it, and the beat sheet's music map then uses its real sections and beats.
 
 **0.4** Ask a short follow-up about anything unclear. Wait. Commit.
 
@@ -83,7 +86,7 @@ Log every escalation in STATE.md under "Escalations", with the template, the rea
 **Lean mode** (Q23):
 - 3 treatments;
 - a round 2 only where round 1 found majors;
-- previews P1, P3 and P4 only.
+- previews P1, P3, P4 and P4b only.
 
 **Every review stage** runs the lenses that `RUBRIC.md` assigns to it. One reviewer per lens (template 07) reviews **all** items, in an order rotated by one per lens (L1 starts at item A, L2 at item B, …). Then a tally (08), then the fixer (13). Repeat until a round has no majors, at most 3 rounds.
 
@@ -95,10 +98,11 @@ Log every escalation in STATE.md under "Escalations", with the template, the rea
 |---|---|---|
 | 1.1 | One analyst per reference, one after another | 01 |
 | 1.2 | Research audit | 02 |
-| 1.3 | Redo loop. Send each "redo" list back to its analyst by SendMessage, then re-audit; at most 2 loops. After that, ask the user for what's missing | 01, 02 |
+| 1.3 | Redo loop. Send each "redo" list back to its analyst by SendMessage, then re-audit; at most 2 loops. A reference that fails the **accuracy spot-check** (10 random claims verified against the evidence) is redone even if it's deep. After that, ask the user for what's missing | 01, 02 |
 | 1.4 | Synthesis, which includes the round-2 questions | 03 |
 | 1.5 | **Checkpoint:** send the round-2 questions, the format profile in brief, the conflicts and the angle candidates to rank. Wait. Record verbatim | — |
 | 1.6 | World digest | 04 |
+| 1.7 | **Blender preflight.** Inventory the project files, render a test still and a test push-in, measure seconds per frame per engine, and write the cookbook of working specs (`work/previz/preflight/REPORT.md`). Workbench and EEVEE need a GPU; without one, the previews use Cycles at low samples. Fix any blocker with the user before Phase 2 | 16 |
 
 ### Phase 2 · Style
 
@@ -137,6 +141,7 @@ Log every escalation in STATE.md under "Escalations", with the template, the rea
 | 5.2 | Review stage (L1, L3–L9) until clean | 07, 08, 13 |
 | 5.3 | **P3 boards and transition pairs,** then its review stage (L6, L9) | 15, 07, 08, 13 |
 | 5.4 | **P4 animatic** (light animation, cut to the timing, with real transition types and a temp track or click), then its review stage (L1 rhythm against the references, L7, L9). The reviewers compare the animatic's measured `transitions.csv` with the references' | 15, 07, 08, 13 |
+| 5.4b | **P4b key moves in 3D.** The 10–15 most important shots as real camera moves (Workbench, or Cycles at low samples), at 50 % size and 12 fps. Catches parallax and scale problems before the motion sheet. Then its review stage (L6, L7, L9) | 15, 07, 08, 13 |
 | 5.5 | **Checkpoint:** the animatic, the board sheet, the transition pairs, the shot count, runtime and render. Wait. Notes go to the fixer verbatim, then a review stage with only the lenses the notes touch. Lock the storyboard | — |
 
 ### Phase 6 · Motion, timing and block-out

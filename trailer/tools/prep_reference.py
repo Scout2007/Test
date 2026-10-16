@@ -20,7 +20,10 @@ Writes trailer/refs/ref_NN/:
   transitions/cut_NNN.jpg  a strip per cut: every native frame from --cut-window s before to after the cut
   transitions.csv  per cut: picture motion out of and into the cut (dx, dy in px/frame at 320 px wide, by phase
                    correlation, ±1 px; negative dx = the picture moves left, i.e. the camera pans right),
-                   luma and mean colour either side, whether motion carries across, and a flash hint
+                   zoom factor and rotation per frame (log-polar phase correlation; >1 = pushing in), luma and
+                   mean colour either side, whether motion carries across, a flash hint, and low_texture = yes
+                   where the frames are too featureless (black space, stars) for the motion numbers to be trusted
+  music_sections.csv  rough structure from loudness: silence, quiet, build, hit, sustain, with beats per section
   beats.csv        beat times and tempo (librosa if installed, else an onset-energy estimate); cuts.csv then
                    gains each cut's offset from the nearest beat
   manifest.md      a summary for the agents: duration, resolution, fps, cut count, average shot length, files
@@ -188,27 +191,87 @@ def transitions(ff, video, out, cut_list, fps, window):
             dx = dx - c.shape[1] if dx > c.shape[1] // 2 else dx
             return -dx, -dy
 
+        def logpolar(img, square, n_r=256, n_t=360):
+            """Log-polar resample of the windowed FFT magnitude: scale -> shift in r, rotation -> shift in theta.
+            Zoom reads best on the whole frame (Hann window); rotation on a centred square (circular window)."""
+            if square:
+                sz = min(img.shape)
+                y0, x0 = (img.shape[0] - sz) // 2, (img.shape[1] - sz) // 2
+                img = img[y0:y0 + sz, x0:x0 + sz]
+                yy, xx = np.mgrid[0:sz, 0:sz] - (sz - 1) / 2
+                rad = np.hypot(yy, xx) / (sz / 2)
+                win = np.where(rad < 1, 0.5 + 0.5 * np.cos(np.pi * rad), 0)
+            else:
+                win = np.outer(np.hanning(img.shape[0]), np.hanning(img.shape[1]))
+            m = np.abs(np.fft.fftshift(np.fft.fft2((img - img.mean()) * win)))
+            hh, ww = m.shape
+            cy, cx = hh / 2, ww / 2
+            r_min, r_max = np.log(3), np.log(min(cy, cx) * 0.9)
+            rr = np.exp(np.linspace(r_min, r_max, n_r))[:, None]
+            tt = np.linspace(0, np.pi, n_t, endpoint=False)[None, :]
+            ys, xs = cy + rr * np.sin(tt), cx + rr * np.cos(tt)
+            yi, xi = np.clip(np.floor(ys).astype(int), 0, hh - 2), np.clip(np.floor(xs).astype(int), 0, ww - 2)
+            fy, fx = ys - np.floor(ys), xs - np.floor(xs)
+            v = (m[yi, xi] * (1 - fy) * (1 - fx) + m[yi + 1, xi] * fy * (1 - fx)
+                 + m[yi, xi + 1] * (1 - fy) * fx + m[yi + 1, xi + 1] * fy * fx)
+            return np.log1p(v), (r_max - r_min) / (n_r - 1), 180.0 / n_t
+
+        def lp_shift(x, y, square):
+            a, dr, dt = logpolar(x, square)
+            b, _, _ = logpolar(y, square)
+            fa, fb = np.fft.fft2(a - a.mean()), np.fft.fft2(b - b.mean())
+            r = fa * np.conj(fb)
+            c = np.abs(np.fft.ifft2(r / (np.abs(r) + 1e-6)))
+            # compression blocks and the window leave a fixed peak at zero shift: if the frames really differ,
+            # prefer the best peak away from zero when it is at least ZERO_RATIO of the zero peak
+            off = c.copy()
+            for di in (-1, 0, 1):
+                for dj in (-1, 0, 1):
+                    off[di, dj] = 0
+            moving = float(np.mean(np.abs(x - y))) > 2.0
+            src = off if (not square) and moving and off.max() >= 0.3 * c[0, 0] else c   # zoom path only
+            i, j = np.unravel_index(np.argmax(src), src.shape)
+            i = i - c.shape[0] if i > c.shape[0] // 2 else i
+            j = j - c.shape[1] if j > c.shape[1] // 2 else j
+            return i * dr, j * dt
+
+        def zoom_rot(x, y):
+            log_zoom, _ = lp_shift(x, y, square=False)
+            _, rot = lp_shift(x, y, square=True)
+            return float(np.exp(log_zoom)), float(rot)          # zoom factor (>1 = pushing in), rotation in degrees
+
+        def texture(x):
+            gy, gx = np.gradient(x)
+            return float(np.mean(np.hypot(gx, gy)))
+
         def mean_motion(seq):
             if len(seq) < 2:
-                return (0.0, 0.0)
+                return (0.0, 0.0, 1.0, 0.0, 0.0)
             v = [motion(seq[i], seq[i + 1]) for i in range(len(seq) - 1)]
-            return (round(float(np.median([p[0] for p in v])), 2), round(float(np.median([p[1] for p in v])), 2))
+            step = min(6, len(seq) - 1)              # compare frames `step` apart: slow pushes are sub-bin per frame
+            zr = [zoom_rot(seq[i], seq[i + step]) for i in range(0, len(seq) - step)]
+            zr = [(z ** (1 / step), r / step) for z, r in zr]
+            return (round(float(np.median([p[0] for p in v])), 2), round(float(np.median([p[1] for p in v])), 2),
+                    round(float(np.median([z[0] for z in zr])), 4), round(float(np.median([z[1] for z in zr])), 2),
+                    round(float(np.median([texture(f) for f in seq])), 2))
 
         out_m, in_m = mean_motion(g[:k]), mean_motion(g[k:])
+        low_tex = "yes" if min(out_m[4], in_m[4]) < 2.0 else ""
         lo, li = float(g[k - 1].mean()), float(g[k].mean())
         co = [round(float(c), 1) for c in np.asarray(imgs[k - 1]).reshape(-1, 3).mean(0)]
         ci = [round(float(c), 1) for c in np.asarray(imgs[k]).reshape(-1, 3).mean(0)]
         same_dir = (out_m[0] * in_m[0] > 0) or (out_m[1] * in_m[1] > 0)
         flash = max(float(x.mean()) for x in g[max(0, k - 2):k + 2]) > max(lo, li) + 60
-        rows.append([n, round(t, 3), kind, out_m[0], out_m[1], in_m[0], in_m[1], round(lo, 1), round(li, 1),
-                     "/".join(map(str, co)), "/".join(map(str, ci)), "yes" if same_dir else "", "yes" if flash else ""])
+        rows.append([n, round(t, 3), kind, out_m[0], out_m[1], out_m[2], out_m[3], in_m[0], in_m[1], in_m[2], in_m[3],
+                     round(lo, 1), round(li, 1), "/".join(map(str, co)), "/".join(map(str, ci)),
+                     "yes" if same_dir else "", "yes" if flash else "", low_tex])
         for f in files:
             f.unlink()
         tmp.rmdir()
     with open(out / "transitions.csv", "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["cut", "time_s", "kind", "out_dx", "out_dy", "in_dx", "in_dy", "luma_out", "luma_in",
-                    "rgb_out", "rgb_in", "motion_carries", "flash"])
+        w.writerow(["cut", "time_s", "kind", "out_dx", "out_dy", "out_zoom", "out_rot_deg", "in_dx", "in_dy", "in_zoom",
+                    "in_rot_deg", "luma_out", "luma_in", "rgb_out", "rgb_in", "motion_carries", "flash", "low_texture"])
         w.writerows(rows)
     return f"{len(rows)} cuts, ±{window} s at native rate"
 
@@ -249,6 +312,52 @@ def beats(ff, video, out):
         w.writerow(["beat", "time_s"])
         w.writerows([(i + 1, round(t, 3)) for i, t in enumerate(times)])
     return f"{tempo:.1f} BPM ({method})", times
+
+
+def music_sections(out, beat_times):
+    """Rough music structure from the loudness map: silence, quiet, build, hit, sustain. Markers, not truth."""
+    rows = list(csv.DictReader(open(out / "loudness.csv")))
+    if len(rows) < 8:
+        return 0
+    t = [float(r["time_s"]) for r in rows]
+    v = [max(-90.0, float(r["rms_db"])) if r["rms_db"] not in ("-inf", "") else -90.0 for r in rows]
+    sm = [sum(v[max(0, i - 2):i + 3]) / len(v[max(0, i - 2):i + 3]) for i in range(len(v))]     # 2.5 s smoothing
+    peak = max(sm)
+    labels = []
+    for i in range(len(sm)):
+        slope = sm[min(i + 4, len(sm) - 1)] - sm[i]                                           # change over ~2 s
+        jump = v[i] - v[i - 1] if i else 0
+        if sm[i] < -45:
+            lab = "silence"
+        elif jump > 9:
+            lab = "hit"
+        elif slope > 4:
+            lab = "build"
+        elif sm[i] > peak - 6:
+            lab = "sustain (loudest)"
+        else:
+            lab = "quiet"
+        labels.append(lab)
+    sections, start = [], 0
+    for i in range(1, len(labels) + 1):
+        if i == len(labels) or (labels[i] != labels[start] and labels[i] != "hit") or labels[start] == "hit":
+            end = t[i] if i < len(t) else t[-1] + 0.5
+            beats_in = sum(1 for b in beat_times if t[start] <= b < end)
+            sections.append([t[start], end, round(end - t[start], 2), labels[start],
+                             round(sum(v[start:i]) / max(1, i - start), 1), beats_in])
+            start = i
+    merged = []
+    for sec in sections:                       # fold sections under 1 s into the previous one, except hits
+        if merged and sec[2] < 1.0 and sec[3] != "hit" and merged[-1][3] != "hit":
+            merged[-1][1], merged[-1][2] = sec[1], round(sec[1] - merged[-1][0], 2)
+            merged[-1][5] += sec[5]
+        else:
+            merged.append(sec)
+    with open(out / "music_sections.csv", "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["start_s", "end_s", "dur_s", "section", "mean_db", "beats"])
+        w.writerows(merged)
+    return len(merged)
 
 
 def transcript(out):
@@ -297,6 +406,7 @@ def main():
         ranges_frames(ff, video, frames, ranges)
     sheets(ff, video, out / "sheets")
     n_loud, n_sil = loudness(ff, video, out)
+    n_sec = music_sections(out, beat_times)
     has_subs = transcript(out)
     title = ""
     if (out / "info.json").exists():
@@ -316,7 +426,8 @@ def main():
         f"- Frames: {len(list(frames.glob('cut_*.jpg')))} cut frames, {len(list(frames.glob('ts_*.jpg')))} range frames "
         f"({', '.join(ranges) or 'no ranges given'})\n"
         f"- Contact sheets: {len(list((out / 'sheets').glob('*.jpg')))} (one frame every 2 s)\n"
-        f"- Loudness samples: {n_loud} (every 0.5 s) · silences: {n_sil}\n"
+        f"- Loudness samples: {n_loud} (every 0.5 s) · silences: {n_sil} · music sections: {n_sec} "
+        f"(music_sections.csv: silence / quiet / build / hit / sustain markers from loudness; confirm by ear or user notes)\n"
         f"- Transcript: {'transcript.txt' if has_subs else 'none available'}\n\n"
         "Scene detection misses dissolves and fast flashes and may split camera flashes into extra cuts: "
         "the analyst confirms cuts against the frames and contact sheets.\n")

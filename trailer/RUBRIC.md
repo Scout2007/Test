@@ -30,6 +30,7 @@ Reviews come in rounds. Lenses L6, L7 and L9 run on the stronger model by defaul
 | P1 style frames, P2 key images | L1, L2, L6 |
 | P3 boards | L6, **L9** |
 | P4 animatic | L1 (rhythm against the references), L7, **L9** |
+| P4b key moves in 3D | L6, L7, **L9** |
 | P5 block-out | L6, L7, L8, **L9** |
 
 ## Findings format

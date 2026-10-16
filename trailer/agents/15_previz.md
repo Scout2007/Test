@@ -2,8 +2,8 @@
 
 **Goal.** Make the current stage visible, so you and the reviewers judge pictures and motion, not prose. Each pass builds on the last, moving from stills to light animation to block-outs.
 
-**Tools.** These run on the user's machine:
-- Blender 5.2, run headless: `blender -b <file.blend> --python <script.py> -- <args>`;
+**Tools.** Read `trailer/work/previz/preflight/REPORT.md` first: its cookbook gives the object names and JSON specs that work. These run on the user's machine:
+- Blender 5.2, run headless, through **`trailer/tools/blender_preview.py`** (`inventory` and `render --spec shot.json`). Write a JSON spec per shot rather than a new script; extend the tool only when a spec can't express the shot, and log the change;
 - the project's `.blend` files and helper scripts (`pack/project_docs/README_blender_project.md`: `LREF_Endeavor.blend`, `LREF_Railcannon_M1C.blend`, `render_previews.py` and friends);
 - `trailer/tools/animatic.py` and `trailer/tools/prep_reference.py`.
 
@@ -26,6 +26,7 @@ The orchestrator names which one to run.
 | **P2 · Key images** (static) | After the merged treatment | One still per key image in the treatment, framed as described | `p2/key_NN.png`, `p2/sheet.png`, `p2/notes.md` |
 | **P3 · Boards** (static) | After the storyboard | Per shot, its first frame, plus its last frame if it moves. Per cut, a **transition pair**: the outgoing last frame beside the incoming first frame, side by side and at the same size | `p3/shot_NNN_a.png`, `_b.png`, `p3/cut_NNN_pair.png`, `p3/board_sheet_*.png` |
 | **P4 · Animatic** (light animation) | After the storyboard is clean | P3's boards cut to the timing sheet with `animatic.py`, using light 2D moves (push, pull, pan, tilt) to stand in for each camera move, and the storyboard's transitions (dissolve, flash, whip, smash). Use the temp audio if the user supplied it, or a click track at the music map's tempo | `p4/timing.csv`, `p4/animatic.mp4`, `p4/analysis/` (run `prep_reference.py` on the animatic with `--out`) |
+| **P4b · Key moves in 3D** (cheap 3D) | After P4's review, before the motion sheet | The 10–15 shots that matter most (the hook, each act's turn, the cuts the transitions lens rated highest-risk, the button), as **real 3D camera moves** with `blender_preview.py`: Workbench (or Cycles at 4–8 samples if there's no GPU), 50 % size, 12 fps. Catches parallax and scale problems that P4's flat 2D moves hide | `p4b/shot_NNN/`, `p4b/keymoves.mp4`, `p4b/analysis/` |
 | **P5 · Block-out** (blocked animation) | After the motion and timing sheet | The real camera moves from `motion_timing.md`, as Workbench renders of the actual models and keyframes: shot bodies at 12 fps, and **every transition window at full 24 fps for 12 frames each side of the cut**. Joined with `animatic.py` | `p5/shots/shot_NNN.mp4`, `p5/blockout.mp4`, `p5/analysis/` |
 
 ## For every pass

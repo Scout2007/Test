@@ -19,8 +19,16 @@
 | Transfer | Borrowable techniques separated from content, and translated to 3D-only means |
 | User's notes | Each thing the user said they like is addressed |
 
+**Spot-check accuracy, not just depth.** For each reference, choose 10 claims at random. Use Python's `random` with seed = the reference number, so the choice can be repeated. Draw them from the shot list, the transitions table, the rhythm figures and the sound map. Verify each one against the evidence:
+- the frames and strips;
+- `cuts.csv`, `transitions.csv`, `beats.csv` and `music_sections.csv`;
+- the transcript.
+
+Score each claim **correct**, **wrong** or **unverifiable**. A reference with 2 or more wrong claims, or 4 or more unverifiable, fails, whatever its depth. Treat motion numbers flagged `low_texture` as unverifiable rather than wrong.
+
 **Write** `trailer/work/research/audit.md`:
 - the checklist table per reference;
+- the spot-check table per reference: each claim, the evidence checked, and the verdict;
 - a **verdict** per reference: accept, or redo with a numbered list of exactly what is missing;
 - a short list of **cross-reference gaps**: things no reference covers that the trailer will need, such as the ending style.
 

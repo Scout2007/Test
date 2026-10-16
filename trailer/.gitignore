@@ -1,0 +1,6 @@
+# Downloaded reference media stays local (personal study only)
+refs/**/video.*
+refs/**/*.mp4
+refs/**/*.webm
+refs/**/*.mkv
+refs/**/*.m4a
